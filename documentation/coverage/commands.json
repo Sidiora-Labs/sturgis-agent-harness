@@ -1,0 +1,1088 @@
+{
+  "schema": "sturgis-command-catalog/1",
+  "source": "Static AST extraction of explicit AgentApplication registrations and domain signatures, intersected with ConsumerControl HTTP allowlists. No application instantiation.",
+  "count": 95,
+  "commands": {
+    "overview": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.overview",
+      "source": "consumer/application.py",
+      "line": 93
+    },
+    "conversations.create": {
+      "classification": "write",
+      "required": [],
+      "optional": [
+        "title"
+      ],
+      "handler": "self.conversation_create",
+      "source": "consumer/application.py",
+      "line": 94
+    },
+    "conversations.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "query",
+        "include_archived"
+      ],
+      "handler": "self.conversation_list",
+      "source": "consumer/application.py",
+      "line": 95
+    },
+    "conversations.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.conversation_get",
+      "source": "consumer/application.py",
+      "line": 96
+    },
+    "conversations.update": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [
+        "title",
+        "archived"
+      ],
+      "handler": "self.conversation_update",
+      "source": "consumer/application.py",
+      "line": 97
+    },
+    "messages.send": {
+      "classification": "write",
+      "required": [
+        "conversation_id",
+        "message_id",
+        "text"
+      ],
+      "optional": [
+        "attachments",
+        "kind"
+      ],
+      "handler": "self.message_send",
+      "source": "consumer/application.py",
+      "line": 98
+    },
+    "messages.cancel": {
+      "classification": "write",
+      "required": [
+        "conversation_id",
+        "message_id"
+      ],
+      "optional": [],
+      "handler": "self.message_cancel",
+      "source": "consumer/application.py",
+      "line": 99
+    },
+    "messages.events": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "conversation_id",
+        "after",
+        "limit"
+      ],
+      "handler": "self.events",
+      "source": "consumer/application.py",
+      "line": 100
+    },
+    "attachments.upload": {
+      "classification": "write",
+      "required": [
+        "name",
+        "media_type",
+        "data_base64",
+        "operation_id"
+      ],
+      "optional": [],
+      "handler": "self.upload",
+      "source": "consumer/application.py",
+      "line": 101
+    },
+    "attachments.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "limit"
+      ],
+      "handler": "self.data.attachments",
+      "source": "consumer/application.py",
+      "line": 102
+    },
+    "attachments.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.data.attachment",
+      "source": "consumer/application.py",
+      "line": 103
+    },
+    "attachments.read": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "offset",
+        "limit"
+      ],
+      "handler": "self.data.read_attachment",
+      "source": "consumer/application.py",
+      "line": 104
+    },
+    "files.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "path"
+      ],
+      "handler": "self.data.files",
+      "source": "consumer/application.py",
+      "line": 105
+    },
+    "files.read": {
+      "classification": "read",
+      "required": [
+        "path"
+      ],
+      "optional": [],
+      "handler": "self.data.read_file",
+      "source": "consumer/application.py",
+      "line": 106
+    },
+    "files.write": {
+      "classification": "write",
+      "required": [
+        "path",
+        "data_base64"
+      ],
+      "optional": [
+        "expected_sha256"
+      ],
+      "handler": "self.file_write",
+      "source": "consumer/application.py",
+      "line": 107
+    },
+    "files.delete": {
+      "classification": "write",
+      "required": [
+        "path",
+        "expected_sha256"
+      ],
+      "optional": [],
+      "handler": "self.data.delete_file",
+      "source": "consumer/application.py",
+      "line": 108
+    },
+    "knowledge.add": {
+      "classification": "write",
+      "required": [
+        "attachment_id",
+        "title",
+        "operation_id"
+      ],
+      "optional": [
+        "document_id",
+        "expected_revision"
+      ],
+      "handler": "self.data.knowledge_add",
+      "source": "consumer/application.py",
+      "line": 109
+    },
+    "knowledge.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "query",
+        "limit"
+      ],
+      "handler": "self.data.knowledge_list",
+      "source": "consumer/application.py",
+      "line": 110
+    },
+    "knowledge.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "revision"
+      ],
+      "handler": "self.data.knowledge_get",
+      "source": "consumer/application.py",
+      "line": 111
+    },
+    "knowledge.delete": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision",
+        "operation_id"
+      ],
+      "optional": [],
+      "handler": "self.data.knowledge_delete",
+      "source": "consumer/application.py",
+      "line": 112
+    },
+    "memory.query": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "text",
+        "concepts",
+        "limit",
+        "embedding",
+        "at"
+      ],
+      "handler": "self.data.memory_query",
+      "source": "consumer/application.py",
+      "line": 113
+    },
+    "memory.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "revision"
+      ],
+      "handler": "self.data.memory_get",
+      "source": "consumer/application.py",
+      "line": 114
+    },
+    "memory.correct": {
+      "classification": "write",
+      "required": [
+        "id",
+        "content",
+        "expected_revision",
+        "operation_id"
+      ],
+      "optional": [],
+      "handler": "self.data.memory_correct",
+      "source": "consumer/application.py",
+      "line": 115
+    },
+    "memory.retract": {
+      "classification": "write",
+      "required": [
+        "id",
+        "reason",
+        "operation_id"
+      ],
+      "optional": [
+        "revision"
+      ],
+      "handler": "self.data.memory_retract",
+      "source": "consumer/application.py",
+      "line": 116
+    },
+    "providers.configure": {
+      "classification": "write",
+      "required": [
+        "provider_id",
+        "endpoint",
+        "model",
+        "context_limit",
+        "output_limit"
+      ],
+      "optional": [
+        "tools",
+        "credential_ref",
+        "expected_revision"
+      ],
+      "handler": "self.providers.configure",
+      "source": "consumer/application.py",
+      "line": 117
+    },
+    "providers.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.providers.inspect",
+      "source": "consumer/application.py",
+      "line": 118
+    },
+    "providers.inspect": {
+      "classification": "read",
+      "required": [],
+      "optional": [
+        "provider_id"
+      ],
+      "handler": "self.providers.inspect",
+      "source": "consumer/application.py",
+      "line": 119
+    },
+    "providers.probe": {
+      "classification": "write",
+      "required": [
+        "provider_id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.providers.probe",
+      "source": "consumer/application.py",
+      "line": 120
+    },
+    "providers.activate": {
+      "classification": "write",
+      "required": [
+        "provider_id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.providers.activate",
+      "source": "consumer/application.py",
+      "line": 121
+    },
+    "providers.credentials.put": {
+      "classification": "write",
+      "required": [
+        "name",
+        "secret"
+      ],
+      "optional": [
+        "expected_revision"
+      ],
+      "handler": "self.credential_put",
+      "source": "consumer/application.py",
+      "line": 122
+    },
+    "providers.credentials.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "lambda: self.vault.list(self.scope)",
+      "source": "consumer/application.py",
+      "line": 123
+    },
+    "providers.credentials.revoke": {
+      "classification": "write",
+      "required": [
+        "name",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.credential_revoke",
+      "source": "consumer/application.py",
+      "line": 124
+    },
+    "connections.configure": {
+      "classification": "write",
+      "required": [
+        "id",
+        "kind",
+        "endpoint"
+      ],
+      "optional": [
+        "credential_ref",
+        "options",
+        "expected_revision"
+      ],
+      "handler": "self.connection_configure",
+      "source": "consumer/application.py",
+      "line": 125
+    },
+    "connections.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.connections.list",
+      "source": "consumer/application.py",
+      "line": 126
+    },
+    "connections.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "lambda id: self.connections.get(id)",
+      "source": "consumer/application.py",
+      "line": 127
+    },
+    "connections.grant": {
+      "classification": "write",
+      "required": [
+        "id",
+        "operations",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.connection_grant",
+      "source": "consumer/application.py",
+      "line": 128
+    },
+    "connections.probe": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.connection_probe",
+      "source": "consumer/application.py",
+      "line": 129
+    },
+    "connections.revoke": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.connection_revoke",
+      "source": "consumer/application.py",
+      "line": 130
+    },
+    "skills.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.skill_list",
+      "source": "consumer/application.py",
+      "line": 131
+    },
+    "skills.install": {
+      "classification": "write",
+      "required": [
+        "manifest"
+      ],
+      "optional": [],
+      "handler": "self.skill_install",
+      "source": "consumer/application.py",
+      "line": 132
+    },
+    "skills.enable": {
+      "classification": "write",
+      "required": [
+        "id",
+        "enabled",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.skill_enable",
+      "source": "consumer/application.py",
+      "line": 133
+    },
+    "skills.rollback": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.skill_rollback",
+      "source": "consumer/application.py",
+      "line": 134
+    },
+    "usage.summary": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.usage.summary",
+      "source": "consumer/application.py",
+      "line": 135
+    },
+    "artifacts.read": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "offset",
+        "limit"
+      ],
+      "handler": "self.artifact_read",
+      "source": "consumer/application.py",
+      "line": 173
+    },
+    "diagnostics.get": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.diagnostics",
+      "source": "consumer/application.py",
+      "line": 174
+    },
+    "plugins.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.plugin_list",
+      "source": "consumer/application.py",
+      "line": 175
+    },
+    "plugins.inspect": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.plugin_inspect",
+      "source": "consumer/application.py",
+      "line": 176
+    },
+    "plugins.health": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.plugin_health",
+      "source": "consumer/application.py",
+      "line": 177
+    },
+    "work.overview": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.overview",
+      "source": "consumer/work.py",
+      "line": 36
+    },
+    "work.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_work",
+      "source": "consumer/work.py",
+      "line": 41
+    },
+    "work.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.work.get_work",
+      "source": "consumer/work.py",
+      "line": 44
+    },
+    "work.cancel": {
+      "classification": "write",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "reason"
+      ],
+      "handler": "self.work.cancel_work",
+      "source": "consumer/work.py",
+      "line": 59
+    },
+    "goals.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_goals",
+      "source": "consumer/work.py",
+      "line": 65
+    },
+    "goals.create": {
+      "classification": "write",
+      "required": [
+        "objective"
+      ],
+      "optional": [
+        "limits",
+        "criteria",
+        "parent_id"
+      ],
+      "handler": "self.work.create_goal",
+      "source": "consumer/work.py",
+      "line": 68
+    },
+    "goals.edit": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [
+        "objective",
+        "limits",
+        "criteria"
+      ],
+      "handler": "self.work.edit_goal",
+      "source": "consumer/work.py",
+      "line": 71
+    },
+    "goals.transition": {
+      "classification": "write",
+      "required": [
+        "id",
+        "state",
+        "expected_revision"
+      ],
+      "optional": [
+        "evidence",
+        "reason"
+      ],
+      "handler": "self.work.transition_goal",
+      "source": "consumer/work.py",
+      "line": 75
+    },
+    "goals.archive": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.work.archive_goal",
+      "source": "consumer/work.py",
+      "line": 88
+    },
+    "commitments.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_commitments",
+      "source": "consumer/work.py",
+      "line": 91
+    },
+    "commitments.create": {
+      "classification": "write",
+      "required": [
+        "description"
+      ],
+      "optional": [
+        "beneficiary",
+        "criteria",
+        "expires_at"
+      ],
+      "handler": "self.work.create_commitment",
+      "source": "consumer/work.py",
+      "line": 94
+    },
+    "commitments.transition": {
+      "classification": "write",
+      "required": [
+        "id",
+        "state",
+        "expected_revision"
+      ],
+      "optional": [
+        "evidence",
+        "reason"
+      ],
+      "handler": "self.work.transition_commitment",
+      "source": "consumer/work.py",
+      "line": 98
+    },
+    "commitments.progress": {
+      "classification": "write",
+      "required": [
+        "id",
+        "progress",
+        "expected_revision"
+      ],
+      "optional": [
+        "reason"
+      ],
+      "handler": "self.work.commitment_progress",
+      "source": "consumer/work.py",
+      "line": 102
+    },
+    "commitments.wait": {
+      "classification": "write",
+      "required": [
+        "id",
+        "trigger",
+        "expected_revision"
+      ],
+      "optional": [
+        "after_seq",
+        "expires_at"
+      ],
+      "handler": "self.work.wait_commitment",
+      "source": "consumer/work.py",
+      "line": 106
+    },
+    "commitments.resume": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.work.resume_commitment",
+      "source": "consumer/work.py",
+      "line": 112
+    },
+    "schedules.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_schedules",
+      "source": "consumer/work.py",
+      "line": 130
+    },
+    "schedules.create": {
+      "classification": "write",
+      "required": [
+        "conversation_id",
+        "text",
+        "spec",
+        "resources"
+      ],
+      "optional": [
+        "goal_id",
+        "missed_policy"
+      ],
+      "handler": "self.work.create_schedule",
+      "source": "consumer/work.py",
+      "line": 133
+    },
+    "schedules.state": {
+      "classification": "write",
+      "required": [
+        "id",
+        "state",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.work.schedule_state",
+      "source": "consumer/work.py",
+      "line": 140
+    },
+    "workflows.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_workflows",
+      "source": "consumer/work.py",
+      "line": 180
+    },
+    "workflows.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.work.get_workflow",
+      "source": "consumer/work.py",
+      "line": 172
+    },
+    "workflows.create": {
+      "classification": "write",
+      "required": [
+        "steps",
+        "budget"
+      ],
+      "optional": [
+        "goal_id",
+        "commitment_id"
+      ],
+      "handler": "self.work.create_workflow",
+      "source": "consumer/work.py",
+      "line": 164
+    },
+    "workflows.revise": {
+      "classification": "write",
+      "required": [
+        "id",
+        "steps",
+        "expected_revision",
+        "reason"
+      ],
+      "optional": [],
+      "handler": "self.work.revise_workflow",
+      "source": "consumer/work.py",
+      "line": 169
+    },
+    "workflows.run": {
+      "classification": "write",
+      "required": [
+        "id",
+        "conversation_id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.work.run_workflow",
+      "source": "consumer/work.py",
+      "line": 183
+    },
+    "workflows.state": {
+      "classification": "write",
+      "required": [
+        "id",
+        "state",
+        "expected_revision"
+      ],
+      "optional": [
+        "reason"
+      ],
+      "handler": "self.work.workflow_state",
+      "source": "consumer/work.py",
+      "line": 220
+    },
+    "workflows.step": {
+      "classification": "write",
+      "required": [
+        "id",
+        "step_id",
+        "state",
+        "expected_revision"
+      ],
+      "optional": [
+        "evidence",
+        "reason"
+      ],
+      "handler": "self.work.workflow_step",
+      "source": "consumer/work.py",
+      "line": 227
+    },
+    "children.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.list_children",
+      "source": "consumer/work.py",
+      "line": 336
+    },
+    "children.get": {
+      "classification": "read",
+      "required": [
+        "id"
+      ],
+      "optional": [],
+      "handler": "self.work.get_child",
+      "source": "consumer/work.py",
+      "line": 339
+    },
+    "children.cancel": {
+      "classification": "write",
+      "required": [
+        "id"
+      ],
+      "optional": [
+        "reason"
+      ],
+      "handler": "self.work.cancel_child",
+      "source": "consumer/work.py",
+      "line": 342
+    },
+    "children.delegate": {
+      "classification": "write",
+      "required": [
+        "parent_work_id",
+        "objective",
+        "capabilities",
+        "resources"
+      ],
+      "optional": [
+        "criteria",
+        "workspace_mode",
+        "retained"
+      ],
+      "handler": "self.work.delegate",
+      "source": "consumer/work.py",
+      "line": 345
+    },
+    "inbox.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.work.inbox",
+      "source": "consumer/work.py",
+      "line": 383
+    },
+    "inbox.decide": {
+      "classification": "write",
+      "required": [
+        "id",
+        "decision"
+      ],
+      "optional": [
+        "conversation_id",
+        "resources"
+      ],
+      "handler": "self.work.decide_inbox",
+      "source": "consumer/work.py",
+      "line": 386
+    },
+    "initiative.propose": {
+      "classification": "write",
+      "required": [
+        "source_event_id",
+        "action",
+        "signals",
+        "expires_at",
+        "dedupe_key"
+      ],
+      "optional": [
+        "channel"
+      ],
+      "handler": "self.work.propose_initiative",
+      "source": "consumer/work.py",
+      "line": 349
+    },
+    "attention.policy": {
+      "classification": "write",
+      "required": [
+        "policy"
+      ],
+      "optional": [
+        "expected_revision"
+      ],
+      "handler": "self.work.attention_policy",
+      "source": "consumer/work.py",
+      "line": 353
+    },
+    "permissions.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.permissions.list",
+      "source": "consumer/permissions.py",
+      "line": 54
+    },
+    "permissions.pending": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.permissions.pending",
+      "source": "consumer/permissions.py",
+      "line": 185
+    },
+    "permissions.request": {
+      "classification": "read",
+      "required": [
+        "event_id"
+      ],
+      "optional": [],
+      "handler": "self.permissions.request",
+      "source": "consumer/permissions.py",
+      "line": 153
+    },
+    "permissions.set": {
+      "classification": "write",
+      "required": [
+        "tool",
+        "mode"
+      ],
+      "optional": [
+        "expected_revision"
+      ],
+      "handler": "self.permissions.set",
+      "source": "consumer/permissions.py",
+      "line": 93
+    },
+    "permissions.approve": {
+      "classification": "write",
+      "required": [
+        "event_id"
+      ],
+      "optional": [
+        "expires_in"
+      ],
+      "handler": "self.permissions.approve",
+      "source": "consumer/permissions.py",
+      "line": 196
+    },
+    "permissions.deny": {
+      "classification": "write",
+      "required": [
+        "event_id"
+      ],
+      "optional": [],
+      "handler": "self.permissions.deny",
+      "source": "consumer/permissions.py",
+      "line": 212
+    },
+    "devices.list": {
+      "classification": "read",
+      "required": [],
+      "optional": [],
+      "handler": "self.devices.list",
+      "source": "consumer/device.py",
+      "line": 97
+    },
+    "devices.get": {
+      "classification": "read",
+      "required": [
+        "connection_id"
+      ],
+      "optional": [],
+      "handler": "self.devices.get",
+      "source": "consumer/device.py",
+      "line": 90
+    },
+    "devices.pair": {
+      "classification": "write",
+      "required": [
+        "connection_id",
+        "expected_revision"
+      ],
+      "optional": [
+        "ttl"
+      ],
+      "handler": "self.devices.pair",
+      "source": "consumer/device.py",
+      "line": 50
+    },
+    "devices.revoke": {
+      "classification": "write",
+      "required": [
+        "connection_id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "self.device_revoke",
+      "source": "consumer/application.py",
+      "line": 486
+    },
+    "plugins.activate": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "AgentApplication.plugin_change",
+      "source": "consumer/application.py"
+    },
+    "plugins.disable": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "AgentApplication.plugin_change",
+      "source": "consumer/application.py"
+    },
+    "plugins.rollback": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "AgentApplication.plugin_change",
+      "source": "consumer/application.py"
+    },
+    "plugins.uninstall": {
+      "classification": "write",
+      "required": [
+        "id",
+        "expected_revision"
+      ],
+      "optional": [],
+      "handler": "AgentApplication.plugin_change",
+      "source": "consumer/application.py"
+    }
+  }
+}

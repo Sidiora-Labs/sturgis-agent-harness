@@ -1,0 +1,13 @@
+flowchart LR
+    RULES[Versioned instructions and output contract] --> BUILD[Context assembler]
+    STATE[Current situation snapshot] --> BUILD
+    INPUT[New inputs with inclusion cursors] --> BUILD
+    HIST[Active conversation with original roles] --> BUILD
+    TOOL[Normalized tool observations and artifacts] --> BUILD
+    MEM[Scoped memory plus recent evidence overlay] --> BUILD
+    BUILD --> FILTER[Scope, validity, dependency and budget checks]
+    FILTER --> PACKET[Immutable ContextPacket and manifest]
+    PACKET --> ADAPT[Provider adapter preserving message roles]
+    ADAPT --> MODEL[Model invocation]
+    FILTER --> DEFER[Explicit deferred-input cursor]
+    DEFER --> INPUT

@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scenario": "Real CLI rejects independently broken path, heading and line targets; persists failure report and exits nonzero. External invalid-domain URL is classified without fetching.",
+  "checker_exit_code": 1,
+  "failure_report_status": "failed",
+  "detected_errors": [
+    "line_anchor_out_of_range",
+    "missing_heading_or_html_id",
+    "missing_path"
+  ],
+  "external_urls_not_fetched": 1,
+  "checker_self_validation": {
+    "status": "passed",
+    "count": 22,
+    "cases": [
+      "real_path",
+      "missing_path",
+      "real_heading",
+      "missing_heading",
+      "same_document",
+      "duplicate_heading",
+      "missing_duplicate",
+      "unicode_inline_heading",
+      "html_id",
+      "svg_id",
+      "line",
+      "line_range",
+      "colon_line",
+      "absolute_colon",
+      "line_zero",
+      "line_excess",
+      "colon_excess",
+      "reversed_range",
+      "bad_fragment_type",
+      "missing_svg_id",
+      "reference_image_html_links_and_code_exclusion",
+      "external_classification_without_network"
+    ]
+  }
+}

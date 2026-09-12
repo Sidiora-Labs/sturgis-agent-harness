@@ -1,0 +1,17 @@
+flowchart LR
+    RULES[Versioned instructions and output contract] --> FRAME[context compiler]
+    STATE[awareness: situation snapshot] --> ATT[attention]
+    INPUT[Pending user input and inclusion cursors] --> ATT
+    HIST[Active conversation with original roles] --> ATT
+    TOOL[Normalized observations and artifacts] --> ATT
+    MEM[Scoped memory and recent evidence overlay] --> ATT
+    PLAN[planner: dependencies and evidence needs] --> ATT
+    CAT[provider-catalog: pinned limits] --> ATT
+    ATT -->|selection, allocations, deferrals| FRAME
+    SK[skills: applicable pinned procedures] --> FRAME
+    FRAME --> FILTER[Scope, authority, causality and budget validation]
+    FILTER --> PACKET[Immutable ContextPacket and manifest]
+    PACKET --> ADAPT[provider-adapters: preserve roles and content]
+    ADAPT --> MODEL[Admitted model invocation]
+    FILTER --> DEFER[Explicit deferred-input ranges]
+    DEFER --> INPUT

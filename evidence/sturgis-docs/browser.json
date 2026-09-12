@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "audiences": {
+    "users": {
+      "home": "passed",
+      "keyboard_skip": "passed",
+      "theme_persistence": "passed",
+      "search": {
+        "query": "connect model",
+        "result": "/models/connect-a-model/"
+      },
+      "copied_example_route": "/cli/using-the-cli/",
+      "copied_characters": 135,
+      "mobile_navigation": "passed",
+      "overflow": false,
+      "browser_errors": []
+    },
+    "developers": {
+      "home": "passed",
+      "keyboard_skip": "passed",
+      "theme_persistence": "passed",
+      "search": {
+        "query": "GoalService",
+        "result": "/reference/files/agent/goals/__init__.py/"
+      },
+      "copied_example_route": "/guides/getting-started/setup/",
+      "copied_characters": 138,
+      "mobile_navigation": "passed",
+      "overflow": false,
+      "browser_errors": []
+    }
+  },
+  "accessibility": [
+    {
+      "audience": "users",
+      "view": "desktop-home",
+      "violations": []
+    },
+    {
+      "audience": "users",
+      "view": "mobile-home",
+      "violations": []
+    },
+    {
+      "audience": "developers",
+      "view": "desktop-home",
+      "violations": []
+    },
+    {
+      "audience": "developers",
+      "view": "mobile-home",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "completed_at": "2026-09-12T17:45:23.417Z"
+}

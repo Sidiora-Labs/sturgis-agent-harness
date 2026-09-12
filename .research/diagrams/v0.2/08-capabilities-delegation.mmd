@@ -1,0 +1,18 @@
+flowchart TB
+    SDK[plugin-sdk] --> HOST[plugin-host]
+    HOST -->|versioned registrations| REG[Tool, channel, provider and skill registries]
+    REG --> SK[skills]
+    SK --> PLAN[planner and context compiler]
+    PLAN --> SCHED[scheduler]
+    SCHED --> TR[tool-runner]
+    TR -->|recorded delegation control| SUB[subagents]
+    SUB --> CHILD[Scoped child context and admitted provider work]
+    CHILD -->|action proposal| SCHED
+    REG --> TR
+    TR --> CAP[Built-in or plugin capability]
+    CAP --> J[Journal observations and artifacts]
+    CHILD --> RESULT[Attributed child result submission]
+    J --> RESULT
+    RESULT --> ADMIT[subagents: result admission]
+    ADMIT -->|accepted, partial or rejected finding| PARENT[Parent planner and domain owners]
+    CHILD -->|declared visible output route| DEL[delivery]

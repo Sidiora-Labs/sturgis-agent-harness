@@ -1,0 +1,815 @@
+{
+  "commands": {
+    "artifacts.read": {
+      "page": "connections/media.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "ARTIFACT_ID",
+        "offset": 0,
+        "limit": 4096
+      }
+    },
+    "attachments.get": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "ATTACHMENT_ID"
+      }
+    },
+    "attachments.list": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "limit": 20
+      }
+    },
+    "attachments.read": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "ATTACHMENT_ID",
+        "offset": 0,
+        "limit": 4096
+      }
+    },
+    "attachments.upload": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "name": "hello.txt",
+        "media_type": "text/plain",
+        "data_base64": "SGVsbG8K",
+        "operation_id": "upload_hello_1"
+      }
+    },
+    "attention.policy": {
+      "page": "work/initiative-and-attention.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "policy": {
+          "mode": "suggest",
+          "minimum_score": 0.6
+        },
+        "expected_revision": 0
+      }
+    },
+    "children.cancel": {
+      "page": "work/delegation.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "CHILD_ID",
+        "reason": "Parent no longer needs this review"
+      }
+    },
+    "children.delegate": {
+      "page": "work/delegation.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "parent_work_id": "LIVE_PARENT_WORK_ID",
+        "objective": "Review unsupported dates",
+        "capabilities": [],
+        "resources": {
+          "tokens": 16000,
+          "iterations": 2,
+          "elapsed_ms": 60000,
+          "tool_calls": 2
+        },
+        "workspace_mode": "isolated",
+        "retained": false
+      }
+    },
+    "children.get": {
+      "page": "work/delegation.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "CHILD_ID"
+      }
+    },
+    "children.list": {
+      "page": "work/delegation.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "commitments.create": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "description": "Review corrected dates",
+        "beneficiary": "owner"
+      }
+    },
+    "commitments.list": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "commitments.progress": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "COMMITMENT_ID",
+        "progress": "blocked",
+        "expected_revision": 2,
+        "reason": "Waiting for corrected source"
+      }
+    },
+    "commitments.resume": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "COMMITMENT_ID",
+        "expected_revision": 3
+      }
+    },
+    "commitments.transition": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "COMMITMENT_ID",
+        "state": "accepted",
+        "expected_revision": 1
+      }
+    },
+    "commitments.wait": {
+      "page": "work/commitments.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "COMMITMENT_ID",
+        "expected_revision": 2,
+        "trigger": {
+          "kind": "user_response",
+          "conversation_id": "CONVERSATION_ID"
+        },
+        "after_seq": 0
+      }
+    },
+    "connections.configure": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "reference",
+        "kind": "http",
+        "endpoint": "https://reference.example.com/notes"
+      }
+    },
+    "connections.get": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "reference"
+      }
+    },
+    "connections.grant": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "reference",
+        "operations": [
+          "fetch"
+        ],
+        "expected_revision": 1
+      }
+    },
+    "connections.list": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "connections.probe": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "reference",
+        "expected_revision": 2
+      }
+    },
+    "connections.revoke": {
+      "page": "connections/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "reference",
+        "expected_revision": 3
+      }
+    },
+    "conversations.create": {
+      "page": "conversations/continuing-conversations.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "title": "Maintenance review"
+      }
+    },
+    "conversations.get": {
+      "page": "conversations/sources-history-search.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "CONVERSATION_ID"
+      }
+    },
+    "conversations.list": {
+      "page": "conversations/sources-history-search.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "query": "maintenance",
+        "include_archived": true
+      }
+    },
+    "conversations.update": {
+      "page": "conversations/sources-history-search.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "CONVERSATION_ID",
+        "expected_revision": 2,
+        "title": "Corrected maintenance review"
+      }
+    },
+    "devices.get": {
+      "page": "connections/devices.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "connection_id": "DEVICE_CONNECTION_ID"
+      }
+    },
+    "devices.list": {
+      "page": "connections/devices.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "devices.pair": {
+      "page": "connections/devices.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "connection_id": "DEVICE_CONNECTION_ID",
+        "expected_revision": 1,
+        "ttl": 300
+      }
+    },
+    "devices.revoke": {
+      "page": "connections/devices.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "connection_id": "DEVICE_CONNECTION_ID",
+        "expected_revision": 3
+      }
+    },
+    "diagnostics.get": {
+      "page": "settings/usage-diagnostics.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "files.delete": {
+      "page": "files/workspace.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "path": "hello.txt",
+        "expected_sha256": "CURRENT_SHA256"
+      }
+    },
+    "files.list": {
+      "page": "files/workspace.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "path": "."
+      }
+    },
+    "files.read": {
+      "page": "files/workspace.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "path": "hello.txt"
+      }
+    },
+    "files.write": {
+      "page": "files/workspace.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "path": "hello.txt",
+        "data_base64": "SGVsbG8K"
+      }
+    },
+    "goals.archive": {
+      "page": "work/goals.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "TERMINAL_GOAL_ID",
+        "expected_revision": 4
+      }
+    },
+    "goals.create": {
+      "page": "work/goals.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "objective": "Prepare a source-based brief",
+        "limits": {
+          "tokens": 16000,
+          "iterations": 2,
+          "elapsed_ms": 60000,
+          "tool_calls": 2
+        }
+      }
+    },
+    "goals.edit": {
+      "page": "work/goals.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "GOAL_ID",
+        "expected_revision": 2,
+        "objective": "Prepare a corrected source-based brief"
+      }
+    },
+    "goals.list": {
+      "page": "work/goals.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "goals.transition": {
+      "page": "work/goals.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "GOAL_ID",
+        "state": "active",
+        "expected_revision": 1
+      }
+    },
+    "inbox.decide": {
+      "page": "work/initiative-and-attention.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "PROPOSAL_ID",
+        "decision": "dismiss"
+      }
+    },
+    "inbox.list": {
+      "page": "work/initiative-and-attention.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "initiative.propose": {
+      "page": "work/initiative-and-attention.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "source_event_id": "ACTUAL_SOURCE_EVENT_ID",
+        "action": "Review the corrected source",
+        "signals": {
+          "urgency": 0.5,
+          "expected_value": 0.8,
+          "confidence": 0.8,
+          "interruption_cost": 0.2,
+          "resource_cost": 0.2,
+          "duplication_penalty": 0
+        },
+        "expires_at": 1893456000,
+        "dedupe_key": "review_corrected_source_1"
+      }
+    },
+    "knowledge.add": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "attachment_id": "ATTACHMENT_ID",
+        "title": "Maintenance notes",
+        "operation_id": "index_maintenance_1"
+      }
+    },
+    "knowledge.delete": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "DOCUMENT_ID",
+        "expected_revision": 2,
+        "operation_id": "retract_document_1"
+      }
+    },
+    "knowledge.get": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "DOCUMENT_ID",
+        "revision": 1
+      }
+    },
+    "knowledge.list": {
+      "page": "knowledge/source-library.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "query": "maintenance",
+        "limit": 20
+      }
+    },
+    "memory.correct": {
+      "page": "knowledge/memory.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "MEMORY_ID",
+        "content": "The corrected source identifies May.",
+        "expected_revision": 1,
+        "operation_id": "correct_date_1"
+      }
+    },
+    "memory.get": {
+      "page": "knowledge/memory.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "MEMORY_ID",
+        "revision": 1
+      }
+    },
+    "memory.query": {
+      "page": "knowledge/memory.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "text": "maintenance",
+        "limit": 20
+      }
+    },
+    "memory.retract": {
+      "page": "knowledge/memory.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "MEMORY_ID",
+        "reason": "Source withdrawn",
+        "revision": 2,
+        "operation_id": "retract_date_1"
+      }
+    },
+    "messages.cancel": {
+      "page": "conversations/steering-and-cancellation.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "conversation_id": "CONVERSATION_ID",
+        "message_id": "maintenance_cancel_1"
+      }
+    },
+    "messages.events": {
+      "page": "conversations/sources-history-search.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "conversation_id": "CONVERSATION_ID",
+        "after": 0,
+        "limit": 100
+      }
+    },
+    "messages.send": {
+      "page": "conversations/steering-and-cancellation.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "conversation_id": "CONVERSATION_ID",
+        "message_id": "maintenance_prompt_1",
+        "text": "Summarize the maintenance source.",
+        "kind": "prompt"
+      }
+    },
+    "overview": {
+      "page": "settings/usage-diagnostics.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "permissions.approve": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "event_id": "REQUEST_EVENT_ID",
+        "expires_in": 300
+      }
+    },
+    "permissions.deny": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "event_id": "REQUEST_EVENT_ID"
+      }
+    },
+    "permissions.list": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "permissions.pending": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "permissions.request": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "event_id": "REQUEST_EVENT_ID"
+      }
+    },
+    "permissions.set": {
+      "page": "settings/permissions.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "tool": "workspace.write",
+        "mode": "ask",
+        "expected_revision": 0
+      }
+    },
+    "plugins.activate": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID",
+        "expected_revision": 2
+      }
+    },
+    "plugins.disable": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID",
+        "expected_revision": 3
+      }
+    },
+    "plugins.health": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID"
+      }
+    },
+    "plugins.inspect": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID"
+      }
+    },
+    "plugins.list": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "plugins.rollback": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID",
+        "expected_revision": 3
+      }
+    },
+    "plugins.uninstall": {
+      "page": "settings/plugins.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "INSTALLED_PLUGIN_ID",
+        "expected_revision": 4
+      }
+    },
+    "providers.activate": {
+      "page": "models/connect-a-model.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "provider_id": "research",
+        "expected_revision": 1
+      }
+    },
+    "providers.configure": {
+      "page": "models/connect-a-model.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "provider_id": "research",
+        "endpoint": "https://model.example.com/v1/chat/completions",
+        "model": "SERVICE_MODEL",
+        "context_limit": 32768,
+        "output_limit": 4096,
+        "tools": false
+      }
+    },
+    "providers.credentials.list": {
+      "page": "models/credentials.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "providers.credentials.put": {
+      "page": "models/credentials.md",
+      "anchor": "command-examples",
+      "parameters": null
+    },
+    "providers.credentials.revoke": {
+      "page": "models/credentials.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "name": "model_key",
+        "expected_revision": 2
+      }
+    },
+    "providers.inspect": {
+      "page": "models/connect-a-model.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "provider_id": "research"
+      }
+    },
+    "providers.list": {
+      "page": "models/connect-a-model.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "providers.probe": {
+      "page": "models/connect-a-model.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "provider_id": "research",
+        "expected_revision": 1
+      }
+    },
+    "schedules.create": {
+      "page": "work/schedules.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "conversation_id": "CONVERSATION_ID",
+        "text": "Review maintenance notes",
+        "spec": {
+          "kind": "calendar",
+          "timezone": "Europe/Berlin",
+          "hour": 9,
+          "minute": 0,
+          "weekdays": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "fold": "first"
+        },
+        "resources": {
+          "tokens": 16000,
+          "iterations": 2,
+          "elapsed_ms": 60000,
+          "tool_calls": 2
+        }
+      }
+    },
+    "schedules.list": {
+      "page": "work/schedules.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "schedules.state": {
+      "page": "work/schedules.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "SCHEDULE_ID",
+        "state": "paused",
+        "expected_revision": 1
+      }
+    },
+    "skills.enable": {
+      "page": "settings/procedures.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "review_sources",
+        "enabled": false,
+        "expected_revision": 1
+      }
+    },
+    "skills.install": {
+      "page": "settings/procedures.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "manifest": {
+          "id": "review_sources",
+          "version": "1",
+          "description": "Review source evidence",
+          "triggers": [
+            "source review"
+          ],
+          "steps": [
+            "Identify the source for every claimed date."
+          ],
+          "required_tools": []
+        }
+      }
+    },
+    "skills.list": {
+      "page": "settings/procedures.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "skills.rollback": {
+      "page": "settings/procedures.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "review_sources",
+        "expected_revision": 2
+      }
+    },
+    "usage.summary": {
+      "page": "settings/usage-diagnostics.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "work.cancel": {
+      "page": "work/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "WORK_ID",
+        "reason": "Owner ended this work"
+      }
+    },
+    "work.get": {
+      "page": "work/overview.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "WORK_ID"
+      }
+    },
+    "work.list": {
+      "page": "work/overview.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "work.overview": {
+      "page": "work/overview.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "workflows.create": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "steps": [
+          {
+            "id": "review",
+            "description": "Review the source",
+            "dependencies": [],
+            "budget": {
+              "tokens": 16000,
+              "iterations": 2,
+              "elapsed_ms": 60000,
+              "tool_calls": 2
+            }
+          }
+        ],
+        "budget": {
+          "tokens": 16000,
+          "iterations": 2,
+          "elapsed_ms": 60000,
+          "tool_calls": 2
+        }
+      }
+    },
+    "workflows.get": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "PLAN_ID"
+      }
+    },
+    "workflows.list": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {}
+    },
+    "workflows.revise": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "PLAN_ID",
+        "expected_revision": 1,
+        "steps": [
+          {
+            "id": "review",
+            "description": "Review the corrected source",
+            "budget": {
+              "tokens": 16000,
+              "iterations": 2,
+              "elapsed_ms": 60000,
+              "tool_calls": 2
+            }
+          }
+        ],
+        "reason": "Source corrected"
+      }
+    },
+    "workflows.run": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "PLAN_ID",
+        "conversation_id": "CONVERSATION_ID",
+        "expected_revision": 1
+      }
+    },
+    "workflows.state": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "PLAN_ID",
+        "state": "paused",
+        "expected_revision": 2
+      }
+    },
+    "workflows.step": {
+      "page": "work/workflows.md",
+      "anchor": "command-examples",
+      "parameters": {
+        "id": "USER_PLAN_ID",
+        "step_id": "human_review",
+        "state": "in_progress",
+        "expected_revision": 1
+      }
+    }
+  }
+}

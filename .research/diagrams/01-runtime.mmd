@@ -1,0 +1,30 @@
+flowchart TB
+    U[User and external inputs] --> IN[Python: input adapters and validation]
+    IN --> J[(Durable operational journal)]
+    J --> RED[Python: ordered situation reducer]
+    RED --> SCH[Python: attention and work scheduler]
+    SCH --> CTX[Python: immutable context assembler]
+    CTX --> MOD[Python: streaming model gateway]
+    MOD -->|user-visible output| OUT[(Durable output outbox)]
+    OUT --> SEND[Python: delivery and replay]
+    SEND --> U
+    MOD -->|complete action proposal| VAL[Python: tool validation and preconditions]
+    VAL -->|persist intent before dispatch| J
+    J -->|ready action records| EXEC[Python: supervised tool workers]
+    EXEC --> WORLD[Digital environment]
+    WORLD --> NORM[Python: normalized observations and results]
+    NORM --> J
+    J --> REC[Python: expected versus observed reconciliation]
+    REC -->|evidence-backed transitions| J
+    J -->|replayable ingestion cursor| MEM
+    CTX <-->|deadline-bound asynchronous IPC| MEM
+    subgraph CPP[C++ memory process]
+        MEM[Versioned memory API]
+        MEM --> RECORDS[(Typed records and concept links)]
+        MEM --> INDEX[(Embedding and lexical projections)]
+        MEM --> GEN[Immutable generations and publication]
+    end
+    SLEEP[Python: daily sleep coordinator] -->|snapshot and staged proposals| MEM
+    SLEEP --> BG[Background inference and embedding jobs]
+    BG --> SLEEP
+    J -->|cycle checkpoint| SLEEP

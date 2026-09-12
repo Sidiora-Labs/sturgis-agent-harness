@@ -1,0 +1,9 @@
+cg check — /root/Sturgis
+  ok    spec render is current
+  ok    spec lint is clean
+  ok    task evidence holds
+  ok    task claims are consistent
+  ok    working tree matches the last snapshot
+  warn  7 stale anchor(s) — doc comments whose code has moved on (cg anchors --stale)
+  ok    no grounding/contract/hygiene findings
+0 failure(s), 1 warning(s)

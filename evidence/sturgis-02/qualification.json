@@ -1,0 +1,52 @@
+{
+  "spec": "sturgis-02",
+  "required_line_percent": 90.0,
+  "python_line_percent": 97.86897352041355,
+  "native_line_percent": 97.82178217821782,
+  "javascript_line_percent": 97.17314487632508,
+  "python_branches": {
+    "num_branches": 3452,
+    "num_partial_branches": 211,
+    "covered_branches": 3227,
+    "missing_branches": 225
+  },
+  "javascript_branches": {
+    "total": 1985,
+    "covered": 1510,
+    "skipped": 0,
+    "pct": 76.07
+  },
+  "live_remote_provider_certified": false,
+  "public_deployment_certified": false,
+  "python_version": "3.12.3",
+  "system": "Linux",
+  "executable_lines": {
+    "python": {
+      "covered": 9277,
+      "total": 9479
+    },
+    "native": {
+      "covered": 494,
+      "total": 505
+    },
+    "javascript": {
+      "total": 1132,
+      "covered": 1100,
+      "skipped": 0,
+      "pct": 97.17
+    }
+  },
+  "native_branches": {
+    "covered": 1510,
+    "total": 2977
+  },
+  "evidence_sha256": {
+    "python-coverage.json": "56ca357be4dc0fea7ba3768461c3045ced103feef49f57302c0112aaa9127724",
+    "native-coverage.json": "b0413732f032370c8d31dcdb9ab6934fb5f99176e8cf504c9d0bfdd919354463",
+    "web-coverage.json": "48c535dffbc09422e1825886af829f2ca84075a6204034a29fd79f02d338783b",
+    "web-source-manifest.json": "5dd0e18ba387845bc8fad5cb569158bdf78cb82f254714803b3fae95cdfa81f5",
+    "browser-quality.json": "059f10a2c26980a5f27d6f790dec3467caeb61e5d66c65de363e45bff5532fd5"
+  },
+  "completed_at": 1789229127.821307,
+  "source_manifest_sha256": "29abc8017cc3b9824c5cf756afdca75a4eb645661ab847774cc63444902f590e"
+}

@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "completed_at": 1789235126.0410533,
+  "manuals": [
+    {
+      "audience": "users",
+      "status": "passed",
+      "manuals": 40,
+      "words": 33373,
+      "examples": 159,
+      "mapped_commands": 95,
+      "mapped_sources": 56,
+      "manifest_sha256": "4a4a6be7cb69d2a456d4a190d7360bc1c3a7e613b525adb69139c3133ad84a50",
+      "errors": []
+    },
+    {
+      "audience": "developers",
+      "status": "passed",
+      "manuals": 53,
+      "words": 21151,
+      "examples": 53,
+      "mapped_commands": 95,
+      "mapped_sources": 106,
+      "manifest_sha256": "7131233590116ecec2750aff84fac2f2ad5945547307a30b5d37415dfe36624a",
+      "errors": []
+    }
+  ],
+  "sites": [
+    {
+      "audience": "users",
+      "status": "passed",
+      "pages": 41,
+      "expected_routes": 40,
+      "source_lines": 0,
+      "source_symbols": 0,
+      "local_links": 3380,
+      "external_links_not_fetched": 0,
+      "canonical_metadata_not_navigation": 41,
+      "errors": []
+    },
+    {
+      "audience": "developers",
+      "status": "passed",
+      "pages": 275,
+      "expected_routes": 274,
+      "source_lines": 46782,
+      "source_symbols": 3126,
+      "local_links": 185670,
+      "external_links_not_fetched": 0,
+      "canonical_metadata_not_navigation": 275,
+      "errors": []
+    }
+  ],
+  "examples": {
+    "status": "passed",
+    "counts": {
+      "json": 38,
+      "python_compiled": 25,
+      "shell_syntax": 156
+    },
+    "executed_tutorial": "documentation/examples/first_mechanisms.py",
+    "tutorial_sha256": "bab5d5a70c6d5f2a57a39f42d389ff6a1350203e16f082aebb78dfb3c8b6d44f",
+    "boundary": "Syntax checks do not prove remote endpoint behavior. The local tutorial executes real journal, revisions, goals, framing, and canonical error handling in a temporary workspace."
+  },
+  "source_manifest_sha256": "0cbe22860f6da4d2f99efe934f68f3883f820f8b4b374cd86de172acf26bf8bc",
+  "evidence_sha256": {
+    "browser.json": "b2dbd44bff8c22a2a759bc046b52f9397704bf5982aea51014e6d193c6062724",
+    "command-contracts.json": "24ab5d5ca597d2c63629c6d34af68197e1052bb1a5d962d4a8eb892f54d25cd0",
+    "command-recipes.json": "7110d0fa3f0563e0af2ef862a9aa52878b1586efaf749810524424e0759ab3cf",
+    "content-developers.json": "40953ef7e92f0b50dbc1fce160c2b6c14b5a10c2ea8219602dbb0783abe1a5ef",
+    "content-users.json": "88a66781cccde1f9f82616e400f0220f471a48cafab81b2982ab01f841af6388",
+    "coverage-floors.json": "82df60d23c68b21ef08a3a3329ffde3cae70ce116b3986d010e7d9b95b508364",
+    "coverage.json": "77d252a09206fa1f236d489efac08d864c5e9b48782e4e6e00adabde779a55ee",
+    "distribution-manifest.json": "71eed56ee18107dd18503720d5a5b8859debba050a659682d5d1c4ffa3864ca1",
+    "examples.json": "e995229a9626759212bf8a5273fd7b31c488c3a9a2aa1d9a39045b56533e906f",
+    "links-developers.json": "24a411cb11e26ccc7d073e05d065e2d16a016b8f629880438d58ac2e52ed61cc",
+    "links-users.json": "b04505a243a1701974c0d39c12c842a448aba52987a1869fcfaa9819e12d9ac5",
+    "source-manifest.json": "0cbe22860f6da4d2f99efe934f68f3883f820f8b4b374cd86de172acf26bf8bc"
+  },
+  "reference_manifest_sha256": "3fc3f6816c524cbd4d4e361467a58b932cf5ef86ccf87536fea3126221085234",
+  "coverage_input_sha256": {
+    "command-recipes.json": "0bbfc52c55a9cae4541cb4ee4eddb7d3001c8e0b135a88909b63c480ffa29a4f",
+    "commands.json": "1883eb02df18578d9f0ab674d6db7a8df4d788b99d695f30cd5ab24ee6160d9b",
+    "developers.json": "7131233590116ecec2750aff84fac2f2ad5945547307a30b5d37415dfe36624a",
+    "user-command-examples.json": "a42e08f9d81163e5d7544468b8f24004ec1666c4d109e1c53fc70a04fee0af63",
+    "users.json": "4a4a6be7cb69d2a456d4a190d7360bc1c3a7e613b525adb69139c3133ad84a50"
+  },
+  "content_manifest_sha256": {
+    "users": "4a4a6be7cb69d2a456d4a190d7360bc1c3a7e613b525adb69139c3133ad84a50",
+    "developers": "7131233590116ecec2750aff84fac2f2ad5945547307a30b5d37415dfe36624a"
+  }
+}

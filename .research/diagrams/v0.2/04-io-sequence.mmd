@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant U as User
+    participant I as channel-core and adapters
+    participant J as Journal and outbox
+    participant S as Scheduler
+    participant M as provider-adapters
+    participant T as tool-runner
+    participant E as delivery
+    U->>I: Message A with client id
+    I->>J: Durable input append
+    J-->>I: Accepted event id
+    I-->>U: Acceptance acknowledgment
+    J-->>S: Pending input notification
+    S->>M: Context snapshot including A
+    M->>J: Persist visible stream chunk
+    J-->>E: Pending output
+    E-->>U: Deliver chunk with sequence
+    M->>S: Complete action proposal
+    S->>T: Admitted action
+    T->>J: Persist validated intent and claim current authority
+    par Tool continues
+        T->>T: Execute and observe result
+    and User steers
+        U->>I: Message B
+        I->>J: Persist B
+        I-->>U: Accepted
+        J-->>S: B pending incorporation
+    end
+    S->>M: Continue or cancel and rebuild at safe boundary
+    T->>J: Normalized result with action id
+    J-->>S: Result pending incorporation
+    S->>M: New snapshot including B and result
+    M->>J: Persist final visible content and stream terminal
+    J-->>E: Pending output
+    alt Receiver supports receipts and replay
+        E-->>U: Deliver or replay pending output
+        U-->>E: Highest contiguous sequence received
+    else No receiver acknowledgment capability
+        E-->>U: Ordered transport send
+        E->>J: Record sent_unconfirmed
+    end

@@ -1,0 +1,21 @@
+flowchart TB
+    JOURNAL[Operational journal and source evidence] --> INGEST[C++: cursor-based memory ingestion]
+    INGEST --> EP[Episodic records linked to actions and outcomes]
+    INGEST --> SEM[Semantic facts, concepts and contested beliefs]
+    EP --> PROC[Procedural candidates with preconditions]
+    EP --> INDEX[Versioned embedding and lexical projections]
+    SEM --> INDEX
+    PROC --> INDEX
+    INDEX --> QUERY[Scoped retrieval from published generation]
+    JOURNAL --> RECENT[Recent evidence after memory watermark]
+    QUERY --> ATT[Python attention]
+    RECENT --> ATT
+    ATT --> CONTEXT[Python context compiler]
+    CYCLE[scheduler: daily maintenance allocation] --> SNAP[Pin generation and source watermark]
+    SNAP --> PROPOSE[Python: bounded consolidation and embedding jobs]
+    PROPOSE --> STAGE[C++: staged revisions and indexes]
+    STAGE --> CHECK[Validate evidence, scope and concurrent changes]
+    CHECK -->|valid parent and complete projection| PUBLISH[C++: atomic generation publication]
+    CHECK -->|conflict or incomplete work| RETRY[Rebase or abandon staging]
+    PUBLISH --> QUERY
+    PUBLISH --> GC[Retire unpinned redundant projections]

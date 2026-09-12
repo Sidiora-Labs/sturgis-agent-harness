@@ -1,0 +1,214 @@
+# sturgis-01: core agent mechanisms only. Executable source of truth.
+[meta]
+feature = "sturgis-01"
+title = "Sturgis 01 — Core agent and mechanisms"
+status = "done"
+spec_version = "1.0.0"
+intro = "Build the new Python agent core and isolated C++ memory engine, with parallel ownership and independently measured 90 percent Python and C++ line coverage. Applications and UI belong to the next spec."
+
+[design]
+overview = "Durable operational truth, typed interfaces, independent I/O, evidence-linked cognition and scoped effects. See design.body.md, execution.md, contracts.md and coverage.md."
+include = "design.body.md"
+
+[documentation]
+mode = "manual"
+status = "done"
+audiences = ["developer"]
+targets = ["README.md", "docs/core.md", "docs/qualification.md"]
+
+[req.1]
+title = "Core-only scope"
+story = "As the core runtime owner, I need core-only scope."
+ac_1 = "Implement exactly the listed Python core packages and native/memory plus tests, build tooling and developer documentation. No app, UI, frontend, web server, product API service, desktop/TUI client, deployment or next-spec feature is included."
+ac_2 = "ACP is a reusable facade, channel/provider adapters are reusable libraries, and runtime composition is a programmatic core API; none requires an application shell."
+
+[req.2]
+title = "Canonical contracts and durability"
+story = "As the core runtime owner, I need canonical contracts and durability."
+ac_1 = "Versioned strict events, invocation/results, explicit error/effect/completeness states and bounded byte frames retain scope, provenance and stable IDs. Malformed or unauthorized calls execute no effect."
+ac_2 = "SQLite operational records use atomic revision checks, journal sequences, deduplication and durable cursors. Artifact reads enforce scope and content integrity. Recovery preserves accepted work and indeterminate effects."
+
+[req.3]
+title = "Situation, identity and intent"
+story = "As the core runtime owner, I need situation, identity and intent."
+ac_1 = "Profiles own durable scoped roots/configuration/resources. Awareness ingests watcher observations with provenance and current projections. Goals own cumulative budgets/evidence; commitments own accepted responsibilities and durable waits."
+ac_2 = "Initiative creates scored candidates; attention exposes separate proactive-policy and context-selection decisions. Planner supports direct/planned/delegated routing, versioned dependency plans, assignments, expectations and result checks."
+
+[req.4]
+title = "Input, providers and output"
+story = "As the core runtime owner, I need input, providers and output."
+ac_1 = "Channel contracts preserve account/conversation/participant identity, capabilities, admission and deduplication. At least one real asynchronous transport adapter and an injectable adapter registry are executable."
+ac_2 = "Provider catalog separates static declarations and observed capability freshness. A real HTTP streaming model adapter preserves message roles, tools, cancellation and typed errors. ACP initialization/session/prompt/cancel/update correlation uses the common core."
+ac_3 = "Delivery persists visible partial/final content independently of tool/memory completion and differentiates sent, acknowledged and unconfirmed receipt with retry/recovery semantics."
+
+[req.5]
+title = "Capabilities and bounded effects"
+story = "As the core runtime owner, I need capabilities and bounded effects."
+ac_1 = "Plugin SDK/host implement validated manifests, tools and commands, isolated worker execution, grants, install/activate/disable/drain, state compatibility, migration/rollback and quarantine. Skills have scoped discovery, revisioned applicability, synthesis evidence, activation and rollback."
+ac_2 = "Tool dispatch records intent before claiming current authority; restricted processes and rooted file operations enforce argv/environment/path/output/time bounds, cancellation, version checks and normalized results. No unknown side effect is blindly retried."
+
+[req.6]
+title = "One admission and delegation authority"
+story = "As the core runtime owner, I need one admission and delegation authority."
+ac_1 = "Scheduler implements durable work queues, fair admission, scope/ancestor grants, revisioned authority, shared allocations, cumulative goal budget reservations, calendar/interval timers and durable wait subscriptions."
+ac_2 = "Subagents implement parent-scoped delegation, workspace modes, messaging/waits, liveness/orphan recovery, retention and accepted/partial/rejected result admission. Memory scouts expose only scoped memory reads. Cancellation revokes new descendant dispatch while retaining already-authorized effect evidence."
+
+[req.7]
+title = "C++ temporal memory and Python sleep"
+story = "As the core runtime owner, I need c++ temporal memory and python sleep."
+ac_1 = "Native memory is an isolated C++ process with bounded length-framed versioned IPC, durable SQLite records, concept links, lexical/vector retrieval, explicit temporal validity/retraction/scope, compatible embedding spaces and idempotent ingestion."
+ac_2 = "Generation staging/publish uses expected-parent atomic publication, complete records/index projections, source watermarks and reader leases. Current retractions suppress old generations."
+ac_3 = "Python client uses asynchronous multiplexed requests with deadlines/cancellation and truthful unavailable/partial status. Daily sleep has persisted cycle/cursor, bounded consolidation, conflict handling, atomic publication and foreground independence."
+
+[req.8]
+title = "Context and continuous runtime"
+story = "As the core runtime owner, I need context and continuous runtime."
+ac_1 = "Context compiler creates immutable labeled packets/manifests with exact source ranges, roles, revisions, budgets, memory freshness and deferrals. Provider calls consume fixed snapshots."
+ac_2 = "Runtime composition supervises independent durable ingress, inference, execution and delivery paths; new inputs are accepted during slow tools/memory, incorporated on subsequent calls or after cancellation, and remain traceable after restart."
+ac_3 = "Operational authority and evidence determine completion; a model narrative, child summary or memory consolidation cannot manufacture external success."
+
+[req.9]
+title = "Diagnosis and code evolution"
+story = "As the core runtime owner, I need diagnosis and code evolution."
+ac_1 = "Meta-harness records trace-linked causal diagnoses, falsifiable repair hypotheses and immutable evaluations against protected checks. Self-evolution stages exact source/artifact candidates in permitted roots and supports isolated verification, shadow/canary, versioned activation, observation and reversal."
+ac_2 = "Candidate code cannot alter evaluator/governing authority. Skills/memory generations and behavior generations have distinct owners. Compatible rollback preserves prior effects and evidence; incompatible migration fails explicitly."
+
+[req.10]
+title = "Measured qualification and parallel execution"
+story = "As the core runtime owner, I need measured qualification and parallel execution."
+ac_1 = "Enforce at least 90 percent executable line coverage independently for the complete agent Python tree and native/memory production C++ sources. Unimported Python modules are included; native compiler/library/generated code and tests are excluded, never first-party production code."
+ac_2 = "Python branch coverage is enabled and reported separately; C++ branch data is reported. Coverage percentages are never blended across languages. Coverage thresholds are verified by an executable gate that fails below 90."
+ac_3 = "Run actual temporary SQLite stores, real subprocesses, sockets/HTTP boundary fixtures and the compiled memory process; test doubles at remote-provider boundaries cannot substitute for local integrated runtime evidence. No secret-dependent live-provider test is claimed without running it."
+ac_4 = "Task dependencies, exclusive file ownership and integration checkpoints enable up to four concurrent agents without duplicate full builds. Each task completes only after its focused verify command and graph checks; final completion requires full coverage/recovery/scope gates."
+
+[task.1.1]
+title = "Foundation contracts, persistence, artifacts, framing and test harness"
+status = "done"
+wave = 1
+owner_lane = "root-foundation"
+requires = []
+reqs = ["2.1", "2.2", "10.1", "10.2", "10.3", "10.4"]
+touches = ["agent/__init__.py", "agent/protocol/**", "agent/state/**", "agent/artifacts/**", "agent/framing/**", "tests/core/test_foundation.py", "pyproject.toml", "CMakeLists.txt", "scripts/**", ".gitignore", "README.md", "docs/**"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_foundation.py -q"
+do_1 = "Implement the frozen common interfaces in contracts.md, atomic SQLite records/events and scoped artifact integrity."
+do_2 = "Install isolated test tooling and implement Python/native coverage and core-scope verification scripts."
+
+[task.1.2]
+title = "Native C++ memory process and native verification"
+status = "done"
+wave = 1
+owner_lane = "native-memory"
+requires = []
+reqs = ["7.1", "7.2", "7.3", "10.1", "10.2", "10.3", "10.4"]
+touches = ["native/memory/**", "tests/native/**"]
+verify_cmd = ".venv/bin/python scripts/verify_native.py"
+do_1 = "Implement versioned framed IPC and durable temporal concept/vector/lexical memory."
+do_2 = "Implement generation staging, publication conflicts, leases, retractions and native recovery tests with at least 90 percent line coverage."
+
+[task.2.1]
+title = "Situation, profile, goals, commitments, initiative, attention and planner"
+status = "done"
+wave = 2
+owner_lane = "cognition"
+requires = ["1.1"]
+reqs = ["3.1", "3.2", "6.1", "6.2"]
+touches = ["agent/profile/**", "agent/awareness/**", "agent/goals/**", "agent/commitments/**", "agent/initiative/**", "agent/attention/**", "agent/planner/**", "tests/core/test_cognition.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_cognition.py -q"
+do_1 = "Implement domain owners with revisioned Journal records and evidence-linked transitions."
+do_2 = "Cover proactive/context attention separation, goal budgets, waiting, dependency/result validation and profile isolation."
+
+[task.2.2]
+title = "Channel, ACP, provider and durable delivery libraries"
+status = "done"
+wave = 2
+owner_lane = "boundaries"
+requires = ["1.1"]
+reqs = ["4.1", "4.2", "4.3"]
+touches = ["agent/channel_core/**", "agent/channel_adapters/**", "agent/delivery/**", "agent/acp/**", "agent/provider_catalog/**", "agent/provider_adapters/**", "tests/core/test_boundaries.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_boundaries.py -q"
+do_1 = "Implement typed channel contracts, real async adapter, ACP facade and durable ordered outbox."
+do_2 = "Implement real streaming HTTP provider adapter with local wire-server validation; expose no app/UI server."
+
+[task.2.3]
+title = "Plugin contracts/host, skills and canonical tool execution"
+status = "done"
+wave = 2
+owner_lane = "capabilities"
+requires = ["1.1"]
+reqs = ["5.1", "5.2"]
+touches = ["agent/plugin_sdk/**", "agent/plugin_host/**", "agent/skills/**", "agent/tool_runner/**", "tests/core/test_capabilities.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_capabilities.py -q"
+do_1 = "Implement isolated plugin workers, manifest/lifecycle/state migration, revisioned skills and uniform dispatcher."
+do_2 = "Prove real process/file execution, bounds, no path escape, cancellation, durable attempts and indeterminate effects."
+
+[task.2.4]
+title = "Async native-memory client, retrieval and daily sleep"
+status = "done"
+wave = 2
+owner_lane = "native-memory"
+requires = ["1.1", "1.2"]
+reqs = ["7.1", "7.2", "7.3"]
+touches = ["agent/memory/**", "tests/core/test_memory.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_memory.py -q"
+do_1 = "Integrate the compiled native process through bounded async framed requests."
+do_2 = "Persist daily-cycle progress, reconcile generation publication and demonstrate responsive foreground with memory failure/consolidation."
+
+[task.3.1]
+title = "Shared scheduler, durable wakes, grants and child delegation"
+status = "done"
+wave = 3
+owner_lane = "cognition"
+requires = ["2.1", "2.3"]
+reqs = ["6.1", "6.2"]
+touches = ["agent/scheduler/**", "agent/subagents/**", "tests/core/test_scheduling.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_scheduling.py -q"
+do_1 = "Implement admission and fencing shared by parent/child actions, goal allocation, durable timers/wakes and recovery."
+do_2 = "Implement child messaging, workspace modes, liveness/retention, restricted scouts and evidence/result admission."
+
+[task.3.2]
+title = "Trace diagnosis and staged code/harness evolution"
+status = "done"
+wave = 3
+owner_lane = "capabilities"
+requires = ["2.3"]
+reqs = ["9.1", "9.2"]
+touches = ["agent/meta_harness/**", "agent/self_evolution/**", "tests/core/test_evolution.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_evolution.py -q"
+do_1 = "Implement protected evaluation with falsifiable diagnosis and exact candidate staging."
+do_2 = "Exercise isolated builds/checks, shadow/canary records, compatibility, activation and rollback using harmless temporary source projects."
+
+[task.3.3]
+title = "Immutable labeled context packets and exact inclusion manifests"
+status = "done"
+wave = 3
+owner_lane = "root-context"
+requires = ["1.1", "2.2"]
+reqs = ["8.1"]
+touches = ["agent/context/**", "tests/core/test_context.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_context.py -q"
+do_1 = "Compile supplied attention selections into immutable role-preserving packets with scoped evidence, byte ranges, budgets and explicit deferrals."
+do_2 = "Test multi-byte chunking, authority labels, incomplete observations and source manifests independently before runtime composition."
+
+[task.4.1]
+title = "Immutable context and integrated continuously responsive core runtime"
+status = "done"
+wave = 4
+owner_lane = "root-integration"
+requires = ["1.1", "2.2", "3.3"]
+reqs = ["8.1", "8.2", "8.3"]
+touches = ["agent/runtime/**", "agent/acp/**", "agent/provider_adapters/**", "agent/state/**", "agent/channel_core/**", "agent/tool_runner/__init__.py", "tests/core/test_runtime.py", "tests/core/test_qualification_gate.py", "scripts/qualify.py", "tests/integration/**", "docs/**", "README.md"]
+verify_cmd = ".venv/bin/python -m pytest tests/core/test_runtime.py tests/integration -q"
+do_1 = "Compose actual domain/provider/tool/memory/delivery modules under a reusable Python runtime API."
+do_2 = "Prove steering during blocked tools, durable input/output, fixed provider snapshots, cancellation and restart without duplicate effects."
+
+[task.5.1]
+title = "Full coverage, recovery, contract and scope qualification"
+status = "done"
+wave = 5
+owner_lane = "root-qualification"
+requires = ["1.2", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2", "4.1"]
+reqs = ["1.1", "1.2", "2.1", "2.2", "3.1", "3.2", "4.1", "4.2", "4.3", "5.1", "5.2", "6.1", "6.2", "7.1", "7.2", "7.3", "8.1", "8.2", "8.3", "9.1", "9.2", "10.1", "10.2", "10.3", "10.4"]
+touches = ["agent/**", "native/memory/**", "tests/**", "scripts/**", "docs/**", "README.md", "pyproject.toml", "CMakeLists.txt"]
+verify_cmd = ".venv/bin/python scripts/qualify.py"
+do_1 = "Run one combined Python suite and one coverage native build, enforce independent 90 percent line gates."
+do_2 = "Close integration defects in bounded delegated file scopes, verify all required modules and excluded app paths, publish exact qualification evidence and developer instructions."

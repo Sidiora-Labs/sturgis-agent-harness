@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2160" height="1810" viewBox="0 0 2160 1810" role="img" aria-labelledby="title description">
+<title id="title">Agent module ownership map: all 23 requested modules</title>
+<desc id="description">Six ownership groups contain all 23 requested Python modules. Context compilation, runtime supervision, operational durability, and an isolated C++ memory engine provide shared support. ACP means Agent Client Protocol. Detailed flow diagrams accompany this map.</desc>
+<rect width="2160" height="1810" fill="#f6f8fc"/>
+<text x="60" y="40" font-family="DejaVu Sans, sans-serif" font-size="43" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">An agent with a continuing digital situation</text>
+<text x="60" y="101" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">23 Python modules  /  shared operational state  /  isolated C++ memory</text>
+<text x="2055" y="47" font-family="DejaVu Sans, sans-serif" font-size="28" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">v0.2</text>
+<text x="60" y="145" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Module names clarified against the user-supplied source; architecture designed for this discussion.</text>
+<rect x="60" y="200" width="650" height="510" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="85" y="222" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">01  CLIENTS AND CHANNELS</text>
+<text x="85" y="276" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">acp</text>
+<text x="85" y="304" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Agent Client Protocol: sessions, prompts, updates</text>
+<text x="85" y="332" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">channel-adapters</text>
+<text x="85" y="360" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Concrete transports, account health, attachments</text>
+<text x="85" y="388" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">channel-core</text>
+<text x="85" y="416" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Typed messages, identity, routing, input admission</text>
+<text x="85" y="444" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">delivery</text>
+<text x="85" y="472" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Durable outbox, ordered sends, receipts and retries</text>
+<text x="85" y="674" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Input acceptance and output delivery progress independently.</text>
+<rect x="755" y="200" width="650" height="510" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="780" y="222" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">02  SITUATION AND INTENT</text>
+<text x="780" y="276" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">profile</text>
+<text x="780" y="304" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Durable configuration, scoped roots and resources</text>
+<text x="780" y="332" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">awareness</text>
+<text x="780" y="360" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Watchers, observations, current world and self-state</text>
+<text x="780" y="388" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">goals</text>
+<text x="780" y="416" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Desired outcomes, cumulative budgets and evidence</text>
+<text x="780" y="444" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">commitments</text>
+<text x="780" y="472" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Accepted responsibilities, waits and satisfaction</text>
+<text x="780" y="500" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">initiative</text>
+<text x="780" y="528" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Opportunity candidates, value, urgency and cost</text>
+<text x="780" y="556" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">attention</text>
+<text x="780" y="584" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Proactive policy plus focus and evidence selection</text>
+<text x="780" y="612" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">planner</text>
+<text x="780" y="640" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Direct, planned or delegated work; dependencies</text>
+<rect x="1450" y="200" width="650" height="510" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1475" y="222" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">03  CAPABILITIES AND DELEGATION</text>
+<text x="1475" y="276" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">plugin-sdk</text>
+<text x="1475" y="304" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Manifests, tools/commands, hooks and contracts</text>
+<text x="1475" y="332" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">plugin-host</text>
+<text x="1475" y="360" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Isolated hosting, migration, health and rollback</text>
+<text x="1475" y="388" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">skills</text>
+<text x="1475" y="416" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Scoped procedures, synthesis and package lifecycle</text>
+<text x="1475" y="444" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">subagents</text>
+<text x="1475" y="472" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Bounded child work, messages, workspaces, findings</text>
+<text x="1475" y="500" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">tool-runner</text>
+<text x="1475" y="528" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Canonical dispatch + restricted execution backends</text>
+<text x="1475" y="674" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Every agent tool action uses the same recorded contract.</text>
+<rect x="60" y="755" width="650" height="335" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="85" y="777" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">04  TIME AND SHARED CONTRACTS</text>
+<text x="85" y="831" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">scheduler</text>
+<text x="85" y="859" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Calendar jobs, durable wakes and common admission</text>
+<text x="85" y="887" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">protocol</text>
+<text x="85" y="915" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Versioned events, calls, results and domain schemas</text>
+<text x="85" y="943" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">framing</text>
+<text x="85" y="971" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Bounded transport byte codec for internal IPC</text>
+<text x="85" y="1054" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Framing delimits bytes; context compilation is separate.</text>
+<rect x="755" y="755" width="650" height="335" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="780" y="777" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">05  MODEL PROVIDERS</text>
+<text x="780" y="831" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">provider-catalog</text>
+<text x="780" y="859" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Provider declarations + fresh capability snapshots</text>
+<text x="780" y="887" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">provider-adapters</text>
+<text x="780" y="915" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Requests, roles, tools, streams, cancellation, usage</text>
+<text x="780" y="1054" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Each invocation pins its model contract and input packet.</text>
+<rect x="1450" y="755" width="650" height="335" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1475" y="777" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">06  DIAGNOSIS AND IMPROVEMENT</text>
+<text x="1475" y="831" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">meta-harness</text>
+<text x="1475" y="859" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Trace diagnosis, repair hypotheses, fixed evaluation</text>
+<text x="1475" y="887" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">self-evolution</text>
+<text x="1475" y="915" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Stage code, verify, canary, promote, observe, revert</text>
+<text x="1475" y="1054" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Candidate code cannot redefine its own acceptance rules.</text>
+<text x="60" y="1132" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#53667e" dominant-baseline="text-before-edge">SHARED SUPPORTING COMPONENTS</text>
+<rect x="60" y="1177" width="650" height="160" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="385.0" y="1197" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Python context compiler + runtime support</text>
+<text x="385.0" y="1235" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Immutable labeled context and exact inclusion manifests</text>
+<text x="385.0" y="1263" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Process supervision, health, recovery and grant checks</text>
+<text x="385.0" y="1291" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Independent ingress, inference, execution and delivery lanes</text>
+<rect x="755" y="1177" width="650" height="160" rx="18" fill="#fff5de" stroke="#c5a966" stroke-width="2"/>
+<text x="1080.0" y="1197" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Durable operational journal + outbox</text>
+<text x="1080.0" y="1235" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Domain records, events, action intents, waits and cursors</text>
+<text x="1080.0" y="1263" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">One operational transaction boundary with explicit owners</text>
+<text x="1080.0" y="1291" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Artifact bodies retain typed evidence and exact ranges</text>
+<rect x="1450" y="1177" width="650" height="160" rx="18" fill="#f1ebfb" stroke="#a389c5" stroke-width="2"/>
+<text x="1775.0" y="1197" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">C++ memory process</text>
+<text x="1775.0" y="1235" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Typed memories, stable concepts, evidence and time</text>
+<text x="1775.0" y="1263" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Embedding / lexical indexes and scoped retrieval</text>
+<text x="1775.0" y="1291" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Snapshot leases, staged revisions, atomic publication</text>
+<polyline points="385,1360 385,1394 1775,1394 1775,1360" fill="none" stroke="#8461b5" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 8"/>
+<polygon points="1775.00,1360.00 1782.00,1372.12 1768.00,1372.12" fill="#8461b5"/>
+<text x="1080" y="1408" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#8461b5" dominant-baseline="text-before-edge" text-anchor="middle">Python memory client + daily sleep  |  bounded async IPC  |  live interaction continues</text>
+<rect x="60" y="1480" width="2040" height="180" rx="22" fill="#ffffff" stroke="#dce4ee" stroke-width="2"/>
+<text x="1080" y="1506" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">OBSERVE  →  UNDERSTAND  →  EXPECT  →  ACT  →  CHECK THE CONSEQUENCE</text>
+<text x="1080" y="1560" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Stable objects, source evidence and unresolved responsibilities persist across model invocations.</text>
+<text x="1080" y="1605" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Daily sleep consolidates memory. Evaluated evolution changes behavior through a separate publication.</text>
+<text x="1080" y="1701" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Ownership map, not a synchronous call chain. Detailed runtime and lifecycle flows are supplied as Mermaid sources.</text>
+<text x="1080" y="1744" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Design proposal • ACP delivery depends on negotiated capabilities • No runtime implementation or performance claim</text>
+</svg>

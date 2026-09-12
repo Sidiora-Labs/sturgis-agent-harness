@@ -1,0 +1,128 @@
+{
+  "version": "sturgis-documentation-gate/1",
+  "status": "passed",
+  "generated_at": "2026-09-12T16:16:15.848472+00:00",
+  "scope": "Full current core and consumer documentation; historical core evidence preserved.",
+  "inline_anchor_review": {
+    "count": 7,
+    "semantic_drift": false,
+    "source_edits": false,
+    "symbols": [
+      "AcpFacade",
+      "CoreRuntime",
+      "attach_ingress",
+      "pause_admission",
+      "Lifecycle",
+      "WorkerManager",
+      "Json"
+    ],
+    "interpretation": "Codify timestamp freshness warnings were reviewed against current source; no concrete semantic drift found."
+  },
+  "boundaries": {
+    "behavioral_execution": "Recorded independently in qualification.json; documentation checks do not establish runtime behavior.",
+    "external_urls": "Counted without fetching.",
+    "absolute_donor_links": "Verified on this host, not portable checkout links."
+  },
+  "completed_at": "2026-09-12T16:20:09.141658+00:00",
+  "commands": [
+    {
+      "command": "cg docs check -f sturgis-01",
+      "exit_code": 0,
+      "checks": 1937,
+      "errors": 0,
+      "report": "evidence/sturgis-02/documentation-sturgis-01.log",
+      "sha256": "728440358c1b1146c2e56489c98ff7c5a86410b543985d16a93f496519187182"
+    },
+    {
+      "command": "cg docs check -f sturgis-02",
+      "exit_code": 0,
+      "checks": 3567,
+      "errors": 0,
+      "report": "evidence/sturgis-02/documentation-sturgis-02.log",
+      "sha256": "10b3b8e9585a3543a388e417ebcc55d47c9a111a72fbae77648e3f6f3374eb74"
+    },
+    {
+      "command": "cg spec render --check",
+      "exit_code": 0,
+      "report": "evidence/sturgis-02/documentation-render.log",
+      "sha256": "3e42aa7eb99293514232630fc84f3e6852bea1af681c9d5d095665e4966b2f63"
+    },
+    {
+      "command": "cg spec status",
+      "exit_code": 0,
+      "report": "evidence/sturgis-02/documentation-status.log",
+      "sha256": "d3c278c7c317708196effe8c1f72d53cf9b8b180e3bd47dc2fa5e8e5ee94d7d5"
+    },
+    {
+      "command": "cg status",
+      "exit_code": 0,
+      "report": "evidence/sturgis-02/documentation-tree.log",
+      "sha256": "103b4522923d22d4bc8e8df8dbb9b1e6190ae78384e77ff2c862a7386cdd1490"
+    },
+    {
+      "command": "cg check",
+      "exit_code": 0,
+      "failures": 0,
+      "warning_groups": 1,
+      "warning": "7 stale inline anchor timestamps, semantically reviewed",
+      "report": "evidence/sturgis-02/documentation-cg-check.log",
+      "sha256": "122e555a81995ebe70c76c01c6ec97e8987fa00c8daac9a9b5c67c4e2bc62cfd"
+    }
+  ],
+  "documentation_stage": "done",
+  "implementation_tasks": {
+    "total": 13,
+    "done": 13
+  },
+  "documentation_closure": {
+    "feature": "sturgis-02",
+    "workspace_revision": "1207f61c0f8cf055d8f2f7cc5c6d5aac1749ee2ddb53193b60d409d4f21ffa72",
+    "closed_at_ms": 1789229844182
+  },
+  "post_closure_navigation_snapshot": "47911d2ac45a",
+  "post_closure_note": "Two later core regression links were added in a labeled current-run section. Both documentation checks passed again, and the maintenance update was snapshotted. Completed documentation stages were not reset or forced.",
+  "link_audit": {
+    "documents": 43,
+    "links": 1462,
+    "local": 1372,
+    "link": 1459,
+    "image": 3,
+    "external": 90,
+    "heading_or_html_id": 3,
+    "line": 1187,
+    "outside_repository_local": 360,
+    "errors": 0
+  },
+  "claim_audit": {
+    "required_input_rows": 525,
+    "required_resolved": 525,
+    "required_rows_preserved": 525,
+    "required_unique_type_name_path": 508,
+    "legacy_input_rows": 374,
+    "legacy_resolved": 374,
+    "legacy_additional_unique_type_name_path": 342,
+    "total_ledger_rows": 867,
+    "ledger_unique_type_name_path": 850,
+    "new_navigation_claims": 462,
+    "new_navigation_source_files": 56,
+    "document_mappings": {
+      "docs/sturgis-02/qualification.md": 462,
+      "docs/qualification.md": 312,
+      "docs/core.md": 58,
+      "docs/sturgis-02/deployment.md": 35
+    },
+    "material_issues": 0,
+    "exact_symbols_in_current_mapped_documents": 867
+  },
+  "production_manifest_unchanged": {
+    "files": 137,
+    "sha256": "29abc8017cc3b9824c5cf756afdca75a4eb645661ab847774cc63444902f590e"
+  },
+  "evidence_sha256": {
+    "documentation-links.json": "4e4a4c61b2ea9001adb9d527a161baf226f4d9d9504e056d46156ee0890e69a9",
+    "documentation-claims.json": "c9ce9d698d330e1c9361c12cb2f5beb4689644e1ef9f46cf96767d8f12d661e8",
+    "documentation-link-checker-validation.json": "e03ccce63b8cdac86a0c9190233db5274aeaf36ebc14437cc853530cd30d9210",
+    "verify-documentation-links.py": "12709dfc217f2c26c6c53645592ae55e9f2bba92a6aa9f9b959c68b5368e1511",
+    "sturgis-01-original-documentation-claims.kvx": "21cce29137501ce417b898acd516093f3a0040e66cf30b3cda0a0fa81270191a"
+  }
+}

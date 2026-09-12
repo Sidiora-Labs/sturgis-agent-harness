@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "counts": {
+    "json": 38,
+    "python_compiled": 25,
+    "shell_syntax": 156
+  },
+  "executed_tutorial": "documentation/examples/first_mechanisms.py",
+  "tutorial_sha256": "bab5d5a70c6d5f2a57a39f42d389ff6a1350203e16f082aebb78dfb3c8b6d44f",
+  "boundary": "Syntax checks do not prove remote endpoint behavior. The local tutorial executes real journal, revisions, goals, framing, and canonical error handling in a temporary workspace."
+}

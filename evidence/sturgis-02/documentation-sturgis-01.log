@@ -1,0 +1,1938 @@
+documentation check: PASS (1937 checks, 0 errors)
+ok  evidence packet exists
+ok  provenance manifest exists
+ok  documentation target preserved: docs/qualification.md
+ok  docs/qualification.md local link ../evidence/sturgis-01/qualification.json
+ok  docs/qualification.md local link ../evidence/sturgis-01/source-manifest.json
+ok  docs/qualification.md local link ../evidence/sturgis-01/python-coverage.json
+ok  docs/qualification.md local link ../evidence/sturgis-01/python-coverage.xml
+ok  docs/qualification.md local link ../evidence/sturgis-01/native-coverage.json
+ok  docs/qualification.md local link ../evidence/sturgis-01/native-coverage.xml
+ok  docs/qualification.md local link ../evidence/sturgis-01/native-coverage.txt
+ok  docs/qualification.md local link ../scripts/qualify.py
+ok  docs/qualification.md local link ../scripts/verify_native.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_boundaries.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_capabilities.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_cognition.py
+ok  docs/qualification.md local link ../tests/core/test_context.py
+ok  docs/qualification.md local link ../tests/core/test_context.py
+ok  docs/qualification.md local link ../tests/core/test_context.py
+ok  docs/qualification.md local link ../tests/core/test_context.py
+ok  docs/qualification.md local link ../tests/core/test_context.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_evolution.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_foundation.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_memory.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_qualification_gate.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_runtime.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/core/test_scheduling.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_evidence_admission.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_provider_outcomes.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/integration/test_runtime_faults.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link ../tests/native/test_memory_worker.py
+ok  docs/qualification.md local link sturgis-02/qualification.md
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  docs/qualification.md local link ../tests/integration/test_continuity.py
+ok  at least one configured document changed (1)
+ok  user coverage mapped to README.md
+ok  README.md local link spec/sturgis-02/spec.kvx
+ok  README.md local link docs/sturgis-02/consumer.md
+ok  README.md local link docs/sturgis-02/deployment.md
+ok  README.md local link spec/sturgis-02/http-contract.md
+ok  README.md local link docs/sturgis-02/qualification.md
+ok  README.md local link spec/sturgis-01/spec.kvx
+ok  README.md local link spec/sturgis-01/design.body.md
+ok  README.md local link spec/sturgis-01/execution.md
+ok  README.md local link spec/sturgis-01/contracts.md
+ok  README.md local link spec/sturgis-01/coverage.md
+ok  README.md local link docs/core.md
+ok  README.md local link docs/qualification.md
+ok  README.md local link .research/agent-architecture-v0.2.md
+ok  README.md local link .research/agent-module-map-v0.2.md
+ok  README.md local link .research/agent-interface-contracts-v0.2.md
+ok  README.md local link .research/diagrams/v0.2/module-map.svg
+ok  README.md local link .research/agent-memory-systems-2026-09-12.md
+ok  developer coverage mapped to docs/core.md
+ok  docs/core.md local link ../spec/sturgis-01/spec.kvx
+ok  docs/core.md local link ../spec/sturgis-01/execution.md
+ok  docs/core.md local link sturgis-02/deployment.md
+ok  docs/core.md local link qualification.md
+ok  docs/core.md local link ../native/memory/PROTOCOL.md
+ok  docs/core.md local link ../agent/memory/README.md
+ok  docs/core.md local link ../agent/acp/__init__.py
+ok  docs/core.md local link ../agent/attention/__init__.py
+ok  docs/core.md local link ../agent/awareness/__init__.py
+ok  docs/core.md local link ../agent/channel_adapters/__init__.py
+ok  docs/core.md local link ../agent/channel_core/__init__.py
+ok  docs/core.md local link ../agent/commitments/__init__.py
+ok  docs/core.md local link ../agent/delivery/__init__.py
+ok  docs/core.md local link ../agent/framing/__init__.py
+ok  docs/core.md local link ../agent/goals/__init__.py
+ok  docs/core.md local link ../agent/initiative/__init__.py
+ok  docs/core.md local link ../agent/meta_harness/__init__.py
+ok  docs/core.md local link ../agent/planner/__init__.py
+ok  docs/core.md local link ../agent/plugin_host/__init__.py
+ok  docs/core.md local link ../agent/plugin_sdk/__init__.py
+ok  docs/core.md local link ../agent/profile/__init__.py
+ok  docs/core.md local link ../agent/protocol/__init__.py
+ok  docs/core.md local link ../agent/provider_adapters/__init__.py
+ok  docs/core.md local link ../agent/provider_catalog/__init__.py
+ok  docs/core.md local link ../agent/scheduler/__init__.py
+ok  docs/core.md local link ../agent/self_evolution/__init__.py
+ok  docs/core.md local link ../agent/skills/__init__.py
+ok  docs/core.md local link ../agent/subagents/__init__.py
+ok  docs/core.md local link ../agent/tool_runner/__init__.py
+ok  docs/core.md local link ../agent/tool_runner/files.py
+ok  docs/core.md local link ../agent/tool_runner/process.py
+ok  docs/core.md local link ../agent/context/__init__.py
+ok  docs/core.md local link ../agent/runtime/__init__.py
+ok  docs/core.md local link ../agent/memory/README.md
+ok  docs/core.md local link ../agent/state/__init__.py
+ok  docs/core.md local link ../agent/artifacts/__init__.py
+ok  docs/core.md local link ../native/memory/PROTOCOL.md
+ok  docs/core.md local link ../native/memory/engine.cpp
+ok  docs/core.md local link ../native/memory/main.cpp
+ok  release_or_migration coverage mapped to docs/core.md
+ok  docs/core.md local link ../spec/sturgis-01/spec.kvx
+ok  docs/core.md local link ../spec/sturgis-01/execution.md
+ok  docs/core.md local link sturgis-02/deployment.md
+ok  docs/core.md local link qualification.md
+ok  docs/core.md local link ../native/memory/PROTOCOL.md
+ok  docs/core.md local link ../agent/memory/README.md
+ok  docs/core.md local link ../agent/acp/__init__.py
+ok  docs/core.md local link ../agent/attention/__init__.py
+ok  docs/core.md local link ../agent/awareness/__init__.py
+ok  docs/core.md local link ../agent/channel_adapters/__init__.py
+ok  docs/core.md local link ../agent/channel_core/__init__.py
+ok  docs/core.md local link ../agent/commitments/__init__.py
+ok  docs/core.md local link ../agent/delivery/__init__.py
+ok  docs/core.md local link ../agent/framing/__init__.py
+ok  docs/core.md local link ../agent/goals/__init__.py
+ok  docs/core.md local link ../agent/initiative/__init__.py
+ok  docs/core.md local link ../agent/meta_harness/__init__.py
+ok  docs/core.md local link ../agent/planner/__init__.py
+ok  docs/core.md local link ../agent/plugin_host/__init__.py
+ok  docs/core.md local link ../agent/plugin_sdk/__init__.py
+ok  docs/core.md local link ../agent/profile/__init__.py
+ok  docs/core.md local link ../agent/protocol/__init__.py
+ok  docs/core.md local link ../agent/provider_adapters/__init__.py
+ok  docs/core.md local link ../agent/provider_catalog/__init__.py
+ok  docs/core.md local link ../agent/scheduler/__init__.py
+ok  docs/core.md local link ../agent/self_evolution/__init__.py
+ok  docs/core.md local link ../agent/skills/__init__.py
+ok  docs/core.md local link ../agent/subagents/__init__.py
+ok  docs/core.md local link ../agent/tool_runner/__init__.py
+ok  docs/core.md local link ../agent/tool_runner/files.py
+ok  docs/core.md local link ../agent/tool_runner/process.py
+ok  docs/core.md local link ../agent/context/__init__.py
+ok  docs/core.md local link ../agent/runtime/__init__.py
+ok  docs/core.md local link ../agent/memory/README.md
+ok  docs/core.md local link ../agent/state/__init__.py
+ok  docs/core.md local link ../agent/artifacts/__init__.py
+ok  docs/core.md local link ../native/memory/PROTOCOL.md
+ok  docs/core.md local link ../native/memory/engine.cpp
+ok  docs/core.md local link ../native/memory/main.cpp
+ok  project exclusions are explicit
+ok  unresolved claims: none
+ok  claim ledger contains 376 claim(s)
+ok  claim ACPAdapter appears in mapped document docs/core.md
+ok  claim ACPAdapter evidence agent/acp/__init__.py:8
+ok  claim ACPAdapter resolves as symbol
+ok  claim AcpFacade appears in mapped document docs/core.md
+ok  claim AcpFacade evidence agent/acp/__init__.py:30
+ok  claim AcpFacade resolves as symbol
+ok  claim Artifact appears in mapped document docs/core.md
+ok  claim Artifact evidence agent/artifacts/__init__.py:13
+ok  claim Artifact resolves as symbol
+ok  claim ArtifactStore appears in mapped document docs/core.md
+ok  claim ArtifactStore evidence agent/artifacts/__init__.py:21
+ok  claim ArtifactStore resolves as symbol
+ok  claim Attention appears in mapped document docs/core.md
+ok  claim Attention evidence agent/attention/__init__.py:17
+ok  claim Attention resolves as symbol
+ok  claim Awareness appears in mapped document docs/core.md
+ok  claim Awareness evidence agent/awareness/__init__.py:31
+ok  claim Awareness resolves as symbol
+ok  claim AdapterRegistry appears in mapped document docs/core.md
+ok  claim AdapterRegistry evidence agent/channel_adapters/__init__.py:7
+ok  claim AdapterRegistry resolves as symbol
+ok  claim StreamChannelAdapter appears in mapped document docs/core.md
+ok  claim StreamChannelAdapter evidence agent/channel_adapters/__init__.py:24
+ok  claim StreamChannelAdapter resolves as symbol
+ok  claim InboundMessage appears in mapped document docs/core.md
+ok  claim InboundMessage evidence agent/channel_core/__init__.py:8
+ok  claim InboundMessage resolves as symbol
+ok  claim ChannelCore appears in mapped document docs/core.md
+ok  claim ChannelCore evidence agent/channel_core/__init__.py:18
+ok  claim ChannelCore resolves as symbol
+ok  claim CommitmentService appears in mapped document docs/core.md
+ok  claim CommitmentService evidence agent/commitments/__init__.py:31
+ok  claim CommitmentService resolves as symbol
+ok  claim ContextBlock appears in mapped document docs/core.md
+ok  claim ContextBlock evidence agent/context/__init__.py:10
+ok  claim ContextBlock resolves as symbol
+ok  claim ContextPacket appears in mapped document docs/core.md
+ok  claim ContextPacket evidence agent/context/__init__.py:42
+ok  claim ContextPacket resolves as symbol
+ok  claim ContextCompiler appears in mapped document docs/core.md
+ok  claim ContextCompiler evidence agent/context/__init__.py:61
+ok  claim ContextCompiler resolves as symbol
+ok  claim Delivery appears in mapped document docs/core.md
+ok  claim Delivery evidence agent/delivery/__init__.py:7
+ok  claim Delivery resolves as symbol
+ok  claim FrameCodec appears in mapped document docs/core.md
+ok  claim FrameCodec evidence agent/framing/__init__.py:13
+ok  claim FrameCodec resolves as symbol
+ok  claim GoalService appears in mapped document docs/core.md
+ok  claim GoalService evidence agent/goals/__init__.py:19
+ok  claim GoalService resolves as symbol
+ok  claim Initiative appears in mapped document docs/core.md
+ok  claim Initiative evidence agent/initiative/__init__.py:21
+ok  claim Initiative resolves as symbol
+ok  claim NativeMemoryClient appears in mapped document docs/core.md
+ok  claim NativeMemoryClient evidence agent/memory/client.py:23
+ok  claim NativeMemoryClient resolves as symbol
+ok  claim MemoryIngestor appears in mapped document docs/core.md
+ok  claim MemoryIngestor evidence agent/memory/ingestion.py:13
+ok  claim MemoryIngestor resolves as symbol
+ok  claim MemorySleep appears in mapped document docs/core.md
+ok  claim MemorySleep evidence agent/memory/sleep.py:89
+ok  claim MemorySleep resolves as symbol
+ok  claim SourceSnapshot appears in mapped document docs/core.md
+ok  claim SourceSnapshot evidence agent/meta_harness/__init__.py:17
+ok  claim SourceSnapshot resolves as symbol
+ok  claim CheckSpec appears in mapped document docs/core.md
+ok  claim CheckSpec evidence agent/meta_harness/__init__.py:95
+ok  claim CheckSpec resolves as symbol
+ok  claim MetaHarness appears in mapped document docs/core.md
+ok  claim MetaHarness evidence agent/meta_harness/__init__.py:120
+ok  claim MetaHarness resolves as symbol
+ok  claim Planner appears in mapped document docs/core.md
+ok  claim Planner evidence agent/planner/__init__.py:47
+ok  claim Planner resolves as symbol
+ok  claim PluginHost appears in mapped document docs/core.md
+ok  claim PluginHost evidence agent/plugin_host/__init__.py:33
+ok  claim PluginHost resolves as symbol
+ok  claim Capability appears in mapped document docs/core.md
+ok  claim Capability evidence agent/plugin_sdk/__init__.py:55
+ok  claim Capability resolves as symbol
+ok  claim PluginManifest appears in mapped document docs/core.md
+ok  claim PluginManifest evidence agent/plugin_sdk/__init__.py:93
+ok  claim PluginManifest resolves as symbol
+ok  claim ProfileRegistry appears in mapped document docs/core.md
+ok  claim ProfileRegistry evidence agent/profile/__init__.py:46
+ok  claim ProfileRegistry resolves as symbol
+ok  claim CoreError appears in mapped document docs/core.md
+ok  claim CoreError evidence agent/protocol/__init__.py:9
+ok  claim CoreError resolves as symbol
+ok  claim Event appears in mapped document docs/core.md
+ok  claim Event evidence agent/protocol/__init__.py:60
+ok  claim Event resolves as symbol
+ok  claim ToolCall appears in mapped document docs/core.md
+ok  claim ToolCall evidence agent/protocol/__init__.py:71
+ok  claim ToolCall resolves as symbol
+ok  claim ToolResult appears in mapped document docs/core.md
+ok  claim ToolResult evidence agent/protocol/__init__.py:101
+ok  claim ToolResult resolves as symbol
+ok  claim ProviderEvent appears in mapped document docs/core.md
+ok  claim ProviderEvent evidence agent/provider_adapters/__init__.py:11
+ok  claim ProviderEvent resolves as symbol
+ok  claim HTTPProvider appears in mapped document docs/core.md
+ok  claim HTTPProvider evidence agent/provider_adapters/__init__.py:44
+ok  claim HTTPProvider resolves as symbol
+ok  claim ProviderCatalog appears in mapped document docs/core.md
+ok  claim ProviderCatalog evidence agent/provider_catalog/__init__.py:6
+ok  claim ProviderCatalog resolves as symbol
+ok  claim _ChildChannel appears in mapped document docs/core.md
+ok  claim _ChildChannel evidence agent/runtime/__init__.py:41
+ok  claim _ChildChannel resolves as symbol
+ok  claim CoreRuntime appears in mapped document docs/core.md
+ok  claim CoreRuntime evidence agent/runtime/__init__.py:49
+ok  claim CoreRuntime resolves as symbol
+ok  claim Scheduler appears in mapped document docs/core.md
+ok  claim Scheduler evidence agent/scheduler/__init__.py:46
+ok  claim Scheduler resolves as symbol
+ok  claim EvolutionAuthority appears in mapped document docs/core.md
+ok  claim EvolutionAuthority evidence agent/self_evolution/__init__.py:28
+ok  claim EvolutionAuthority resolves as symbol
+ok  claim SourceEdit appears in mapped document docs/core.md
+ok  claim SourceEdit evidence agent/self_evolution/__init__.py:51
+ok  claim SourceEdit resolves as symbol
+ok  claim SelfEvolution appears in mapped document docs/core.md
+ok  claim SelfEvolution evidence agent/self_evolution/__init__.py:63
+ok  claim SelfEvolution resolves as symbol
+ok  claim SkillRegistry appears in mapped document docs/core.md
+ok  claim SkillRegistry evidence agent/skills/__init__.py:31
+ok  claim SkillRegistry resolves as symbol
+ok  claim Record appears in mapped document docs/core.md
+ok  claim Record evidence agent/state/__init__.py:14
+ok  claim Record resolves as symbol
+ok  claim Journal appears in mapped document docs/core.md
+ok  claim Journal evidence agent/state/__init__.py:22
+ok  claim Journal resolves as symbol
+ok  claim Subagents appears in mapped document docs/core.md
+ok  claim Subagents evidence agent/subagents/__init__.py:15
+ok  claim Subagents resolves as symbol
+ok  claim ExecutionContext appears in mapped document docs/core.md
+ok  claim ExecutionContext evidence agent/tool_runner/__init__.py:18
+ok  claim ExecutionContext resolves as symbol
+ok  claim ExecutorResult appears in mapped document docs/core.md
+ok  claim ExecutorResult evidence agent/tool_runner/__init__.py:29
+ok  claim ExecutorResult resolves as symbol
+ok  claim ToolDispatcher appears in mapped document docs/core.md
+ok  claim ToolDispatcher evidence agent/tool_runner/__init__.py:35
+ok  claim ToolDispatcher resolves as symbol
+ok  claim WorkspaceFs appears in mapped document docs/core.md
+ok  claim WorkspaceFs evidence agent/tool_runner/files.py:17
+ok  claim WorkspaceFs resolves as symbol
+ok  claim ProcessRunner appears in mapped document docs/core.md
+ok  claim ProcessRunner evidence agent/tool_runner/process.py:13
+ok  claim ProcessRunner resolves as symbol
+ok  claim sturgis appears in mapped document docs/core.md
+ok  claim sturgis evidence native/memory/engine.cpp:12
+ok  claim sturgis resolves as symbol
+ok  claim Statement appears in mapped document docs/core.md
+ok  claim Statement evidence native/memory/engine.cpp:94
+ok  claim Statement resolves as symbol
+ok  claim Transaction appears in mapped document docs/core.md
+ok  claim Transaction evidence native/memory/engine.cpp:135
+ok  claim Transaction resolves as symbol
+ok  claim sturgis appears in mapped document docs/core.md
+ok  claim sturgis evidence native/memory/engine.hpp:9
+ok  claim sturgis resolves as symbol
+ok  claim Failure appears in mapped document docs/core.md
+ok  claim Failure evidence native/memory/engine.hpp:13
+ok  claim Failure resolves as symbol
+ok  claim Engine appears in mapped document docs/core.md
+ok  claim Engine evidence native/memory/engine.hpp:24
+ok  claim Engine resolves as symbol
+ok  claim main appears in mapped document docs/core.md
+ok  claim main evidence native/memory/main.cpp:5
+ok  claim main resolves as symbol
+ok  claim main appears in mapped document docs/qualification.md
+ok  claim main evidence scripts/qualify.py:21
+ok  claim main resolves as symbol
+ok  claim main appears in mapped document docs/qualification.md
+ok  claim main evidence scripts/verify_native.py:9
+ok  claim main resolves as symbol
+ok  claim setup_channels appears in mapped document docs/qualification.md
+ok  claim setup_channels evidence tests/core/test_boundaries.py:18
+ok  claim setup_channels resolves as symbol
+ok  claim test_input_admission_and_scoping appears in mapped document docs/qualification.md
+ok  claim test_input_admission_and_scoping evidence tests/core/test_boundaries.py:24
+ok  claim test_input_admission_and_scoping resolves as symbol
+ok  claim test_stream_channel_and_durable_delivery appears in mapped document docs/qualification.md
+ok  claim test_stream_channel_and_durable_delivery evidence tests/core/test_boundaries.py:43
+ok  claim test_stream_channel_and_durable_delivery resolves as symbol
+ok  claim receiver appears in mapped document docs/qualification.md
+ok  claim receiver evidence tests/core/test_boundaries.py:45
+ok  claim receiver resolves as symbol
+ok  claim test_delivery_claim_recovery_retry_and_replay appears in mapped document docs/qualification.md
+ok  claim test_delivery_claim_recovery_retry_and_replay evidence tests/core/test_boundaries.py:75
+ok  claim test_delivery_claim_recovery_retry_and_replay resolves as symbol
+ok  claim test_missing_adapter_records_retry appears in mapped document docs/qualification.md
+ok  claim test_missing_adapter_records_retry evidence tests/core/test_boundaries.py:106
+ok  claim test_missing_adapter_records_retry resolves as symbol
+ok  claim wire_provider appears in mapped document docs/qualification.md
+ok  claim wire_provider evidence tests/core/test_boundaries.py:114
+ok  claim wire_provider resolves as symbol
+ok  claim serve appears in mapped document docs/qualification.md
+ok  claim serve evidence tests/core/test_boundaries.py:116
+ok  claim serve resolves as symbol
+ok  claim descriptor appears in mapped document docs/qualification.md
+ok  claim descriptor evidence tests/core/test_boundaries.py:137
+ok  claim descriptor resolves as symbol
+ok  claim collect_provider appears in mapped document docs/qualification.md
+ok  claim collect_provider evidence tests/core/test_boundaries.py:141
+ok  claim collect_provider resolves as symbol
+ok  claim test_real_http_stream_and_tool_serialization appears in mapped document docs/qualification.md
+ok  claim test_real_http_stream_and_tool_serialization evidence tests/core/test_boundaries.py:145
+ok  claim test_real_http_stream_and_tool_serialization resolves as symbol
+ok  claim test_provider_errors appears in mapped document docs/qualification.md
+ok  claim test_provider_errors evidence tests/core/test_boundaries.py:166
+ok  claim test_provider_errors resolves as symbol
+ok  claim test_provider_cancel_and_validation appears in mapped document docs/qualification.md
+ok  claim test_provider_cancel_and_validation evidence tests/core/test_boundaries.py:172
+ok  claim test_provider_cancel_and_validation resolves as symbol
+ok  claim run appears in mapped document docs/qualification.md
+ok  claim run evidence tests/core/test_boundaries.py:175
+ok  claim run resolves as symbol
+ok  claim collect appears in mapped document docs/qualification.md
+ok  claim collect evidence tests/core/test_boundaries.py:178
+ok  claim collect resolves as symbol
+ok  claim test_catalog_freshness_and_versions appears in mapped document docs/qualification.md
+ok  claim test_catalog_freshness_and_versions evidence tests/core/test_boundaries.py:187
+ok  claim test_catalog_freshness_and_versions resolves as symbol
+ok  claim test_acp_facade_correlation_delivery_and_cancel appears in mapped document docs/qualification.md
+ok  claim test_acp_facade_correlation_delivery_and_cancel evidence tests/core/test_boundaries.py:204
+ok  claim test_acp_facade_correlation_delivery_and_cancel resolves as symbol
+ok  claim emit appears in mapped document docs/qualification.md
+ok  claim emit evidence tests/core/test_boundaries.py:206
+ok  claim emit resolves as symbol
+ok  claim submit appears in mapped document docs/qualification.md
+ok  claim submit evidence tests/core/test_boundaries.py:207
+ok  claim submit resolves as symbol
+ok  claim cancel appears in mapped document docs/qualification.md
+ok  claim cancel evidence tests/core/test_boundaries.py:212
+ok  claim cancel resolves as symbol
+ok  claim req appears in mapped document docs/qualification.md
+ok  claim req evidence tests/core/test_boundaries.py:215
+ok  claim req resolves as symbol
+ok  claim journal appears in mapped document docs/qualification.md
+ok  claim journal evidence tests/core/test_capabilities.py:28
+ok  claim journal resolves as symbol
+ok  claim authority appears in mapped document docs/qualification.md
+ok  claim authority evidence tests/core/test_capabilities.py:34
+ok  claim authority resolves as symbol
+ok  claim authorize appears in mapped document docs/qualification.md
+ok  claim authorize evidence tests/core/test_capabilities.py:35
+ok  claim authorize resolves as symbol
+ok  claim dispatcher appears in mapped document docs/qualification.md
+ok  claim dispatcher evidence tests/core/test_capabilities.py:46
+ok  claim dispatcher resolves as symbol
+ok  claim context appears in mapped document docs/qualification.md
+ok  claim context evidence tests/core/test_capabilities.py:51
+ok  claim context resolves as symbol
+ok  claim descriptor appears in mapped document docs/qualification.md
+ok  claim descriptor evidence tests/core/test_capabilities.py:55
+ok  claim descriptor resolves as symbol
+ok  claim manifest appears in mapped document docs/qualification.md
+ok  claim manifest evidence tests/core/test_capabilities.py:59
+ok  claim manifest resolves as symbol
+ok  claim package appears in mapped document docs/qualification.md
+ok  claim package evidence tests/core/test_capabilities.py:64
+ok  claim package resolves as symbol
+ok  claim test_capability_contract_rejects_invalid_descriptors appears in mapped document docs/qualification.md
+ok  claim test_capability_contract_rejects_invalid_descriptors evidence tests/core/test_capabilities.py:102
+ok  claim test_capability_contract_rejects_invalid_descriptors resolves as symbol
+ok  claim test_plugin_manifest_validation appears in mapped document docs/qualification.md
+ok  claim test_plugin_manifest_validation evidence tests/core/test_capabilities.py:111
+ok  claim test_plugin_manifest_validation resolves as symbol
+ok  claim test_sdk_worker_protocol_and_schemas appears in mapped document docs/qualification.md
+ok  claim test_sdk_worker_protocol_and_schemas evidence tests/core/test_capabilities.py:116
+ok  claim test_sdk_worker_protocol_and_schemas resolves as symbol
+ok  claim test_rooted_file_operations_preimages_and_symlinks appears in mapped document docs/qualification.md
+ok  claim test_rooted_file_operations_preimages_and_symlinks evidence tests/core/test_capabilities.py:146
+ok  claim test_rooted_file_operations_preimages_and_symlinks resolves as symbol
+ok  claim test_file_limits_and_mutation_failures appears in mapped document docs/qualification.md
+ok  claim test_file_limits_and_mutation_failures evidence tests/core/test_capabilities.py:177
+ok  claim test_file_limits_and_mutation_failures resolves as symbol
+ok  claim test_real_process_limits_environment_and_namespace appears in mapped document docs/qualification.md
+ok  claim test_real_process_limits_environment_and_namespace evidence tests/core/test_capabilities.py:209
+ok  claim test_real_process_limits_environment_and_namespace resolves as symbol
+ok  claim test_process_tree_cancellation_stops_descendant_effect appears in mapped document docs/qualification.md
+ok  claim test_process_tree_cancellation_stops_descendant_effect evidence tests/core/test_capabilities.py:236
+ok  claim test_process_tree_cancellation_stops_descendant_effect resolves as symbol
+ok  claim test_dispatch_transaction_schema_dedupe_and_real_file_effect appears in mapped document docs/qualification.md
+ok  claim test_dispatch_transaction_schema_dedupe_and_real_file_effect evidence tests/core/test_capabilities.py:249
+ok  claim test_dispatch_transaction_schema_dedupe_and_real_file_effect resolves as symbol
+ok  claim test_dispatch_process_target_error_and_file_operations appears in mapped document docs/qualification.md
+ok  claim test_dispatch_process_target_error_and_file_operations evidence tests/core/test_capabilities.py:275
+ok  claim test_dispatch_process_target_error_and_file_operations resolves as symbol
+ok  claim test_dispatch_cancellation_failures_recovery_and_reconciliation appears in mapped document docs/qualification.md
+ok  claim test_dispatch_cancellation_failures_recovery_and_reconciliation evidence tests/core/test_capabilities.py:294
+ok  claim test_dispatch_cancellation_failures_recovery_and_reconciliation resolves as symbol
+ok  claim slow appears in mapped document docs/qualification.md
+ok  claim slow evidence tests/core/test_capabilities.py:297
+ok  claim slow resolves as symbol
+ok  claim bad appears in mapped document docs/qualification.md
+ok  claim bad evidence tests/core/test_capabilities.py:300
+ok  claim bad resolves as symbol
+ok  claim large appears in mapped document docs/qualification.md
+ok  claim large evidence tests/core/test_capabilities.py:302
+ok  claim large resolves as symbol
+ok  claim error appears in mapped document docs/qualification.md
+ok  claim error evidence tests/core/test_capabilities.py:304
+ok  claim error resolves as symbol
+ok  claim test_plugin_worker_migration_commands_rollback_restart appears in mapped document docs/qualification.md
+ok  claim test_plugin_worker_migration_commands_rollback_restart evidence tests/core/test_capabilities.py:344
+ok  claim test_plugin_worker_migration_commands_rollback_restart resolves as symbol
+ok  claim test_plugin_filesystem_and_network_grants_are_real appears in mapped document docs/qualification.md
+ok  claim test_plugin_filesystem_and_network_grants_are_real evidence tests/core/test_capabilities.py:372
+ok  claim test_plugin_filesystem_and_network_grants_are_real resolves as symbol
+ok  claim test_plugin_failure_quarantine_and_version_integrity appears in mapped document docs/qualification.md
+ok  claim test_plugin_failure_quarantine_and_version_integrity evidence tests/core/test_capabilities.py:396
+ok  claim test_plugin_failure_quarantine_and_version_integrity resolves as symbol
+ok  claim test_plugin_dispatch_draining_cancellation_and_malformed_response appears in mapped document docs/qualification.md
+ok  claim test_plugin_dispatch_draining_cancellation_and_malformed_response evidence tests/core/test_capabilities.py:435
+ok  claim test_plugin_dispatch_draining_cancellation_and_malformed_response resolves as symbol
+ok  claim skill appears in mapped document docs/qualification.md
+ok  claim skill evidence tests/core/test_capabilities.py:464
+ok  claim skill resolves as symbol
+ok  claim test_skills_scoped_discovery_selection_revisions_and_rollback appears in mapped document docs/qualification.md
+ok  claim test_skills_scoped_discovery_selection_revisions_and_rollback evidence tests/core/test_capabilities.py:469
+ok  claim test_skills_scoped_discovery_selection_revisions_and_rollback resolves as symbol
+ok  claim test_skill_synthesis_uses_actual_scoped_tool_outcomes appears in mapped document docs/qualification.md
+ok  claim test_skill_synthesis_uses_actual_scoped_tool_outcomes evidence tests/core/test_capabilities.py:503
+ok  claim test_skill_synthesis_uses_actual_scoped_tool_outcomes resolves as symbol
+ok  claim test_invalid_skill_packages appears in mapped document docs/qualification.md
+ok  claim test_invalid_skill_packages evidence tests/core/test_capabilities.py:540
+ok  claim test_invalid_skill_packages resolves as symbol
+ok  claim journal appears in mapped document docs/qualification.md
+ok  claim journal evidence tests/core/test_cognition.py:23
+ok  claim journal resolves as symbol
+ok  claim observation appears in mapped document docs/qualification.md
+ok  claim observation evidence tests/core/test_cognition.py:29
+ok  claim observation resolves as symbol
+ok  claim active_goal appears in mapped document docs/qualification.md
+ok  claim active_goal evidence tests/core/test_cognition.py:39
+ok  claim active_goal resolves as symbol
+ok  claim candidate appears in mapped document docs/qualification.md
+ok  claim candidate evidence tests/core/test_cognition.py:45
+ok  claim candidate resolves as symbol
+ok  claim step appears in mapped document docs/qualification.md
+ok  claim step evidence tests/core/test_cognition.py:50
+ok  claim step resolves as symbol
+ok  claim test_profiles_roots_revisions_and_restart appears in mapped document docs/qualification.md
+ok  claim test_profiles_roots_revisions_and_restart evidence tests/core/test_cognition.py:54
+ok  claim test_profiles_roots_revisions_and_restart resolves as symbol
+ok  claim test_profile_invalid_boundaries appears in mapped document docs/qualification.md
+ok  claim test_profile_invalid_boundaries evidence tests/core/test_cognition.py:77
+ok  claim test_profile_invalid_boundaries resolves as symbol
+ok  claim test_awareness_lifecycle_deduplication_and_stale_observations appears in mapped document docs/qualification.md
+ok  claim test_awareness_lifecycle_deduplication_and_stale_observations evidence tests/core/test_cognition.py:116
+ok  claim test_awareness_lifecycle_deduplication_and_stale_observations resolves as symbol
+ok  claim test_scoped_outcome_checks_and_paged_evidence appears in mapped document docs/qualification.md
+ok  claim test_scoped_outcome_checks_and_paged_evidence evidence tests/core/test_cognition.py:149
+ok  claim test_scoped_outcome_checks_and_paged_evidence resolves as symbol
+ok  claim test_goal_states_evidence_and_atomic_revision appears in mapped document docs/qualification.md
+ok  claim test_goal_states_evidence_and_atomic_revision evidence tests/core/test_cognition.py:170
+ok  claim test_goal_states_evidence_and_atomic_revision resolves as symbol
+ok  claim test_goal_reservations_cumulative_usage_and_overage appears in mapped document docs/qualification.md
+ok  claim test_goal_reservations_cumulative_usage_and_overage evidence tests/core/test_cognition.py:199
+ok  claim test_goal_reservations_cumulative_usage_and_overage resolves as symbol
+ok  claim test_goal_competing_reservations_and_reopen appears in mapped document docs/qualification.md
+ok  claim test_goal_competing_reservations_and_reopen evidence tests/core/test_cognition.py:241
+ok  claim test_goal_competing_reservations_and_reopen resolves as symbol
+ok  claim reserve appears in mapped document docs/qualification.md
+ok  claim reserve evidence tests/core/test_cognition.py:243
+ok  claim reserve resolves as symbol
+ok  claim test_commitments_evidence_progress_and_overdue appears in mapped document docs/qualification.md
+ok  claim test_commitments_evidence_progress_and_overdue evidence tests/core/test_cognition.py:257
+ok  claim test_commitments_evidence_progress_and_overdue resolves as symbol
+ok  claim test_commitment_registrar_contract_is_atomic_before_release appears in mapped document docs/qualification.md
+ok  claim test_commitment_registrar_contract_is_atomic_before_release evidence tests/core/test_cognition.py:283
+ok  claim test_commitment_registrar_contract_is_atomic_before_release resolves as symbol
+ok  claim register appears in mapped document docs/qualification.md
+ok  claim register evidence tests/core/test_cognition.py:285
+ok  claim register resolves as symbol
+ok  claim cancel appears in mapped document docs/qualification.md
+ok  claim cancel evidence tests/core/test_cognition.py:287
+ok  claim cancel resolves as symbol
+ok  claim test_all_trigger_shapes appears in mapped document docs/qualification.md
+ok  claim test_all_trigger_shapes evidence tests/core/test_cognition.py:319
+ok  claim test_all_trigger_shapes resolves as symbol
+ok  claim test_initiative_evidence_scores_expiry_and_deduplication appears in mapped document docs/qualification.md
+ok  claim test_initiative_evidence_scores_expiry_and_deduplication evidence tests/core/test_cognition.py:327
+ok  claim test_initiative_evidence_scores_expiry_and_deduplication resolves as symbol
+ok  claim test_attention_proactive_policies_and_notification_accounting appears in mapped document docs/qualification.md
+ok  claim test_attention_proactive_policies_and_notification_accounting evidence tests/core/test_cognition.py:343
+ok  claim test_attention_proactive_policies_and_notification_accounting resolves as symbol
+ok  claim test_attention_quiet_hours_and_validation appears in mapped document docs/qualification.md
+ok  claim test_attention_quiet_hours_and_validation evidence tests/core/test_cognition.py:365
+ok  claim test_attention_quiet_hours_and_validation resolves as symbol
+ok  claim test_context_attention_preserves_required_inputs_and_explicit_deferrals appears in mapped document docs/qualification.md
+ok  claim test_context_attention_preserves_required_inputs_and_explicit_deferrals evidence tests/core/test_cognition.py:378
+ok  claim test_context_attention_preserves_required_inputs_and_explicit_deferrals resolves as symbol
+ok  claim test_planner_routes_dependencies_assignments_and_history appears in mapped document docs/qualification.md
+ok  claim test_planner_routes_dependencies_assignments_and_history evidence tests/core/test_cognition.py:394
+ok  claim test_planner_routes_dependencies_assignments_and_history resolves as symbol
+ok  claim test_planner_invalid_graphs_and_revision_changes appears in mapped document docs/qualification.md
+ok  claim test_planner_invalid_graphs_and_revision_changes evidence tests/core/test_cognition.py:433
+ok  claim test_planner_invalid_graphs_and_revision_changes resolves as symbol
+ok  claim test_packet_labels_roles_ranges_and_immutability appears in mapped document docs/qualification.md
+ok  claim test_packet_labels_roles_ranges_and_immutability evidence tests/core/test_context.py:7
+ok  claim test_packet_labels_roles_ranges_and_immutability resolves as symbol
+ok  claim test_unicode_chunk_cursor_and_optional_deferral appears in mapped document docs/qualification.md
+ok  claim test_unicode_chunk_cursor_and_optional_deferral evidence tests/core/test_context.py:18
+ok  claim test_unicode_chunk_cursor_and_optional_deferral resolves as symbol
+ok  claim test_causal_tool_pair_and_budget_reservation appears in mapped document docs/qualification.md
+ok  claim test_causal_tool_pair_and_budget_reservation evidence tests/core/test_context.py:35
+ok  claim test_causal_tool_pair_and_budget_reservation resolves as symbol
+ok  claim test_invalid_blocks appears in mapped document docs/qualification.md
+ok  claim test_invalid_blocks evidence tests/core/test_context.py:50
+ok  claim test_invalid_blocks resolves as symbol
+ok  claim test_invalid_packets_and_instruction_overflow appears in mapped document docs/qualification.md
+ok  claim test_invalid_packets_and_instruction_overflow evidence tests/core/test_context.py:54
+ok  claim test_invalid_packets_and_instruction_overflow resolves as symbol
+ok  claim journal appears in mapped document docs/qualification.md
+ok  claim journal evidence tests/core/test_evolution.py:21
+ok  claim journal resolves as symbol
+ok  claim make_dispatcher appears in mapped document docs/qualification.md
+ok  claim make_dispatcher evidence tests/core/test_evolution.py:27
+ok  claim make_dispatcher resolves as symbol
+ok  claim authorize appears in mapped document docs/qualification.md
+ok  claim authorize evidence tests/core/test_evolution.py:28
+ok  claim authorize resolves as symbol
+ok  claim checks appears in mapped document docs/qualification.md
+ok  claim checks evidence tests/core/test_evolution.py:37
+ok  claim checks resolves as symbol
+ok  claim setup appears in mapped document docs/qualification.md
+ok  claim setup evidence tests/core/test_evolution.py:45
+ok  claim setup resolves as symbol
+ok  claim stage appears in mapped document docs/qualification.md
+ok  claim stage evidence tests/core/test_evolution.py:60
+ok  claim stage resolves as symbol
+ok  claim qualify appears in mapped document docs/qualification.md
+ok  claim qualify evidence tests/core/test_evolution.py:66
+ok  claim qualify resolves as symbol
+ok  claim execute_selected appears in mapped document docs/qualification.md
+ok  claim execute_selected evidence tests/core/test_evolution.py:72
+ok  claim execute_selected resolves as symbol
+ok  claim test_real_build_shadow_canary_activation_and_rollback appears in mapped document docs/qualification.md
+ok  claim test_real_build_shadow_canary_activation_and_rollback evidence tests/core/test_evolution.py:79
+ok  claim test_real_build_shadow_canary_activation_and_rollback resolves as symbol
+ok  claim test_candidate_cannot_replace_governing_checks_or_claim_success appears in mapped document docs/qualification.md
+ok  claim test_candidate_cannot_replace_governing_checks_or_claim_success evidence tests/core/test_evolution.py:108
+ok  claim test_candidate_cannot_replace_governing_checks_or_claim_success resolves as symbol
+ok  claim test_default_authority_and_incompatible_migration_fail_explicitly appears in mapped document docs/qualification.md
+ok  claim test_default_authority_and_incompatible_migration_fail_explicitly evidence tests/core/test_evolution.py:130
+ok  claim test_default_authority_and_incompatible_migration_fail_explicitly resolves as symbol
+ok  claim test_competing_candidate_cas_and_baseline_restoration appears in mapped document docs/qualification.md
+ok  claim test_competing_candidate_cas_and_baseline_restoration evidence tests/core/test_evolution.py:154
+ok  claim test_competing_candidate_cas_and_baseline_restoration resolves as symbol
+ok  claim test_watchdog_requires_exact_runtime_evidence_and_restores_selected_code appears in mapped document docs/qualification.md
+ok  claim test_watchdog_requires_exact_runtime_evidence_and_restores_selected_code evidence tests/core/test_evolution.py:173
+ok  claim test_watchdog_requires_exact_runtime_evidence_and_restores_selected_code resolves as symbol
+ok  claim test_diagnosis_uses_actual_trace_and_never_becomes_verified_truth appears in mapped document docs/qualification.md
+ok  claim test_diagnosis_uses_actual_trace_and_never_becomes_verified_truth evidence tests/core/test_evolution.py:189
+ok  claim test_diagnosis_uses_actual_trace_and_never_becomes_verified_truth resolves as symbol
+ok  claim test_real_timeout_cancellation_and_reopen_recovery appears in mapped document docs/qualification.md
+ok  claim test_real_timeout_cancellation_and_reopen_recovery evidence tests/core/test_evolution.py:204
+ok  claim test_real_timeout_cancellation_and_reopen_recovery resolves as symbol
+ok  claim test_source_tamper_policy_changes_and_missing_evaluation appears in mapped document docs/qualification.md
+ok  claim test_source_tamper_policy_changes_and_missing_evaluation evidence tests/core/test_evolution.py:230
+ok  claim test_source_tamper_policy_changes_and_missing_evaluation resolves as symbol
+ok  claim test_passing_verdict_without_completion_receipt_cannot_activate appears in mapped document docs/qualification.md
+ok  claim test_passing_verdict_without_completion_receipt_cannot_activate evidence tests/core/test_evolution.py:259
+ok  claim test_passing_verdict_without_completion_receipt_cannot_activate resolves as symbol
+ok  claim test_edit_validation_scopes_evidence_preimages_and_deletion appears in mapped document docs/qualification.md
+ok  claim test_edit_validation_scopes_evidence_preimages_and_deletion evidence tests/core/test_evolution.py:277
+ok  claim test_edit_validation_scopes_evidence_preimages_and_deletion resolves as symbol
+ok  claim test_snapshot_bounds_and_copy_integrity appears in mapped document docs/qualification.md
+ok  claim test_snapshot_bounds_and_copy_integrity evidence tests/core/test_evolution.py:307
+ok  claim test_snapshot_bounds_and_copy_integrity resolves as symbol
+ok  claim test_invalid_immutable_checks appears in mapped document docs/qualification.md
+ok  claim test_invalid_immutable_checks evidence tests/core/test_evolution.py:327
+ok  claim test_invalid_immutable_checks resolves as symbol
+ok  claim test_harness_requires_real_checks_and_allowed_programs appears in mapped document docs/qualification.md
+ok  claim test_harness_requires_real_checks_and_allowed_programs evidence tests/core/test_evolution.py:332
+ok  claim test_harness_requires_real_checks_and_allowed_programs resolves as symbol
+ok  claim test_strict_protocol appears in mapped document docs/qualification.md
+ok  claim test_strict_protocol evidence tests/core/test_foundation.py:14
+ok  claim test_strict_protocol resolves as symbol
+ok  claim test_tool_contracts appears in mapped document docs/qualification.md
+ok  claim test_tool_contracts evidence tests/core/test_foundation.py:28
+ok  claim test_tool_contracts resolves as symbol
+ok  claim test_journal_atomicity_restart_scope_and_dedupe appears in mapped document docs/qualification.md
+ok  claim test_journal_atomicity_restart_scope_and_dedupe evidence tests/core/test_foundation.py:39
+ok  claim test_journal_atomicity_restart_scope_and_dedupe resolves as symbol
+ok  claim test_competing_revisions appears in mapped document docs/qualification.md
+ok  claim test_competing_revisions evidence tests/core/test_foundation.py:85
+ok  claim test_competing_revisions resolves as symbol
+ok  claim update appears in mapped document docs/qualification.md
+ok  claim update evidence tests/core/test_foundation.py:88
+ok  claim update resolves as symbol
+ok  claim test_artifact_integrity_and_scope appears in mapped document docs/qualification.md
+ok  claim test_artifact_integrity_and_scope evidence tests/core/test_foundation.py:98
+ok  claim test_artifact_integrity_and_scope resolves as symbol
+ok  claim test_incremental_frames appears in mapped document docs/qualification.md
+ok  claim test_incremental_frames evidence tests/core/test_foundation.py:117
+ok  claim test_incremental_frames resolves as symbol
+ok  claim test_async_frames_real_socket appears in mapped document docs/qualification.md
+ok  claim test_async_frames_real_socket evidence tests/core/test_foundation.py:131
+ok  claim test_async_frames_real_socket resolves as symbol
+ok  claim echo appears in mapped document docs/qualification.md
+ok  claim echo evidence tests/core/test_foundation.py:132
+ok  claim echo resolves as symbol
+ok  claim record appears in mapped document docs/qualification.md
+ok  claim record evidence tests/core/test_memory.py:24
+ok  claim record resolves as symbol
+ok  claim client appears in mapped document docs/qualification.md
+ok  claim client evidence tests/core/test_memory.py:34
+ok  claim client resolves as symbol
+ok  claim journal appears in mapped document docs/qualification.md
+ok  claim journal evidence tests/core/test_memory.py:42
+ok  claim journal resolves as symbol
+ok  claim seed appears in mapped document docs/qualification.md
+ok  claim seed evidence tests/core/test_memory.py:48
+ok  claim seed resolves as symbol
+ok  claim result_ids appears in mapped document docs/qualification.md
+ok  claim result_ids evidence tests/core/test_memory.py:54
+ok  claim result_ids resolves as symbol
+ok  claim test_client_real_multiplexing_retrieval_and_scoped_context appears in mapped document docs/qualification.md
+ok  claim test_client_real_multiplexing_retrieval_and_scoped_context evidence tests/core/test_memory.py:58
+ok  claim test_client_real_multiplexing_retrieval_and_scoped_context resolves as symbol
+ok  claim test_deadline_cancel_and_late_frame_drain_preserve_responsiveness appears in mapped document docs/qualification.md
+ok  claim test_deadline_cancel_and_late_frame_drain_preserve_responsiveness evidence tests/core/test_memory.py:83
+ok  claim test_deadline_cancel_and_late_frame_drain_preserve_responsiveness resolves as symbol
+ok  claim foreground appears in mapped document docs/qualification.md
+ok  claim foreground evidence tests/core/test_memory.py:88
+ok  claim foreground resolves as symbol
+ok  claim test_capacity_and_writer_wait_deadlines appears in mapped document docs/qualification.md
+ok  claim test_capacity_and_writer_wait_deadlines evidence tests/core/test_memory.py:108
+ok  claim test_capacity_and_writer_wait_deadlines resolves as symbol
+ok  claim test_worker_death_restart_and_unknown_dispatched_mutation appears in mapped document docs/qualification.md
+ok  claim test_worker_death_restart_and_unknown_dispatched_mutation evidence tests/core/test_memory.py:127
+ok  claim test_worker_death_restart_and_unknown_dispatched_mutation resolves as symbol
+ok  claim test_snapshot_freshness_partial_vector_status_and_release appears in mapped document docs/qualification.md
+ok  claim test_snapshot_freshness_partial_vector_status_and_release evidence tests/core/test_memory.py:139
+ok  claim test_snapshot_freshness_partial_vector_status_and_release resolves as symbol
+ok  claim test_client_configuration appears in mapped document docs/qualification.md
+ok  claim test_client_configuration evidence tests/core/test_memory.py:158
+ok  claim test_client_configuration resolves as symbol
+ok  claim test_invalid_requests_and_startup_failure appears in mapped document docs/qualification.md
+ok  claim test_invalid_requests_and_startup_failure evidence tests/core/test_memory.py:163
+ok  claim test_invalid_requests_and_startup_failure resolves as symbol
+ok  claim test_bad_peer_frames_fail_closed_without_deadlock appears in mapped document docs/qualification.md
+ok  claim test_bad_peer_frames_fail_closed_without_deadlock evidence tests/core/test_memory.py:181
+ok  claim test_bad_peer_frames_fail_closed_without_deadlock resolves as symbol
+ok  claim test_startup_deadline_and_closing_stalled_worker appears in mapped document docs/qualification.md
+ok  claim test_startup_deadline_and_closing_stalled_worker evidence tests/core/test_memory.py:196
+ok  claim test_startup_deadline_and_closing_stalled_worker resolves as symbol
+ok  claim test_event_replay_exact_sources_rejections_and_no_recursive_ingestion appears in mapped document docs/qualification.md
+ok  claim test_event_replay_exact_sources_rejections_and_no_recursive_ingestion evidence tests/core/test_memory.py:209
+ok  claim test_event_replay_exact_sources_rejections_and_no_recursive_ingestion resolves as symbol
+ok  claim test_ingestion_receipt_replay_after_cursor_loss appears in mapped document docs/qualification.md
+ok  claim test_ingestion_receipt_replay_after_cursor_loss evidence tests/core/test_memory.py:234
+ok  claim test_ingestion_receipt_replay_after_cursor_loss resolves as symbol
+ok  claim test_native_event_rejection_is_durable_and_acknowledgment_idempotent appears in mapped document docs/qualification.md
+ok  claim test_native_event_rejection_is_durable_and_acknowledgment_idempotent evidence tests/core/test_memory.py:245
+ok  claim test_native_event_rejection_is_durable_and_acknowledgment_idempotent resolves as symbol
+ok  claim test_unavailable_ingestion_retains_cursor appears in mapped document docs/qualification.md
+ok  claim test_unavailable_ingestion_retains_cursor evidence tests/core/test_memory.py:257
+ok  claim test_unavailable_ingestion_retains_cursor resolves as symbol
+ok  claim test_ingestor_configuration_and_invalid_source appears in mapped document docs/qualification.md
+ok  claim test_ingestor_configuration_and_invalid_source evidence tests/core/test_memory.py:271
+ok  claim test_ingestor_configuration_and_invalid_source resolves as symbol
+ok  claim test_sleep_default_consolidation_pruning_and_same_day_idempotency appears in mapped document docs/qualification.md
+ok  claim test_sleep_default_consolidation_pruning_and_same_day_idempotency evidence tests/core/test_memory.py:282
+ok  claim test_sleep_default_consolidation_pruning_and_same_day_idempotency resolves as symbol
+ok  claim test_sleep_admission_and_ingestion_are_bounded appears in mapped document docs/qualification.md
+ok  claim test_sleep_admission_and_ingestion_are_bounded evidence tests/core/test_memory.py:305
+ok  claim test_sleep_admission_and_ingestion_are_bounded resolves as symbol
+ok  claim admission appears in mapped document docs/qualification.md
+ok  claim admission evidence tests/core/test_memory.py:310
+ok  claim admission resolves as symbol
+ok  claim test_sleep_candidate_evidence_rejection_and_partial_truth appears in mapped document docs/qualification.md
+ok  claim test_sleep_candidate_evidence_rejection_and_partial_truth evidence tests/core/test_memory.py:327
+ok  claim test_sleep_candidate_evidence_rejection_and_partial_truth resolves as symbol
+ok  claim consolidate appears in mapped document docs/qualification.md
+ok  claim consolidate evidence tests/core/test_memory.py:329
+ok  claim consolidate resolves as symbol
+ok  claim test_sleep_conflict_rebases_next_attempt_and_prunes_abandoned appears in mapped document docs/qualification.md
+ok  claim test_sleep_conflict_rebases_next_attempt_and_prunes_abandoned evidence tests/core/test_memory.py:339
+ok  claim test_sleep_conflict_rebases_next_attempt_and_prunes_abandoned resolves as symbol
+ok  claim consolidate appears in mapped document docs/qualification.md
+ok  claim consolidate evidence tests/core/test_memory.py:342
+ok  claim consolidate resolves as symbol
+ok  claim test_sleep_preserves_prune_work_added_during_another_cycle appears in mapped document docs/qualification.md
+ok  claim test_sleep_preserves_prune_work_added_during_another_cycle evidence tests/core/test_memory.py:358
+ok  claim test_sleep_preserves_prune_work_added_during_another_cycle resolves as symbol
+ok  claim consolidate appears in mapped document docs/qualification.md
+ok  claim consolidate evidence tests/core/test_memory.py:367
+ok  claim consolidate resolves as symbol
+ok  claim test_sleep_lost_cycle_ownership_cannot_publish appears in mapped document docs/qualification.md
+ok  claim test_sleep_lost_cycle_ownership_cannot_publish evidence tests/core/test_memory.py:378
+ok  claim test_sleep_lost_cycle_ownership_cannot_publish resolves as symbol
+ok  claim takeover appears in mapped document docs/qualification.md
+ok  claim takeover evidence tests/core/test_memory.py:380
+ok  claim takeover resolves as symbol
+ok  claim test_sleep_cancel_then_resume_and_parallel_foreground appears in mapped document docs/qualification.md
+ok  claim test_sleep_cancel_then_resume_and_parallel_foreground evidence tests/core/test_memory.py:392
+ok  claim test_sleep_cancel_then_resume_and_parallel_foreground resolves as symbol
+ok  claim consolidate appears in mapped document docs/qualification.md
+ok  claim consolidate evidence tests/core/test_memory.py:395
+ok  claim consolidate resolves as symbol
+ok  claim test_sleep_publication_receipt_recovers_lost_ack appears in mapped document docs/qualification.md
+ok  claim test_sleep_publication_receipt_recovers_lost_ack evidence tests/core/test_memory.py:416
+ok  claim test_sleep_publication_receipt_recovers_lost_ack resolves as symbol
+ok  claim request appears in mapped document docs/qualification.md
+ok  claim request evidence tests/core/test_memory.py:421
+ok  claim request resolves as symbol
+ok  claim test_cycle_timeout_and_callback_failures_are_resumable appears in mapped document docs/qualification.md
+ok  claim test_cycle_timeout_and_callback_failures_are_resumable evidence tests/core/test_memory.py:439
+ok  claim test_cycle_timeout_and_callback_failures_are_resumable resolves as symbol
+ok  claim slow appears in mapped document docs/qualification.md
+ok  claim slow evidence tests/core/test_memory.py:441
+ok  claim slow resolves as symbol
+ok  claim broken appears in mapped document docs/qualification.md
+ok  claim broken evidence tests/core/test_memory.py:448
+ok  claim broken resolves as symbol
+ok  claim test_iana_day_boundary_and_invalid_sleep_configuration appears in mapped document docs/qualification.md
+ok  claim test_iana_day_boundary_and_invalid_sleep_configuration evidence tests/core/test_memory.py:456
+ok  claim test_iana_day_boundary_and_invalid_sleep_configuration resolves as symbol
+ok  claim test_candidate_validation_boundaries appears in mapped document docs/qualification.md
+ok  claim test_candidate_validation_boundaries evidence tests/core/test_memory.py:481
+ok  claim test_candidate_validation_boundaries resolves as symbol
+ok  claim test_default_consolidation_respects_evidence_and_content_bounds appears in mapped document docs/qualification.md
+ok  claim test_default_consolidation_respects_evidence_and_content_bounds evidence tests/core/test_memory.py:488
+ok  claim test_default_consolidation_respects_evidence_and_content_bounds resolves as symbol
+ok  claim ReportBoundary appears in mapped document docs/qualification.md
+ok  claim ReportBoundary evidence tests/core/test_qualification_gate.py:11
+ok  claim ReportBoundary resolves as symbol
+ok  claim __init__ appears in mapped document docs/qualification.md
+ok  claim __init__ evidence tests/core/test_qualification_gate.py:14
+ok  claim __init__ resolves as symbol
+ok  claim run appears in mapped document docs/qualification.md
+ok  claim run evidence tests/core/test_qualification_gate.py:20
+ok  claim run resolves as symbol
+ok  claim python_report appears in mapped document docs/qualification.md
+ok  claim python_report evidence tests/core/test_qualification_gate.py:46
+ok  claim python_report resolves as symbol
+ok  claim native_report appears in mapped document docs/qualification.md
+ok  claim native_report evidence tests/core/test_qualification_gate.py:61
+ok  claim native_report resolves as symbol
+ok  claim gate appears in mapped document docs/qualification.md
+ok  claim gate evidence tests/core/test_qualification_gate.py:73
+ok  claim gate resolves as symbol
+ok  claim test_valid_independent_reports_build_native_first_and_preserve_evidence_limits appears in mapped document docs/qualification.md
+ok  claim test_valid_independent_reports_build_native_first_and_preserve_evidence_limits evidence tests/core/test_qualification_gate.py:103
+ok  claim test_valid_independent_reports_build_native_first_and_preserve_evidence_limits resolves as symbol
+ok  claim test_relative_python_report_paths_resolve_against_the_qualification_root appears in mapped document docs/qualification.md
+ok  claim test_relative_python_report_paths_resolve_against_the_qualification_root evidence tests/core/test_qualification_gate.py:115
+ok  claim test_relative_python_report_paths_resolve_against_the_qualification_root resolves as symbol
+ok  claim test_each_language_must_independently_reach_the_unrounded_floor appears in mapped document docs/qualification.md
+ok  claim test_each_language_must_independently_reach_the_unrounded_floor evidence tests/core/test_qualification_gate.py:124
+ok  claim test_each_language_must_independently_reach_the_unrounded_floor resolves as symbol
+ok  claim test_empty_executable_denominator_cannot_qualify appears in mapped document docs/qualification.md
+ok  claim test_empty_executable_denominator_cannot_qualify evidence tests/core/test_qualification_gate.py:138
+ok  claim test_empty_executable_denominator_cannot_qualify resolves as symbol
+ok  claim test_omitted_nested_first_party_python_source_fails_even_with_high_totals appears in mapped document docs/qualification.md
+ok  claim test_omitted_nested_first_party_python_source_fails_even_with_high_totals evidence tests/core/test_qualification_gate.py:148
+ok  claim test_omitted_nested_first_party_python_source_fails_even_with_high_totals resolves as symbol
+ok  claim test_omitted_first_party_cpp_source_fails_even_with_high_totals appears in mapped document docs/qualification.md
+ok  claim test_omitted_first_party_cpp_source_fails_even_with_high_totals evidence tests/core/test_qualification_gate.py:157
+ok  claim test_omitted_first_party_cpp_source_fails_even_with_high_totals resolves as symbol
+ok  claim test_new_nested_first_party_cpp_source_must_appear_in_coverage appears in mapped document docs/qualification.md
+ok  claim test_new_nested_first_party_cpp_source_must_appear_in_coverage evidence tests/core/test_qualification_gate.py:165
+ok  claim test_new_nested_first_party_cpp_source_must_appear_in_coverage resolves as symbol
+ok  claim test_third_party_coverage_cannot_conceal_a_native_shortfall appears in mapped document docs/qualification.md
+ok  claim test_third_party_coverage_cannot_conceal_a_native_shortfall evidence tests/core/test_qualification_gate.py:175
+ok  claim test_third_party_coverage_cannot_conceal_a_native_shortfall resolves as symbol
+ok  claim test_nonproduction_python_coverage_cannot_conceal_a_shortfall appears in mapped document docs/qualification.md
+ok  claim test_nonproduction_python_coverage_cannot_conceal_a_shortfall evidence tests/core/test_qualification_gate.py:184
+ok  claim test_nonproduction_python_coverage_cannot_conceal_a_shortfall resolves as symbol
+ok  claim test_failed_scope_check_invalidates_a_previous_success_report appears in mapped document docs/qualification.md
+ok  claim test_failed_scope_check_invalidates_a_previous_success_report evidence tests/core/test_qualification_gate.py:194
+ok  claim test_failed_scope_check_invalidates_a_previous_success_report resolves as symbol
+ok  claim test_missing_required_core_module_fails_before_commands appears in mapped document docs/qualification.md
+ok  claim test_missing_required_core_module_fails_before_commands evidence tests/core/test_qualification_gate.py:204
+ok  claim test_missing_required_core_module_fails_before_commands resolves as symbol
+ok  claim test_unexpected_top_level_agent_modules_fail_before_commands appears in mapped document docs/qualification.md
+ok  claim test_unexpected_top_level_agent_modules_fail_before_commands evidence tests/core/test_qualification_gate.py:212
+ok  claim test_unexpected_top_level_agent_modules_fail_before_commands resolves as symbol
+ok  claim test_application_folders_fail_before_commands appears in mapped document docs/qualification.md
+ok  claim test_application_folders_fail_before_commands evidence tests/core/test_qualification_gate.py:223
+ok  claim test_application_folders_fail_before_commands resolves as symbol
+ok  claim test_failed_verification_subprocess_cannot_publish_qualification appears in mapped document docs/qualification.md
+ok  claim test_failed_verification_subprocess_cannot_publish_qualification evidence tests/core/test_qualification_gate.py:231
+ok  claim test_failed_verification_subprocess_cannot_publish_qualification resolves as symbol
+ok  claim test_missing_language_report_cannot_publish_qualification appears in mapped document docs/qualification.md
+ok  claim test_missing_language_report_cannot_publish_qualification evidence tests/core/test_qualification_gate.py:241
+ok  claim test_missing_language_report_cannot_publish_qualification resolves as symbol
+ok  claim ControlledProvider appears in mapped document docs/qualification.md
+ok  claim ControlledProvider evidence tests/core/test_runtime.py:17
+ok  claim ControlledProvider resolves as symbol
+ok  claim __init__ appears in mapped document docs/qualification.md
+ok  claim __init__ evidence tests/core/test_runtime.py:19
+ok  claim __init__ resolves as symbol
+ok  claim stream appears in mapped document docs/qualification.md
+ok  claim stream evidence tests/core/test_runtime.py:23
+ok  claim stream resolves as symbol
+ok  claim Capture appears in mapped document docs/qualification.md
+ok  claim Capture evidence tests/core/test_runtime.py:30
+ok  claim Capture resolves as symbol
+ok  claim __init__ appears in mapped document docs/qualification.md
+ok  claim __init__ evidence tests/core/test_runtime.py:31
+ok  claim __init__ resolves as symbol
+ok  claim send appears in mapped document docs/qualification.md
+ok  claim send evidence tests/core/test_runtime.py:32
+ok  claim send resolves as symbol
+ok  claim runtime appears in mapped document docs/qualification.md
+ok  claim runtime evidence tests/core/test_runtime.py:35
+ok  claim runtime resolves as symbol
+ok  claim accept appears in mapped document docs/qualification.md
+ok  claim accept evidence tests/core/test_runtime.py:47
+ok  claim accept resolves as symbol
+ok  claim test_lifecycle_identity_lock_and_invalid_input appears in mapped document docs/qualification.md
+ok  claim test_lifecycle_identity_lock_and_invalid_input evidence tests/core/test_runtime.py:52
+ok  claim test_lifecycle_identity_lock_and_invalid_input resolves as symbol
+ok  claim test_failed_inference_keeps_visible_output_and_truthful_terminal appears in mapped document docs/qualification.md
+ok  claim test_failed_inference_keeps_visible_output_and_truthful_terminal evidence tests/core/test_runtime.py:85
+ok  claim test_failed_inference_keeps_visible_output_and_truthful_terminal resolves as symbol
+ok  claim test_cancellation_fences_queued_work_and_waiting appears in mapped document docs/qualification.md
+ok  claim test_cancellation_fences_queued_work_and_waiting evidence tests/core/test_runtime.py:98
+ok  claim test_cancellation_fences_queued_work_and_waiting resolves as symbol
+ok  claim test_large_input_has_exact_deferred_ranges_and_budget_failure appears in mapped document docs/qualification.md
+ok  claim test_large_input_has_exact_deferred_ranges_and_budget_failure evidence tests/core/test_runtime.py:113
+ok  claim test_large_input_has_exact_deferred_ranges_and_budget_failure resolves as symbol
+ok  claim test_recovery_interrupts_prior_running_work_without_repeating_effect appears in mapped document docs/qualification.md
+ok  claim test_recovery_interrupts_prior_running_work_without_repeating_effect evidence tests/core/test_runtime.py:129
+ok  claim test_recovery_interrupts_prior_running_work_without_repeating_effect resolves as symbol
+ok  claim test_supervised_worker_failure_is_recorded_and_restarted appears in mapped document docs/qualification.md
+ok  claim test_supervised_worker_failure_is_recorded_and_restarted evidence tests/core/test_runtime.py:149
+ok  claim test_supervised_worker_failure_is_recorded_and_restarted resolves as symbol
+ok  claim fail_once appears in mapped document docs/qualification.md
+ok  claim fail_once evidence tests/core/test_runtime.py:152
+ok  claim fail_once resolves as symbol
+ok  claim test_invalid_limits_workspace_and_insufficient_context appears in mapped document docs/qualification.md
+ok  claim test_invalid_limits_workspace_and_insufficient_context evidence tests/core/test_runtime.py:168
+ok  claim test_invalid_limits_workspace_and_insufficient_context resolves as symbol
+ok  claim test_explicit_evolution_configuration_has_no_implicit_source_authority appears in mapped document docs/qualification.md
+ok  claim test_explicit_evolution_configuration_has_no_implicit_source_authority evidence tests/core/test_runtime.py:180
+ok  claim test_explicit_evolution_configuration_has_no_implicit_source_authority resolves as symbol
+ok  claim test_scheduler_constraints_control_real_child_file_and_process_effects appears in mapped document docs/qualification.md
+ok  claim test_scheduler_constraints_control_real_child_file_and_process_effects evidence tests/core/test_runtime.py:198
+ok  claim test_scheduler_constraints_control_real_child_file_and_process_effects resolves as symbol
+ok  claim unsafe appears in mapped document docs/qualification.md
+ok  claim unsafe evidence tests/core/test_runtime.py:213
+ok  claim unsafe resolves as symbol
+ok  claim call appears in mapped document docs/qualification.md
+ok  claim call evidence tests/core/test_runtime.py:215
+ok  claim call resolves as symbol
+ok  claim journal appears in mapped document docs/qualification.md
+ok  claim journal evidence tests/core/test_scheduling.py:23
+ok  claim journal resolves as symbol
+ok  claim scheduler appears in mapped document docs/qualification.md
+ok  claim scheduler evidence tests/core/test_scheduling.py:30
+ok  claim scheduler resolves as symbol
+ok  claim admitted appears in mapped document docs/qualification.md
+ok  claim admitted evidence tests/core/test_scheduling.py:34
+ok  claim admitted resolves as symbol
+ok  claim claim appears in mapped document docs/qualification.md
+ok  claim claim evidence tests/core/test_scheduling.py:39
+ok  claim claim resolves as symbol
+ok  claim active_goal appears in mapped document docs/qualification.md
+ok  claim active_goal evidence tests/core/test_scheduling.py:45
+ok  claim active_goal resolves as symbol
+ok  claim checks appears in mapped document docs/qualification.md
+ok  claim checks evidence tests/core/test_scheduling.py:50
+ok  claim checks resolves as symbol
+ok  claim children appears in mapped document docs/qualification.md
+ok  claim children evidence tests/core/test_scheduling.py:55
+ok  claim children resolves as symbol
+ok  claim test_admission_readiness_priority_capacity_global_scope_and_recovery appears in mapped document docs/qualification.md
+ok  claim test_admission_readiness_priority_capacity_global_scope_and_recovery evidence tests/core/test_scheduling.py:59
+ok  claim test_admission_readiness_priority_capacity_global_scope_and_recovery resolves as symbol
+ok  claim test_goal_child_grants_cumulative_usage_and_retention appears in mapped document docs/qualification.md
+ok  claim test_goal_child_grants_cumulative_usage_and_retention evidence tests/core/test_scheduling.py:81
+ok  claim test_goal_child_grants_cumulative_usage_and_retention resolves as symbol
+ok  claim test_late_usage_overage_and_descendant_cancellation_preserve_claims appears in mapped document docs/qualification.md
+ok  claim test_late_usage_overage_and_descendant_cancellation_preserve_claims evidence tests/core/test_scheduling.py:112
+ok  claim test_late_usage_overage_and_descendant_cancellation_preserve_claims resolves as symbol
+ok  claim test_crash_unknown_claim_never_replayed_or_zero_charged appears in mapped document docs/qualification.md
+ok  claim test_crash_unknown_claim_never_replayed_or_zero_charged evidence tests/core/test_scheduling.py:133
+ok  claim test_crash_unknown_claim_never_replayed_or_zero_charged resolves as symbol
+ok  claim test_paused_goal_fences_new_execution_but_allows_receipts_and_cleanup appears in mapped document docs/qualification.md
+ok  claim test_paused_goal_fences_new_execution_but_allows_receipts_and_cleanup evidence tests/core/test_scheduling.py:147
+ok  claim test_paused_goal_fences_new_execution_but_allows_receipts_and_cleanup resolves as symbol
+ok  claim test_submission_scope_constraints_and_invalid_input appears in mapped document docs/qualification.md
+ok  claim test_submission_scope_constraints_and_invalid_input evidence tests/core/test_scheduling.py:176
+ok  claim test_submission_scope_constraints_and_invalid_input resolves as symbol
+ok  claim test_actual_commitment_wait_transaction_restart_and_expiry appears in mapped document docs/qualification.md
+ok  claim test_actual_commitment_wait_transaction_restart_and_expiry evidence tests/core/test_scheduling.py:226
+ok  claim test_actual_commitment_wait_transaction_restart_and_expiry resolves as symbol
+ok  claim test_all_scoped_wake_event_families appears in mapped document docs/qualification.md
+ok  claim test_all_scoped_wake_event_families evidence tests/core/test_scheduling.py:257
+ok  claim test_all_scoped_wake_event_families resolves as symbol
+ok  claim test_durable_park_wake_requeue_and_cancellation appears in mapped document docs/qualification.md
+ok  claim test_durable_park_wake_requeue_and_cancellation evidence tests/core/test_scheduling.py:279
+ok  claim test_durable_park_wake_requeue_and_cancellation resolves as symbol
+ok  claim test_schedule_catchup_pause_resume_skip_and_bounded_replay appears in mapped document docs/qualification.md
+ok  claim test_schedule_catchup_pause_resume_skip_and_bounded_replay evidence tests/core/test_scheduling.py:289
+ok  claim test_schedule_catchup_pause_resume_skip_and_bounded_replay resolves as symbol
+ok  claim utc appears in mapped document docs/qualification.md
+ok  claim utc evidence tests/core/test_scheduling.py:316
+ok  claim utc resolves as symbol
+ok  claim test_calendar_dst_gap_fold_and_schedule_validation appears in mapped document docs/qualification.md
+ok  claim test_calendar_dst_gap_fold_and_schedule_validation evidence tests/core/test_scheduling.py:320
+ok  claim test_calendar_dst_gap_fold_and_schedule_validation resolves as symbol
+ok  claim test_actual_tool_receipts_child_workspace_and_cancel_evidence appears in mapped document docs/qualification.md
+ok  claim test_actual_tool_receipts_child_workspace_and_cancel_evidence evidence tests/core/test_scheduling.py:334
+ok  claim test_actual_tool_receipts_child_workspace_and_cancel_evidence resolves as symbol
+ok  claim test_child_evidence_partial_rejected_accepted_and_idempotent_submission appears in mapped document docs/qualification.md
+ok  claim test_child_evidence_partial_rejected_accepted_and_idempotent_submission evidence tests/core/test_scheduling.py:357
+ok  claim test_child_evidence_partial_rejected_accepted_and_idempotent_submission resolves as symbol
+ok  claim test_child_messages_wait_cycles_resume_and_expiry appears in mapped document docs/qualification.md
+ok  claim test_child_messages_wait_cycles_resume_and_expiry evidence tests/core/test_scheduling.py:381
+ok  claim test_child_messages_wait_cycles_resume_and_expiry resolves as symbol
+ok  claim test_child_constraints_depth_liveness_and_retained_identity appears in mapped document docs/qualification.md
+ok  claim test_child_constraints_depth_liveness_and_retained_identity evidence tests/core/test_scheduling.py:415
+ok  claim test_child_constraints_depth_liveness_and_retained_identity resolves as symbol
+ok  claim test_memory_scout_uses_real_native_reads_and_scope_fence appears in mapped document docs/qualification.md
+ok  claim test_memory_scout_uses_real_native_reads_and_scope_fence evidence tests/core/test_scheduling.py:438
+ok  claim test_memory_scout_uses_real_native_reads_and_scope_fence resolves as symbol
+ok  claim test_process_exit_wait_uses_actual_executor_receipt_not_process_shaped_data appears in mapped document docs/qualification.md
+ok  claim test_process_exit_wait_uses_actual_executor_receipt_not_process_shaped_data evidence tests/core/test_scheduling.py:467
+ok  claim test_process_exit_wait_uses_actual_executor_receipt_not_process_shaped_data resolves as symbol
+ok  claim shaped appears in mapped document docs/qualification.md
+ok  claim shaped evidence tests/core/test_scheduling.py:475
+ok  claim shaped resolves as symbol
+ok  claim WireModel appears in mapped document docs/qualification.md
+ok  claim WireModel evidence tests/integration/test_continuity.py:19
+ok  claim WireModel resolves as symbol
+ok  claim __init__ appears in mapped document docs/qualification.md
+ok  claim __init__ evidence tests/integration/test_continuity.py:20
+ok  claim __init__ resolves as symbol
+ok  claim handle appears in mapped document docs/qualification.md
+ok  claim handle evidence tests/integration/test_continuity.py:23
+ok  claim handle resolves as symbol
+ok  claim proposal appears in mapped document docs/qualification.md
+ok  claim proposal evidence tests/integration/test_continuity.py:45
+ok  claim proposal resolves as symbol
+ok  claim eventually appears in mapped document docs/qualification.md
+ok  claim eventually evidence tests/integration/test_continuity.py:50
+ok  claim eventually resolves as symbol
+ok  claim check appears in mapped document docs/qualification.md
+ok  claim check evidence tests/integration/test_continuity.py:51
+ok  claim check resolves as symbol
+ok  claim harness appears in mapped document docs/qualification.md
+ok  claim harness evidence tests/integration/test_continuity.py:60
+ok  claim harness resolves as symbol
+ok  claim collect appears in mapped document docs/qualification.md
+ok  claim collect evidence tests/integration/test_continuity.py:65
+ok  claim collect resolves as symbol
+ok  claim send appears in mapped document docs/qualification.md
+ok  claim send evidence tests/integration/test_continuity.py:89
+ok  claim send resolves as symbol
+ok  claim test_real_world_effect_fixed_context_native_memory_and_wire_delivery appears in mapped document docs/qualification.md
+ok  claim test_real_world_effect_fixed_context_native_memory_and_wire_delivery evidence tests/integration/test_continuity.py:95
+ok  claim test_real_world_effect_fixed_context_native_memory_and_wire_delivery resolves as symbol
+ok  claim test_steering_during_real_process_preserves_partial_output_and_revokes_effects appears in mapped document docs/qualification.md
+ok  claim test_steering_during_real_process_preserves_partial_output_and_revokes_effects evidence tests/integration/test_continuity.py:125
+ok  claim test_steering_during_real_process_preserves_partial_output_and_revokes_effects resolves as symbol
+ok  claim test_pending_input_and_visible_text_remain_responsive_during_slow_provider appears in mapped document docs/qualification.md
+ok  claim test_pending_input_and_visible_text_remain_responsive_during_slow_provider evidence tests/integration/test_continuity.py:147
+ok  claim test_pending_input_and_visible_text_remain_responsive_during_slow_provider resolves as symbol
+ok  claim test_restart_replays_durable_unrouted_input_and_existing_outbox appears in mapped document docs/qualification.md
+ok  claim test_restart_replays_durable_unrouted_input_and_existing_outbox evidence tests/integration/test_continuity.py:162
+ok  claim test_restart_replays_durable_unrouted_input_and_existing_outbox resolves as symbol
+ok  claim test_memory_process_missing_does_not_block_foreground appears in mapped document docs/qualification.md
+ok  claim test_memory_process_missing_does_not_block_foreground evidence tests/integration/test_continuity.py:175
+ok  claim test_memory_process_missing_does_not_block_foreground resolves as symbol
+ok  claim test_acp_prompts_use_the_same_runtime_and_output_path appears in mapped document docs/qualification.md
+ok  claim test_acp_prompts_use_the_same_runtime_and_output_path evidence tests/integration/test_continuity.py:185
+ok  claim test_acp_prompts_use_the_same_runtime_and_output_path resolves as symbol
+ok  claim emit appears in mapped document docs/qualification.md
+ok  claim emit evidence tests/integration/test_continuity.py:188
+ok  claim emit resolves as symbol
+ok  claim test_real_channel_ingress_is_bound_and_can_be_reattached_after_invalid_input appears in mapped document docs/qualification.md
+ok  claim test_real_channel_ingress_is_bound_and_can_be_reattached_after_invalid_input evidence tests/integration/test_continuity.py:201
+ok  claim test_real_channel_ingress_is_bound_and_can_be_reattached_after_invalid_input resolves as symbol
+ok  claim test_real_model_child_uses_its_workspace_and_evidence_admission appears in mapped document docs/qualification.md
+ok  claim test_real_model_child_uses_its_workspace_and_evidence_admission evidence tests/integration/test_continuity.py:217
+ok  claim test_real_model_child_uses_its_workspace_and_evidence_admission resolves as symbol
+ok  claim test_large_tool_body_is_durable_and_explicitly_deferred_from_context appears in mapped document docs/qualification.md
+ok  claim test_large_tool_body_is_durable_and_explicitly_deferred_from_context evidence tests/integration/test_continuity.py:243
+ok  claim test_large_tool_body_is_durable_and_explicitly_deferred_from_context resolves as symbol
+ok  claim large appears in mapped document docs/qualification.md
+ok  claim large evidence tests/integration/test_continuity.py:245
+ok  claim large resolves as symbol
+ok  claim test_due_schedule_runs_through_common_runtime_once appears in mapped document docs/qualification.md
+ok  claim test_due_schedule_runs_through_common_runtime_once evidence tests/integration/test_continuity.py:258
+ok  claim test_due_schedule_runs_through_common_runtime_once resolves as symbol
+ok  claim test_provider_limits_preserve_partial_text_and_do_not_execute_proposals appears in mapped document docs/qualification.md
+ok  claim test_provider_limits_preserve_partial_text_and_do_not_execute_proposals evidence tests/integration/test_continuity.py:273
+ok  claim test_provider_limits_preserve_partial_text_and_do_not_execute_proposals resolves as symbol
+ok  claim test_unreported_provider_tokens_remain_reserved_until_receipt appears in mapped document docs/qualification.md
+ok  claim test_unreported_provider_tokens_remain_reserved_until_receipt evidence tests/integration/test_continuity.py:288
+ok  claim test_unreported_provider_tokens_remain_reserved_until_receipt resolves as symbol
+ok  claim observer_payload appears in mapped document docs/qualification.md
+ok  claim observer_payload evidence tests/integration/test_evidence_admission.py:16
+ok  claim observer_payload resolves as symbol
+ok  claim observe appears in mapped document docs/qualification.md
+ok  claim observe evidence tests/integration/test_evidence_admission.py:22
+ok  claim observe resolves as symbol
+ok  claim inspect_attempt appears in mapped document docs/qualification.md
+ok  claim inspect_attempt evidence tests/integration/test_evidence_admission.py:26
+ok  claim inspect_attempt resolves as symbol
+ok  claim uncertain_effect appears in mapped document docs/qualification.md
+ok  claim uncertain_effect evidence tests/integration/test_evidence_admission.py:45
+ok  claim uncertain_effect resolves as symbol
+ok  claim lost_acknowledgement appears in mapped document docs/qualification.md
+ok  claim lost_acknowledgement evidence tests/integration/test_evidence_admission.py:53
+ok  claim lost_acknowledgement resolves as symbol
+ok  claim reject appears in mapped document docs/qualification.md
+ok  claim reject evidence tests/integration/test_evidence_admission.py:81
+ok  claim reject resolves as symbol
+ok  claim test_observed_real_effect_reconciles_exact_attempt_and_settles_attested_usage appears in mapped document docs/qualification.md
+ok  claim test_observed_real_effect_reconciles_exact_attempt_and_settles_attested_usage evidence tests/integration/test_evidence_admission.py:94
+ok  claim test_observed_real_effect_reconciles_exact_attempt_and_settles_attested_usage resolves as symbol
+ok  claim test_narrative_or_untrusted_source_cannot_authorize_completion appears in mapped document docs/qualification.md
+ok  claim test_narrative_or_untrusted_source_cannot_authorize_completion evidence tests/integration/test_evidence_admission.py:117
+ok  claim test_narrative_or_untrusted_source_cannot_authorize_completion resolves as symbol
+ok  claim test_observation_must_attest_every_proposed_result_field appears in mapped document docs/qualification.md
+ok  claim test_observation_must_attest_every_proposed_result_field evidence tests/integration/test_evidence_admission.py:131
+ok  claim test_observation_must_attest_every_proposed_result_field resolves as symbol
+ok  claim test_observation_envelope_and_usage_are_exact appears in mapped document docs/qualification.md
+ok  claim test_observation_envelope_and_usage_are_exact evidence tests/integration/test_evidence_admission.py:143
+ok  claim test_observation_envelope_and_usage_are_exact resolves as symbol
+ok  claim test_unrelated_causal_event_and_cross_scope_observation_are_rejected appears in mapped document docs/qualification.md
+ok  claim test_unrelated_causal_event_and_cross_scope_observation_are_rejected evidence tests/integration/test_evidence_admission.py:150
+ok  claim test_unrelated_causal_event_and_cross_scope_observation_are_rejected resolves as symbol
+ok  claim test_mixed_missing_duplicate_and_malformed_evidence_reject_atomically appears in mapped document docs/qualification.md
+ok  claim test_mixed_missing_duplicate_and_malformed_evidence_reject_atomically evidence tests/integration/test_evidence_admission.py:167
+ok  claim test_mixed_missing_duplicate_and_malformed_evidence_reject_atomically resolves as symbol
+ok  claim test_unattested_or_invalid_usage_cannot_settle_the_attempt appears in mapped document docs/qualification.md
+ok  claim test_unattested_or_invalid_usage_cannot_settle_the_attempt evidence tests/integration/test_evidence_admission.py:181
+ok  claim test_unattested_or_invalid_usage_cannot_settle_the_attempt resolves as symbol
+ok  claim test_terminal_observation_can_preserve_unknown_effect_certainty appears in mapped document docs/qualification.md
+ok  claim test_terminal_observation_can_preserve_unknown_effect_certainty evidence tests/integration/test_evidence_admission.py:190
+ok  claim test_terminal_observation_can_preserve_unknown_effect_certainty resolves as symbol
+ok  claim test_observed_effect_after_actual_owner_crash_keeps_unmeasured_usage_unsettled appears in mapped document docs/qualification.md
+ok  claim test_observed_effect_after_actual_owner_crash_keeps_unmeasured_usage_unsettled evidence tests/integration/test_evidence_admission.py:234
+ok  claim test_observed_effect_after_actual_owner_crash_keeps_unmeasured_usage_unsettled resolves as symbol
+ok  claim wire appears in mapped document docs/qualification.md
+ok  claim wire evidence tests/integration/test_provider_outcomes.py:13
+ok  claim wire resolves as symbol
+ok  claim finish appears in mapped document docs/qualification.md
+ok  claim finish evidence tests/integration/test_provider_outcomes.py:29
+ok  claim finish resolves as symbol
+ok  claim delta appears in mapped document docs/qualification.md
+ok  claim delta evidence tests/integration/test_provider_outcomes.py:33
+ok  claim delta resolves as symbol
+ok  claim collect appears in mapped document docs/qualification.md
+ok  claim collect evidence tests/integration/test_provider_outcomes.py:37
+ok  claim collect resolves as symbol
+ok  claim test_terminal_cause_preserves_visible_text appears in mapped document docs/qualification.md
+ok  claim test_terminal_cause_preserves_visible_text evidence tests/integration/test_provider_outcomes.py:51
+ok  claim test_terminal_cause_preserves_visible_text resolves as symbol
+ok  claim test_truncated_or_filtered_calls_are_never_proposals appears in mapped document docs/qualification.md
+ok  claim test_truncated_or_filtered_calls_are_never_proposals evidence tests/integration/test_provider_outcomes.py:60
+ok  claim test_truncated_or_filtered_calls_are_never_proposals resolves as symbol
+ok  claim test_refusal_text_overrides_stop_and_withholds_existing_tool_proposal appears in mapped document docs/qualification.md
+ok  claim test_refusal_text_overrides_stop_and_withholds_existing_tool_proposal evidence tests/integration/test_provider_outcomes.py:68
+ok  claim test_refusal_text_overrides_stop_and_withholds_existing_tool_proposal resolves as symbol
+ok  claim test_valid_fragmented_call_and_final_usage_details appears in mapped document docs/qualification.md
+ok  claim test_valid_fragmented_call_and_final_usage_details evidence tests/integration/test_provider_outcomes.py:76
+ok  claim test_valid_fragmented_call_and_final_usage_details resolves as symbol
+ok  claim test_malformed_wire_shapes_fail_before_any_tool_proposal appears in mapped document docs/qualification.md
+ok  claim test_malformed_wire_shapes_fail_before_any_tool_proposal evidence tests/integration/test_provider_outcomes.py:114
+ok  claim test_malformed_wire_shapes_fail_before_any_tool_proposal resolves as symbol
+ok  claim test_tool_fragments_have_aggregate_byte_part_name_and_call_bounds appears in mapped document docs/qualification.md
+ok  claim test_tool_fragments_have_aggregate_byte_part_name_and_call_bounds evidence tests/integration/test_provider_outcomes.py:131
+ok  claim test_tool_fragments_have_aggregate_byte_part_name_and_call_bounds resolves as symbol
+ok  claim test_conflicting_terminal_identity_and_usage_are_rejected appears in mapped document docs/qualification.md
+ok  claim test_conflicting_terminal_identity_and_usage_are_rejected evidence tests/integration/test_provider_outcomes.py:144
+ok  claim test_conflicting_terminal_identity_and_usage_are_rejected resolves as symbol
+ok  claim test_every_tool_is_validated_before_any_tool_event_is_admitted appears in mapped document docs/qualification.md
+ok  claim test_every_tool_is_validated_before_any_tool_event_is_admitted evidence tests/integration/test_provider_outcomes.py:150
+ok  claim test_every_tool_is_validated_before_any_tool_event_is_admitted resolves as symbol
+ok  claim test_identical_final_usage_replay_is_not_double_counted appears in mapped document docs/qualification.md
+ok  claim test_identical_final_usage_replay_is_not_double_counted evidence tests/integration/test_provider_outcomes.py:160
+ok  claim test_identical_final_usage_replay_is_not_double_counted resolves as symbol
+ok  claim test_invalid_provider_resource_limits appears in mapped document docs/qualification.md
+ok  claim test_invalid_provider_resource_limits evidence tests/integration/test_provider_outcomes.py:170
+ok  claim test_invalid_provider_resource_limits resolves as symbol
+ok  claim test_single_slot_sleep_preempts_dispatched_native_publish appears in mapped document docs/qualification.md
+ok  claim test_single_slot_sleep_preempts_dispatched_native_publish evidence tests/integration/test_runtime_faults.py:16
+ok  claim test_single_slot_sleep_preempts_dispatched_native_publish resolves as symbol
+ok  claim consolidate appears in mapped document docs/qualification.md
+ok  claim consolidate evidence tests/integration/test_runtime_faults.py:20
+ok  claim consolidate resolves as symbol
+ok  claim test_sigstop_native_query_keeps_admission_and_wire_output_responsive appears in mapped document docs/qualification.md
+ok  claim test_sigstop_native_query_keeps_admission_and_wire_output_responsive evidence tests/integration/test_runtime_faults.py:63
+ok  claim test_sigstop_native_query_keeps_admission_and_wire_output_responsive resolves as symbol
+ok  claim start_owner appears in mapped document docs/qualification.md
+ok  claim start_owner evidence tests/integration/test_runtime_faults.py:157
+ok  claim start_owner resolves as symbol
+ok  claim kill_owner appears in mapped document docs/qualification.md
+ok  claim kill_owner evidence tests/integration/test_runtime_faults.py:177
+ok  claim kill_owner resolves as symbol
+ok  claim reopen appears in mapped document docs/qualification.md
+ok  claim reopen evidence tests/integration/test_runtime_faults.py:182
+ok  claim reopen resolves as symbol
+ok  claim test_killed_owner_replays_ingress_gap_and_existing_outbox_once appears in mapped document docs/qualification.md
+ok  claim test_killed_owner_replays_ingress_gap_and_existing_outbox_once evidence tests/integration/test_runtime_faults.py:189
+ok  claim test_killed_owner_replays_ingress_gap_and_existing_outbox_once resolves as symbol
+ok  claim test_killed_owner_preserves_unknown_effect_and_does_not_reinvoke appears in mapped document docs/qualification.md
+ok  claim test_killed_owner_preserves_unknown_effect_and_does_not_reinvoke evidence tests/integration/test_runtime_faults.py:213
+ok  claim test_killed_owner_preserves_unknown_effect_and_does_not_reinvoke resolves as symbol
+ok  claim test_killed_owner_between_admission_and_turn_update_releases_single_slot appears in mapped document docs/qualification.md
+ok  claim test_killed_owner_between_admission_and_turn_update_releases_single_slot evidence tests/integration/test_runtime_faults.py:253
+ok  claim test_killed_owner_between_admission_and_turn_update_releases_single_slot resolves as symbol
+ok  claim test_killed_owner_background_sleep_cannot_hold_foreground_capacity appears in mapped document docs/qualification.md
+ok  claim test_killed_owner_background_sleep_cannot_hold_foreground_capacity evidence tests/integration/test_runtime_faults.py:272
+ok  claim test_killed_owner_background_sleep_cannot_hold_foreground_capacity resolves as symbol
+ok  claim record appears in mapped document docs/qualification.md
+ok  claim record evidence tests/native/test_memory_worker.py:20
+ok  claim record resolves as symbol
+ok  claim Worker appears in mapped document docs/qualification.md
+ok  claim Worker evidence tests/native/test_memory_worker.py:32
+ok  claim Worker resolves as symbol
+ok  claim __init__ appears in mapped document docs/qualification.md
+ok  claim __init__ evidence tests/native/test_memory_worker.py:33
+ok  claim __init__ resolves as symbol
+ok  claim exact appears in mapped document docs/qualification.md
+ok  claim exact evidence tests/native/test_memory_worker.py:41
+ok  claim exact resolves as symbol
+ok  claim receive appears in mapped document docs/qualification.md
+ok  claim receive evidence tests/native/test_memory_worker.py:53
+ok  claim receive resolves as symbol
+ok  claim raw appears in mapped document docs/qualification.md
+ok  claim raw evidence tests/native/test_memory_worker.py:58
+ok  claim raw resolves as symbol
+ok  claim call appears in mapped document docs/qualification.md
+ok  claim call evidence tests/native/test_memory_worker.py:63
+ok  claim call resolves as symbol
+ok  claim mutate appears in mapped document docs/qualification.md
+ok  claim mutate evidence tests/native/test_memory_worker.py:69
+ok  claim mutate resolves as symbol
+ok  claim ingest appears in mapped document docs/qualification.md
+ok  claim ingest evidence tests/native/test_memory_worker.py:73
+ok  claim ingest resolves as symbol
+ok  claim begin appears in mapped document docs/qualification.md
+ok  claim begin evidence tests/native/test_memory_worker.py:76
+ok  claim begin resolves as symbol
+ok  claim publish appears in mapped document docs/qualification.md
+ok  claim publish evidence tests/native/test_memory_worker.py:81
+ok  claim publish resolves as symbol
+ok  claim lease appears in mapped document docs/qualification.md
+ok  claim lease evidence tests/native/test_memory_worker.py:84
+ok  claim lease resolves as symbol
+ok  claim close appears in mapped document docs/qualification.md
+ok  claim close evidence tests/native/test_memory_worker.py:89
+ok  claim close resolves as symbol
+ok  claim worker appears in mapped document docs/qualification.md
+ok  claim worker evidence tests/native/test_memory_worker.py:102
+ok  claim worker resolves as symbol
+ok  claim ids appears in mapped document docs/qualification.md
+ok  claim ids evidence tests/native/test_memory_worker.py:108
+ok  claim ids resolves as symbol
+ok  claim test_durable_revision_evidence_and_idempotency appears in mapped document docs/qualification.md
+ok  claim test_durable_revision_evidence_and_idempotency evidence tests/native/test_memory_worker.py:112
+ok  claim test_durable_revision_evidence_and_idempotency resolves as symbol
+ok  claim test_lexical_concept_vector_scores_and_time appears in mapped document docs/qualification.md
+ok  claim test_lexical_concept_vector_scores_and_time evidence tests/native/test_memory_worker.py:142
+ok  claim test_lexical_concept_vector_scores_and_time resolves as symbol
+ok  claim test_embedding_spaces_are_explicit_and_scoped appears in mapped document docs/qualification.md
+ok  claim test_embedding_spaces_are_explicit_and_scoped evidence tests/native/test_memory_worker.py:169
+ok  claim test_embedding_spaces_are_explicit_and_scoped resolves as symbol
+ok  claim test_generation_publication_leases_retractions_and_restart appears in mapped document docs/qualification.md
+ok  claim test_generation_publication_leases_retractions_and_restart evidence tests/native/test_memory_worker.py:186
+ok  claim test_generation_publication_leases_retractions_and_restart resolves as symbol
+ok  claim test_stage_atomicity_parent_copy_and_canonical_precedence appears in mapped document docs/qualification.md
+ok  claim test_stage_atomicity_parent_copy_and_canonical_precedence evidence tests/native/test_memory_worker.py:228
+ok  claim test_stage_atomicity_parent_copy_and_canonical_precedence resolves as symbol
+ok  claim test_snapshot_watermark_validation_and_lease_expiration appears in mapped document docs/qualification.md
+ok  claim test_snapshot_watermark_validation_and_lease_expiration evidence tests/native/test_memory_worker.py:257
+ok  claim test_snapshot_watermark_validation_and_lease_expiration resolves as symbol
+ok  claim test_bounded_prune_protects_leases_current_and_canonical_evidence appears in mapped document docs/qualification.md
+ok  claim test_bounded_prune_protects_leases_current_and_canonical_evidence evidence tests/native/test_memory_worker.py:275
+ok  claim test_bounded_prune_protects_leases_current_and_canonical_evidence resolves as symbol
+ok  claim test_database_projection_failure_rolls_back_and_blocks_publication appears in mapped document docs/qualification.md
+ok  claim test_database_projection_failure_rolls_back_and_blocks_publication evidence tests/native/test_memory_worker.py:312
+ok  claim test_database_projection_failure_rolls_back_and_blocks_publication resolves as symbol
+ok  claim test_concurrent_workers_revision_and_parent_cas appears in mapped document docs/qualification.md
+ok  claim test_concurrent_workers_revision_and_parent_cas evidence tests/native/test_memory_worker.py:333
+ok  claim test_concurrent_workers_revision_and_parent_cas resolves as symbol
+ok  claim test_crash_during_staging_recovers_atomic_batch_and_receipt appears in mapped document docs/qualification.md
+ok  claim test_crash_during_staging_recovers_atomic_batch_and_receipt evidence tests/native/test_memory_worker.py:346
+ok  claim test_crash_during_staging_recovers_atomic_batch_and_receipt resolves as symbol
+ok  claim test_invalid_records_have_no_effect appears in mapped document docs/qualification.md
+ok  claim test_invalid_records_have_no_effect evidence tests/native/test_memory_worker.py:389
+ok  claim test_invalid_records_have_no_effect resolves as symbol
+ok  claim test_invalid_operations appears in mapped document docs/qualification.md
+ok  claim test_invalid_operations evidence tests/native/test_memory_worker.py:405
+ok  claim test_invalid_operations resolves as symbol
+ok  claim test_strict_envelope appears in mapped document docs/qualification.md
+ok  claim test_strict_envelope evidence tests/native/test_memory_worker.py:414
+ok  claim test_strict_envelope resolves as symbol
+ok  claim test_malformed_json_does_not_desynchronize appears in mapped document docs/qualification.md
+ok  claim test_malformed_json_does_not_desynchronize evidence tests/native/test_memory_worker.py:424
+ok  claim test_malformed_json_does_not_desynchronize resolves as symbol
+ok  claim test_bad_frame_terminates_cleanly appears in mapped document docs/qualification.md
+ok  claim test_bad_frame_terminates_cleanly evidence tests/native/test_memory_worker.py:431
+ok  claim test_bad_frame_terminates_cleanly resolves as symbol
+ok  claim test_multiple_frames_and_fragmented_input appears in mapped document docs/qualification.md
+ok  claim test_multiple_frames_and_fragmented_input evidence tests/native/test_memory_worker.py:437
+ok  claim test_multiple_frames_and_fragmented_input resolves as symbol
+ok  claim test_startup_errors appears in mapped document docs/qualification.md
+ok  claim test_startup_errors evidence tests/native/test_memory_worker.py:449
+ok  claim test_startup_errors resolves as symbol
+ok  claim test_response_bound_is_truthful appears in mapped document docs/qualification.md
+ok  claim test_response_bound_is_truthful evidence tests/native/test_memory_worker.py:463
+ok  claim test_response_bound_is_truthful resolves as symbol
+ok  claim test_query_scan_bound_reports_partial appears in mapped document docs/qualification.md
+ok  claim test_query_scan_bound_reports_partial evidence tests/native/test_memory_worker.py:472
+ok  claim test_query_scan_bound_reports_partial resolves as symbol
+ok  claim test_harness_assertion_failure_closes_blocked_provider_before_waiting_for_servers appears in mapped document docs/qualification.md
+ok  claim test_harness_assertion_failure_closes_blocked_provider_before_waiting_for_servers evidence tests/integration/test_continuity.py:305
+ok  claim test_harness_assertion_failure_closes_blocked_provider_before_waiting_for_servers resolves as symbol
+ok  claim fail_after_partial_output appears in mapped document docs/qualification.md
+ok  claim fail_after_partial_output evidence tests/integration/test_continuity.py:310
+ok  claim fail_after_partial_output resolves as symbol
+ok  required public surface ledger contains 376 item(s)
+ok  required symbol ACPAdapter is documented
+ok  required symbol AcpFacade is documented
+ok  required symbol Artifact is documented
+ok  required symbol ArtifactStore is documented
+ok  required symbol Attention is documented
+ok  required symbol Awareness is documented
+ok  required symbol AdapterRegistry is documented
+ok  required symbol StreamChannelAdapter is documented
+ok  required symbol InboundMessage is documented
+ok  required symbol ChannelCore is documented
+ok  required symbol CommitmentService is documented
+ok  required symbol ContextBlock is documented
+ok  required symbol ContextPacket is documented
+ok  required symbol ContextCompiler is documented
+ok  required symbol Delivery is documented
+ok  required symbol FrameCodec is documented
+ok  required symbol GoalService is documented
+ok  required symbol Initiative is documented
+ok  required symbol NativeMemoryClient is documented
+ok  required symbol MemoryIngestor is documented
+ok  required symbol MemorySleep is documented
+ok  required symbol SourceSnapshot is documented
+ok  required symbol CheckSpec is documented
+ok  required symbol MetaHarness is documented
+ok  required symbol Planner is documented
+ok  required symbol PluginHost is documented
+ok  required symbol Capability is documented
+ok  required symbol PluginManifest is documented
+ok  required symbol ProfileRegistry is documented
+ok  required symbol CoreError is documented
+ok  required symbol Event is documented
+ok  required symbol ToolCall is documented
+ok  required symbol ToolResult is documented
+ok  required symbol ProviderEvent is documented
+ok  required symbol HTTPProvider is documented
+ok  required symbol ProviderCatalog is documented
+ok  required symbol _ChildChannel is documented
+ok  required symbol CoreRuntime is documented
+ok  required symbol Scheduler is documented
+ok  required symbol EvolutionAuthority is documented
+ok  required symbol SourceEdit is documented
+ok  required symbol SelfEvolution is documented
+ok  required symbol SkillRegistry is documented
+ok  required symbol Record is documented
+ok  required symbol Journal is documented
+ok  required symbol Subagents is documented
+ok  required symbol ExecutionContext is documented
+ok  required symbol ExecutorResult is documented
+ok  required symbol ToolDispatcher is documented
+ok  required symbol WorkspaceFs is documented
+ok  required symbol ProcessRunner is documented
+ok  required symbol sturgis is documented
+ok  required symbol Statement is documented
+ok  required symbol Transaction is documented
+ok  required symbol sturgis is documented
+ok  required symbol Failure is documented
+ok  required symbol Engine is documented
+ok  required symbol main is documented
+ok  required symbol main is documented
+ok  required symbol main is documented
+ok  required symbol setup_channels is documented
+ok  required symbol test_input_admission_and_scoping is documented
+ok  required symbol test_stream_channel_and_durable_delivery is documented
+ok  required symbol receiver is documented
+ok  required symbol test_delivery_claim_recovery_retry_and_replay is documented
+ok  required symbol test_missing_adapter_records_retry is documented
+ok  required symbol wire_provider is documented
+ok  required symbol serve is documented
+ok  required symbol descriptor is documented
+ok  required symbol collect_provider is documented
+ok  required symbol test_real_http_stream_and_tool_serialization is documented
+ok  required symbol test_provider_errors is documented
+ok  required symbol test_provider_cancel_and_validation is documented
+ok  required symbol run is documented
+ok  required symbol collect is documented
+ok  required symbol test_catalog_freshness_and_versions is documented
+ok  required symbol test_acp_facade_correlation_delivery_and_cancel is documented
+ok  required symbol emit is documented
+ok  required symbol submit is documented
+ok  required symbol cancel is documented
+ok  required symbol req is documented
+ok  required symbol journal is documented
+ok  required symbol authority is documented
+ok  required symbol authorize is documented
+ok  required symbol dispatcher is documented
+ok  required symbol context is documented
+ok  required symbol descriptor is documented
+ok  required symbol manifest is documented
+ok  required symbol package is documented
+ok  required symbol test_capability_contract_rejects_invalid_descriptors is documented
+ok  required symbol test_plugin_manifest_validation is documented
+ok  required symbol test_sdk_worker_protocol_and_schemas is documented
+ok  required symbol test_rooted_file_operations_preimages_and_symlinks is documented
+ok  required symbol test_file_limits_and_mutation_failures is documented
+ok  required symbol test_real_process_limits_environment_and_namespace is documented
+ok  required symbol test_process_tree_cancellation_stops_descendant_effect is documented
+ok  required symbol test_dispatch_transaction_schema_dedupe_and_real_file_effect is documented
+ok  required symbol test_dispatch_process_target_error_and_file_operations is documented
+ok  required symbol test_dispatch_cancellation_failures_recovery_and_reconciliation is documented
+ok  required symbol slow is documented
+ok  required symbol bad is documented
+ok  required symbol large is documented
+ok  required symbol error is documented
+ok  required symbol test_plugin_worker_migration_commands_rollback_restart is documented
+ok  required symbol test_plugin_filesystem_and_network_grants_are_real is documented
+ok  required symbol test_plugin_failure_quarantine_and_version_integrity is documented
+ok  required symbol test_plugin_dispatch_draining_cancellation_and_malformed_response is documented
+ok  required symbol skill is documented
+ok  required symbol test_skills_scoped_discovery_selection_revisions_and_rollback is documented
+ok  required symbol test_skill_synthesis_uses_actual_scoped_tool_outcomes is documented
+ok  required symbol test_invalid_skill_packages is documented
+ok  required symbol journal is documented
+ok  required symbol observation is documented
+ok  required symbol active_goal is documented
+ok  required symbol candidate is documented
+ok  required symbol step is documented
+ok  required symbol test_profiles_roots_revisions_and_restart is documented
+ok  required symbol test_profile_invalid_boundaries is documented
+ok  required symbol test_awareness_lifecycle_deduplication_and_stale_observations is documented
+ok  required symbol test_scoped_outcome_checks_and_paged_evidence is documented
+ok  required symbol test_goal_states_evidence_and_atomic_revision is documented
+ok  required symbol test_goal_reservations_cumulative_usage_and_overage is documented
+ok  required symbol test_goal_competing_reservations_and_reopen is documented
+ok  required symbol reserve is documented
+ok  required symbol test_commitments_evidence_progress_and_overdue is documented
+ok  required symbol test_commitment_registrar_contract_is_atomic_before_release is documented
+ok  required symbol register is documented
+ok  required symbol cancel is documented
+ok  required symbol test_all_trigger_shapes is documented
+ok  required symbol test_initiative_evidence_scores_expiry_and_deduplication is documented
+ok  required symbol test_attention_proactive_policies_and_notification_accounting is documented
+ok  required symbol test_attention_quiet_hours_and_validation is documented
+ok  required symbol test_context_attention_preserves_required_inputs_and_explicit_deferrals is documented
+ok  required symbol test_planner_routes_dependencies_assignments_and_history is documented
+ok  required symbol test_planner_invalid_graphs_and_revision_changes is documented
+ok  required symbol test_packet_labels_roles_ranges_and_immutability is documented
+ok  required symbol test_unicode_chunk_cursor_and_optional_deferral is documented
+ok  required symbol test_causal_tool_pair_and_budget_reservation is documented
+ok  required symbol test_invalid_blocks is documented
+ok  required symbol test_invalid_packets_and_instruction_overflow is documented
+ok  required symbol journal is documented
+ok  required symbol make_dispatcher is documented
+ok  required symbol authorize is documented
+ok  required symbol checks is documented
+ok  required symbol setup is documented
+ok  required symbol stage is documented
+ok  required symbol qualify is documented
+ok  required symbol execute_selected is documented
+ok  required symbol test_real_build_shadow_canary_activation_and_rollback is documented
+ok  required symbol test_candidate_cannot_replace_governing_checks_or_claim_success is documented
+ok  required symbol test_default_authority_and_incompatible_migration_fail_explicitly is documented
+ok  required symbol test_competing_candidate_cas_and_baseline_restoration is documented
+ok  required symbol test_watchdog_requires_exact_runtime_evidence_and_restores_selected_code is documented
+ok  required symbol test_diagnosis_uses_actual_trace_and_never_becomes_verified_truth is documented
+ok  required symbol test_real_timeout_cancellation_and_reopen_recovery is documented
+ok  required symbol test_source_tamper_policy_changes_and_missing_evaluation is documented
+ok  required symbol test_passing_verdict_without_completion_receipt_cannot_activate is documented
+ok  required symbol test_edit_validation_scopes_evidence_preimages_and_deletion is documented
+ok  required symbol test_snapshot_bounds_and_copy_integrity is documented
+ok  required symbol test_invalid_immutable_checks is documented
+ok  required symbol test_harness_requires_real_checks_and_allowed_programs is documented
+ok  required symbol test_strict_protocol is documented
+ok  required symbol test_tool_contracts is documented
+ok  required symbol test_journal_atomicity_restart_scope_and_dedupe is documented
+ok  required symbol test_competing_revisions is documented
+ok  required symbol update is documented
+ok  required symbol test_artifact_integrity_and_scope is documented
+ok  required symbol test_incremental_frames is documented
+ok  required symbol test_async_frames_real_socket is documented
+ok  required symbol echo is documented
+ok  required symbol record is documented
+ok  required symbol client is documented
+ok  required symbol journal is documented
+ok  required symbol seed is documented
+ok  required symbol result_ids is documented
+ok  required symbol test_client_real_multiplexing_retrieval_and_scoped_context is documented
+ok  required symbol test_deadline_cancel_and_late_frame_drain_preserve_responsiveness is documented
+ok  required symbol foreground is documented
+ok  required symbol test_capacity_and_writer_wait_deadlines is documented
+ok  required symbol test_worker_death_restart_and_unknown_dispatched_mutation is documented
+ok  required symbol test_snapshot_freshness_partial_vector_status_and_release is documented
+ok  required symbol test_client_configuration is documented
+ok  required symbol test_invalid_requests_and_startup_failure is documented
+ok  required symbol test_bad_peer_frames_fail_closed_without_deadlock is documented
+ok  required symbol test_startup_deadline_and_closing_stalled_worker is documented
+ok  required symbol test_event_replay_exact_sources_rejections_and_no_recursive_ingestion is documented
+ok  required symbol test_ingestion_receipt_replay_after_cursor_loss is documented
+ok  required symbol test_native_event_rejection_is_durable_and_acknowledgment_idempotent is documented
+ok  required symbol test_unavailable_ingestion_retains_cursor is documented
+ok  required symbol test_ingestor_configuration_and_invalid_source is documented
+ok  required symbol test_sleep_default_consolidation_pruning_and_same_day_idempotency is documented
+ok  required symbol test_sleep_admission_and_ingestion_are_bounded is documented
+ok  required symbol admission is documented
+ok  required symbol test_sleep_candidate_evidence_rejection_and_partial_truth is documented
+ok  required symbol consolidate is documented
+ok  required symbol test_sleep_conflict_rebases_next_attempt_and_prunes_abandoned is documented
+ok  required symbol consolidate is documented
+ok  required symbol test_sleep_preserves_prune_work_added_during_another_cycle is documented
+ok  required symbol consolidate is documented
+ok  required symbol test_sleep_lost_cycle_ownership_cannot_publish is documented
+ok  required symbol takeover is documented
+ok  required symbol test_sleep_cancel_then_resume_and_parallel_foreground is documented
+ok  required symbol consolidate is documented
+ok  required symbol test_sleep_publication_receipt_recovers_lost_ack is documented
+ok  required symbol request is documented
+ok  required symbol test_cycle_timeout_and_callback_failures_are_resumable is documented
+ok  required symbol slow is documented
+ok  required symbol broken is documented
+ok  required symbol test_iana_day_boundary_and_invalid_sleep_configuration is documented
+ok  required symbol test_candidate_validation_boundaries is documented
+ok  required symbol test_default_consolidation_respects_evidence_and_content_bounds is documented
+ok  required symbol ReportBoundary is documented
+ok  required symbol __init__ is documented
+ok  required symbol run is documented
+ok  required symbol python_report is documented
+ok  required symbol native_report is documented
+ok  required symbol gate is documented
+ok  required symbol test_valid_independent_reports_build_native_first_and_preserve_evidence_limits is documented
+ok  required symbol test_relative_python_report_paths_resolve_against_the_qualification_root is documented
+ok  required symbol test_each_language_must_independently_reach_the_unrounded_floor is documented
+ok  required symbol test_empty_executable_denominator_cannot_qualify is documented
+ok  required symbol test_omitted_nested_first_party_python_source_fails_even_with_high_totals is documented
+ok  required symbol test_omitted_first_party_cpp_source_fails_even_with_high_totals is documented
+ok  required symbol test_new_nested_first_party_cpp_source_must_appear_in_coverage is documented
+ok  required symbol test_third_party_coverage_cannot_conceal_a_native_shortfall is documented
+ok  required symbol test_nonproduction_python_coverage_cannot_conceal_a_shortfall is documented
+ok  required symbol test_failed_scope_check_invalidates_a_previous_success_report is documented
+ok  required symbol test_missing_required_core_module_fails_before_commands is documented
+ok  required symbol test_unexpected_top_level_agent_modules_fail_before_commands is documented
+ok  required symbol test_application_folders_fail_before_commands is documented
+ok  required symbol test_failed_verification_subprocess_cannot_publish_qualification is documented
+ok  required symbol test_missing_language_report_cannot_publish_qualification is documented
+ok  required symbol ControlledProvider is documented
+ok  required symbol __init__ is documented
+ok  required symbol stream is documented
+ok  required symbol Capture is documented
+ok  required symbol __init__ is documented
+ok  required symbol send is documented
+ok  required symbol runtime is documented
+ok  required symbol accept is documented
+ok  required symbol test_lifecycle_identity_lock_and_invalid_input is documented
+ok  required symbol test_failed_inference_keeps_visible_output_and_truthful_terminal is documented
+ok  required symbol test_cancellation_fences_queued_work_and_waiting is documented
+ok  required symbol test_large_input_has_exact_deferred_ranges_and_budget_failure is documented
+ok  required symbol test_recovery_interrupts_prior_running_work_without_repeating_effect is documented
+ok  required symbol test_supervised_worker_failure_is_recorded_and_restarted is documented
+ok  required symbol fail_once is documented
+ok  required symbol test_invalid_limits_workspace_and_insufficient_context is documented
+ok  required symbol test_explicit_evolution_configuration_has_no_implicit_source_authority is documented
+ok  required symbol test_scheduler_constraints_control_real_child_file_and_process_effects is documented
+ok  required symbol unsafe is documented
+ok  required symbol call is documented
+ok  required symbol journal is documented
+ok  required symbol scheduler is documented
+ok  required symbol admitted is documented
+ok  required symbol claim is documented
+ok  required symbol active_goal is documented
+ok  required symbol checks is documented
+ok  required symbol children is documented
+ok  required symbol test_admission_readiness_priority_capacity_global_scope_and_recovery is documented
+ok  required symbol test_goal_child_grants_cumulative_usage_and_retention is documented
+ok  required symbol test_late_usage_overage_and_descendant_cancellation_preserve_claims is documented
+ok  required symbol test_crash_unknown_claim_never_replayed_or_zero_charged is documented
+ok  required symbol test_paused_goal_fences_new_execution_but_allows_receipts_and_cleanup is documented
+ok  required symbol test_submission_scope_constraints_and_invalid_input is documented
+ok  required symbol test_actual_commitment_wait_transaction_restart_and_expiry is documented
+ok  required symbol test_all_scoped_wake_event_families is documented
+ok  required symbol test_durable_park_wake_requeue_and_cancellation is documented
+ok  required symbol test_schedule_catchup_pause_resume_skip_and_bounded_replay is documented
+ok  required symbol utc is documented
+ok  required symbol test_calendar_dst_gap_fold_and_schedule_validation is documented
+ok  required symbol test_actual_tool_receipts_child_workspace_and_cancel_evidence is documented
+ok  required symbol test_child_evidence_partial_rejected_accepted_and_idempotent_submission is documented
+ok  required symbol test_child_messages_wait_cycles_resume_and_expiry is documented
+ok  required symbol test_child_constraints_depth_liveness_and_retained_identity is documented
+ok  required symbol test_memory_scout_uses_real_native_reads_and_scope_fence is documented
+ok  required symbol test_process_exit_wait_uses_actual_executor_receipt_not_process_shaped_data is documented
+ok  required symbol shaped is documented
+ok  required symbol WireModel is documented
+ok  required symbol __init__ is documented
+ok  required symbol handle is documented
+ok  required symbol proposal is documented
+ok  required symbol eventually is documented
+ok  required symbol check is documented
+ok  required symbol harness is documented
+ok  required symbol collect is documented
+ok  required symbol send is documented
+ok  required symbol test_real_world_effect_fixed_context_native_memory_and_wire_delivery is documented
+ok  required symbol test_steering_during_real_process_preserves_partial_output_and_revokes_effects is documented
+ok  required symbol test_pending_input_and_visible_text_remain_responsive_during_slow_provider is documented
+ok  required symbol test_restart_replays_durable_unrouted_input_and_existing_outbox is documented
+ok  required symbol test_memory_process_missing_does_not_block_foreground is documented
+ok  required symbol test_acp_prompts_use_the_same_runtime_and_output_path is documented
+ok  required symbol emit is documented
+ok  required symbol test_real_channel_ingress_is_bound_and_can_be_reattached_after_invalid_input is documented
+ok  required symbol test_real_model_child_uses_its_workspace_and_evidence_admission is documented
+ok  required symbol test_large_tool_body_is_durable_and_explicitly_deferred_from_context is documented
+ok  required symbol large is documented
+ok  required symbol test_due_schedule_runs_through_common_runtime_once is documented
+ok  required symbol test_provider_limits_preserve_partial_text_and_do_not_execute_proposals is documented
+ok  required symbol test_unreported_provider_tokens_remain_reserved_until_receipt is documented
+ok  required symbol test_harness_assertion_failure_closes_blocked_provider_before_waiting_for_servers is documented
+ok  required symbol fail_after_partial_output is documented
+ok  required symbol observer_payload is documented
+ok  required symbol observe is documented
+ok  required symbol inspect_attempt is documented
+ok  required symbol uncertain_effect is documented
+ok  required symbol lost_acknowledgement is documented
+ok  required symbol reject is documented
+ok  required symbol test_observed_real_effect_reconciles_exact_attempt_and_settles_attested_usage is documented
+ok  required symbol test_narrative_or_untrusted_source_cannot_authorize_completion is documented
+ok  required symbol test_observation_must_attest_every_proposed_result_field is documented
+ok  required symbol test_observation_envelope_and_usage_are_exact is documented
+ok  required symbol test_unrelated_causal_event_and_cross_scope_observation_are_rejected is documented
+ok  required symbol test_mixed_missing_duplicate_and_malformed_evidence_reject_atomically is documented
+ok  required symbol test_unattested_or_invalid_usage_cannot_settle_the_attempt is documented
+ok  required symbol test_terminal_observation_can_preserve_unknown_effect_certainty is documented
+ok  required symbol test_observed_effect_after_actual_owner_crash_keeps_unmeasured_usage_unsettled is documented
+ok  required symbol wire is documented
+ok  required symbol finish is documented
+ok  required symbol delta is documented
+ok  required symbol collect is documented
+ok  required symbol test_terminal_cause_preserves_visible_text is documented
+ok  required symbol test_truncated_or_filtered_calls_are_never_proposals is documented
+ok  required symbol test_refusal_text_overrides_stop_and_withholds_existing_tool_proposal is documented
+ok  required symbol test_valid_fragmented_call_and_final_usage_details is documented
+ok  required symbol test_malformed_wire_shapes_fail_before_any_tool_proposal is documented
+ok  required symbol test_tool_fragments_have_aggregate_byte_part_name_and_call_bounds is documented
+ok  required symbol test_conflicting_terminal_identity_and_usage_are_rejected is documented
+ok  required symbol test_every_tool_is_validated_before_any_tool_event_is_admitted is documented
+ok  required symbol test_identical_final_usage_replay_is_not_double_counted is documented
+ok  required symbol test_invalid_provider_resource_limits is documented
+ok  required symbol test_single_slot_sleep_preempts_dispatched_native_publish is documented
+ok  required symbol consolidate is documented
+ok  required symbol test_sigstop_native_query_keeps_admission_and_wire_output_responsive is documented
+ok  required symbol start_owner is documented
+ok  required symbol kill_owner is documented
+ok  required symbol reopen is documented
+ok  required symbol test_killed_owner_replays_ingress_gap_and_existing_outbox_once is documented
+ok  required symbol test_killed_owner_preserves_unknown_effect_and_does_not_reinvoke is documented
+ok  required symbol test_killed_owner_between_admission_and_turn_update_releases_single_slot is documented
+ok  required symbol test_killed_owner_background_sleep_cannot_hold_foreground_capacity is documented
+ok  required symbol record is documented
+ok  required symbol Worker is documented
+ok  required symbol __init__ is documented
+ok  required symbol exact is documented
+ok  required symbol receive is documented
+ok  required symbol raw is documented
+ok  required symbol call is documented
+ok  required symbol mutate is documented
+ok  required symbol ingest is documented
+ok  required symbol begin is documented
+ok  required symbol publish is documented
+ok  required symbol lease is documented
+ok  required symbol close is documented
+ok  required symbol worker is documented
+ok  required symbol ids is documented
+ok  required symbol test_durable_revision_evidence_and_idempotency is documented
+ok  required symbol test_lexical_concept_vector_scores_and_time is documented
+ok  required symbol test_embedding_spaces_are_explicit_and_scoped is documented
+ok  required symbol test_generation_publication_leases_retractions_and_restart is documented
+ok  required symbol test_stage_atomicity_parent_copy_and_canonical_precedence is documented
+ok  required symbol test_snapshot_watermark_validation_and_lease_expiration is documented
+ok  required symbol test_bounded_prune_protects_leases_current_and_canonical_evidence is documented
+ok  required symbol test_database_projection_failure_rolls_back_and_blocks_publication is documented
+ok  required symbol test_concurrent_workers_revision_and_parent_cas is documented
+ok  required symbol test_crash_during_staging_recovers_atomic_batch_and_receipt is documented
+ok  required symbol test_invalid_records_have_no_effect is documented
+ok  required symbol test_invalid_operations is documented
+ok  required symbol test_strict_envelope is documented
+ok  required symbol test_malformed_json_does_not_desynchronize is documented
+ok  required symbol test_bad_frame_terminates_cleanly is documented
+ok  required symbol test_multiple_frames_and_fragmented_input is documented
+ok  required symbol test_startup_errors is documented
+ok  required symbol test_response_bound_is_truthful is documented
+ok  required symbol test_query_scan_bound_reports_partial is documented

@@ -1,0 +1,17 @@
+stateDiagram-v2
+    [*] --> Proposed
+    Proposed --> Rejected: invalid schema or precondition
+    Proposed --> Recorded: validated and intent persisted
+    Recorded --> Dispatched: current action authority confirmed
+    Recorded --> Cancelled: cancelled before dispatch
+    Dispatched --> Running: execution observed
+    Dispatched --> Completed: immediate observed result
+    Running --> Completed: observed terminal result
+    Dispatched --> Indeterminate: connection lost or restart
+    Running --> Indeterminate: completion cannot be established
+    Running --> Cancelled: execution cancellation confirmed
+    Indeterminate --> Completed: outcome reconciled
+    Indeterminate --> Cancelled: cancellation reconciled
+    Rejected --> [*]
+    Completed --> [*]
+    Cancelled --> [*]

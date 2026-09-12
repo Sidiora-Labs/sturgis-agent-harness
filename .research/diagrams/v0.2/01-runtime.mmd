@@ -1,0 +1,64 @@
+flowchart TB
+    CLIENT[External clients] --> ACP[acp]
+    CHANNEL[Other channels] --> ADAP[channel-adapters]
+    ACP -.->|registered transport| ADAP
+    ACP --> CORE[channel-core]
+    ADAP --> CORE
+    CORE --> J[(Operational journal and output outbox)]
+    J --> AWARE[awareness]
+    PROFILE[profile] --> AWARE
+    GOALS[goals] --> AWARE
+    COMMIT[commitments] --> AWARE
+    AWARE --> INIT[initiative]
+    AWARE --> PLAN[planner]
+    GOALS --> PLAN
+    COMMIT --> PLAN
+    SK[skills] --> PLAN
+    INIT --> POLICY[attention: proactive policy]
+    POLICY -->|eligible proposal| SCH[scheduler]
+    PLAN -->|ready steps| SCH
+    J -->|accepted input and due work| SCH
+    SCH --> ATT[attention]
+    AWARE --> ATT
+    ATT --> FRAME[context compiler]
+    FRAME --> PA[provider-adapters]
+    CAT[provider-catalog] --> SCH
+    CAT --> PA
+    PA -->|visible output| J
+    PA -->|action or delegation proposal| SCH
+    SCH --> TR[tool-runner]
+    TR -->|recorded delegation control| SUB[subagents]
+    SUB -->|child work in parent allocation| SCH
+    SUB -->|attributed findings| J
+    TR --> WORLD[Digital environment]
+    WORLD -->|normalized result via tool-runner| J
+    J --> DEL[delivery]
+    CORE -->|resolved route| DEL
+    DEL --> ACP
+    DEL --> ADAP
+    ACP --> CLIENT
+    ADAP --> CHANNEL
+    SDK[plugin-sdk] --> HOST[plugin-host]
+    HOST -->|tool registrations| TR
+    HOST -->|procedure registrations| SK
+    HOST -->|provider registrations| CAT
+    HOST -->|channel registrations| ADAP
+    SK --> FRAME
+    PROTO[protocol] -.->|shared schemas| CORE
+    PROTO -.-> FRAME
+    PROTO -.-> TR
+    SUP[Supporting runtime supervisor] -.->|supervise and recover| SCH
+    SUP -.-> HOST
+    MH[meta-harness] -->|repair hypotheses| EV
+    EV[self-evolution] -->|candidate and evaluation work| SCH
+    SCH -->|admitted isolated evaluation| MH
+    MH -->|evaluation evidence| EV
+    J -->|trace and experience evidence| MH
+    FRAMECODEC[framing] -.->|bounded native IPC| MEM
+    J -->|cursor-based ingestion| MEM
+    MEM -->|scoped retrieval| ATT
+    subgraph NATIVE[Separate C++ memory process]
+        MEM[Typed records, concept links, indexes and generations]
+    end
+    SCH -->|daily maintenance allocation| SLEEP[Python memory sleep coordinator]
+    SLEEP <-->|stage, validate and publish| MEM

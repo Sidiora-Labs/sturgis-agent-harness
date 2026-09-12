@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1840" height="1450" viewBox="0 0 1840 1450" role="img" aria-labelledby="title description">
+<title id="title">Python agent with a separate C++ memory engine</title>
+<desc id="description">Live input, durable operational state, context assembly, streaming model output, and supervised tools form independent paths. A separate C++ memory process supports retrieval and background daily consolidation.</desc>
+<rect width="1840" height="1450" fill="#f6f8fc"/>
+<text x="64" y="48" font-family="DejaVu Sans, sans-serif" font-size="45" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge">Agent architecture</text>
+<text x="64" y="110" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Python behavior and coordination  /  C++ memory engine</text>
+<text x="1740" y="58" font-family="DejaVu Sans, sans-serif" font-size="28" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">v0.1</text>
+<rect x="1110" y="116" width="18" height="18" rx="4" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1139" y="113" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Python</text>
+<rect x="1290" y="116" width="18" height="18" rx="4" fill="#f1ebfb" stroke="#a389c5" stroke-width="2"/>
+<text x="1319" y="113" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">C++</text>
+<rect x="1435" y="116" width="18" height="18" rx="4" fill="#fff5de" stroke="#c5a966" stroke-width="2"/>
+<text x="1464" y="113" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">Durable state</text>
+<rect x="48" y="178" width="1744" height="790" rx="24" fill="#ffffff" stroke="#dce4ee" stroke-width="2"/>
+<text x="80" y="199" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#53667e" dominant-baseline="text-before-edge">LIVE INPUT, REASONING, ACTION, AND OUTPUT</text>
+<polyline points="595,254 595,239 1230,239 1230,254" fill="none" stroke="#b29b63" stroke-width="2" stroke-linejoin="round"/>
+<text x="913" y="211" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#846f3b" dominant-baseline="text-before-edge" text-anchor="middle">One transactional operational store</text>
+<polyline points="328,315 430,315" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430.00,315.00 417.88,322.00 417.88,308.00" fill="#64809e"/>
+<polyline points="1370,315 1490,315" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1490.00,315.00 1477.88,322.00 1477.88,308.00" fill="#64809e"/>
+<polyline points="595,376 595,510" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="595.00,510.00 588.00,497.88 602.00,497.88" fill="#64809e"/>
+<text x="610" y="426" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">ordered events</text>
+<polyline points="760,575 840,575" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="840.00,575.00 827.88,582.00 827.88,568.00" fill="#64809e"/>
+<polyline points="1140,575 1250,575" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1250.00,575.00 1237.88,582.00 1237.88,568.00" fill="#64809e"/>
+<text x="1195" y="547" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">packet</text>
+<polyline points="1430,510 1430,430 1230,430 1230,376" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1230.00,376.00 1237.00,388.12 1223.00,388.12" fill="#64809e"/>
+<text x="1350" y="402" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">visible stream</text>
+<polyline points="1430,640 1430,780" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1430.00,780.00 1423.00,767.88 1437.00,767.88" fill="#64809e"/>
+<text x="1450" y="702" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">action proposal</text>
+<polyline points="1250,845 760,845" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="760.00,845.00 772.12,838.00 772.12,852.00" fill="#64809e"/>
+<text x="863" y="807" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">intent persisted</text>
+<text x="1120" y="807" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">authority checked</text>
+<polyline points="430,845 328,845" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328.00,845.00 340.12,838.00 340.12,852.00" fill="#64809e"/>
+<text x="379" y="811" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">effects</text>
+<polyline points="208,780 208,376" fill="none" stroke="#64809e" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="208.00,376.00 215.00,388.12 201.00,388.12" fill="#64809e"/>
+<text x="95" y="614" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge">observations</text>
+<rect x="48" y="1000" width="1744" height="330" rx="24" fill="#f9f6fe" stroke="#dfd5ef" stroke-width="2"/>
+<text x="80" y="1022" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#735495" dominant-baseline="text-before-edge">SEPARATE MEMORY PROCESS + BACKGROUND MAINTENANCE</text>
+<polyline points="990,640 990,1048 450,1048 450,1080" fill="none" stroke="#8461b5" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 8"/>
+<polygon points="450.00,1080.00 443.00,1067.88 457.00,1067.88" fill="#8461b5"/>
+<polyline points="990,674 990,640" fill="none" stroke="#8461b5" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 8"/>
+<polygon points="990.00,640.00 997.00,652.12 983.00,652.12" fill="#8461b5"/>
+<rect x="980" y="837" width="20" height="16" fill="#ffffff"/>
+<polyline points="990,830 990,860" fill="none" stroke="#8461b5" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 8"/>
+<text x="1007" y="889" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#8461b5" dominant-baseline="text-before-edge">asynchronous memory IPC</text>
+<text x="1007" y="916" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#8461b5" dominant-baseline="text-before-edge">deadline + snapshot generation</text>
+<polyline points="1020,1175 820,1175" fill="none" stroke="#8461b5" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="820.00,1175.00 832.12,1168.00 832.12,1182.00" fill="#8461b5"/>
+<text x="920" y="1110" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#8461b5" dominant-baseline="text-before-edge" text-anchor="middle">stage / publish</text>
+<text x="920" y="1138" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#8461b5" dominant-baseline="text-before-edge" text-anchor="middle">versioned API</text>
+<rect x="88" y="254" width="240" height="122" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="208.0" y="274" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Input gateway</text>
+<text x="208.0" y="312" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">User + external events</text>
+<text x="208.0" y="340" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Validate, persist, accept</text>
+<rect x="430" y="254" width="330" height="122" rx="18" fill="#fff5de" stroke="#c5a966" stroke-width="2"/>
+<text x="595.0" y="274" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Operational journal</text>
+<text x="595.0" y="312" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Events, action intents, cursors</text>
+<text x="595.0" y="340" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Durable acceptance</text>
+<rect x="1090" y="254" width="280" height="122" rx="18" fill="#fff5de" stroke="#c5a966" stroke-width="2"/>
+<text x="1230.0" y="274" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Output outbox</text>
+<text x="1230.0" y="312" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Persisted text + status</text>
+<text x="1230.0" y="340" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Stable stream sequences</text>
+<rect x="1490" y="254" width="250" height="122" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1615.0" y="274" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">User delivery</text>
+<text x="1615.0" y="312" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Stream, acknowledge</text>
+<text x="1615.0" y="340" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Reconnect and replay</text>
+<rect x="430" y="510" width="330" height="130" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="595.0" y="530" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Situation + scheduler</text>
+<text x="595.0" y="568" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Commitments, pending actions</text>
+<text x="595.0" y="596" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Attention and steering</text>
+<rect x="840" y="510" width="300" height="130" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="990.0" y="530" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Context assembler</text>
+<text x="990.0" y="568" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Labeled, scoped, budgeted</text>
+<text x="990.0" y="596" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Exact inclusion manifest</text>
+<rect x="1250" y="510" width="360" height="130" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1430.0" y="530" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Streaming model gateway</text>
+<text x="1430.0" y="568" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Provider-compatible input</text>
+<text x="1430.0" y="596" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Independent output routing</text>
+<rect x="88" y="780" width="240" height="130" rx="18" fill="#edf0f4" stroke="#99a8b8" stroke-width="2"/>
+<text x="208.0" y="800" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Digital environment</text>
+<text x="208.0" y="838" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Objects and processes</text>
+<text x="208.0" y="866" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Observable consequences</text>
+<rect x="430" y="780" width="330" height="130" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="595.0" y="800" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Supervised tools</text>
+<text x="595.0" y="838" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Execute and normalize</text>
+<text x="595.0" y="866" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Results return to journal</text>
+<rect x="1250" y="780" width="360" height="130" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1430.0" y="800" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Tool contract + dispatch</text>
+<text x="1430.0" y="838" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Schema and precondition checks</text>
+<text x="1430.0" y="866" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Expectation linked to action</text>
+<rect x="80" y="1080" width="740" height="190" rx="18" fill="#f1ebfb" stroke="#a389c5" stroke-width="2"/>
+<text x="450.0" y="1100" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">C++ memory engine</text>
+<text x="450.0" y="1138" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Typed revisions + stable concepts + embedding / lexical indexes</text>
+<text x="450.0" y="1166" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Replayable journal ingestion and explicit indexing freshness</text>
+<text x="450.0" y="1194" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Scoped retrieval, snapshot leases, atomic publication</text>
+<text x="450.0" y="1222" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Episodic / semantic / procedural memory</text>
+<rect x="1020" y="1080" width="710" height="190" rx="18" fill="#edf5ff" stroke="#739ecf" stroke-width="2"/>
+<text x="1375.0" y="1100" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Python daily sleep coordinator</text>
+<text x="1375.0" y="1138" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Snapshot -&gt; consolidate -&gt; validate -&gt; stage -&gt; publish</text>
+<text x="1375.0" y="1166" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Model-assisted proposals with source evidence</text>
+<text x="1375.0" y="1194" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Lower resource priority; checkpoint and resume</text>
+<text x="1375.0" y="1222" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Live input and output continue during maintenance</text>
+<text x="920" y="1360" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#152b45" dominant-baseline="text-before-edge" text-anchor="middle">Observation -&gt; expectation -&gt; action -&gt; observed consequence -&gt; updated understanding</text>
+<text x="920" y="1402" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53667e" dominant-baseline="text-before-edge" text-anchor="middle">Design proposal. Full lifecycle diagrams and contracts are in the companion Markdown files.</text>
+</svg>

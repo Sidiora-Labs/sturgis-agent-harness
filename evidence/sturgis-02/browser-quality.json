@@ -1,0 +1,183 @@
+{
+  "accessibility": [
+    {
+      "label": "bootstrap",
+      "violations": []
+    },
+    {
+      "label": "empty conversation",
+      "violations": []
+    },
+    {
+      "label": "conversation",
+      "violations": []
+    },
+    {
+      "label": "work",
+      "violations": []
+    },
+    {
+      "label": "mobile conversation",
+      "violations": []
+    }
+  ],
+  "performance": {
+    "coldAssets": [
+      {
+        "url": "/assets/index-CEapWaEf.js",
+        "transferSize": 37585,
+        "encodedBodySize": 37285,
+        "duration": 91.10000038146973
+      },
+      {
+        "url": "/assets/rolldown-runtime-hePW80VL.js",
+        "transferSize": 1016,
+        "encodedBodySize": 716,
+        "duration": 58.20000076293945
+      },
+      {
+        "url": "/assets/react-wiHys0m2.js",
+        "transferSize": 68626,
+        "encodedBodySize": 68326,
+        "duration": 72.69999980926514
+      },
+      {
+        "url": "/assets/icons-Fa1M2mbg.js",
+        "transferSize": 6839,
+        "encodedBodySize": 6539,
+        "duration": 58.60000038146973
+      },
+      {
+        "url": "/assets/primitives-B4OQEf9S.js",
+        "transferSize": 28116,
+        "encodedBodySize": 27816,
+        "duration": 123.19999980926514
+      },
+      {
+        "url": "/assets/ui-BKzYPz3H.js",
+        "transferSize": 24531,
+        "encodedBodySize": 24231,
+        "duration": 118.89999961853027
+      },
+      {
+        "url": "/assets/ui-BULKDll0.css",
+        "transferSize": 5264,
+        "encodedBodySize": 4964,
+        "duration": 60.90000057220459
+      },
+      {
+        "url": "/assets/index-R5Xpdzgo.css",
+        "transferSize": 5721,
+        "encodedBodySize": 5421,
+        "duration": 54.19999980926514
+      },
+      {
+        "url": "/assets/roboto-flex-latin-wght-normal-n-dP9qr2.woff2",
+        "transferSize": 34620,
+        "encodedBodySize": 34320,
+        "duration": 49.09999942779541
+      },
+      {
+        "url": "/assets/ConversationPage-B4JeWwC3.js",
+        "transferSize": 50797,
+        "encodedBodySize": 50497,
+        "duration": 60.80000019073486
+      },
+      {
+        "url": "/assets/shared-Dy-fnpz7.js",
+        "transferSize": 1247,
+        "encodedBodySize": 947,
+        "duration": 13
+      },
+      {
+        "url": "/assets/ConversationPage-D8Yio0Um.css",
+        "transferSize": 4072,
+        "encodedBodySize": 3772,
+        "duration": 25.40000057220459
+      }
+    ],
+    "initialJavaScriptBytes": 216357,
+    "inputFrameP95Ms": 119.09422700000141,
+    "longTasks": [],
+    "resources": [
+      {
+        "url": "/assets/index-CEapWaEf.js",
+        "transferSize": 0,
+        "encodedBodySize": 37285,
+        "duration": 0
+      },
+      {
+        "url": "/assets/rolldown-runtime-hePW80VL.js",
+        "transferSize": 0,
+        "encodedBodySize": 716,
+        "duration": 0
+      },
+      {
+        "url": "/assets/react-wiHys0m2.js",
+        "transferSize": 0,
+        "encodedBodySize": 68326,
+        "duration": 0
+      },
+      {
+        "url": "/assets/icons-Fa1M2mbg.js",
+        "transferSize": 0,
+        "encodedBodySize": 6539,
+        "duration": 0
+      },
+      {
+        "url": "/assets/primitives-B4OQEf9S.js",
+        "transferSize": 0,
+        "encodedBodySize": 27816,
+        "duration": 0
+      },
+      {
+        "url": "/assets/ui-BKzYPz3H.js",
+        "transferSize": 0,
+        "encodedBodySize": 24231,
+        "duration": 0
+      },
+      {
+        "url": "/assets/ui-BULKDll0.css",
+        "transferSize": 0,
+        "encodedBodySize": 4964,
+        "duration": 0
+      },
+      {
+        "url": "/assets/index-R5Xpdzgo.css",
+        "transferSize": 0,
+        "encodedBodySize": 5421,
+        "duration": 0
+      },
+      {
+        "url": "/assets/roboto-flex-latin-wght-normal-n-dP9qr2.woff2",
+        "transferSize": 0,
+        "encodedBodySize": 34320,
+        "duration": 0
+      },
+      {
+        "url": "/assets/ConversationPage-B4JeWwC3.js",
+        "transferSize": 0,
+        "encodedBodySize": 50497,
+        "duration": 0
+      },
+      {
+        "url": "/assets/shared-Dy-fnpz7.js",
+        "transferSize": 0,
+        "encodedBodySize": 947,
+        "duration": 0
+      },
+      {
+        "url": "/assets/ConversationPage-D8Yio0Um.css",
+        "transferSize": 0,
+        "encodedBodySize": 3772,
+        "duration": 0
+      }
+    ]
+  },
+  "requests": [
+    [
+      401,
+      "http://127.0.0.1:54769/api/v1/auth/login"
+    ]
+  ]
+}

@@ -1,0 +1,340 @@
+# sturgis-02: consumer product and portable hosting. Executable source of truth.
+[meta]
+feature = "sturgis-02"
+title = "Sturgis 02 — Consumer features and portable hosting"
+status = "in_progress"
+spec_version = "1.1.0"
+intro = "Build one Python consumer product for self-hosted and hosted operation, with responsive web and CLI, private runtime continuity, parallel task lanes and independent 90 percent coverage."
+
+[design]
+overview = "Existing core authority with authenticated consumer commands, private runtime lifecycle, usable clients and source-backed capability breadth."
+include = "design.body.md"
+
+[documentation]
+mode = "manual"
+status = "done"
+audiences = ["user", "developer", "operator"]
+targets = ["README.md", "docs/core.md", "docs/qualification.md", "docs/sturgis-02/consumer.md", "docs/sturgis-02/deployment.md", "docs/sturgis-02/qualification.md", "native/memory/PROTOCOL.md", "agent/memory/README.md", "agent/scheduler/README.md", "agent/tool_runner/README.md", "agent/self_evolution/README.md", "packaging/README.md", "frontend/licenses/README.md", "spec/sturgis-02/contracts.md", "spec/sturgis-02/http-contract.md", "spec/sturgis-02/coverage.md", "spec/sturgis-02/execution.md", "spec/sturgis-02/feature-map.md", "spec/sturgis-02/design.body.md", "documentation/README.md", "documentation/users/src/content/docs/**", "documentation/developers/src/content/docs/**", "documentation/closure.md"]
+
+# Reopened by the owner scope correction: Markdown summaries do not satisfy two complete documentation sites.
+user_site = "documentation/users"
+developer_site = "documentation/developers"
+full_gate = "python3 scripts/docs_gate.py full"
+
+[req.1]
+title = "Consumer product and two modes"
+story = "As a Sturgis owner, I need consumer product and two modes."
+ac_1 = "Implement responsive web and CLI clients over the same authenticated Python consumer contract for self_hosted and hosted operation. Existing agent/native mechanisms retain authority."
+ac_2 = "Classify every audited family in feature-map.md; implement stated first-pass adapters and explicitly label unsupported providers/devices. No paid deployment or proprietary control-plane dependency is required."
+
+[req.2]
+title = "Identity and private ownership"
+story = "As a Sturgis owner, I need identity and private ownership."
+ac_1 = "Secure first-owner bootstrap, password hashing, opaque sessions with revocation/expiry, CSRF/origin protection and owner-to-agent authorization persist across restart."
+ac_2 = "Cross-account access to agent commands, events, artifacts, credentials and lifecycle operations is rejected before private worker access; caller-selected scopes/roots cannot confer authority."
+
+[req.3]
+title = "Credentials and provider readiness"
+story = "As a Sturgis owner, I need credentials and provider readiness."
+ac_1 = "Use authenticated encryption with private key/file permissions outside writable workspaces; public configuration, journals, errors and tokens do not expose secrets."
+ac_2 = "Provider configuration and credential revisions invalidate observations; readiness requires an actual bounded provider request, and execution uses the selected current credential without journal leakage."
+
+[req.4]
+title = "Conversations and continuous I/O"
+story = "As a Sturgis owner, I need conversations and continuous i/o."
+ac_1 = "Durably retain stable-id messages before waking private workers; preserve conversation metadata, history/search, streamed output, replay cursors and separate accepted/delivered/completed states."
+ac_2 = "Steering/cancellation during slow inference/tools remains responsive. Recovery preserves accepted input, output and indeterminate effects without duplicate effective actions."
+
+[req.5]
+title = "Content knowledge and memory"
+story = "As a Sturgis owner, I need content knowledge and memory."
+ac_1 = "Support bounded typed uploads, scoped artifact read/download, rooted file operations with preimage/revision guards, source-backed text knowledge/search and explicit unsupported formats."
+ac_2 = "Memory search/correction/retraction uses the real native engine; exact source evidence and labels distinguish uploaded documents, user input and retrieved memory. Attachments reach model context or an explicit bounded deferral."
+
+[req.6]
+title = "Work automation and attention"
+story = "As a Sturgis owner, I need work automation and attention."
+ac_1 = "Expose goals, commitments, plan/workflow dependencies, child results, schedules, initiative/inbox and operational evidence through consumer commands/views."
+ac_2 = "Schedules and workflow execution use core owners and grants; daily memory consolidation and compute suspension remain distinct. User-facing success cannot be manufactured from model narrative."
+
+[req.7]
+title = "Permissions and usage"
+story = "As a Sturgis owner, I need permissions and usage."
+ac_1 = "Persist revisioned policy and bounded human approvals tied to actual capability/action versions. Revocation fences new execution and reports pending versus effective state."
+ac_2 = "Expose deduplicated actual consumption, recorded overages and unresolved reservations; estimates/entitlements remain separate from payment settlement and cannot erase factual receipts."
+
+[req.8]
+title = "Connections and external ingress"
+story = "As a Sturgis owner, I need connections and external ingress."
+ac_1 = "Implement versioned configure/probe/grant/revoke lifecycle with scoped credential references and current-revision execution checks."
+ac_2 = "Signed webhooks verify sender/timestamp/nonce/body and durably deduplicate before attributed admission. External payloads cannot select owner identity or bypass scheduler grants."
+
+[req.9]
+title = "Concrete browser media and protocol adapters"
+story = "As a Sturgis owner, I need concrete browser media and protocol adapters."
+ac_1 = "Implement bounded HTTP fetch/search, HTTP MCP schema negotiation/execution, real CDP browser operations, configured HTTP speech/image providers and a paired remote-device protocol."
+ac_2 = "Network policy enforces allowed destinations and redirects, scope, time/byte/resource bounds and operator-only private-origin exceptions. Unsupported delegation/device/OS/vendor capabilities fail explicitly."
+
+[req.10]
+title = "Private runtime lifecycle"
+story = "As a Sturgis owner, I need private runtime lifecycle."
+ac_1 = "Implement common authenticated bounded worker IPC, fixed runtime scope/root, durable lifecycle operations, readiness, restart/recovery and a real hosted Linux namespace backend."
+ac_2 = "Hosted worker filesystem/PID/resource containment is exercised; network sharing and capability egress policy are stated accurately. Self-host trusted-local process mode is not presented as hosted isolation proof."
+ac_3 = "Accepted input and due work survive wake/suspend/replacement; single-owner fencing, live-work checks, storage consistency and uncertain command outcomes constrain retries."
+
+[req.11]
+title = "Portability and installation"
+story = "As a Sturgis owner, I need portability and installation."
+ac_1 = "Implement versioned consistent backup/export and bounded restore with hashes, traversal/symlink checks, target ownership and explicit root relocation. Exclude/reconnect credentials and execution authority."
+ac_2 = "Package Python CLI, web assets, native worker and service/container examples; exercise installed entry points and private runtime startup. Self-host installation works without vendor accounts."
+
+[req.12]
+title = "Usable consumer client"
+story = "As a Sturgis owner, I need usable consumer client."
+ac_1 = "Build conversation-first responsive web with persistent composer, agent/conversation navigation and Work/Knowledge/Files/Connections/Settings views plus clear readiness/error/recovery states."
+ac_2 = "CLI uses the same authenticated API for setup/serve/login/agents/chat/events/stop and domain/backup/doctor operations; no second inference loop."
+ac_3 = "Real browser journeys exercise core interactions, keyboard/narrow layouts and safe rendering of untrusted text/artifacts."
+ac_4 = "The self-hosted client uses Gemini-inspired Material 3 styling with Sturgis branding and a premium React/TypeScript application with Vite, accessible Radix components, Tailwind design tokens, locally served typography, reduced-motion-aware transitions, cached scoped data, deliberate loading states and measured interaction/bundle performance. Source is divided into shell, components, data hooks and feature pages."
+
+[req.13]
+title = "Parallel execution and qualification"
+story = "As a Sturgis owner, I need parallel execution and qualification."
+ac_1 = "Use disjoint task ownership and dependency joins with up to four agents; focused verification and tagged snapshots precede done."
+ac_2 = "Enforce independent 90 percent executable line coverage for complete Python agent/consumer, production C++ and all production client JavaScript. Report branches and validate complete denominators and source hashes."
+ac_3 = "Qualify actual databases/workers/native memory/effects/browser plus controlled remote wire endpoints; no source-only or fixture-only production claims."
+
+[req.14]
+title = "Complete user and developer documentation sites"
+story = "As a user or developer, I need an independently usable documentation site that teaches the entire system and documents every feature and important implementation contract."
+ac_1 = "Produce two separate searchable, responsive static sites with Sturgis branding, accessible navigation, light/dark themes, code examples, learning paths and complete cross-linked guides. A Markdown guide, source list or passing link ledger alone cannot satisfy this requirement."
+ac_2 = "User manuals cover every consumer feature, actual UI/CLI/API exposure, prerequisites, step-by-step examples, expected outcomes, errors, recovery and self-hosted/hosted limits. Inventory live command, configuration and feature families independently of the prose."
+ac_3 = "Developer manuals cover all module responsibilities, architecture, protocols, data ownership, control and failure paths, extension contracts, frontend, installation, operation, testing and maintenance with working examples and source anchors."
+ac_4 = "Generate and audit complete first-party file and qualified-symbol references from actual source, including signatures, defaults, annotations, exceptions, call sites, effects and important control branches. Every source line remains reachable. Generated syntax facts complement authored explanations and never masquerade as behavioral qualification."
+ac_5 = "The full docs gate must build both sites, reject missing or stale source/feature coverage, verify every rendered local link and anchor, exercise real search/navigation/mobile/theme/code-copy journeys, validate representative examples, and retain source-bound evidence before documentation closure. Product coverage floors remain unchanged."
+
+[task.1.1]
+title = "Consumer contracts, configuration and qualification foundation"
+status = "done"
+wave = 1
+owner_lane = "root"
+requires = []
+reqs = ["1.1", "13.1", "13.2"]
+touches = ["consumer/__init__.py", "consumer/contracts.py", "consumer/config.py", "pyproject.toml", "package.json", "scripts/qualify_consumer.py", "scripts/verify_native.py", "scripts/verify_web.mjs", "tests/consumer/test_contracts.py", "tests/consumer/test_consumer_gate.py", ".gitignore", ".cgignore"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_contracts.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.1.2]
+title = "Accounts, private agent directory, vault, provider settings and usage"
+status = "done"
+wave = 1
+owner_lane = "identity"
+requires = []
+reqs = ["2.1", "2.2", "3.1", "3.2", "7.2"]
+touches = ["agent/provider_adapters/__init__.py", "consumer/identity.py", "consumer/vault.py", "consumer/providers.py", "consumer/usage.py", "tests/consumer/test_identity.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_identity.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.1.3]
+title = "Content, workspace, knowledge and native memory administration"
+status = "done"
+wave = 1
+owner_lane = "content-hosting"
+requires = []
+reqs = ["5.1", "5.2"]
+touches = ["consumer/content.py", "tests/consumer/test_content.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_content.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.1.4]
+title = "Connection lifecycle, network policy and attributed webhook ingress"
+status = "done"
+wave = 1
+owner_lane = "integrations"
+requires = []
+reqs = ["8.1", "8.2", "9.2"]
+touches = ["consumer/connections.py", "consumer/network.py", "consumer/webhooks.py", "tests/consumer/test_connections.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_connections.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.2.1]
+title = "Private agent application and continuous conversation integration"
+status = "done"
+wave = 2
+owner_lane = "root"
+requires = ["1.1", "1.3"]
+reqs = ["1.1", "4.1", "4.2", "5.2", "6.2"]
+touches = ["consumer/application.py", "consumer/config.py", "tests/__init__.py", "tests/consumer/__init__.py", "tests/consumer_integration/__init__.py", "agent/runtime/__init__.py", "tests/consumer/test_application.py", "tests/consumer_integration/test_application.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_application.py tests/consumer_integration/test_application.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.2.2]
+title = "Authenticated workers, namespace isolation and durable lifecycle"
+status = "done"
+wave = 2
+owner_lane = "content-hosting"
+requires = ["1.1", "1.3"]
+reqs = ["10.1", "10.2", "10.3", "4.1", "4.2"]
+touches = ["consumer/workers.py", "consumer/worker.py", "consumer/lifecycle.py", "tests/consumer/test_workers.py", "tests/consumer_integration/test_lifecycle.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_workers.py tests/consumer_integration/test_lifecycle.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.2.3]
+title = "User work, workflows, attention, permissions and approvals"
+status = "done"
+wave = 2
+owner_lane = "identity"
+requires = ["1.1", "1.2"]
+reqs = ["6.1", "6.2", "7.1", "7.2"]
+touches = ["consumer/work.py", "consumer/permissions.py", "tests/consumer/test_work.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_work.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.2.4]
+title = "Real browser, search, MCP, media and device adapters"
+status = "done"
+wave = 2
+owner_lane = "integrations"
+requires = ["1.1", "1.4"]
+reqs = ["9.1", "9.2", "8.1"]
+touches = ["consumer/connections.py", "consumer/network.py", "consumer/connectors.py", "consumer/browser.py", "consumer/device.py", "tests/consumer/test_connectors.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_connectors.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.3.1]
+title = "Shared authenticated HTTP API and replayable consumer transport"
+status = "done"
+wave = 3
+owner_lane = "root"
+requires = ["2.1"]
+reqs = ["2.1", "2.2", "4.1", "4.2", "5.1", "8.2", "12.1"]
+touches = ["consumer/api.py", "consumer/application.py", "consumer/config.py", "tests/consumer/test_api.py", "tests/consumer/test_api_security.py", "tests/consumer/test_application_domains.py", "tests/consumer_integration/test_http.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_api.py tests/consumer/test_api_security.py tests/consumer/test_application_domains.py tests/consumer_integration/test_http.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+do_3 = "Construction may proceed against frozen worker/work/connector APIs; root qualifies this join only after tasks 2.2, 2.3 and 2.4 pass their focused suites."
+
+[task.3.2]
+title = "Responsive conversation and consumer work surfaces"
+status = "done"
+wave = 3
+owner_lane = "root"
+requires = ["2.1"]
+reqs = ["12.1", "12.3", "12.4", "4.1", "5.1", "6.1", "7.1", "8.1", "10.3", "11.1"]
+touches = ["consumer/web/**", "frontend/**", "agent/runtime/__init__.py", "consumer/application.py", "consumer/api.py", "consumer/portability.py", "consumer/cli.py", "tests/consumer/test_portability.py", "tests/consumer/test_cli.py", "tests/consumer_integration/test_restore_idempotency.py", "tests/consumer_integration/test_text_only_provider.py", "tests/consumer_web/**", "scripts/verify_web.mjs", "scripts/qualify_consumer.py", "tests/consumer/test_consumer_gate.py", "pyproject.toml", "package.json"]
+verify_cmd = "npm run test:web"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+do_3 = "Construction uses the frozen HTTP contract; qualification waits for task 3.1."
+
+[task.3.3]
+title = "Authenticated CLI and self-host operator commands"
+status = "done"
+wave = 3
+owner_lane = "integrations"
+requires = ["1.1"]
+reqs = ["12.2", "11.2"]
+touches = ["consumer/cli.py", "consumer/__main__.py", "tests/consumer/test_cli.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_cli.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+do_3 = "Construction uses the frozen HTTP contract; qualification waits for task 3.1. No independent inference loop is allowed."
+
+[task.3.4]
+title = "Consistent portability, installation and hosted packaging"
+status = "done"
+wave = 3
+owner_lane = "content-hosting"
+requires = ["2.2"]
+reqs = ["11.1", "11.2", "10.3"]
+touches = ["consumer/portability.py", "consumer/lifecycle.py", "consumer/api.py", "consumer/config.py", "tests/consumer_integration/test_portability_http.py", "packaging/**", "tests/consumer/test_portability.py", "tests/consumer_integration/test_packaging.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/consumer/test_portability.py tests/consumer_integration/test_packaging.py tests/consumer_integration/test_portability_http.py -q"
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+do_3 = "Construction uses the frozen API and qualified lifecycle; qualification waits for task 3.1."
+
+[task.4.1]
+title = "Consumer journeys, coverage and two-mode final qualification"
+status = "done"
+wave = 4
+owner_lane = "root"
+requires = ["3.2", "3.3", "3.4"]
+reqs = ["1.1", "1.2", "2.1", "2.2", "3.1", "3.2", "4.1", "4.2", "5.1", "5.2", "6.1", "6.2", "7.1", "7.2", "8.1", "8.2", "9.1", "9.2", "10.1", "10.2", "10.3", "11.1", "11.2", "12.1", "12.2", "12.3", "12.4", "13.1", "13.2", "13.3"]
+touches = ["scripts/qualify_consumer.py", "docs/sturgis-02/qualification.md", "tests/consumer/test_cli.py", "tests/consumer/test_connections.py", "tests/consumer/test_connectors.py", "tests/consumer_integration/test_packaging.py", "tests/integration/test_continuity.py", "tests/consumer/test_consumer_gate.py", "tests/consumer_web/journey.mjs", "frontend/src/pages/conversation.css", "consumer/web/index.html", "packaging/README.md"]
+verify_cmd = ".venv/bin/python scripts/qualify_consumer.py"
+qualification_scope = ["agent/**", "consumer/**", "frontend/**", "native/memory/**", "tests/**", "scripts/**", "packaging/**"]
+do_1 = "Implement the declared capability and frozen contracts in the exclusive lane; preserve core authority and documented feature boundaries."
+do_2 = "Exercise actual local mechanisms and adversarial boundaries with focused tests; publish public APIs and evidence before the dependent join."
+
+[task.5.1]
+title = "Two documentation sites and permanent spec workflow"
+status = "done"
+wave = 5
+owner_lane = "root"
+requires = ["4.1"]
+reqs = ["14.1", "14.2", "14.3", "14.4", "14.5"]
+touches = ["documentation/package.json", "documentation/requirements.txt", "documentation/shared/**", "documentation/users/astro.config.mjs", "documentation/developers/astro.config.mjs", "documentation/developers/route-middleware.ts", "documentation/users/src/content.config.ts", "documentation/developers/src/content.config.ts", "documentation/users/tsconfig.json", "documentation/developers/tsconfig.json", "documentation/examples/**", "documentation/users/public/**", "documentation/developers/public/**", "documentation/README.md", "scripts/docs_gate.py", "scripts/docs_journey.mjs", "tests/docs_site_gate.py", "spec/**", "README.md", "AGENTS.md", "CLAUDE.md", ".cgignore", ".gitignore"]
+verify_cmd = "python3 scripts/docs_gate.py sites"
+do_1 = "Implement complete source-grounded documentation in the assigned lane; root integrates content drafts into the two site checkouts."
+do_2 = "Qualify the actual rendered output, completeness and examples before task completion."
+
+[task.5.2]
+title = "Complete user learning paths and every-feature manuals"
+status = "done"
+wave = 5
+owner_lane = "user-manuals"
+requires = ["4.1"]
+reqs = ["14.1", "14.2", "14.3", "14.4", "14.5"]
+touches = ["documentation/users/src/content/docs/**"]
+outputs = ["documentation/coverage/users.json", "documentation/coverage/command-recipes.json", "documentation/coverage/user-command-examples.json"]
+verify_cmd = "python3 scripts/docs_gate.py content --audience users"
+do_1 = "Implement complete source-grounded documentation in the assigned lane; root integrates content drafts into the two site checkouts."
+do_2 = "Qualify the actual rendered output, completeness and examples before task completion."
+
+[task.5.3]
+title = "Complete file and qualified-symbol reference generation"
+status = "done"
+wave = 5
+owner_lane = "source-reference"
+requires = ["4.1"]
+reqs = ["14.1", "14.2", "14.3", "14.4", "14.5"]
+touches = ["scripts/docs_reference/**", "tests/documentation/**"]
+outputs = ["documentation/developers/src/content/docs/reference/**", "documentation/coverage/reference.json"]
+verify_cmd = ".venv/bin/python -m pytest tests/documentation -q"
+do_1 = "Implement complete source-grounded documentation in the assigned lane; root integrates content drafts into the two site checkouts."
+do_2 = "Qualify the actual rendered output, completeness and examples before task completion."
+
+[task.5.4]
+title = "Complete developer architecture and implementation manuals"
+status = "done"
+wave = 5
+owner_lane = "developer-manuals"
+requires = ["4.1"]
+reqs = ["14.1", "14.2", "14.3", "14.4", "14.5"]
+touches = ["documentation/developers/src/content/docs/guides/**", "documentation/developers/src/content/docs/index.md"]
+outputs = ["documentation/coverage/developers.json", "documentation/coverage/commands.json"]
+verify_cmd = "python3 scripts/docs_gate.py content --audience developers"
+do_1 = "Implement complete source-grounded documentation in the assigned lane; root integrates content drafts into the two site checkouts."
+do_2 = "Qualify the actual rendered output, completeness and examples before task completion."
+
+[task.6.1]
+title = "Full-system documentation site and coverage qualification"
+status = "done"
+wave = 6
+owner_lane = "root"
+requires = ["5.1", "5.2", "5.3", "5.4"]
+reqs = ["14.1", "14.2", "14.3", "14.4", "14.5"]
+touches = ["documentation/**", "scripts/docs_gate.py", "scripts/docs_journey.mjs", "README.md", "spec/**"]
+verify_cmd = "python3 scripts/docs_gate.py full"
+do_1 = "Implement complete source-grounded documentation in the assigned lane; root integrates content drafts into the two site checkouts."
+do_2 = "Qualify the actual rendered output, completeness and examples before task completion."

@@ -1,0 +1,3738 @@
+{
+  "version": "sturgis-user-manual/1",
+  "scope": "Complete user manuals grounded in reviewed implementation; syntax checks remain separate from runtime qualification.",
+  "pages": [
+    {
+      "path": "cli/using-the-cli.md",
+      "title": "Use the same agent from the CLI",
+      "description": "Authenticate, send prompts, inspect events, run domain commands, preserve request identities, and move backups through the same API.",
+      "sources": [
+        "consumer/cli.py",
+        "consumer/api.py",
+        "consumer/contracts.py"
+      ],
+      "commands": [],
+      "features": [
+        "cli.installation",
+        "cli.authentication",
+        "cli.output_redaction",
+        "cli.request_id",
+        "cli.operation_id"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-run-and-inspect-a-research-request",
+          "heading": "Worked example: run and inspect a research request",
+          "description": "Run and inspect a research request",
+          "commands": [
+            "conversations.list"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 568
+    },
+    {
+      "path": "connections/browser.md",
+      "title": "Inspect pages with the managed browser",
+      "description": "Use contained Chromium page inspection and understand operator prerequisites, artifacts, and hosted unavailability.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/browser.py",
+        "consumer/connectors.py",
+        "consumer/workers.py",
+        "consumer/config.py"
+      ],
+      "commands": [],
+      "features": [
+        "connector.browser.inspect",
+        "connector.browser.screenshot",
+        "connector.browser.containment",
+        "connector.browser.hosted_unavailable"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-inspect-a-public-reference-page",
+          "heading": "Worked example: inspect a public reference page",
+          "description": "Inspect a public reference page",
+          "commands": [
+            "artifacts.read"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 492
+    },
+    {
+      "path": "connections/devices.md",
+      "title": "Pair and manage a compatible device",
+      "description": "Use one-time pairing, declared operation schemas, signed polling, and truthful device-result states.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/device.py",
+        "consumer/api.py",
+        "consumer/connections.py"
+      ],
+      "commands": [
+        "devices.get",
+        "devices.list",
+        "devices.pair",
+        "devices.revoke"
+      ],
+      "features": [
+        "devices.pairing",
+        "devices.signed_ingress",
+        "devices.status_operation",
+        "devices.polling",
+        "devices.revocation"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-read-status-device",
+          "heading": "Worked example: a read-status device",
+          "description": "A read-status device",
+          "commands": [
+            "devices.get",
+            "devices.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "devices.get",
+            "devices.list",
+            "devices.pair",
+            "devices.revoke"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "devices.get": {
+              "connection_id": "DEVICE_CONNECTION_ID"
+            },
+            "devices.list": {},
+            "devices.pair": {
+              "connection_id": "DEVICE_CONNECTION_ID",
+              "expected_revision": 1,
+              "ttl": 300
+            },
+            "devices.revoke": {
+              "connection_id": "DEVICE_CONNECTION_ID",
+              "expected_revision": 3
+            }
+          }
+        }
+      ],
+      "words": 583
+    },
+    {
+      "path": "connections/mcp.md",
+      "title": "Connect an MCP app server",
+      "description": "Allow exact remote tool names through the supported HTTP MCP subset and recover when catalogs or schemas change.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/connectors.py",
+        "consumer/connections.py"
+      ],
+      "commands": [],
+      "features": [
+        "connector.mcp.http",
+        "connector.mcp.tools_list",
+        "connector.mcp.tools_call"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-notes-service",
+          "heading": "Worked example: a notes service",
+          "description": "A notes service",
+          "commands": [
+            "connections.configure",
+            "connections.get"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 463
+    },
+    {
+      "path": "connections/media.md",
+      "title": "Connect speech and image services",
+      "description": "Configure transcription, speech synthesis, and image generation using the supported media-service contracts.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/connectors.py",
+        "consumer/api.py",
+        "consumer/application.py"
+      ],
+      "commands": [
+        "artifacts.read"
+      ],
+      "features": [
+        "connector.speech_to_text.transcribe",
+        "connector.text_to_speech.speak",
+        "connector.image.generate",
+        "artifacts.download"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-transcribe-an-uploaded-recording",
+          "heading": "Worked example: transcribe an uploaded recording",
+          "description": "Transcribe an uploaded recording",
+          "commands": [],
+          "ui_actions": []
+        },
+        {
+          "id": "worked-example-generate-spoken-audio",
+          "heading": "Worked example: generate spoken audio",
+          "description": "Generate spoken audio",
+          "commands": [],
+          "ui_actions": []
+        },
+        {
+          "id": "worked-example-generate-one-image",
+          "heading": "Worked example: generate one image",
+          "description": "Generate one image",
+          "commands": [],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "artifacts.read"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "artifacts.read": {
+              "id": "ARTIFACT_ID",
+              "offset": 0,
+              "limit": 4096
+            }
+          }
+        }
+      ],
+      "words": 665
+    },
+    {
+      "path": "connections/overview.md",
+      "title": "Configure connection access and readiness",
+      "description": "Use the shared connection workflow and understand why configuration, grants, probes, and action permissions are separate.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/connections.py",
+        "consumer/network.py",
+        "consumer/permissions.py"
+      ],
+      "commands": [
+        "connections.configure",
+        "connections.get",
+        "connections.grant",
+        "connections.list",
+        "connections.probe",
+        "connections.revoke"
+      ],
+      "features": [
+        "connections.readiness",
+        "connections.capability_grants",
+        "connections.stale_revision"
+      ],
+      "ui_actions": [
+        "Configure",
+        "Grant",
+        "Revoke"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-a-read-only-service",
+          "heading": "Worked example: a read-only service",
+          "description": "A read-only service",
+          "commands": [
+            "connections.configure",
+            "connections.get",
+            "connections.grant",
+            "connections.list",
+            "connections.probe",
+            "connections.revoke"
+          ],
+          "ui_actions": [
+            "Grant"
+          ]
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "connections.configure",
+            "connections.get",
+            "connections.grant",
+            "connections.list",
+            "connections.probe",
+            "connections.revoke"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "connections.configure": {
+              "id": "reference",
+              "kind": "http",
+              "endpoint": "https://reference.example.com/notes"
+            },
+            "connections.get": {
+              "id": "reference"
+            },
+            "connections.grant": {
+              "id": "reference",
+              "operations": [
+                "fetch"
+              ],
+              "expected_revision": 1
+            },
+            "connections.list": {},
+            "connections.probe": {
+              "id": "reference",
+              "expected_revision": 2
+            },
+            "connections.revoke": {
+              "id": "reference",
+              "expected_revision": 3
+            }
+          }
+        }
+      ],
+      "words": 558
+    },
+    {
+      "path": "connections/web-and-search.md",
+      "title": "Fetch web content and connect search",
+      "description": "Configure bounded HTTP reads and a compatible search service, with source URLs and exact origin policy.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/connections.py",
+        "consumer/connectors.py",
+        "consumer/network.py"
+      ],
+      "commands": [],
+      "features": [
+        "connector.http.fetch",
+        "connector.search.search",
+        "connector.public_origin_policy"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-fetch-a-reference-note",
+          "heading": "Worked example: fetch a reference note",
+          "description": "Fetch a reference note",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 501
+    },
+    {
+      "path": "connections/webhooks.md",
+      "title": "Receive signed webhook observations",
+      "description": "Configure authenticated external events and distinguish them from owner prompts or automatic execution authority.",
+      "sources": [
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "consumer/webhooks.py",
+        "consumer/api.py",
+        "consumer/connections.py"
+      ],
+      "commands": [],
+      "features": [
+        "webhooks.signed_ingress",
+        "webhooks.replay_protection",
+        "webhooks.body_bounds"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-report-a-source-update",
+          "heading": "Worked example: report a source update",
+          "description": "Report a source update",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 448
+    },
+    {
+      "path": "conversations/continuing-conversations.md",
+      "title": "Start and continue a conversation",
+      "description": "Create conversations, send prompts, follow durable output, and return to previous work.",
+      "sources": [
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/components/Shell.tsx",
+        "frontend/src/hooks/useEvents.ts",
+        "consumer/application.py",
+        "consumer/lifecycle.py",
+        "consumer/cli.py"
+      ],
+      "commands": [
+        "conversations.create"
+      ],
+      "features": [
+        "conversation.continuity",
+        "conversation.stream_reconnect"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-keep-a-research-thread",
+          "heading": "Worked example: keep a research thread",
+          "description": "Keep a research thread",
+          "commands": [
+            "conversations.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "conversations.create"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "conversations.create": {
+              "title": "Maintenance review"
+            }
+          }
+        }
+      ],
+      "words": 561
+    },
+    {
+      "path": "conversations/sources-history-search.md",
+      "title": "Attach sources and find conversation history",
+      "description": "Include bounded source material, replay durable events, search conversations, and recover archived threads.",
+      "sources": [
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/App.tsx",
+        "consumer/application.py",
+        "consumer/content.py",
+        "consumer/api.py",
+        "consumer/portability.py"
+      ],
+      "commands": [
+        "conversations.get",
+        "conversations.list",
+        "conversations.update",
+        "messages.events"
+      ],
+      "features": [
+        "conversation.attachments",
+        "conversation.history",
+        "conversation.search",
+        "conversation.archive",
+        "conversation.imported_history"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-compare-a-source-with-a-response",
+          "heading": "Worked example: compare a source with a response",
+          "description": "Compare a source with a response",
+          "commands": [],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "conversations.get",
+            "conversations.list",
+            "conversations.update",
+            "messages.events"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "conversations.get": {
+              "id": "CONVERSATION_ID"
+            },
+            "conversations.list": {
+              "query": "maintenance",
+              "include_archived": true
+            },
+            "conversations.update": {
+              "id": "CONVERSATION_ID",
+              "expected_revision": 2,
+              "title": "Corrected maintenance review"
+            },
+            "messages.events": {
+              "conversation_id": "CONVERSATION_ID",
+              "after": 0,
+              "limit": 100
+            }
+          }
+        }
+      ],
+      "words": 556
+    },
+    {
+      "path": "conversations/steering-and-cancellation.md",
+      "title": "Steer, stop, and retry active work",
+      "description": "Change direction without losing input identity, and handle uncertain acknowledgements or effects truthfully.",
+      "sources": [
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/hooks/useAgent.tsx",
+        "consumer/application.py",
+        "consumer/lifecycle.py",
+        "agent/runtime/__init__.py"
+      ],
+      "commands": [
+        "messages.cancel",
+        "messages.send"
+      ],
+      "features": [
+        "conversation.steering",
+        "conversation.priority",
+        "conversation.stop",
+        "conversation.ambiguous_retry"
+      ],
+      "ui_actions": [
+        "Stop"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-narrow-a-running-task",
+          "heading": "Worked example: narrow a running task",
+          "description": "Narrow a running task",
+          "commands": [
+            "messages.cancel",
+            "messages.send"
+          ],
+          "ui_actions": [
+            "Stop"
+          ]
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "messages.cancel",
+            "messages.send"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "messages.cancel": {
+              "conversation_id": "CONVERSATION_ID",
+              "message_id": "maintenance_cancel_1"
+            },
+            "messages.send": {
+              "conversation_id": "CONVERSATION_ID",
+              "message_id": "maintenance_prompt_1",
+              "text": "Summarize the maintenance source.",
+              "kind": "prompt"
+            }
+          }
+        }
+      ],
+      "words": 534
+    },
+    {
+      "path": "files/workspace.md",
+      "title": "Create and safely edit workspace files",
+      "description": "Browse, create, read, edit, download, and delete files using workspace-relative paths and exact content hashes.",
+      "sources": [
+        "frontend/src/pages/FilesPage.tsx",
+        "consumer/content.py",
+        "agent/tool_runner/files.py",
+        "consumer/api.py"
+      ],
+      "commands": [
+        "files.delete",
+        "files.list",
+        "files.read",
+        "files.write"
+      ],
+      "features": [
+        "files.create",
+        "files.edit",
+        "files.download",
+        "files.hash_conflicts",
+        "files.path_boundaries"
+      ],
+      "ui_actions": [
+        "New file",
+        "Save",
+        "Download",
+        "Delete"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-create-edit-and-verify-a-note",
+          "heading": "Worked example: create, edit, and verify a note",
+          "description": "Create, edit, and verify a note",
+          "commands": [
+            "files.list",
+            "files.read",
+            "files.write"
+          ],
+          "ui_actions": [
+            "Save",
+            "Download"
+          ]
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "files.delete",
+            "files.list",
+            "files.read",
+            "files.write"
+          ],
+          "ui_actions": [
+            "Save"
+          ],
+          "parameter_examples": {
+            "files.delete": {
+              "path": "hello.txt",
+              "expected_sha256": "CURRENT_SHA256"
+            },
+            "files.list": {
+              "path": "."
+            },
+            "files.read": {
+              "path": "hello.txt"
+            },
+            "files.write": {
+              "path": "hello.txt",
+              "data_base64": "SGVsbG8K"
+            }
+          }
+        }
+      ],
+      "words": 564
+    },
+    {
+      "path": "getting-started/account-and-agents.md",
+      "title": "Create your account and first agent",
+      "description": "Bootstrap or sign in, create private agent spaces, switch between them, and understand agent profiles.",
+      "sources": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Shell.tsx",
+        "consumer/identity.py",
+        "consumer/api.py",
+        "consumer/cli.py",
+        "agent/profile/__init__.py"
+      ],
+      "commands": [],
+      "features": [
+        "account.bootstrap",
+        "account.login",
+        "account.signup",
+        "account.logout",
+        "agents.create",
+        "agents.rename",
+        "agents.archive",
+        "agents.profile_identity"
+      ],
+      "ui_actions": [
+        "Rename"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-separate-research-from-operations",
+          "heading": "Worked example: separate research from operations",
+          "description": "Separate research from operations",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 479
+    },
+    {
+      "path": "getting-started/hosted.md",
+      "title": "Use or operate a hosted installation",
+      "description": "Connect through an operator's HTTPS origin and understand account, namespace, resource, and network boundaries.",
+      "sources": [
+        "consumer/workers.py",
+        "consumer/config.py",
+        "consumer/api.py",
+        "consumer/network.py",
+        "packaging/sturgis.service",
+        "packaging/Dockerfile"
+      ],
+      "commands": [],
+      "features": [
+        "hosting.https",
+        "hosting.owner_scope",
+        "hosting.filesystem_isolation",
+        "hosting.process_isolation",
+        "hosting.shared_network",
+        "hosting.resource_limits"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-serve-behind-an-https-proxy",
+          "heading": "Worked example: serve behind an HTTPS proxy",
+          "description": "Serve behind an https proxy",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 472
+    },
+    {
+      "path": "getting-started/installation-choices.md",
+      "title": "Choose an installation",
+      "description": "Decide whether to join a hosted installation or run Sturgis yourself, and understand what each choice includes.",
+      "sources": [
+        "consumer/config.py",
+        "consumer/workers.py",
+        "pyproject.toml"
+      ],
+      "commands": [],
+      "features": [
+        "installation.self_hosted",
+        "installation.hosted",
+        "installation.choice"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-choose-the-smallest-useful-setup",
+          "heading": "Worked example: choose the smallest useful setup",
+          "description": "Choose the smallest useful setup",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 477
+    },
+    {
+      "path": "getting-started/self-hosted.md",
+      "title": "Install Sturgis on your Linux machine",
+      "description": "Install a matching platform wheel, keep data private, and start the local interface without a Node runtime.",
+      "sources": [
+        "consumer/cli.py",
+        "consumer/config.py",
+        "packaging/build-wheel.sh",
+        "pyproject.toml"
+      ],
+      "commands": [],
+      "features": [
+        "installation.wheel",
+        "installation.native_binary",
+        "installation.setup",
+        "installation.bootstrap_file"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-install-and-start-locally",
+          "heading": "Worked example: install and start locally",
+          "description": "Install and start locally",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 427
+    },
+    {
+      "path": "index.md",
+      "title": "Learn and use Sturgis",
+      "description": "A complete learning path from your first agent to ongoing work, private knowledge, connections, and recovery.",
+      "sources": [
+        "frontend/src/App.tsx",
+        "consumer/application.py"
+      ],
+      "commands": [],
+      "features": [
+        "learning_path.first_use",
+        "learning_path.research_companion"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-research-companion",
+          "heading": "Worked example: a research companion",
+          "description": "A research companion",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 417
+    },
+    {
+      "path": "knowledge/memory.md",
+      "title": "Search, correct, and retract memory",
+      "description": "Inspect remembered records and provenance, add corrections as new revisions, and handle unavailable or stale recall.",
+      "sources": [
+        "frontend/src/pages/KnowledgePage.tsx",
+        "consumer/content.py",
+        "agent/memory/__init__.py",
+        "agent/memory/sleep.py",
+        "native/memory/PROTOCOL.md"
+      ],
+      "commands": [
+        "memory.correct",
+        "memory.get",
+        "memory.query",
+        "memory.retract"
+      ],
+      "features": [
+        "memory.correction",
+        "memory.retraction",
+        "memory.revision",
+        "memory.freshness",
+        "memory.daily_sleep",
+        "memory.validity_not_knowledge_as_of",
+        "memory.user_correction_belief",
+        "memory.identity_retraction_future_revisions"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-update-a-changed-date",
+          "heading": "Worked example: update a changed date",
+          "description": "Update a changed date",
+          "commands": [
+            "memory.correct"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "memory.correct",
+            "memory.get",
+            "memory.query",
+            "memory.retract"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "memory.correct": {
+              "id": "MEMORY_ID",
+              "content": "The corrected source identifies May.",
+              "expected_revision": 1,
+              "operation_id": "correct_date_1"
+            },
+            "memory.get": {
+              "id": "MEMORY_ID",
+              "revision": 1
+            },
+            "memory.query": {
+              "text": "maintenance",
+              "limit": 20
+            },
+            "memory.retract": {
+              "id": "MEMORY_ID",
+              "reason": "Source withdrawn",
+              "revision": 2,
+              "operation_id": "retract_date_1"
+            }
+          }
+        }
+      ],
+      "words": 741
+    },
+    {
+      "path": "knowledge/source-library.md",
+      "title": "Build and revise your source library",
+      "description": "Upload original files, inspect extraction, index knowledge, revise documents, and retract indexed content without deleting sources.",
+      "sources": [
+        "frontend/src/pages/KnowledgePage.tsx",
+        "consumer/content.py",
+        "consumer/api.py"
+      ],
+      "commands": [
+        "attachments.get",
+        "attachments.list",
+        "attachments.read",
+        "attachments.upload",
+        "knowledge.add",
+        "knowledge.delete",
+        "knowledge.get",
+        "knowledge.list"
+      ],
+      "features": [
+        "knowledge.extraction",
+        "knowledge.reindex",
+        "knowledge.source_evidence"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-correct-an-uploaded-maintenance-note",
+          "heading": "Worked example: correct an uploaded maintenance note",
+          "description": "Correct an uploaded maintenance note",
+          "commands": [
+            "knowledge.add",
+            "knowledge.get",
+            "knowledge.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "attachments.get",
+            "attachments.list",
+            "attachments.read",
+            "attachments.upload",
+            "knowledge.add",
+            "knowledge.delete",
+            "knowledge.get",
+            "knowledge.list"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "attachments.get": {
+              "id": "ATTACHMENT_ID"
+            },
+            "attachments.list": {
+              "limit": 20
+            },
+            "attachments.read": {
+              "id": "ATTACHMENT_ID",
+              "offset": 0,
+              "limit": 4096
+            },
+            "attachments.upload": {
+              "name": "hello.txt",
+              "media_type": "text/plain",
+              "data_base64": "SGVsbG8K",
+              "operation_id": "upload_hello_1"
+            },
+            "knowledge.add": {
+              "attachment_id": "ATTACHMENT_ID",
+              "title": "Maintenance notes",
+              "operation_id": "index_maintenance_1"
+            },
+            "knowledge.delete": {
+              "id": "DOCUMENT_ID",
+              "expected_revision": 2,
+              "operation_id": "retract_document_1"
+            },
+            "knowledge.get": {
+              "id": "DOCUMENT_ID",
+              "revision": 1
+            },
+            "knowledge.list": {
+              "query": "maintenance",
+              "limit": 20
+            }
+          }
+        }
+      ],
+      "words": 661
+    },
+    {
+      "path": "models/connect-a-model.md",
+      "title": "Connect and select a model",
+      "description": "Configure the supported streaming protocol, probe actual readiness, and choose text-only or tool-capable operation.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/providers.py",
+        "agent/provider_catalog/__init__.py",
+        "agent/provider_adapters/__init__.py",
+        "consumer/application.py"
+      ],
+      "commands": [
+        "providers.activate",
+        "providers.configure",
+        "providers.inspect",
+        "providers.list",
+        "providers.probe"
+      ],
+      "features": [
+        "provider.chat_completions",
+        "provider.text_only",
+        "provider.readiness",
+        "provider.activation"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-text-only-research-model",
+          "heading": "Worked example: a text-only research model",
+          "description": "A text-only research model",
+          "commands": [
+            "providers.activate",
+            "providers.configure",
+            "providers.list",
+            "providers.probe"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "providers.activate",
+            "providers.configure",
+            "providers.inspect",
+            "providers.list",
+            "providers.probe"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "providers.activate": {
+              "provider_id": "research",
+              "expected_revision": 1
+            },
+            "providers.configure": {
+              "provider_id": "research",
+              "endpoint": "https://model.example.com/v1/chat/completions",
+              "model": "SERVICE_MODEL",
+              "context_limit": 32768,
+              "output_limit": 4096,
+              "tools": false
+            },
+            "providers.inspect": {
+              "provider_id": "research"
+            },
+            "providers.list": {},
+            "providers.probe": {
+              "provider_id": "research",
+              "expected_revision": 1
+            }
+          }
+        }
+      ],
+      "words": 530
+    },
+    {
+      "path": "models/credentials.md",
+      "title": "Store, rotate, and revoke credentials",
+      "description": "Keep model and connection secrets in the private vault and reconnect their exact revisions when values change.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/vault.py",
+        "consumer/application.py",
+        "consumer/cli.py"
+      ],
+      "commands": [
+        "providers.credentials.list",
+        "providers.credentials.put",
+        "providers.credentials.revoke"
+      ],
+      "features": [
+        "credentials.private_prompt",
+        "credentials.vault",
+        "credentials.rotation"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-rotate-a-model-key",
+          "heading": "Worked example: rotate a model key",
+          "description": "Rotate a model key",
+          "commands": [],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "providers.credentials.list",
+            "providers.credentials.put",
+            "providers.credentials.revoke"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "providers.credentials.list": {},
+            "providers.credentials.put": null,
+            "providers.credentials.revoke": {
+              "name": "model_key",
+              "expected_revision": 2
+            }
+          }
+        }
+      ],
+      "words": 548
+    },
+    {
+      "path": "reference/commands.md",
+      "title": "Complete command and route reference",
+      "description": "Find every allowlisted consumer command, its parameters, the feature manual, and the shared API/CLI request conventions.",
+      "sources": [
+        "consumer/api.py",
+        "consumer/application.py",
+        "consumer/cli.py",
+        "spec/sturgis-02/http-contract.md"
+      ],
+      "commands": [
+        "artifacts.read",
+        "attachments.get",
+        "attachments.list",
+        "attachments.read",
+        "attachments.upload",
+        "attention.policy",
+        "children.cancel",
+        "children.delegate",
+        "children.get",
+        "children.list",
+        "commitments.create",
+        "commitments.list",
+        "commitments.progress",
+        "commitments.resume",
+        "commitments.transition",
+        "commitments.wait",
+        "connections.configure",
+        "connections.get",
+        "connections.grant",
+        "connections.list",
+        "connections.probe",
+        "connections.revoke",
+        "conversations.create",
+        "conversations.get",
+        "conversations.list",
+        "conversations.update",
+        "devices.get",
+        "devices.list",
+        "devices.pair",
+        "devices.revoke",
+        "diagnostics.get",
+        "files.delete",
+        "files.list",
+        "files.read",
+        "files.write",
+        "goals.archive",
+        "goals.create",
+        "goals.edit",
+        "goals.list",
+        "goals.transition",
+        "inbox.decide",
+        "inbox.list",
+        "initiative.propose",
+        "knowledge.add",
+        "knowledge.delete",
+        "knowledge.get",
+        "knowledge.list",
+        "memory.correct",
+        "memory.get",
+        "memory.query",
+        "memory.retract",
+        "messages.cancel",
+        "messages.events",
+        "messages.send",
+        "overview",
+        "permissions.approve",
+        "permissions.deny",
+        "permissions.list",
+        "permissions.pending",
+        "permissions.request",
+        "permissions.set",
+        "plugins.activate",
+        "plugins.disable",
+        "plugins.health",
+        "plugins.inspect",
+        "plugins.list",
+        "plugins.rollback",
+        "plugins.uninstall",
+        "providers.activate",
+        "providers.configure",
+        "providers.credentials.list",
+        "providers.credentials.put",
+        "providers.credentials.revoke",
+        "providers.inspect",
+        "providers.list",
+        "providers.probe",
+        "schedules.create",
+        "schedules.list",
+        "schedules.state",
+        "skills.enable",
+        "skills.install",
+        "skills.list",
+        "skills.rollback",
+        "usage.summary",
+        "work.cancel",
+        "work.get",
+        "work.list",
+        "work.overview",
+        "workflows.create",
+        "workflows.get",
+        "workflows.list",
+        "workflows.revise",
+        "workflows.run",
+        "workflows.state",
+        "workflows.step"
+      ],
+      "features": [
+        "api.envelope",
+        "api.request_ids",
+        "api.routes",
+        "api.command_allowlist",
+        "api.owner_scope"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-inspect-a-knowledge-revision",
+          "heading": "Worked example: inspect a knowledge revision",
+          "description": "Inspect a knowledge revision",
+          "commands": [
+            "knowledge.get"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 1989
+    },
+    {
+      "path": "reference/glossary.md",
+      "title": "Glossary and state vocabulary",
+      "description": "Understand the identities, records, evidence, resource states, and trust boundaries used throughout Sturgis.",
+      "sources": [
+        "consumer/application.py",
+        "consumer/contracts.py",
+        "consumer/work.py",
+        "agent/awareness/evidence.py"
+      ],
+      "commands": [],
+      "features": [
+        "glossary.layers",
+        "glossary.identity",
+        "glossary.evidence"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-name-the-failed-layer",
+          "heading": "Worked example: name the failed layer",
+          "description": "Name the failed layer",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 701
+    },
+    {
+      "path": "reference/limits.md",
+      "title": "Limits and compatibility at a glance",
+      "description": "Find the concrete request, content, workflow, connector, archive, and runtime bounds enforced by this release.",
+      "sources": [
+        "consumer/contracts.py",
+        "consumer/content.py",
+        "consumer/connectors.py",
+        "consumer/device.py",
+        "consumer/webhooks.py",
+        "consumer/portability.py",
+        "consumer/config.py",
+        "consumer/browser.py",
+        "agent/scheduler/__init__.py",
+        "agent/planner/__init__.py",
+        "agent/skills/__init__.py"
+      ],
+      "commands": [],
+      "features": [
+        "limits.bytes",
+        "limits.protocols",
+        "limits.budgets",
+        "limits.platforms"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-valid-upload-that-cannot-be-indexed",
+          "heading": "Worked example: a valid upload that cannot be indexed",
+          "description": "A valid upload that cannot be indexed",
+          "commands": [],
+          "ui_actions": []
+        }
+      ],
+      "words": 604
+    },
+    {
+      "path": "reference/troubleshooting.md",
+      "title": "Troubleshoot without losing the evidence",
+      "description": "Diagnose login, runtime, provider, content, connector, permission, and backup failures while preserving accepted requests.",
+      "sources": [
+        "consumer/contracts.py",
+        "consumer/api.py",
+        "consumer/cli.py",
+        "consumer/lifecycle.py",
+        "consumer/providers.py",
+        "consumer/connectors.py",
+        "consumer/portability.py"
+      ],
+      "commands": [],
+      "features": [
+        "troubleshooting.setup",
+        "troubleshooting.provider",
+        "troubleshooting.conflicts",
+        "troubleshooting.unknown_ack",
+        "troubleshooting.browser"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-the-page-opens-but-the-agent-does-not-answer",
+          "heading": "Worked example: the page opens but the agent does not answer",
+          "description": "The page opens but the agent does not answer",
+          "commands": [
+            "diagnostics.get",
+            "providers.list",
+            "work.list"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 654
+    },
+    {
+      "path": "settings/backup-restore.md",
+      "title": "Back up and restore an agent",
+      "description": "Export a consistent portable archive, restore into a fresh agent, and retry lost acknowledgements without duplicates.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/portability.py",
+        "consumer/lifecycle.py",
+        "consumer/cli.py",
+        "consumer/api.py"
+      ],
+      "commands": [],
+      "features": [
+        "portability.raw_zip",
+        "portability.bounds",
+        "portability.idempotent_restore",
+        "portability.history",
+        "portability.reconnect_authority"
+      ],
+      "ui_actions": [
+        "Export backup",
+        "Restore backup"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-move-research-to-a-new-agent",
+          "heading": "Worked example: move research to a new agent",
+          "description": "Move research to a new agent",
+          "commands": [],
+          "ui_actions": [
+            "Restore backup"
+          ]
+        }
+      ],
+      "words": 600
+    },
+    {
+      "path": "settings/lifecycle.md",
+      "title": "Start, suspend, recover, and archive an agent",
+      "description": "Control runtime admission while preserving accepted work, scheduled wake, and unresolved outcomes.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "frontend/src/hooks/useAgent.tsx",
+        "consumer/lifecycle.py",
+        "consumer/workers.py",
+        "consumer/api.py"
+      ],
+      "commands": [],
+      "features": [
+        "lifecycle.start",
+        "lifecycle.suspend",
+        "lifecycle.recover",
+        "lifecycle.archive_fence",
+        "lifecycle.durable_wake"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-suspend-between-sessions",
+          "heading": "Worked example: suspend between sessions",
+          "description": "Suspend between sessions",
+          "commands": [
+            "diagnostics.get",
+            "overview"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 483
+    },
+    {
+      "path": "settings/permissions.md",
+      "title": "Set tool permissions and approve exact actions",
+      "description": "Choose Ask first, Allow, or Deny and inspect single-use approvals tied to the original invocation.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/permissions.py",
+        "agent/tool_runner/__init__.py"
+      ],
+      "commands": [
+        "permissions.approve",
+        "permissions.deny",
+        "permissions.list",
+        "permissions.pending",
+        "permissions.request",
+        "permissions.set"
+      ],
+      "features": [
+        "permissions.policy",
+        "permissions.approval",
+        "permissions.denial",
+        "permissions.capability_boundaries"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-ask-before-a-file-changing-action",
+          "heading": "Worked example: ask before a file-changing action",
+          "description": "Ask before a file-changing action",
+          "commands": [
+            "permissions.approve",
+            "permissions.deny",
+            "permissions.list",
+            "permissions.pending",
+            "permissions.request"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "permissions.approve",
+            "permissions.deny",
+            "permissions.list",
+            "permissions.pending",
+            "permissions.request",
+            "permissions.set"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "permissions.approve": {
+              "event_id": "REQUEST_EVENT_ID",
+              "expires_in": 300
+            },
+            "permissions.deny": {
+              "event_id": "REQUEST_EVENT_ID"
+            },
+            "permissions.list": {},
+            "permissions.pending": {},
+            "permissions.request": {
+              "event_id": "REQUEST_EVENT_ID"
+            },
+            "permissions.set": {
+              "tool": "workspace.write",
+              "mode": "ask",
+              "expected_revision": 0
+            }
+          }
+        }
+      ],
+      "words": 582
+    },
+    {
+      "path": "settings/plugins.md",
+      "title": "Manage installed extensions",
+      "description": "Inspect operator-installed plugins, activate or disable them, and use health, rollback, or uninstall through supported commands.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/application.py",
+        "agent/plugin_host/__init__.py",
+        "agent/plugin_sdk/__init__.py"
+      ],
+      "commands": [
+        "plugins.activate",
+        "plugins.disable",
+        "plugins.health",
+        "plugins.inspect",
+        "plugins.list",
+        "plugins.rollback",
+        "plugins.uninstall"
+      ],
+      "features": [
+        "plugins.manifest_inspection",
+        "plugins.activation",
+        "plugins.health",
+        "plugins.rollback",
+        "plugins.backend_boundary"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-inspect-before-activation",
+          "heading": "Worked example: inspect before activation",
+          "description": "Inspect before activation",
+          "commands": [
+            "plugins.activate",
+            "plugins.health",
+            "plugins.inspect",
+            "plugins.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "plugins.activate",
+            "plugins.disable",
+            "plugins.health",
+            "plugins.inspect",
+            "plugins.list",
+            "plugins.rollback",
+            "plugins.uninstall"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "plugins.activate": {
+              "id": "INSTALLED_PLUGIN_ID",
+              "expected_revision": 2
+            },
+            "plugins.disable": {
+              "id": "INSTALLED_PLUGIN_ID",
+              "expected_revision": 3
+            },
+            "plugins.health": {
+              "id": "INSTALLED_PLUGIN_ID"
+            },
+            "plugins.inspect": {
+              "id": "INSTALLED_PLUGIN_ID"
+            },
+            "plugins.list": {},
+            "plugins.rollback": {
+              "id": "INSTALLED_PLUGIN_ID",
+              "expected_revision": 3
+            },
+            "plugins.uninstall": {
+              "id": "INSTALLED_PLUGIN_ID",
+              "expected_revision": 4
+            }
+          }
+        }
+      ],
+      "words": 568
+    },
+    {
+      "path": "settings/procedures.md",
+      "title": "Create and version reusable procedures",
+      "description": "Author trigger-based procedure packages, inspect selection limits, and enable, disable, or roll back their versions.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/application.py",
+        "agent/skills/__init__.py"
+      ],
+      "commands": [
+        "skills.enable",
+        "skills.install",
+        "skills.list",
+        "skills.rollback"
+      ],
+      "features": [
+        "skills.authored_install",
+        "skills.version",
+        "skills.activation",
+        "skills.disabled_import"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-review-source-backed-writing",
+          "heading": "Worked example: review source-backed writing",
+          "description": "Review source-backed writing",
+          "commands": [
+            "skills.install",
+            "skills.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "skills.enable",
+            "skills.install",
+            "skills.list",
+            "skills.rollback"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "skills.enable": {
+              "id": "review_sources",
+              "enabled": false,
+              "expected_revision": 1
+            },
+            "skills.install": {
+              "manifest": {
+                "id": "review_sources",
+                "version": "1",
+                "description": "Review source evidence",
+                "triggers": [
+                  "source review"
+                ],
+                "steps": [
+                  "Identify the source for every claimed date."
+                ],
+                "required_tools": []
+              }
+            },
+            "skills.list": {},
+            "skills.rollback": {
+              "id": "review_sources",
+              "expected_revision": 2
+            }
+          }
+        }
+      ],
+      "words": 580
+    },
+    {
+      "path": "settings/usage-diagnostics.md",
+      "title": "Inspect usage and runtime diagnostics",
+      "description": "Read actual consumption, outstanding reservations, overrun evidence, provider readiness, and runtime failures without inventing cost certainty.",
+      "sources": [
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/usage.py",
+        "consumer/application.py",
+        "consumer/cli.py",
+        "consumer/api.py"
+      ],
+      "commands": [
+        "diagnostics.get",
+        "overview",
+        "usage.summary"
+      ],
+      "features": [
+        "usage.reservations",
+        "usage.settlement",
+        "diagnostics.provider",
+        "diagnostics.memory",
+        "diagnostics.readiness"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-investigate-a-timeout-reservation",
+          "heading": "Worked example: investigate a timeout reservation",
+          "description": "Investigate a timeout reservation",
+          "commands": [
+            "diagnostics.get",
+            "usage.summary",
+            "work.get",
+            "work.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "diagnostics.get",
+            "overview",
+            "usage.summary"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "diagnostics.get": {},
+            "overview": {},
+            "usage.summary": {}
+          }
+        }
+      ],
+      "words": 537
+    },
+    {
+      "path": "work/commitments.md",
+      "title": "Track accepted responsibilities",
+      "description": "Propose and accept commitments, record blocked progress, and register durable waits or evidence-based fulfillment.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/commitments/__init__.py",
+        "agent/scheduler/__init__.py"
+      ],
+      "commands": [
+        "commitments.create",
+        "commitments.list",
+        "commitments.progress",
+        "commitments.resume",
+        "commitments.transition",
+        "commitments.wait"
+      ],
+      "features": [
+        "commitments.lifecycle",
+        "commitments.wait_conditions"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-wait-for-a-source-correction",
+          "heading": "Worked example: wait for a source correction",
+          "description": "Wait for a source correction",
+          "commands": [
+            "commitments.list",
+            "commitments.resume",
+            "commitments.wait"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "commitments.create",
+            "commitments.list",
+            "commitments.progress",
+            "commitments.resume",
+            "commitments.transition",
+            "commitments.wait"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "commitments.create": {
+              "description": "Review corrected dates",
+              "beneficiary": "owner"
+            },
+            "commitments.list": {},
+            "commitments.progress": {
+              "id": "COMMITMENT_ID",
+              "progress": "blocked",
+              "expected_revision": 2,
+              "reason": "Waiting for corrected source"
+            },
+            "commitments.resume": {
+              "id": "COMMITMENT_ID",
+              "expected_revision": 3
+            },
+            "commitments.transition": {
+              "id": "COMMITMENT_ID",
+              "state": "accepted",
+              "expected_revision": 1
+            },
+            "commitments.wait": {
+              "id": "COMMITMENT_ID",
+              "expected_revision": 2,
+              "trigger": {
+                "kind": "user_response",
+                "conversation_id": "CONVERSATION_ID"
+              },
+              "after_seq": 0
+            }
+          }
+        }
+      ],
+      "words": 570
+    },
+    {
+      "path": "work/delegation.md",
+      "title": "Inspect and manage delegated work",
+      "description": "Understand bounded child tasks, parent authority, isolated workspaces, cancellation, and acceptance evidence.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/subagents/__init__.py",
+        "agent/runtime/__init__.py"
+      ],
+      "commands": [
+        "children.cancel",
+        "children.delegate",
+        "children.get",
+        "children.list"
+      ],
+      "features": [
+        "delegation.retained_child",
+        "delegation.capability_subset",
+        "delegation.resource_budget",
+        "delegation.workspace_mode"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-inspect-a-child-before-accepting-its-result",
+          "heading": "Worked example: inspect a child before accepting its result",
+          "description": "Inspect a child before accepting its result",
+          "commands": [
+            "children.delegate",
+            "children.get",
+            "children.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "children.cancel",
+            "children.delegate",
+            "children.get",
+            "children.list"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "children.cancel": {
+              "id": "CHILD_ID",
+              "reason": "Parent no longer needs this review"
+            },
+            "children.delegate": {
+              "parent_work_id": "LIVE_PARENT_WORK_ID",
+              "objective": "Review unsupported dates",
+              "capabilities": [],
+              "resources": {
+                "tokens": 16000,
+                "iterations": 2,
+                "elapsed_ms": 60000,
+                "tool_calls": 2
+              },
+              "workspace_mode": "isolated",
+              "retained": false
+            },
+            "children.get": {
+              "id": "CHILD_ID"
+            },
+            "children.list": {}
+          }
+        }
+      ],
+      "words": 545
+    },
+    {
+      "path": "work/evidence.md",
+      "title": "Read evidence and completion correctly",
+      "description": "Separate model statements, durable records, operational observations, imported history, and verified outcomes.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "agent/awareness/evidence.py",
+        "agent/tool_runner/__init__.py",
+        "consumer/work.py",
+        "consumer/permissions.py",
+        "consumer/portability.py"
+      ],
+      "commands": [],
+      "features": [
+        "evidence.completion",
+        "evidence.provenance",
+        "evidence.unknown_effects",
+        "evidence.imported_history"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-finished-draft-versus-a-sent-message",
+          "heading": "Worked example: a finished draft versus a sent message",
+          "description": "A finished draft versus a sent message",
+          "commands": [
+            "goals.create",
+            "goals.edit",
+            "goals.transition"
+          ],
+          "ui_actions": []
+        }
+      ],
+      "words": 471
+    },
+    {
+      "path": "work/goals.md",
+      "title": "Create and manage goals",
+      "description": "Record desired outcomes, activate bounded intentions, revise allowances, and require evidence for achievement.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/goals/__init__.py",
+        "agent/awareness/evidence.py"
+      ],
+      "commands": [
+        "goals.archive",
+        "goals.create",
+        "goals.edit",
+        "goals.list",
+        "goals.transition"
+      ],
+      "features": [
+        "goals.lifecycle",
+        "goals.evidence_completion"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-prepare-a-source-based-brief",
+          "heading": "Worked example: prepare a source-based brief",
+          "description": "Prepare a source-based brief",
+          "commands": [
+            "goals.archive",
+            "goals.create",
+            "goals.edit",
+            "goals.list",
+            "goals.transition"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "goals.archive",
+            "goals.create",
+            "goals.edit",
+            "goals.list",
+            "goals.transition"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "goals.archive": {
+              "id": "TERMINAL_GOAL_ID",
+              "expected_revision": 4
+            },
+            "goals.create": {
+              "objective": "Prepare a source-based brief",
+              "limits": {
+                "tokens": 16000,
+                "iterations": 2,
+                "elapsed_ms": 60000,
+                "tool_calls": 2
+              }
+            },
+            "goals.edit": {
+              "id": "GOAL_ID",
+              "expected_revision": 2,
+              "objective": "Prepare a corrected source-based brief"
+            },
+            "goals.list": {},
+            "goals.transition": {
+              "id": "GOAL_ID",
+              "state": "active",
+              "expected_revision": 1
+            }
+          }
+        }
+      ],
+      "words": 518
+    },
+    {
+      "path": "work/initiative-and-attention.md",
+      "title": "Review proposals and set attention policy",
+      "description": "Decide when proactive observations become suggestions or bounded work, with quiet hours and explicit budgets.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/initiative/__init__.py",
+        "agent/attention/__init__.py"
+      ],
+      "commands": [
+        "attention.policy",
+        "inbox.decide",
+        "inbox.list",
+        "initiative.propose"
+      ],
+      "features": [
+        "initiative.suggestions",
+        "attention.quiet_hours",
+        "attention.outbound_policy"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-suggestions-with-quiet-hours",
+          "heading": "Worked example: suggestions with quiet hours",
+          "description": "Suggestions with quiet hours",
+          "commands": [
+            "attention.policy",
+            "inbox.decide",
+            "inbox.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "attention.policy",
+            "inbox.decide",
+            "inbox.list",
+            "initiative.propose"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "attention.policy": {
+              "policy": {
+                "mode": "suggest",
+                "minimum_score": 0.6
+              },
+              "expected_revision": 0
+            },
+            "inbox.decide": {
+              "id": "PROPOSAL_ID",
+              "decision": "dismiss"
+            },
+            "inbox.list": {},
+            "initiative.propose": {
+              "source_event_id": "ACTUAL_SOURCE_EVENT_ID",
+              "action": "Review the corrected source",
+              "signals": {
+                "urgency": 0.5,
+                "expected_value": 0.8,
+                "confidence": 0.8,
+                "interruption_cost": 0.2,
+                "resource_cost": 0.2,
+                "duplication_penalty": 0
+              },
+              "expires_at": 1893456000,
+              "dedupe_key": "review_corrected_source_1"
+            }
+          }
+        }
+      ],
+      "words": 517
+    },
+    {
+      "path": "work/overview.md",
+      "title": "Understand ongoing work",
+      "description": "Choose the right work record and distinguish tracking, execution, progress, and evidence.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/scheduler/__init__.py"
+      ],
+      "commands": [
+        "work.cancel",
+        "work.get",
+        "work.list",
+        "work.overview"
+      ],
+      "features": [
+        "work.durable_state",
+        "work.budgets",
+        "work.cancellation"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-inspect-a-stalled-summary",
+          "heading": "Worked example: inspect a stalled summary",
+          "description": "Inspect a stalled summary",
+          "commands": [
+            "overview",
+            "work.cancel",
+            "work.get",
+            "work.list",
+            "work.overview"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "work.cancel",
+            "work.get",
+            "work.list",
+            "work.overview"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "work.cancel": {
+              "id": "WORK_ID",
+              "reason": "Owner ended this work"
+            },
+            "work.get": {
+              "id": "WORK_ID"
+            },
+            "work.list": {},
+            "work.overview": {}
+          }
+        }
+      ],
+      "words": 567
+    },
+    {
+      "path": "work/schedules.md",
+      "title": "Schedule prompts and recurring work",
+      "description": "Create one-time, interval, or calendar prompts with explicit conversations, resource bounds, and missed-run behavior.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/scheduler/__init__.py",
+        "consumer/lifecycle.py"
+      ],
+      "commands": [
+        "schedules.create",
+        "schedules.list",
+        "schedules.state"
+      ],
+      "features": [
+        "schedules.iana_timezone",
+        "schedules.catch_up",
+        "schedules.sleep_wake",
+        "schedules.missed_policy.skip",
+        "schedules.missed_policy.run_once",
+        "schedules.missed_policy.replay_bounded"
+      ],
+      "ui_actions": [],
+      "examples": [
+        {
+          "id": "worked-example-a-weekday-review",
+          "heading": "Worked example: a weekday review",
+          "description": "A weekday review",
+          "commands": [
+            "schedules.create",
+            "schedules.list"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "schedules.create",
+            "schedules.list",
+            "schedules.state"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "schedules.create": {
+              "conversation_id": "CONVERSATION_ID",
+              "text": "Review maintenance notes",
+              "spec": {
+                "kind": "calendar",
+                "timezone": "Europe/Berlin",
+                "hour": 9,
+                "minute": 0,
+                "weekdays": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "fold": "first"
+              },
+              "resources": {
+                "tokens": 16000,
+                "iterations": 2,
+                "elapsed_ms": 60000,
+                "tool_calls": 2
+              }
+            },
+            "schedules.list": {},
+            "schedules.state": {
+              "id": "SCHEDULE_ID",
+              "state": "paused",
+              "expected_revision": 1
+            }
+          }
+        }
+      ],
+      "words": 622
+    },
+    {
+      "path": "work/workflows.md",
+      "title": "Run workflows and revise plans",
+      "description": "Execute dependent steps with budgets, inspect their completion basis, and safely revise or resume a plan.",
+      "sources": [
+        "frontend/src/pages/WorkPage.tsx",
+        "consumer/work.py",
+        "agent/planner/__init__.py"
+      ],
+      "commands": [
+        "workflows.create",
+        "workflows.get",
+        "workflows.list",
+        "workflows.revise",
+        "workflows.run",
+        "workflows.state",
+        "workflows.step"
+      ],
+      "features": [
+        "workflows.dependencies",
+        "workflows.revision",
+        "workflows.evidence"
+      ],
+      "ui_actions": [
+        "Pause workflow",
+        "Resume workflow",
+        "Run workflow"
+      ],
+      "examples": [
+        {
+          "id": "worked-example-draft-and-review",
+          "heading": "Worked example: draft and review",
+          "description": "Draft and review",
+          "commands": [
+            "workflows.get",
+            "workflows.list",
+            "workflows.run"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "worked-example-record-your-own-review",
+          "heading": "Worked example: record your own review",
+          "description": "Record your own review",
+          "commands": [
+            "workflows.create",
+            "workflows.run",
+            "workflows.step"
+          ],
+          "ui_actions": []
+        },
+        {
+          "id": "command-examples",
+          "heading": "Command examples",
+          "description": "Command examples",
+          "commands": [
+            "workflows.create",
+            "workflows.get",
+            "workflows.list",
+            "workflows.revise",
+            "workflows.run",
+            "workflows.state",
+            "workflows.step"
+          ],
+          "ui_actions": [],
+          "parameter_examples": {
+            "workflows.create": {
+              "steps": [
+                {
+                  "id": "review",
+                  "description": "Review the source",
+                  "dependencies": [],
+                  "budget": {
+                    "tokens": 16000,
+                    "iterations": 2,
+                    "elapsed_ms": 60000,
+                    "tool_calls": 2
+                  }
+                }
+              ],
+              "budget": {
+                "tokens": 16000,
+                "iterations": 2,
+                "elapsed_ms": 60000,
+                "tool_calls": 2
+              }
+            },
+            "workflows.get": {
+              "id": "PLAN_ID"
+            },
+            "workflows.list": {},
+            "workflows.revise": {
+              "id": "PLAN_ID",
+              "expected_revision": 1,
+              "steps": [
+                {
+                  "id": "review",
+                  "description": "Review the corrected source",
+                  "budget": {
+                    "tokens": 16000,
+                    "iterations": 2,
+                    "elapsed_ms": 60000,
+                    "tool_calls": 2
+                  }
+                }
+              ],
+              "reason": "Source corrected"
+            },
+            "workflows.run": {
+              "id": "PLAN_ID",
+              "conversation_id": "CONVERSATION_ID",
+              "expected_revision": 1
+            },
+            "workflows.state": {
+              "id": "PLAN_ID",
+              "state": "paused",
+              "expected_revision": 2
+            },
+            "workflows.step": {
+              "id": "USER_PLAN_ID",
+              "step_id": "human_review",
+              "state": "in_progress",
+              "expected_revision": 1
+            }
+          }
+        }
+      ],
+      "words": 820
+    },
+    {
+      "path": "reference/command-recipes.md",
+      "title": "Command cookbook: all 95 consumer commands",
+      "sources": [
+        "agent/attention/__init__.py",
+        "agent/awareness/evidence.py",
+        "agent/commitments/__init__.py",
+        "agent/goals/__init__.py",
+        "agent/initiative/__init__.py",
+        "agent/memory/__init__.py",
+        "agent/planner/__init__.py",
+        "agent/plugin_host/__init__.py",
+        "agent/provider_adapters/__init__.py",
+        "agent/runtime/__init__.py",
+        "agent/scheduler/__init__.py",
+        "agent/skills/__init__.py",
+        "agent/subagents/__init__.py",
+        "agent/tool_runner/__init__.py",
+        "agent/tool_runner/files.py",
+        "consumer/api.py",
+        "consumer/application.py",
+        "consumer/cli.py",
+        "consumer/connections.py",
+        "consumer/connectors.py",
+        "consumer/content.py",
+        "consumer/device.py",
+        "consumer/lifecycle.py",
+        "consumer/network.py",
+        "consumer/permissions.py",
+        "consumer/providers.py",
+        "consumer/usage.py",
+        "consumer/vault.py",
+        "consumer/work.py",
+        "native/memory/PROTOCOL.md"
+      ],
+      "commands": [
+        "overview",
+        "diagnostics.get",
+        "usage.summary",
+        "conversations.create",
+        "conversations.list",
+        "conversations.get",
+        "conversations.update",
+        "messages.send",
+        "messages.cancel",
+        "messages.events",
+        "attachments.upload",
+        "attachments.list",
+        "attachments.get",
+        "attachments.read",
+        "artifacts.read",
+        "files.list",
+        "files.read",
+        "files.write",
+        "files.delete",
+        "knowledge.add",
+        "knowledge.list",
+        "knowledge.get",
+        "knowledge.delete",
+        "memory.query",
+        "memory.get",
+        "memory.correct",
+        "memory.retract",
+        "goals.create",
+        "goals.list",
+        "goals.edit",
+        "goals.transition",
+        "goals.archive",
+        "commitments.create",
+        "commitments.list",
+        "commitments.transition",
+        "commitments.progress",
+        "commitments.wait",
+        "commitments.resume",
+        "schedules.create",
+        "schedules.list",
+        "schedules.state",
+        "workflows.create",
+        "workflows.list",
+        "workflows.get",
+        "workflows.revise",
+        "workflows.run",
+        "workflows.state",
+        "workflows.step",
+        "work.overview",
+        "work.list",
+        "work.get",
+        "work.cancel",
+        "children.delegate",
+        "children.list",
+        "children.get",
+        "children.cancel",
+        "initiative.propose",
+        "attention.policy",
+        "inbox.list",
+        "inbox.decide",
+        "providers.configure",
+        "providers.list",
+        "providers.inspect",
+        "providers.probe",
+        "providers.activate",
+        "providers.credentials.put",
+        "providers.credentials.list",
+        "providers.credentials.revoke",
+        "connections.configure",
+        "connections.list",
+        "connections.get",
+        "connections.grant",
+        "connections.probe",
+        "connections.revoke",
+        "devices.list",
+        "devices.get",
+        "devices.pair",
+        "devices.revoke",
+        "permissions.list",
+        "permissions.set",
+        "permissions.pending",
+        "permissions.request",
+        "permissions.approve",
+        "permissions.deny",
+        "skills.install",
+        "skills.list",
+        "skills.enable",
+        "skills.rollback",
+        "plugins.list",
+        "plugins.inspect",
+        "plugins.activate",
+        "plugins.health",
+        "plugins.disable",
+        "plugins.rollback",
+        "plugins.uninstall"
+      ],
+      "examples": [
+        {
+          "id": "recipe-overview",
+          "heading": "overview",
+          "description": "Select the agent whose configuration you want to understand. This is the application overview, useful before deciding whether a missing response is caused by configuration or by current work. It requires no ready model.",
+          "commands": [
+            "overview"
+          ]
+        },
+        {
+          "id": "recipe-diagnostics-get",
+          "heading": "diagnostics.get",
+          "description": "Use this after recording the failed conversation or work ID. You must own the agent, and the private runtime must be reachable; the command can start a suspended worker, so it is unsuitable for passive dormancy monitoring.",
+          "commands": [
+            "diagnostics.get"
+          ]
+        },
+        {
+          "id": "recipe-usage-summary",
+          "heading": "usage.summary",
+          "description": "Run this after actual work, or while investigating a timeout. Keep the work ID available so you can compare its direct consumption with held allocations. A provider subscription or billing connection is not required.",
+          "commands": [
+            "usage.summary"
+          ]
+        },
+        {
+          "id": "recipe-conversations-create",
+          "heading": "conversations.create",
+          "description": "Create a new thread inside the already selected agent. A model need not be ready merely to create the conversation. Use a meaningful title; creating another conversation does not create another agent or private workspace.",
+          "commands": [
+            "conversations.create"
+          ]
+        },
+        {
+          "id": "recipe-conversations-list",
+          "heading": "conversations.list",
+          "description": "Choose a search term that occurs in the intended conversation title or recorded user-message text. Assistant-output text is not searched by this command. Set include_archived true when you want a thread removed from the active sidebar.",
+          "commands": [
+            "conversations.list"
+          ]
+        },
+        {
+          "id": "recipe-conversations-get",
+          "heading": "conversations.get",
+          "description": "Take the conversation ID from conversations.list or a successful creation response. Use this to inspect one thread before renaming it, checking accepted messages, or connecting a workflow to its history.",
+          "commands": [
+            "conversations.get"
+          ]
+        },
+        {
+          "id": "recipe-conversations-update",
+          "heading": "conversations.update",
+          "description": "Read the current conversation and revision first. This example renames an existing thread. Use the same command with archived true to archive it or archived false to restore a conversation to the active list.",
+          "commands": [
+            "conversations.update"
+          ]
+        },
+        {
+          "id": "recipe-messages-send",
+          "heading": "messages.send",
+          "description": "Use an existing active conversation. For this source-summary example, first upload and attach the intended source, or include actual attachment IDs in the optional attachments array. Choose a fresh message ID for this exact input.",
+          "commands": [
+            "messages.send"
+          ]
+        },
+        {
+          "id": "recipe-messages-cancel",
+          "heading": "messages.cancel",
+          "description": "Identify the conversation whose active work you want stopped. The message_id here identifies the cancellation request itself; it is not the ID of the earlier prompt. Keep it stable if that cancellation acknowledgement is lost.",
+          "commands": [
+            "messages.cancel"
+          ]
+        },
+        {
+          "id": "recipe-messages-events",
+          "heading": "messages.events",
+          "description": "Use a conversation ID to limit replay, or omit it for the agent's public conversation stream. Start after zero for available history, then retain the returned cursor for subsequent pages instead of repeatedly processing old events.",
+          "commands": [
+            "messages.events"
+          ]
+        },
+        {
+          "id": "recipe-attachments-upload",
+          "heading": "attachments.upload",
+          "description": "Prepare a plain filename, canonical media type, and bytes within the 4 MiB upload bound. The supplied base64 is Hello followed by a newline. Choose one operation ID for these exact original bytes and metadata.",
+          "commands": [
+            "attachments.upload"
+          ]
+        },
+        {
+          "id": "recipe-attachments-list",
+          "heading": "attachments.list",
+          "description": "Use this to find source IDs after an upload or when rebuilding a conversation's attachment selection. The example requests twenty records; the command does not search arbitrary host directories or other agents' libraries.",
+          "commands": [
+            "attachments.list"
+          ]
+        },
+        {
+          "id": "recipe-attachments-get",
+          "heading": "attachments.get",
+          "description": "Copy an attachment ID from upload or list. This command is appropriate when you need the original artifact reference, media type, size, or extraction status before deciding whether to index or transcribe the source.",
+          "commands": [
+            "attachments.get"
+          ]
+        },
+        {
+          "id": "recipe-attachments-read",
+          "heading": "attachments.read",
+          "description": "Obtain the attachment ID from metadata and choose a nonnegative byte offset. The example reads at most 4,096 original bytes, useful for checking a source prefix without claiming that the entire file was included.",
+          "commands": [
+            "attachments.read"
+          ]
+        },
+        {
+          "id": "recipe-artifacts-read",
+          "heading": "artifacts.read",
+          "description": "Take a real artifact ID from attachment metadata or a tool result, such as generated audio or a screenshot. Use this recipe for immutable bytes; it does not edit the artifact or require a workspace file with that name.",
+          "commands": [
+            "artifacts.read"
+          ]
+        },
+        {
+          "id": "recipe-files-list",
+          "heading": "files.list",
+          "description": "Choose a workspace-relative directory. The example lists the public workspace root. Internal .sturgis entries and path escapes are excluded; this interface does not expose the installation root, vault directory, or another agent's files.",
+          "commands": [
+            "files.list"
+          ]
+        },
+        {
+          "id": "recipe-files-read",
+          "heading": "files.read",
+          "description": "Choose a regular public workspace file found through files.list. Read it before editing or deleting so that the subsequent mutation can protect the exact bytes you reviewed, even if another writer is active.",
+          "commands": [
+            "files.read"
+          ]
+        },
+        {
+          "id": "recipe-files-write",
+          "heading": "files.write",
+          "description": "Use a new public workspace path for this create example. The base64 writes Hello and a newline. To replace an existing file, first read it and add its current exact hash as expected_sha256.",
+          "commands": [
+            "files.write"
+          ]
+        },
+        {
+          "id": "recipe-files-delete",
+          "heading": "files.delete",
+          "description": "Read the file and preserve any copy you need before deleting. Replace CURRENT_SHA256 with the exact returned 64-character SHA-256, not the hash of an older version or the string shown in this example.",
+          "commands": [
+            "files.delete"
+          ]
+        },
+        {
+          "id": "recipe-knowledge-add",
+          "heading": "knowledge.add",
+          "description": "Upload a supported source and confirm extraction is ready. The example creates a new knowledge document from that attachment. For a new revision of an existing document, also provide document_id and its current expected_revision.",
+          "commands": [
+            "knowledge.add"
+          ]
+        },
+        {
+          "id": "recipe-knowledge-list",
+          "heading": "knowledge.list",
+          "description": "Choose a term appearing in document titles or extracted text. This lists current nondeleted knowledge documents; it does not search all conversation history or enumerate the immutable source library underneath those documents.",
+          "commands": [
+            "knowledge.list"
+          ]
+        },
+        {
+          "id": "recipe-knowledge-get",
+          "heading": "knowledge.get",
+          "description": "Use a document ID from knowledge.list. The example explicitly requests revision one to inspect historical source text. Omit revision when you need the latest record and concurrency revision for a new edit or deletion.",
+          "commands": [
+            "knowledge.get"
+          ]
+        },
+        {
+          "id": "recipe-knowledge-delete",
+          "heading": "knowledge.delete",
+          "description": "Inspect the current document and confirm that removing its knowledge index is intended. Supply the current expected_revision and a stable operation ID. This is not an attachment-delete command or a way to erase all historical evidence.",
+          "commands": [
+            "knowledge.delete"
+          ]
+        },
+        {
+          "id": "recipe-memory-query",
+          "heading": "memory.query",
+          "description": "Choose a term or concept you want to recall. A model provider need not be ready, but the native memory process must be available. The example uses lexical text only; embeddings require a compatible model and vector dimension.",
+          "commands": [
+            "memory.query"
+          ]
+        },
+        {
+          "id": "recipe-memory-get",
+          "heading": "memory.get",
+          "description": "Copy an actual memory ID from query results. The example requests canonical revision one, which is useful when understanding a correction. Omit revision to retrieve the latest canonical version rather than relying on an old search result.",
+          "commands": [
+            "memory.get"
+          ]
+        },
+        {
+          "id": "recipe-memory-correct",
+          "heading": "memory.correct",
+          "description": "Verify the original evidence, then retrieve the current unretracted canonical record. Supply its revision and the complete intended correction. The example changes a date; it does not claim the server independently checked the corrected external source.",
+          "commands": [
+            "memory.correct"
+          ]
+        },
+        {
+          "id": "recipe-memory-retract",
+          "heading": "memory.retract",
+          "description": "Inspect the memory and decide whether you mean one revision or its entire identity. The example explicitly withdraws revision two. Removing revision from the parameters suppresses all revisions of this identity, including future revisions.",
+          "commands": [
+            "memory.retract"
+          ]
+        },
+        {
+          "id": "recipe-goals-create",
+          "heading": "goals.create",
+          "description": "State a desired outcome and choose explicit nonnegative resource limits. The example reserves no execution by itself; it creates the intention that later scheduled or planned work can reference through goal_id.",
+          "commands": [
+            "goals.create"
+          ]
+        },
+        {
+          "id": "recipe-goals-list",
+          "heading": "goals.list",
+          "description": "Use this before editing, activating, pausing, or archiving goals. It reads goal records for the selected agent and is independent of whether a provider can currently run the next model turn.",
+          "commands": [
+            "goals.list"
+          ]
+        },
+        {
+          "id": "recipe-goals-edit",
+          "heading": "goals.edit",
+          "description": "Retrieve a nonterminal goal and its current revision. The example changes only the objective. To change limits or criteria, supply those fields explicitly after reviewing existing usage, outstanding reservations, and what the revised outcome is meant to establish.",
+          "commands": [
+            "goals.edit"
+          ]
+        },
+        {
+          "id": "recipe-goals-transition",
+          "heading": "goals.transition",
+          "description": "Use the shown active transition only for a proposed or otherwise resumable goal, with its current revision. Activation permits eligible associated resource reservations; it does not automatically create a plan, schedule, or model conversation.",
+          "commands": [
+            "goals.transition"
+          ]
+        },
+        {
+          "id": "recipe-goals-archive",
+          "heading": "goals.archive",
+          "description": "Use a goal already in achieved, failed, or abandoned state. Read its current revision and verify you intend to remove it from normal active goal management. Archiving a live goal is rejected.",
+          "commands": [
+            "goals.archive"
+          ]
+        },
+        {
+          "id": "recipe-commitments-create",
+          "heading": "commitments.create",
+          "description": "Describe the responsibility and intended beneficiary. The example uses owner, which is also the consumer default. Optional criteria should specify real fulfillment checks; an optional expiry is a time for assessing overdue responsibility, not automatic execution.",
+          "commands": [
+            "commitments.create"
+          ]
+        },
+        {
+          "id": "recipe-commitments-list",
+          "heading": "commitments.list",
+          "description": "Use this when reviewing accepted responsibilities, checking blocked progress, or finding the current revision and wait identity. It reads commitment state without requiring you to infer responsibility from conversation wording.",
+          "commands": [
+            "commitments.list"
+          ]
+        },
+        {
+          "id": "recipe-commitments-transition",
+          "heading": "commitments.transition",
+          "description": "Read the proposal and use its current revision for the shown accepted transition. The state change makes an explicit responsibility; it still does not supply compute, schedule a task, or prove any result.",
+          "commands": [
+            "commitments.transition"
+          ]
+        },
+        {
+          "id": "recipe-commitments-progress",
+          "heading": "commitments.progress",
+          "description": "Use an accepted commitment without an active durable wait. The example marks it blocked with a concrete reason. Supported manual progress values are pending, in_progress, and blocked; waiting is established through commitments.wait.",
+          "commands": [
+            "commitments.progress"
+          ]
+        },
+        {
+          "id": "recipe-commitments-wait",
+          "heading": "commitments.wait",
+          "description": "Use an accepted responsibility with no existing wait. Select an actual conversation for the user_response trigger. Replace after_seq zero with the observed current cursor if you intend to wait only for a future response.",
+          "commands": [
+            "commitments.wait"
+          ]
+        },
+        {
+          "id": "recipe-commitments-resume",
+          "heading": "commitments.resume",
+          "description": "Retrieve the accepted waiting commitment and its current revision after the registered trigger has actually fired. This is the follow-up to a matching durable wait, not a general way to restart any blocked responsibility.",
+          "commands": [
+            "commitments.resume"
+          ]
+        },
+        {
+          "id": "recipe-schedules-create",
+          "heading": "schedules.create",
+          "description": "Choose an existing active conversation, actual prompt, and positive model-work allocation. The example schedules weekday mornings in Europe/Berlin, with Monday zero through Friday four, and an explicit first-occurrence daylight-saving fold policy.",
+          "commands": [
+            "schedules.create"
+          ]
+        },
+        {
+          "id": "recipe-schedules-list",
+          "heading": "schedules.list",
+          "description": "Use this before changing a timer or checking whether future work can wake a suspended agent. Keep the conversation and goal relationship in view so you know where each occurrence will be admitted.",
+          "commands": [
+            "schedules.list"
+          ]
+        },
+        {
+          "id": "recipe-schedules-state",
+          "heading": "schedules.state",
+          "description": "Read the schedule's current revision. The example pauses a live schedule; use active to resume an eligible paused one or cancelled to terminate it. Neither state nor revision should be guessed from an old screenshot.",
+          "commands": [
+            "schedules.state"
+          ]
+        },
+        {
+          "id": "recipe-workflows-create",
+          "heading": "workflows.create",
+          "description": "Define the step descriptions, dependency graph, and shared budget before creating a plan. This one-step example has its own allocation matching the shared allowance. Omitted assignee defaults to the agent; creation alone does not start execution.",
+          "commands": [
+            "workflows.create"
+          ]
+        },
+        {
+          "id": "recipe-workflows-list",
+          "heading": "workflows.list",
+          "description": "Use this to discover saved plans before choosing one to run, pause, revise, or inspect. The list belongs to the selected agent; a goal or commitment is not itself a workflow record.",
+          "commands": [
+            "workflows.list"
+          ]
+        },
+        {
+          "id": "recipe-workflows-get",
+          "heading": "workflows.get",
+          "description": "Take a real plan ID from creation or listing. Inspect it before recovering a failed step, because the plan state, individual step state, and recorded execution run can describe different parts of the same interruption.",
+          "commands": [
+            "workflows.get"
+          ]
+        },
+        {
+          "id": "recipe-workflows-revise",
+          "heading": "workflows.revise",
+          "description": "Read a live plan with no in-progress steps and supply the complete desired step list plus a reason. The example applies only to a one-step plan; including it verbatim in a larger plan would replace that larger definition.",
+          "commands": [
+            "workflows.revise"
+          ]
+        },
+        {
+          "id": "recipe-workflows-run",
+          "heading": "workflows.run",
+          "description": "Choose an active plan and an existing nonarchived conversation. Supply the plan's current revision. Check provider readiness, associated goal state, resources, and required permissions before asking the monitor to admit ready steps.",
+          "commands": [
+            "workflows.run"
+          ]
+        },
+        {
+          "id": "recipe-workflows-state",
+          "heading": "workflows.state",
+          "description": "Retrieve the current plan revision. Use the shown paused transition for an active plan. Active resumes a paused plan; abandoned requires a reason and ends a live intention. These are plan lifecycle states, separate from step progress.",
+          "commands": [
+            "workflows.state"
+          ]
+        },
+        {
+          "id": "recipe-workflows-step",
+          "heading": "workflows.step",
+          "description": "This recipe requires an active plan with a pending human_review step explicitly assigned as {\"kind\":\"user\"} and completed dependencies. Create that definition with workflows.create or revise a suitable live plan before using its ID here.",
+          "commands": [
+            "workflows.step"
+          ]
+        },
+        {
+          "id": "recipe-work-overview",
+          "heading": "work.overview",
+          "description": "Use this when you need one view of the agent's work domains rather than provider settings. It can help connect a pending task to its goal, commitment, timer, workflow, child, or initiative proposal.",
+          "commands": [
+            "work.overview"
+          ]
+        },
+        {
+          "id": "recipe-work-list",
+          "heading": "work.list",
+          "description": "Run this after a prompt or timer has been admitted and you need its scheduler work ID. The provider may still be unavailable; queued execution can remain recorded while its admission requirements are unresolved.",
+          "commands": [
+            "work.list"
+          ]
+        },
+        {
+          "id": "recipe-work-get",
+          "heading": "work.get",
+          "description": "Use the scheduler work ID found in list, message admission, or workflow evidence. A goal, conversation, or tool attempt ID is a different identity and cannot be substituted for this lookup.",
+          "commands": [
+            "work.get"
+          ]
+        },
+        {
+          "id": "recipe-work-cancel",
+          "heading": "work.cancel",
+          "description": "Identify the exact nonterminal work you intend to end and provide a useful reason. Use message cancellation when your intention is conversation-wide; this command operates from a specific scheduler work record and its affected lineage.",
+          "commands": [
+            "work.cancel"
+          ]
+        },
+        {
+          "id": "recipe-children-delegate",
+          "heading": "children.delegate",
+          "description": "Use an actual eligible live parent work record with sufficient remaining resources and delegable capabilities. This example grants no tool capabilities; include the bounded material needed for review in the supported task description rather than assuming parent files are inherited.",
+          "commands": [
+            "children.delegate"
+          ]
+        },
+        {
+          "id": "recipe-children-list",
+          "heading": "children.list",
+          "description": "Use this after delegated work exists, or when checking whether a parent cancellation affected its children. The web Inbox also exposes delegated records, but this command provides their actual IDs for precise inspection.",
+          "commands": [
+            "children.list"
+          ]
+        },
+        {
+          "id": "recipe-children-get",
+          "heading": "children.get",
+          "description": "Copy a child record ID from children.list. Use it to inspect the delegation itself; use the returned work_id with work.get when investigating scheduler execution or resource consumption underneath that child.",
+          "commands": [
+            "children.get"
+          ]
+        },
+        {
+          "id": "recipe-children-cancel",
+          "heading": "children.cancel",
+          "description": "Identify the child you no longer need, review any active external attempt, and choose a reason that explains the parent's decision. This is a child cancellation request, not deletion of a top-level user agent.",
+          "commands": [
+            "children.cancel"
+          ]
+        },
+        {
+          "id": "recipe-initiative-propose",
+          "heading": "initiative.propose",
+          "description": "Choose an actual source event from this agent and a concrete proposed action. Supply all six finite signals between zero and one, a future expiry, and a stable dedupe key for that particular source/action opportunity.",
+          "commands": [
+            "initiative.propose"
+          ]
+        },
+        {
+          "id": "recipe-attention-policy",
+          "heading": "attention.policy",
+          "description": "Choose the desired proactive policy and read the last saved policy revision. The example uses suggest with a score threshold and expected revision zero only for an absent policy. It does not enable autonomous execution.",
+          "commands": [
+            "attention.policy"
+          ]
+        },
+        {
+          "id": "recipe-inbox-list",
+          "heading": "inbox.list",
+          "description": "Use this after the monitor has evaluated initiative candidates or when the web Inbox shows a proposal. No ready provider is needed simply to inspect what was proposed and why attention selected a particular disposition.",
+          "commands": [
+            "inbox.list"
+          ]
+        },
+        {
+          "id": "recipe-inbox-decide",
+          "heading": "inbox.decide",
+          "description": "Inspect a pending proposal before deciding. The example dismisses it and requires no execution resources. To accept, use decision accept with an active conversation_id and an explicit positive resources allocation suitable for the proposed prompt.",
+          "commands": [
+            "inbox.decide"
+          ]
+        },
+        {
+          "id": "recipe-providers-configure",
+          "heading": "providers.configure",
+          "description": "Obtain the exact streaming chat-completions endpoint, model name, and documented limits from the service operator. The example deliberately configures text-only behavior; it names no bundled model.",
+          "commands": [
+            "providers.configure"
+          ]
+        },
+        {
+          "id": "recipe-providers-list",
+          "heading": "providers.list",
+          "description": "Use this to discover saved provider IDs and determine which configuration is selected. It reads configuration and recorded probe evidence rather than issuing a fresh inference request.",
+          "commands": [
+            "providers.list"
+          ]
+        },
+        {
+          "id": "recipe-providers-inspect",
+          "heading": "providers.inspect",
+          "description": "Take a provider_id from the list. The example inspects research only; omitting provider_id returns all configurations, matching providers.list. Use this before editing or activating a particular revision.",
+          "commands": [
+            "providers.inspect"
+          ]
+        },
+        {
+          "id": "recipe-providers-probe",
+          "heading": "providers.probe",
+          "description": "Read the current configuration revision and confirm its credential is still current. This performs a real bounded inference request and can consume provider resources, even though it does not execute a model-proposed tool.",
+          "commands": [
+            "providers.probe"
+          ]
+        },
+        {
+          "id": "recipe-providers-activate",
+          "heading": "providers.activate",
+          "description": "Choose a provider with a successful unexpired probe for its current configuration and credential revision. Use that configuration revision, not the separate probe record's revision, in this request.",
+          "commands": [
+            "providers.activate"
+          ]
+        },
+        {
+          "id": "recipe-providers-credentials-put",
+          "heading": "providers.credentials.put",
+          "description": "Use the dedicated credential command so the secret is requested privately and never placed in a parameters file or shell argument. The example creates model_key; rotation adds --revision with the current credential revision.",
+          "commands": [
+            "providers.credentials.put"
+          ]
+        },
+        {
+          "id": "recipe-providers-credentials-list",
+          "heading": "providers.credentials.list",
+          "description": "Use this to choose a stored opaque credential reference or obtain the current revision before rotation or revocation. It requires owner access to this agent, not a model task.",
+          "commands": [
+            "providers.credentials.list"
+          ]
+        },
+        {
+          "id": "recipe-providers-credentials-revoke",
+          "heading": "providers.credentials.revoke",
+          "description": "Inspect the credential's current revision and identify dependent providers or connections before revocation. Use this when the old value should no longer authorize future requests from the agent.",
+          "commands": [
+            "providers.credentials.revoke"
+          ]
+        },
+        {
+          "id": "recipe-connections-configure",
+          "heading": "connections.configure",
+          "description": "Choose a supported adapter kind and a real compatible endpoint. This example defines HTTP fetch; optional allowed_origins defaults to the endpoint's exact origin, while credentials use opaque current vault references.",
+          "commands": [
+            "connections.configure"
+          ]
+        },
+        {
+          "id": "recipe-connections-list",
+          "heading": "connections.list",
+          "description": "Use this to discover configured connection IDs and readiness states. It reads local records; it does not fetch every endpoint or automatically grant operations simply because the owner saved an address.",
+          "commands": [
+            "connections.list"
+          ]
+        },
+        {
+          "id": "recipe-connections-get",
+          "heading": "connections.get",
+          "description": "Use a connection ID from configuration or list. Inspect it before editing, granting, probing, signing external traffic, or revoking; each of those operations depends on the exact current binding.",
+          "commands": [
+            "connections.get"
+          ]
+        },
+        {
+          "id": "recipe-connections-grant",
+          "heading": "connections.grant",
+          "description": "Read the connection revision and select only operations offered by its adapter. HTTP uses fetch; MCP uses call; webhook uses receive. This example grants the reference fetch connection its single read operation.",
+          "commands": [
+            "connections.grant"
+          ]
+        },
+        {
+          "id": "recipe-connections-probe",
+          "heading": "connections.probe",
+          "description": "Read the active connection's current revision after configuration and grants. Ensure its credential is current. The probe may contact a real service and is an observation, not a universal harmless health endpoint.",
+          "commands": [
+            "connections.probe"
+          ]
+        },
+        {
+          "id": "recipe-connections-revoke",
+          "heading": "connections.revoke",
+          "description": "Inspect the selected connection and current revision before removing future access. Use this for all its operations rather than attempting to grant an empty operation list. Consider any already submitted external requests.",
+          "commands": [
+            "connections.revoke"
+          ]
+        },
+        {
+          "id": "recipe-devices-list",
+          "heading": "devices.list",
+          "description": "Use this after configuring device-kind connections, or when checking which compatible clients have paired. It does not discover arbitrary computers on the local network or install actuator software.",
+          "commands": [
+            "devices.list"
+          ]
+        },
+        {
+          "id": "recipe-devices-get",
+          "heading": "devices.get",
+          "description": "Use the connection_id of a device-kind connection. It differs from the external client's device_id and from a pending device request ID. Read it before pairing, signing at a revision, or revoking.",
+          "commands": [
+            "devices.get"
+          ]
+        },
+        {
+          "id": "recipe-devices-pair",
+          "heading": "devices.pair",
+          "description": "Configure the device identity and operation schemas first, then read its connection revision. This recipe writes the full one-time pairing response to a new private file because normal CLI output redacts recognized token fields.",
+          "commands": [
+            "devices.pair"
+          ]
+        },
+        {
+          "id": "recipe-devices-revoke",
+          "heading": "devices.revoke",
+          "description": "Read the device connection's current revision and verify this is the client whose future access should end. Revocation is distinct from cancelling one outstanding operation or deleting a computer's installed client software.",
+          "commands": [
+            "devices.revoke"
+          ]
+        },
+        {
+          "id": "recipe-permissions-list",
+          "heading": "permissions.list",
+          "description": "Use this before changing a tool policy. The list reflects tools currently registered through built-ins, ready connections, or active plugins; it is not an unbounded catalog of every tool a model might name.",
+          "commands": [
+            "permissions.list"
+          ]
+        },
+        {
+          "id": "recipe-permissions-set",
+          "heading": "permissions.set",
+          "description": "Read the current workspace.write policy revision and descriptor. The example sets ask only when revision zero denotes no saved policy; substitute the observed policy revision for an existing setting.",
+          "commands": [
+            "permissions.set"
+          ]
+        },
+        {
+          "id": "recipe-permissions-pending",
+          "heading": "permissions.pending",
+          "description": "Use this after a model action was rejected with approval_required. It projects only requests that remain pending from trusted tool-runner rejection evidence. Use permissions.request with a saved event ID to inspect a later decision or stale/expired state.",
+          "commands": [
+            "permissions.pending"
+          ]
+        },
+        {
+          "id": "recipe-permissions-request",
+          "heading": "permissions.request",
+          "description": "Take an event_id from the pending request projection. It must identify the trusted rejected invocation itself, not a conversation message, proposed goal, or unrelated successful tool result.",
+          "commands": [
+            "permissions.request"
+          ]
+        },
+        {
+          "id": "recipe-permissions-approve",
+          "heading": "permissions.approve",
+          "description": "Inspect the exact pending request and confirm the proposed arguments and constraints. The example gives its matching future invocation a 300-second window; the supported expiry range is one to 3,600 seconds.",
+          "commands": [
+            "permissions.approve"
+          ]
+        },
+        {
+          "id": "recipe-permissions-deny",
+          "heading": "permissions.deny",
+          "description": "Use the actual request event after inspecting its proposed tool, arguments, and binding. Deny this invocation when it should not receive one-use authority; changing the general tool policy is a separate decision.",
+          "commands": [
+            "permissions.deny"
+          ]
+        },
+        {
+          "id": "recipe-skills-install",
+          "heading": "skills.install",
+          "description": "Prepare a bounded manifest with id, version, description, triggers, steps, and required_tools. This example installs instructions for source review with no required tools; it is a procedure, not executable plugin code.",
+          "commands": [
+            "skills.install"
+          ]
+        },
+        {
+          "id": "recipe-skills-list",
+          "heading": "skills.list",
+          "description": "Use this to inspect available authored or discovered procedures before enabling, disabling, or choosing a prior version. IDs are normalized for the consumer view; private host discovery paths are omitted.",
+          "commands": [
+            "skills.list"
+          ]
+        },
+        {
+          "id": "recipe-skills-enable",
+          "heading": "skills.enable",
+          "description": "Choose a stored procedure with an actual current revision. This example disables review_sources using enabled false; use true after review when you want that stored procedure eligible for selection again.",
+          "commands": [
+            "skills.enable"
+          ]
+        },
+        {
+          "id": "recipe-skills-rollback",
+          "heading": "skills.rollback",
+          "description": "Inspect the stored procedure and verify a prior version exists. Use the current record revision; this is distinct from the human-selected manifest version string such as 1 or 2.",
+          "commands": [
+            "skills.rollback"
+          ]
+        },
+        {
+          "id": "recipe-plugins-list",
+          "heading": "plugins.list",
+          "description": "Use this only to discover plugins already installed by an operator. The consumer surface does not download arbitrary packages, install from a URL, or provide a public marketplace through this command.",
+          "commands": [
+            "plugins.list"
+          ]
+        },
+        {
+          "id": "recipe-plugins-inspect",
+          "heading": "plugins.inspect",
+          "description": "Choose an actual installed plugin ID and inspect it before activation, rollback, or uninstall. This is the safe metadata step for an inactive package; plugins.health instead requires an active plugin.",
+          "commands": [
+            "plugins.inspect"
+          ]
+        },
+        {
+          "id": "recipe-plugins-activate",
+          "heading": "plugins.activate",
+          "description": "Inspect an operator-installed package and use its current record revision. Activation executes its lifecycle backend and can change plugin state; trust in installed code is an operator responsibility.",
+          "commands": [
+            "plugins.activate"
+          ]
+        },
+        {
+          "id": "recipe-plugins-health",
+          "heading": "plugins.health",
+          "description": "Run this only after metadata reports status active. It invokes the active plugin's health backend, so it is not a purely local inspection of an inactive installation.",
+          "commands": [
+            "plugins.health"
+          ]
+        },
+        {
+          "id": "recipe-plugins-disable",
+          "heading": "plugins.disable",
+          "description": "Inspect the active plugin and use its current revision when you intend to remove future use. The host drains its active lifecycle before completing deactivation; this is more than a presentation toggle.",
+          "commands": [
+            "plugins.disable"
+          ]
+        },
+        {
+          "id": "recipe-plugins-rollback",
+          "heading": "plugins.rollback",
+          "description": "Confirm metadata contains a compatible retained previous active version/state, then use the current plugin revision. This is a deliberate return to that retained executable state, not an arbitrary version selector.",
+          "commands": [
+            "plugins.rollback"
+          ]
+        },
+        {
+          "id": "recipe-plugins-uninstall",
+          "heading": "plugins.uninstall",
+          "description": "Inspect the plugin first. It must be installed, disabled, or quarantined with no pending transition; an active plugin must be disabled and drained before uninstall. Use the current revision after that lifecycle change.",
+          "commands": [
+            "plugins.uninstall"
+          ]
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/v1/health",
+      "page": "settings/usage-diagnostics.md",
+      "example": "worked-example-investigate-a-timeout-reservation",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/bootstrap",
+      "page": "getting-started/self-hosted.md",
+      "example": "worked-example-install-and-start-locally",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/bootstrap",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/signup",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agents",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agents/{agent_id}",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/agents/{agent_id}",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/api.py"
+      ],
+      "operations": [
+        "rename",
+        "archive"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents/{agent_id}/lifecycle/{action}",
+      "page": "settings/lifecycle.md",
+      "example": "worked-example-suspend-between-sessions",
+      "sources": [
+        "consumer/api.py"
+      ],
+      "operations": [
+        "start",
+        "status",
+        "suspend",
+        "recover"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents/{agent_id}/commands/{method}",
+      "page": "reference/commands.md",
+      "example": "worked-example-inspect-a-knowledge-revision",
+      "sources": [
+        "consumer/api.py"
+      ],
+      "operations": [
+        "artifacts.read",
+        "attachments.get",
+        "attachments.list",
+        "attachments.read",
+        "attachments.upload",
+        "attention.policy",
+        "children.cancel",
+        "children.delegate",
+        "children.get",
+        "children.list",
+        "commitments.create",
+        "commitments.list",
+        "commitments.progress",
+        "commitments.resume",
+        "commitments.transition",
+        "commitments.wait",
+        "connections.configure",
+        "connections.get",
+        "connections.grant",
+        "connections.list",
+        "connections.probe",
+        "connections.revoke",
+        "conversations.create",
+        "conversations.get",
+        "conversations.list",
+        "conversations.update",
+        "devices.get",
+        "devices.list",
+        "devices.pair",
+        "devices.revoke",
+        "diagnostics.get",
+        "files.delete",
+        "files.list",
+        "files.read",
+        "files.write",
+        "goals.archive",
+        "goals.create",
+        "goals.edit",
+        "goals.list",
+        "goals.transition",
+        "inbox.decide",
+        "inbox.list",
+        "initiative.propose",
+        "knowledge.add",
+        "knowledge.delete",
+        "knowledge.get",
+        "knowledge.list",
+        "memory.correct",
+        "memory.get",
+        "memory.query",
+        "memory.retract",
+        "messages.cancel",
+        "messages.events",
+        "messages.send",
+        "overview",
+        "permissions.approve",
+        "permissions.deny",
+        "permissions.list",
+        "permissions.pending",
+        "permissions.request",
+        "permissions.set",
+        "plugins.activate",
+        "plugins.disable",
+        "plugins.health",
+        "plugins.inspect",
+        "plugins.list",
+        "plugins.rollback",
+        "plugins.uninstall",
+        "providers.activate",
+        "providers.configure",
+        "providers.credentials.list",
+        "providers.credentials.put",
+        "providers.credentials.revoke",
+        "providers.inspect",
+        "providers.list",
+        "providers.probe",
+        "schedules.create",
+        "schedules.list",
+        "schedules.state",
+        "skills.enable",
+        "skills.install",
+        "skills.list",
+        "skills.rollback",
+        "usage.summary",
+        "work.cancel",
+        "work.get",
+        "work.list",
+        "work.overview",
+        "workflows.create",
+        "workflows.get",
+        "workflows.list",
+        "workflows.revise",
+        "workflows.run",
+        "workflows.state",
+        "workflows.step"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agents/{agent_id}/events",
+      "page": "conversations/sources-history-search.md",
+      "example": "worked-example-compare-a-source-with-a-response",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agents/{agent_id}/attachments/{attachment_id}",
+      "page": "knowledge/source-library.md",
+      "example": "worked-example-correct-an-uploaded-maintenance-note",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agents/{agent_id}/artifacts/{artifact_id}",
+      "page": "connections/media.md",
+      "example": "worked-example-transcribe-an-uploaded-recording",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents/{agent_id}/backup",
+      "page": "settings/backup-restore.md",
+      "example": "worked-example-move-research-to-a-new-agent",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents/restore",
+      "page": "settings/backup-restore.md",
+      "example": "worked-example-move-research-to-a-new-agent",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/external/{agent_id}/webhook/{connection_id}/receive",
+      "page": "connections/webhooks.md",
+      "example": "worked-example-report-a-source-update",
+      "sources": [
+        "consumer/api.py"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/external/{agent_id}/device/{connection_id}/{action}",
+      "page": "connections/devices.md",
+      "example": "worked-example-a-read-status-device",
+      "sources": [
+        "consumer/api.py"
+      ],
+      "operations": [
+        "claim",
+        "sync",
+        "poll",
+        "respond"
+      ]
+    }
+  ],
+  "internal_ingress": [
+    {
+      "command": "ingress.webhook",
+      "page": "connections/webhooks.md",
+      "example": "worked-example-report-a-source-update",
+      "sources": [
+        "consumer/application.py",
+        "consumer/api.py",
+        "consumer/webhooks.py"
+      ]
+    },
+    {
+      "command": "ingress.device.claim",
+      "page": "connections/devices.md",
+      "example": "worked-example-a-read-status-device",
+      "sources": [
+        "consumer/application.py",
+        "consumer/api.py",
+        "consumer/device.py"
+      ]
+    },
+    {
+      "command": "ingress.device.sync",
+      "page": "connections/devices.md",
+      "example": "worked-example-a-read-status-device",
+      "sources": [
+        "consumer/application.py",
+        "consumer/api.py",
+        "consumer/device.py"
+      ]
+    },
+    {
+      "command": "ingress.device.poll",
+      "page": "connections/devices.md",
+      "example": "worked-example-a-read-status-device",
+      "sources": [
+        "consumer/application.py",
+        "consumer/api.py",
+        "consumer/device.py"
+      ]
+    },
+    {
+      "command": "ingress.device.respond",
+      "page": "connections/devices.md",
+      "example": "worked-example-a-read-status-device",
+      "sources": [
+        "consumer/application.py",
+        "consumer/api.py",
+        "consumer/device.py"
+      ]
+    }
+  ],
+  "cli": [
+    {
+      "command": "setup",
+      "page": "getting-started/self-hosted.md",
+      "example": "worked-example-install-and-start-locally",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "serve",
+      "page": "getting-started/self-hosted.md",
+      "example": "worked-example-install-and-start-locally",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "login",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "logout",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents list",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents create",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents get",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents rename",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "agents archive",
+      "page": "getting-started/account-and-agents.md",
+      "example": "worked-example-separate-research-from-operations",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "chat",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "events",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "stop",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "command",
+      "page": "cli/using-the-cli.md",
+      "example": "worked-example-run-and-inspect-a-research-request",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "credential",
+      "page": "models/credentials.md",
+      "example": "worked-example-rotate-a-model-key",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "doctor",
+      "page": "settings/usage-diagnostics.md",
+      "example": "worked-example-investigate-a-timeout-reservation",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "backup",
+      "page": "settings/backup-restore.md",
+      "example": "worked-example-move-research-to-a-new-agent",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    },
+    {
+      "command": "restore",
+      "page": "settings/backup-restore.md",
+      "example": "worked-example-move-research-to-a-new-agent",
+      "sources": [
+        "consumer/cli.py"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "agent/attention/__init__.py": "0eb8e257e66b28b532124485bc2bafdf7bafa9f9318493b3340f3bd0837cb0ea",
+    "agent/awareness/evidence.py": "79f5344e28ae5ba87bbb4421cd6bef7d7b36eb4e1801501b7aefc7f9bfbe3854",
+    "agent/commitments/__init__.py": "b76d9a07f2220e2f69ebe12554fbb3dea6aade6ea8ea8758f24b8624ace1d62f",
+    "agent/goals/__init__.py": "f070a5427ceb954c08e421d0bc25eb229af493a53ef796b374733f6a9dedbec8",
+    "agent/initiative/__init__.py": "d9770e540589c04ba98750b26e21a8f3acb250a6a6d881b9cb8c157f77508f65",
+    "agent/memory/__init__.py": "35b35a3df70c69b86068cef2583ec22bf2edff16c9dedbe8b54336f81790f21a",
+    "agent/memory/sleep.py": "37b4d5e9e4e6b2007a5fdba16dd66a6ed995bb05c607e0416c7019b5e403380f",
+    "agent/planner/__init__.py": "b80a1b09472f10f8f785affc920e66aeb8c08278f60fb7a222432c1b21fb60d6",
+    "agent/plugin_host/__init__.py": "107ff64d6ba162e1197aee63be1087c16d62b16b689660c4b76e6137571c2a7b",
+    "agent/plugin_sdk/__init__.py": "0e093fda474ef7e4ada71d7e32e8d7c6853af9ae8db60e206a3750cdcf3a6876",
+    "agent/profile/__init__.py": "e9eb0c353aeef1edb13093750237a069cab7a141745131e1684daebae63886b3",
+    "agent/provider_adapters/__init__.py": "b1dcb9d4b9bf59d1bc5cae9425cab8baf820ffdd5da16919b9fea5ec0b5c9a74",
+    "agent/provider_catalog/__init__.py": "bf1e6f1f8e1b568666b2c4da1044477575fdc741bae91be45a6f2281217ec95d",
+    "agent/runtime/__init__.py": "60436d64c3c6b77c3f8700ca3295901135bf28e634475639c8a0090d880a03f6",
+    "agent/scheduler/__init__.py": "125bc581cc73893b7e1de9a2d2fab3b305092a15660d38c8d951fc2a6145f0ab",
+    "agent/skills/__init__.py": "1742bb29dc6ecdb3431023150c0025845081e6fd84bfbfc47a79221bb620a23b",
+    "agent/subagents/__init__.py": "0235e9a15d1e1c7ca120f46662d95e5865eeb61927db131aefc791af2fa40fae",
+    "agent/tool_runner/__init__.py": "4eb618bd5d1055698d5ccfa2fe9bcbad34dc3e7c06205b2d7b59e19fd5aceac1",
+    "agent/tool_runner/files.py": "3391795a3474968b68aef7182e4d1ae8fcb0081b8d3ef0af7358ac183cb2bfbf",
+    "consumer/api.py": "f1fff24f870c787f67f2146ea8da7dcfe0a177c283209a6528be2cdb5760e2a0",
+    "consumer/application.py": "b18491fc2c6109e7401ec67072db3753d62438b63a1261eb69ec144442949ddd",
+    "consumer/browser.py": "037c89c3fd9114267c4018291049bc10a283f5957362f471cd118e5d92393408",
+    "consumer/cli.py": "6f8a626d1f2eb37ada21cd022620208635a34396ede34190c9d1bd29f18871fa",
+    "consumer/config.py": "d7946aa462bab7f2dbaf1ee406bba8646d760e7696e37dd5b6a2d00a82b79d9c",
+    "consumer/connections.py": "01e1962040d737bca303ae2c37ee3ec6be7494b8784fcebc9d146db670d0bf86",
+    "consumer/connectors.py": "51d7b48a27e5bc59ad39769522c3932946b6c01b2967c4ebc86c39505092c529",
+    "consumer/content.py": "1b25d9e03131aa005e1714e64e21b0425b2697a3ddb2f31ae9a42fc6c3a48d58",
+    "consumer/contracts.py": "83042c61aa73a3dfa2f30ee01bed2e04eb2770943b5032cfafdb9a228b7cea17",
+    "consumer/device.py": "894ef53052cfc98b09393a5da964da804e9c5627606537eb37886327a5b288bf",
+    "consumer/identity.py": "252cc2ed2b4fd8ca880feae7828b27fb4b546d58823f04e574d21c804df21a6b",
+    "consumer/lifecycle.py": "aa7fa5494565e73224a5c5d2ca16fe5c4256088ccb5c63384b2395a6b7adb99c",
+    "consumer/network.py": "6426f2c35af695616a1a1f6206428c4d771052aab8d7bf449b41a073c9304cd1",
+    "consumer/permissions.py": "57485146889561e9d6c33784a144b7640d00f3105b7f9b7ef6b8c1eb54efd4ec",
+    "consumer/portability.py": "ed599f934435303bf8806f2f92389f42bc69214c1172d99839569bc70484fb44",
+    "consumer/providers.py": "3cb36ee15cec5f912c168e1791dd95113af25b56a04437e981aaee2a74386e9f",
+    "consumer/usage.py": "3baf3d59e60a48ad56651c4b7c3c624565f9d0666ac63a26cec908b8e7ee69b7",
+    "consumer/vault.py": "a0d916e4e6b485eea89feb5622187f3555cff62f488bae38bd624caea1daf2f3",
+    "consumer/webhooks.py": "1a57154a3d85d1aa5c82b4352a915641597f481eb5e2b856d9618a35b84e7125",
+    "consumer/work.py": "f1e3bb8f56688a3d15b1899d4648bc8ed8f4cd5552212ad1f8cfdc9826b73ab6",
+    "consumer/workers.py": "bf376ed5bddb203fa71a5170728d541a0b04229b29c18202ae4f25e129121d72",
+    "frontend/src/App.tsx": "cd9fc7bd286dc609bc87bb1af0fc5c36f18f1725fdad4b20a236be3f6f1e49cb",
+    "frontend/src/components/Shell.tsx": "522550ec6e800b765e1482269a454680709fc30d737ecc4e7d351daef76915e4",
+    "frontend/src/hooks/useAgent.tsx": "46449adbecc4c44e376997b6dc79eeb10b5bcf0db863a1c83a3aaf7e8348d422",
+    "frontend/src/hooks/useEvents.ts": "470ee0071b91ade5a761ee68bed9bdae430b5b17e27a7f8d7f3a84e74cc11c10",
+    "frontend/src/pages/ConnectionsPage.tsx": "48c2e9ab9a14666dbda2bb2688f6b54c916d4054c9eed99020e04f9d978253f0",
+    "frontend/src/pages/ConversationPage.tsx": "1046d42e4a11be89c09f261ded385632b546808171b1d1609eb8286afebac09f",
+    "frontend/src/pages/FilesPage.tsx": "e4686b6aa3868045d74e65901b12b47db6d362bd6d04aa7bf62518adeefdd62c",
+    "frontend/src/pages/KnowledgePage.tsx": "70c39dbfe0919a721df823eabb1ba41b2303e3cc520ebd93f8806c6e3685ca73",
+    "frontend/src/pages/SettingsPage.tsx": "df335eab3d1d6481b0db85d30fda1f4df5cec5c6814929c5afaca0723ac4943a",
+    "frontend/src/pages/WorkPage.tsx": "112be58d7f24a82e2a3931a6d423ac05e72760139404571e21f9849b67a18e4a",
+    "native/memory/PROTOCOL.md": "02d881a19a9a0c17c1ac8874f4488709736bacfdbb5f60110d7c1d548e62fdaa",
+    "packaging/Dockerfile": "1f772c2e9e357dbabcb6eeed0e406ea4559f8cf81529f3f3e66d77dbc18e3d3f",
+    "packaging/build-wheel.sh": "6ffb1227edd025f9ace6d8f30c6814b10143d8941ac7dcc7b953138c466478d6",
+    "packaging/sturgis.service": "218fa62142bba6383a5af92ebdca82fc4e2ccb1f2bad0f46959e75ab5539555c",
+    "pyproject.toml": "931237ef83bbfabc6ec4ba270ceef069a6a42c51789b22662c239ab23ff52485",
+    "spec/sturgis-02/http-contract.md": "48ea12cc7ced817552a7c5b9db69aac59219f92d3f1bf7a13de79322e7817bb7"
+  },
+  "totals": {
+    "pages": 40,
+    "words": 33373,
+    "unique_commands": 95,
+    "features": 159,
+    "sources": 56,
+    "routes": 20,
+    "cli_entries": 18,
+    "internal_ingress": 5
+  },
+  "validation": {
+    "method": "Read-only source AST and Markdown/JSON content checks; no product runtime executed.",
+    "allowlisted_commands": 95,
+    "parameter_examples_checked": 94,
+    "private_prompt_examples": 1,
+    "local_links_checked": 146,
+    "missing_links": 0,
+    "command_parameter_fields": "Exact source-declared allowed and required fields checked; behavioral prerequisites are described in manuals.",
+    "sources_exist": 56
+  }
+}

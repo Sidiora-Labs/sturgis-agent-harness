@@ -1,0 +1,11 @@
+{
+  "audience": "developers",
+  "status": "passed",
+  "manuals": 53,
+  "words": 21151,
+  "examples": 53,
+  "mapped_commands": 95,
+  "mapped_sources": 106,
+  "manifest_sha256": "7131233590116ecec2750aff84fac2f2ad5945547307a30b5d37415dfe36624a",
+  "errors": []
+}

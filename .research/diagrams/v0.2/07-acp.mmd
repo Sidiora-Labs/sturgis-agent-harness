@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant C as ACP client
+    participant A as acp
+    participant CH as channel-core
+    participant J as Journal and outbox
+    participant S as scheduler
+    participant R as provider-adapters and tool-runner
+    participant D as delivery
+    C->>A: initialize and session setup
+    A->>CH: Bind identity, scope and negotiated capabilities
+    C->>A: session/prompt
+    A->>CH: Canonical prompt and request correlation
+    CH->>J: Persist input and prompt-turn record
+    J-->>S: Pending input
+    S->>R: Admitted work
+    R->>J: Persist visible content and tool status
+    J-->>D: Pending visible events
+    D->>A: Serialize destination-compatible output
+    A-->>C: session/update notifications
+    C-->>A: session/cancel notification
+    A->>CH: Scoped cancellation
+    CH->>J: Persist cancellation
+    J-->>S: Revoke pending dispatch and cancel attached work
+    S->>R: Cancellation with existing effect tracking
+    R->>J: Partial results and terminal status
+    J-->>D: Remaining updates and turn terminal
+    D->>A: Ordered final updates then turn response
+    A-->>C: session/prompt response with stop reason

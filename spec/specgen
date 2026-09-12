@@ -1,0 +1,3 @@
+#!/bin/sh
+# Regenerate the spec's Markdown mirrors and agent workflow pointers.
+exec cg spec render "$@"

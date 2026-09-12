@@ -1,0 +1,1674 @@
+{
+  "schema": "sturgis-developer-manual-coverage/1",
+  "audience": "developers",
+  "root": "documentation/developers/src/content/docs/guides",
+  "scope": "Authored narrative guides. Generated every-file/function source reference is separately owned by the documentation builder.",
+  "pages": [
+    {
+      "path": "index.md",
+      "title": "Developer manual",
+      "sources": [
+        "agent/runtime/__init__.py",
+        "consumer/application.py",
+        "spec/sturgis-02/contracts.md"
+      ],
+      "functions": [
+        "CoreRuntime",
+        "AgentApplication"
+      ],
+      "examples": [
+        {
+          "id": "index-1",
+          "heading": "Developer manual",
+          "description": "Choose the connection, tool-authoring, human-permission and qualification guides for a new read-only search capability."
+        }
+      ],
+      "modules": [
+        "agent/runtime"
+      ],
+      "role": "index"
+    },
+    {
+      "path": "getting-started/setup.md",
+      "title": "Set up a development checkout",
+      "sources": [
+        "pyproject.toml",
+        "package.json",
+        "CMakeLists.txt",
+        "consumer/config.py",
+        "consumer/cli.py",
+        "packaging/build-wheel.sh"
+      ],
+      "functions": [
+        "Settings",
+        "main"
+      ],
+      "examples": [
+        {
+          "id": "getting-started-setup-1",
+          "heading": "Set up a development checkout",
+          "description": "Create an environment, build assets and start the existing CLI service."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "getting-started/contribution.md",
+      "title": "Make a change without splitting authority",
+      "sources": [
+        "spec/sturgis-02/spec.kvx",
+        "spec/sturgis-02/execution.md",
+        "agent/state/__init__.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "Journal.transaction",
+        "AgentApplication.bind_command"
+      ],
+      "examples": [
+        {
+          "id": "getting-started-contribution-1",
+          "heading": "Make a change without splitting authority",
+          "description": "Add one consumer command through its existing domain owner."
+        }
+      ],
+      "modules": [
+        "agent/state"
+      ]
+    },
+    {
+      "path": "getting-started/qualification.md",
+      "title": "Qualify the current complete system",
+      "sources": [
+        "scripts/qualify_consumer.py",
+        "scripts/verify_native.py",
+        "scripts/verify_web.mjs",
+        "tests/consumer_web/coverage.mjs",
+        "spec/sturgis-02/coverage.md",
+        "scripts/qualify.py"
+      ],
+      "functions": [
+        "main",
+        "validate_python",
+        "validate_native",
+        "validate_web"
+      ],
+      "examples": [
+        {
+          "id": "getting-started-qualification-1",
+          "heading": "Qualify the current complete system",
+          "description": "Run the current aggregate gate and interpret each independent result."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "architecture/overview.md",
+      "title": "Architecture and process boundaries",
+      "sources": [
+        "agent/runtime/__init__.py",
+        "consumer/api.py",
+        "consumer/application.py",
+        "consumer/workers.py",
+        "native/memory/main.cpp"
+      ],
+      "functions": [
+        "CoreRuntime",
+        "AgentApplication",
+        "WorkerManager",
+        "create_app"
+      ],
+      "examples": [
+        {
+          "id": "architecture-overview-1",
+          "heading": "Architecture and process boundaries",
+          "description": "Locate a failing request at the process boundary that owns it."
+        }
+      ],
+      "modules": [
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "architecture/module-ownership.md",
+      "title": "Module ownership map",
+      "sources": [
+        "agent/runtime/__init__.py",
+        "consumer/application.py",
+        "spec/sturgis-01/contracts.md"
+      ],
+      "functions": [
+        "CoreRuntime.__init__",
+        "AgentApplication.__init__"
+      ],
+      "examples": [
+        {
+          "id": "architecture-module-ownership-1",
+          "heading": "Module ownership map",
+          "description": "Route a proposed feature to its existing owner."
+        }
+      ],
+      "modules": [
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "architecture/causality.md",
+      "title": "The complete request and effect loop",
+      "sources": [
+        "consumer/api.py",
+        "consumer/lifecycle.py",
+        "consumer/application.py",
+        "agent/runtime/__init__.py",
+        "agent/tool_runner/__init__.py",
+        "agent/delivery/__init__.py"
+      ],
+      "functions": [
+        "ConsumerControl.command",
+        "Lifecycle.command",
+        "CoreRuntime.accept",
+        "ToolDispatcher.invoke",
+        "Delivery.finish"
+      ],
+      "examples": [
+        {
+          "id": "architecture-causality-1",
+          "heading": "The complete request and effect loop",
+          "description": "Trace one message that reads a workspace file and survives a disconnected browser."
+        }
+      ],
+      "modules": [
+        "agent/runtime",
+        "agent/tool_runner",
+        "agent/delivery"
+      ]
+    },
+    {
+      "path": "architecture/authority-evidence.md",
+      "title": "Authority, evidence and outcomes",
+      "sources": [
+        "agent/awareness/evidence.py",
+        "agent/tool_runner/__init__.py",
+        "consumer/permissions.py",
+        "agent/goals/__init__.py"
+      ],
+      "functions": [
+        "validate_checks",
+        "verify_checks",
+        "ToolDispatcher.reconcile",
+        "Permissions.install",
+        "GoalService.transition"
+      ],
+      "examples": [
+        {
+          "id": "architecture-authority-evidence-1",
+          "heading": "Authority, evidence and outcomes",
+          "description": "Define an outcome check against a trusted operational event."
+        }
+      ],
+      "modules": [
+        "agent/awareness",
+        "agent/tool_runner",
+        "agent/goals"
+      ]
+    },
+    {
+      "path": "core/protocol.md",
+      "title": "Canonical values and framed boundaries",
+      "sources": [
+        "agent/protocol/__init__.py",
+        "agent/framing/__init__.py",
+        "consumer/contracts.py",
+        "native/memory/PROTOCOL.md"
+      ],
+      "functions": [
+        "CoreError",
+        "ToolCall",
+        "ToolResult",
+        "canonical_json",
+        "strict_loads",
+        "FrameCodec"
+      ],
+      "examples": [
+        {
+          "id": "core-protocol-1",
+          "heading": "Canonical values and framed boundaries",
+          "description": "Serialize and reject malformed canonical tool requests."
+        }
+      ],
+      "modules": [
+        "agent/protocol",
+        "agent/framing"
+      ]
+    },
+    {
+      "path": "core/context.md",
+      "title": "Build exact, labeled model context",
+      "sources": [
+        "agent/context/__init__.py",
+        "agent/attention/__init__.py",
+        "agent/runtime/__init__.py",
+        "consumer/content.py"
+      ],
+      "functions": [
+        "ContextBlock",
+        "ContextCompiler.compile",
+        "Attention.select_context",
+        "CoreRuntime._packet"
+      ],
+      "examples": [
+        {
+          "id": "core-context-1",
+          "heading": "Build exact, labeled model context",
+          "description": "Compile a packet with mandatory instructions and attributed user material."
+        }
+      ],
+      "modules": [
+        "agent/context",
+        "agent/attention",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "core/state.md",
+      "title": "Journal records, events and cursors",
+      "sources": [
+        "agent/state/__init__.py",
+        "agent/protocol/__init__.py"
+      ],
+      "functions": [
+        "Journal.transaction",
+        "Journal.put",
+        "Journal.append",
+        "Journal.events",
+        "Journal.advance_cursor",
+        "Record"
+      ],
+      "examples": [
+        {
+          "id": "core-state-1",
+          "heading": "Journal records, events and cursors",
+          "description": "Update a projection and append its causal event atomically."
+        }
+      ],
+      "modules": [
+        "agent/state",
+        "agent/protocol"
+      ]
+    },
+    {
+      "path": "core/artifacts.md",
+      "title": "Immutable artifacts and bounded views",
+      "sources": [
+        "agent/artifacts/__init__.py",
+        "agent/runtime/__init__.py",
+        "consumer/content.py",
+        "consumer/api.py"
+      ],
+      "functions": [
+        "ArtifactStore.put",
+        "ArtifactStore.get",
+        "CoreRuntime._bounded_result",
+        "ConsumerControl.artifact"
+      ],
+      "examples": [
+        {
+          "id": "core-artifacts-1",
+          "heading": "Immutable artifacts and bounded views",
+          "description": "Store bytes and verify their integrity before use."
+        }
+      ],
+      "modules": [
+        "agent/artifacts",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "core/runtime.md",
+      "title": "Compose and supervise a persistent runtime",
+      "sources": [
+        "agent/runtime/__init__.py",
+        "agent/channel_adapters/__init__.py",
+        "agent/provider_catalog/__init__.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "CoreRuntime",
+        "CoreRuntime.start",
+        "CoreRuntime.accept",
+        "CoreRuntime.submit_event",
+        "CoreRuntime.pause_admission"
+      ],
+      "examples": [
+        {
+          "id": "core-runtime-1",
+          "heading": "Compose and supervise a persistent runtime",
+          "description": "Embed a core over a caller-owned channel and an observed provider."
+        }
+      ],
+      "modules": [
+        "agent/runtime",
+        "agent/channel_adapters",
+        "agent/provider_catalog"
+      ]
+    },
+    {
+      "path": "core/scheduler.md",
+      "title": "Admission, leases and resource grants",
+      "sources": [
+        "agent/scheduler/__init__.py",
+        "agent/goals/__init__.py",
+        "agent/tool_runner/__init__.py"
+      ],
+      "functions": [
+        "Scheduler.submit",
+        "Scheduler.admit",
+        "Scheduler.authorize",
+        "Scheduler.record_usage",
+        "Scheduler.reconcile_usage",
+        "Scheduler.finish"
+      ],
+      "examples": [
+        {
+          "id": "core-scheduler-1",
+          "heading": "Admission, leases and resource grants",
+          "description": "Submit bounded standalone work and observe a scheduler-owned generation."
+        }
+      ],
+      "modules": [
+        "agent/scheduler",
+        "agent/goals",
+        "agent/tool_runner"
+      ]
+    },
+    {
+      "path": "core/waits-timers.md",
+      "title": "Durable waits and calendar schedules",
+      "sources": [
+        "agent/scheduler/__init__.py",
+        "agent/commitments/__init__.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "Scheduler.register_wait",
+        "Scheduler.park",
+        "Scheduler.fire_waits",
+        "Scheduler.schedule",
+        "Scheduler.tick",
+        "next_occurrence"
+      ],
+      "examples": [
+        {
+          "id": "core-waits-timers-1",
+          "heading": "Durable waits and calendar schedules",
+          "description": "Persist a one-shot schedule without adding a separate timer controller."
+        }
+      ],
+      "modules": [
+        "agent/scheduler",
+        "agent/commitments",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "core/cancellation-recovery.md",
+      "title": "Cancellation, restart and unknown outcomes",
+      "sources": [
+        "agent/runtime/__init__.py",
+        "agent/tool_runner/__init__.py",
+        "agent/tool_runner/process.py",
+        "consumer/lifecycle.py",
+        "consumer/workers.py"
+      ],
+      "functions": [
+        "CoreRuntime._recover",
+        "ToolDispatcher.recover",
+        "ProcessRunner.run",
+        "Lifecycle._recover_commands",
+        "WorkerClient.request"
+      ],
+      "examples": [
+        {
+          "id": "core-cancellation-recovery-1",
+          "heading": "Cancellation, restart and unknown outcomes",
+          "description": "Diagnose an effect whose response disappeared during a restart."
+        }
+      ],
+      "modules": [
+        "agent/runtime",
+        "agent/tool_runner"
+      ]
+    },
+    {
+      "path": "memory/records-wire.md",
+      "title": "Native memory records and wire protocol",
+      "sources": [
+        "native/memory/PROTOCOL.md",
+        "native/memory/main.cpp",
+        "native/memory/engine.cpp",
+        "agent/memory/client.py"
+      ],
+      "functions": [
+        "NativeMemoryClient",
+        "NativeMemoryClient.ingest",
+        "NativeMemoryClient.request"
+      ],
+      "examples": [
+        {
+          "id": "memory-records-wire-1",
+          "heading": "Native memory records and wire protocol",
+          "description": "Ingest a temporal record through memory/1 and preserve its idempotency identity."
+        }
+      ],
+      "modules": [
+        "agent/memory"
+      ]
+    },
+    {
+      "path": "memory/retrieval.md",
+      "title": "Retrieval, time and embedding spaces",
+      "sources": [
+        "native/memory/engine.cpp",
+        "agent/memory/client.py",
+        "agent/context/__init__.py"
+      ],
+      "functions": [
+        "NativeMemoryClient.query",
+        "memory_blocks",
+        "ContextBlock"
+      ],
+      "examples": [
+        {
+          "id": "memory-retrieval-1",
+          "heading": "Retrieval, time and embedding spaces",
+          "description": "Combine lexical, concept and vector recall without confusing validity with historical knowledge."
+        }
+      ],
+      "modules": [
+        "agent/memory",
+        "agent/context"
+      ]
+    },
+    {
+      "path": "memory/generations-leases.md",
+      "title": "Generation publication, leases and pruning",
+      "sources": [
+        "native/memory/engine.cpp",
+        "native/memory/PROTOCOL.md",
+        "agent/memory/sleep.py",
+        "agent/memory/client.py"
+      ],
+      "functions": [
+        "NativeMemoryClient.request",
+        "MemorySleep.run_cycle"
+      ],
+      "examples": [
+        {
+          "id": "memory-generations-leases-1",
+          "heading": "Generation publication, leases and pruning",
+          "description": "Publish a snapshot, hold a reader lease, and release it explicitly."
+        }
+      ],
+      "modules": [
+        "agent/memory"
+      ]
+    },
+    {
+      "path": "memory/ingestion-sleep.md",
+      "title": "Journal ingestion and daily memory sleep",
+      "sources": [
+        "agent/memory/ingestion.py",
+        "agent/memory/sleep.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "MemoryIngestor.process_event",
+        "MemoryIngestor.replay",
+        "MemorySleep.run_cycle",
+        "consolidate_duplicates"
+      ],
+      "examples": [
+        {
+          "id": "memory-ingestion-sleep-1",
+          "heading": "Journal ingestion and daily memory sleep",
+          "description": "Replay an event once and resume an interrupted daily publication cycle."
+        }
+      ],
+      "modules": [
+        "agent/memory",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "behavior/profiles-awareness.md",
+      "title": "Profiles and observed self-state",
+      "sources": [
+        "agent/profile/__init__.py",
+        "agent/awareness/__init__.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "ProfileRegistry.register",
+        "ProfileRegistry.update",
+        "ProfileRegistry.resources",
+        "Awareness.register_watcher",
+        "Awareness.observe",
+        "Awareness.snapshot"
+      ],
+      "examples": [
+        {
+          "id": "behavior-profiles-awareness-1",
+          "heading": "Profiles and observed self-state",
+          "description": "Record one attributed observation without turning it into a capability grant."
+        }
+      ],
+      "modules": [
+        "agent/profile",
+        "agent/awareness",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "behavior/goals-budgets.md",
+      "title": "Goals and cumulative budgets",
+      "sources": [
+        "agent/goals/__init__.py",
+        "agent/scheduler/__init__.py",
+        "consumer/usage.py",
+        "consumer/work.py"
+      ],
+      "functions": [
+        "GoalService.create",
+        "GoalService.transition",
+        "GoalService.reserve",
+        "GoalService.charge",
+        "GoalService.release",
+        "UsageView.summary"
+      ],
+      "examples": [
+        {
+          "id": "behavior-goals-budgets-1",
+          "heading": "Goals and cumulative budgets",
+          "description": "Activate a bounded goal and preserve actual usage through an overrun."
+        }
+      ],
+      "modules": [
+        "agent/goals",
+        "agent/scheduler"
+      ]
+    },
+    {
+      "path": "behavior/commitments-plans.md",
+      "title": "Commitments, dependency plans and completion",
+      "sources": [
+        "agent/commitments/__init__.py",
+        "agent/planner/__init__.py",
+        "consumer/work.py"
+      ],
+      "functions": [
+        "CommitmentService.create",
+        "CommitmentService.begin_wait",
+        "CommitmentService.resume_wait",
+        "Planner.create",
+        "Planner.ready",
+        "Planner.transition_step",
+        "WorkViews.run_workflow"
+      ],
+      "examples": [
+        {
+          "id": "behavior-commitments-plans-1",
+          "heading": "Commitments, dependency plans and completion",
+          "description": "Create a two-step dependency plan and understand why a check is required before completion."
+        }
+      ],
+      "modules": [
+        "agent/commitments",
+        "agent/planner"
+      ]
+    },
+    {
+      "path": "behavior/initiative-attention.md",
+      "title": "Initiative and attention",
+      "sources": [
+        "agent/initiative/__init__.py",
+        "agent/attention/__init__.py",
+        "consumer/work.py",
+        "agent/context/__init__.py"
+      ],
+      "functions": [
+        "Initiative.propose",
+        "score",
+        "Attention.evaluate_initiative",
+        "Attention.select_context",
+        "WorkViews.decide_inbox"
+      ],
+      "examples": [
+        {
+          "id": "behavior-initiative-attention-1",
+          "heading": "Initiative and attention",
+          "description": "Evaluate a proactive proposal under quiet hours and then require normal admission."
+        }
+      ],
+      "modules": [
+        "agent/initiative",
+        "agent/attention",
+        "agent/context"
+      ]
+    },
+    {
+      "path": "behavior/evolution-evaluation.md",
+      "title": "Governed source evolution and independent evaluation",
+      "sources": [
+        "agent/self_evolution/__init__.py",
+        "agent/meta_harness/__init__.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "EvolutionAuthority",
+        "SourceEdit",
+        "SelfEvolution.stage",
+        "SelfEvolution.evaluate",
+        "SelfEvolution.activate",
+        "SelfEvolution.observe",
+        "SelfEvolution.rollback",
+        "MetaHarness",
+        "MetaHarness.diagnose"
+      ],
+      "examples": [
+        {
+          "id": "behavior-evolution-evaluation-1",
+          "heading": "Governed source evolution and independent evaluation",
+          "description": "Stage a preimage-checked source edit and require build, shadow and canary evidence."
+        }
+      ],
+      "modules": [
+        "agent/self_evolution",
+        "agent/meta_harness",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "integrations/tool-authoring.md",
+      "title": "Author a canonical tool",
+      "sources": [
+        "agent/tool_runner/__init__.py",
+        "agent/plugin_sdk/__init__.py",
+        "agent/protocol/__init__.py",
+        "agent/scheduler/__init__.py"
+      ],
+      "functions": [
+        "ToolDispatcher.register",
+        "ToolDispatcher.invoke",
+        "ExecutionContext",
+        "ExecutorResult",
+        "validate_schema"
+      ],
+      "examples": [
+        {
+          "id": "integrations-tool-authoring-1",
+          "heading": "Author a canonical tool",
+          "description": "Register and invoke a read-only echo tool with a real bounded scheduler grant."
+        }
+      ],
+      "modules": [
+        "agent/tool_runner",
+        "agent/plugin_sdk",
+        "agent/protocol",
+        "agent/scheduler"
+      ]
+    },
+    {
+      "path": "integrations/tool-effects.md",
+      "title": "Errors, idempotence and effect reconciliation",
+      "sources": [
+        "agent/tool_runner/__init__.py",
+        "agent/protocol/__init__.py",
+        "agent/scheduler/__init__.py",
+        "tests/integration/test_evidence_admission.py"
+      ],
+      "functions": [
+        "ToolDispatcher._claim",
+        "ToolDispatcher.recover",
+        "ToolDispatcher.reconcile",
+        "Scheduler.reconcile_usage"
+      ],
+      "examples": [
+        {
+          "id": "integrations-tool-effects-1",
+          "heading": "Errors, idempotence and effect reconciliation",
+          "description": "Attach an actual trusted observation to the exact indeterminate request."
+        }
+      ],
+      "modules": [
+        "agent/tool_runner",
+        "agent/protocol",
+        "agent/scheduler"
+      ]
+    },
+    {
+      "path": "integrations/files-processes.md",
+      "title": "Rooted files and confined processes",
+      "sources": [
+        "agent/tool_runner/files.py",
+        "agent/tool_runner/process.py",
+        "agent/tool_runner/__init__.py"
+      ],
+      "functions": [
+        "WorkspaceFs.read",
+        "WorkspaceFs.write",
+        "WorkspaceFs.edit",
+        "ProcessRunner.run",
+        "file_executor",
+        "process_executor"
+      ],
+      "examples": [
+        {
+          "id": "integrations-files-processes-1",
+          "heading": "Rooted files and confined processes",
+          "description": "Replace a file only if its observed preimage is still current."
+        }
+      ],
+      "modules": [
+        "agent/tool_runner"
+      ]
+    },
+    {
+      "path": "integrations/plugins.md",
+      "title": "Plugin contracts and lifecycle",
+      "sources": [
+        "agent/plugin_sdk/__init__.py",
+        "agent/plugin_host/__init__.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "PluginManifest",
+        "Capability",
+        "serve",
+        "PluginHost.install",
+        "PluginHost.activate",
+        "PluginHost.register_tools",
+        "PluginHost.rollback"
+      ],
+      "examples": [
+        {
+          "id": "integrations-plugins-1",
+          "heading": "Plugin contracts and lifecycle",
+          "description": "Implement a plugin worker handler with explicit returned state."
+        }
+      ],
+      "modules": [
+        "agent/plugin_sdk",
+        "agent/plugin_host"
+      ]
+    },
+    {
+      "path": "integrations/skills.md",
+      "title": "Versioned skills and learned procedures",
+      "sources": [
+        "agent/skills/__init__.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "SkillRegistry.install",
+        "SkillRegistry.discover",
+        "SkillRegistry.select",
+        "SkillRegistry.synthesize",
+        "SkillRegistry.review",
+        "SkillRegistry.activate",
+        "SkillRegistry.rollback"
+      ],
+      "examples": [
+        {
+          "id": "integrations-skills-1",
+          "heading": "Versioned skills and learned procedures",
+          "description": "Install a procedure and inspect why it is selected or excluded."
+        }
+      ],
+      "modules": [
+        "agent/skills"
+      ]
+    },
+    {
+      "path": "integrations/subagents.md",
+      "title": "Scoped subagents and result admission",
+      "sources": [
+        "agent/subagents/__init__.py",
+        "agent/scheduler/__init__.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "Subagents.delegate",
+        "Subagents.message",
+        "Subagents.wait_for",
+        "Subagents.submit_result",
+        "Subagents.scout",
+        "CoreRuntime.delegate"
+      ],
+      "examples": [
+        {
+          "id": "integrations-subagents-1",
+          "heading": "Scoped subagents and result admission",
+          "description": "Delegate one bounded child without creating new authority or losing the parent allocation."
+        }
+      ],
+      "modules": [
+        "agent/subagents",
+        "agent/scheduler",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "integrations/providers.md",
+      "title": "Provider catalog and streaming adapter",
+      "sources": [
+        "agent/provider_catalog/__init__.py",
+        "agent/provider_adapters/__init__.py",
+        "agent/runtime/__init__.py",
+        "consumer/providers.py"
+      ],
+      "functions": [
+        "ProviderCatalog.register",
+        "ProviderCatalog.observe",
+        "ProviderCatalog.resolve",
+        "HTTPProvider.stream",
+        "ProviderEvent"
+      ],
+      "examples": [
+        {
+          "id": "integrations-providers-1",
+          "heading": "Provider catalog and streaming adapter",
+          "description": "Register a provider, attach a bounded observation, and preserve terminal semantics."
+        }
+      ],
+      "modules": [
+        "agent/provider_catalog",
+        "agent/provider_adapters",
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "integrations/channels-delivery.md",
+      "title": "Channels, bindings and durable delivery",
+      "sources": [
+        "agent/channel_core/__init__.py",
+        "agent/channel_adapters/__init__.py",
+        "agent/delivery/__init__.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "ChannelCore.bind",
+        "ChannelCore.admit",
+        "StreamChannelAdapter",
+        "Delivery.enqueue",
+        "Delivery.dispatch_one",
+        "Delivery.acknowledge",
+        "Delivery.replay"
+      ],
+      "examples": [
+        {
+          "id": "integrations-channels-delivery-1",
+          "heading": "Channels, bindings and durable delivery",
+          "description": "Admit a canonical input and trace its ordered output receipt."
+        }
+      ],
+      "modules": [
+        "agent/channel_core",
+        "agent/channel_adapters",
+        "agent/delivery"
+      ]
+    },
+    {
+      "path": "integrations/acp.md",
+      "title": "Agent Client Protocol integration",
+      "sources": [
+        "agent/acp/__init__.py",
+        "agent/runtime/__init__.py",
+        "agent/channel_core/__init__.py"
+      ],
+      "functions": [
+        "AcpFacade.handle",
+        "ACPAdapter.send",
+        "CoreRuntime.acp",
+        "CoreRuntime._acp_submit"
+      ],
+      "examples": [
+        {
+          "id": "integrations-acp-1",
+          "heading": "Agent Client Protocol integration",
+          "description": "Initialize an ACP connection and bind a text session to the existing runtime."
+        }
+      ],
+      "modules": [
+        "agent/acp",
+        "agent/runtime",
+        "agent/channel_core"
+      ]
+    },
+    {
+      "path": "consumer/ownership-auth.md",
+      "title": "Accounts, ownership and human permissions",
+      "sources": [
+        "consumer/identity.py",
+        "consumer/api.py",
+        "consumer/permissions.py",
+        "consumer/application.py"
+      ],
+      "functions": [
+        "Accounts.bootstrap",
+        "Accounts.login",
+        "Accounts.authenticate",
+        "Accounts.validate_csrf",
+        "AgentDirectory.authorize",
+        "Permissions.install",
+        "Permissions.approve"
+      ],
+      "examples": [
+        {
+          "id": "consumer-ownership-auth-1",
+          "heading": "Accounts, ownership and human permissions",
+          "description": "Follow owner authorization and a one-use approval through a tool attempt."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "consumer/vault-provider-settings.md",
+      "title": "Credential vault and provider settings",
+      "sources": [
+        "consumer/vault.py",
+        "consumer/providers.py",
+        "consumer/application.py",
+        "consumer/network.py"
+      ],
+      "functions": [
+        "CredentialVault.put",
+        "CredentialVault.current",
+        "CredentialVault.resolve",
+        "ProviderSettings.configure",
+        "ProviderSettings.probe",
+        "ProviderSettings.activate",
+        "ProviderSettings.ensure_selected_ready"
+      ],
+      "examples": [
+        {
+          "id": "consumer-vault-provider-settings-1",
+          "heading": "Credential vault and provider settings",
+          "description": "Rotate a key and deliberately reprobe the changed provider configuration."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "consumer/network-connections.md",
+      "title": "Network policy and revisioned connections",
+      "sources": [
+        "consumer/network.py",
+        "consumer/connections.py",
+        "consumer/connectors.py",
+        "consumer/browser.py"
+      ],
+      "functions": [
+        "NetworkPolicy.request",
+        "NetworkPolicy.stream",
+        "ConnectionService.configure",
+        "ConnectionService.grant",
+        "ConnectionService.probe",
+        "ConnectionService.pinned",
+        "ConnectorSuite"
+      ],
+      "examples": [
+        {
+          "id": "consumer-network-connections-1",
+          "heading": "Network policy and revisioned connections",
+          "description": "Configure a search connection without granting arbitrary origins or trusting readiness labels."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "consumer/http-commands.md",
+      "title": "HTTP routes and strict command schemas",
+      "sources": [
+        "consumer/api.py",
+        "consumer/application.py",
+        "consumer/contracts.py",
+        "spec/sturgis-02/http-contract.md",
+        "consumer/work.py",
+        "consumer/permissions.py",
+        "consumer/device.py"
+      ],
+      "functions": [
+        "ConsumerControl.command",
+        "AgentApplication._register_commands",
+        "AgentApplication._register_domain_commands",
+        "AgentApplication.command",
+        "object_body"
+      ],
+      "examples": [
+        {
+          "id": "consumer-http-commands-1",
+          "heading": "HTTP routes and strict command schemas",
+          "description": "Create a goal through the same strict command envelope used by both clients."
+        }
+      ],
+      "modules": [],
+      "commands": [
+        "artifacts.read",
+        "attachments.get",
+        "attachments.list",
+        "attachments.read",
+        "attachments.upload",
+        "attention.policy",
+        "children.cancel",
+        "children.delegate",
+        "children.get",
+        "children.list",
+        "commitments.create",
+        "commitments.list",
+        "commitments.progress",
+        "commitments.resume",
+        "commitments.transition",
+        "commitments.wait",
+        "connections.configure",
+        "connections.get",
+        "connections.grant",
+        "connections.list",
+        "connections.probe",
+        "connections.revoke",
+        "conversations.create",
+        "conversations.get",
+        "conversations.list",
+        "conversations.update",
+        "devices.get",
+        "devices.list",
+        "devices.pair",
+        "devices.revoke",
+        "diagnostics.get",
+        "files.delete",
+        "files.list",
+        "files.read",
+        "files.write",
+        "goals.archive",
+        "goals.create",
+        "goals.edit",
+        "goals.list",
+        "goals.transition",
+        "inbox.decide",
+        "inbox.list",
+        "initiative.propose",
+        "knowledge.add",
+        "knowledge.delete",
+        "knowledge.get",
+        "knowledge.list",
+        "memory.correct",
+        "memory.get",
+        "memory.query",
+        "memory.retract",
+        "messages.cancel",
+        "messages.events",
+        "messages.send",
+        "overview",
+        "permissions.approve",
+        "permissions.deny",
+        "permissions.list",
+        "permissions.pending",
+        "permissions.request",
+        "permissions.set",
+        "plugins.activate",
+        "plugins.disable",
+        "plugins.health",
+        "plugins.inspect",
+        "plugins.list",
+        "plugins.rollback",
+        "plugins.uninstall",
+        "providers.activate",
+        "providers.configure",
+        "providers.credentials.list",
+        "providers.credentials.put",
+        "providers.credentials.revoke",
+        "providers.inspect",
+        "providers.list",
+        "providers.probe",
+        "schedules.create",
+        "schedules.list",
+        "schedules.state",
+        "skills.enable",
+        "skills.install",
+        "skills.list",
+        "skills.rollback",
+        "usage.summary",
+        "work.cancel",
+        "work.get",
+        "work.list",
+        "work.overview",
+        "workflows.create",
+        "workflows.get",
+        "workflows.list",
+        "workflows.revise",
+        "workflows.run",
+        "workflows.state",
+        "workflows.step"
+      ]
+    },
+    {
+      "path": "consumer/workers-ipc.md",
+      "title": "Private workers and authenticated IPC",
+      "sources": [
+        "consumer/workers.py",
+        "consumer/worker.py",
+        "consumer/config.py",
+        "consumer/contracts.py",
+        "agent/framing/__init__.py"
+      ],
+      "functions": [
+        "WorkerConfig",
+        "WorkerManager",
+        "WorkerClient.request",
+        "WorkerServer._authenticate",
+        "WorkerServer._claim"
+      ],
+      "examples": [
+        {
+          "id": "consumer-workers-ipc-1",
+          "heading": "Private workers and authenticated IPC",
+          "description": "Trace a private request identity through anti-replay validation and durable receipt lookup."
+        }
+      ],
+      "modules": [
+        "agent/framing"
+      ]
+    },
+    {
+      "path": "consumer/lifecycle.md",
+      "title": "Dormancy, archive and scheduled wake",
+      "sources": [
+        "consumer/lifecycle.py",
+        "consumer/work.py",
+        "consumer/application.py",
+        "consumer/workers.py",
+        "agent/runtime/__init__.py"
+      ],
+      "functions": [
+        "Lifecycle.suspend",
+        "Lifecycle.status",
+        "Lifecycle.snapshot",
+        "Lifecycle.recover",
+        "Lifecycle._wake",
+        "WorkViews.pause",
+        "AgentApplication.prepare_suspend"
+      ],
+      "examples": [
+        {
+          "id": "consumer-lifecycle-1",
+          "heading": "Dormancy, archive and scheduled wake",
+          "description": "Suspend an idle agent while retaining the next scheduled wake."
+        }
+      ],
+      "modules": [
+        "agent/runtime"
+      ]
+    },
+    {
+      "path": "consumer/backup-restore.md",
+      "title": "Logical backup and idempotent restore",
+      "sources": [
+        "consumer/portability.py",
+        "consumer/cli.py",
+        "frontend/src/pages/SettingsPage.tsx",
+        "consumer/lifecycle.py"
+      ],
+      "functions": [
+        "Portability.backup",
+        "Portability.restore",
+        "Portability.recover",
+        "_export",
+        "_unpack"
+      ],
+      "examples": [
+        {
+          "id": "consumer-backup-restore-1",
+          "heading": "Logical backup and idempotent restore",
+          "description": "Validate a raw ZIP and retry an uncertain restore with the same identity."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "consumer/content-work.md",
+      "title": "Content, conversations and executable workflows",
+      "sources": [
+        "consumer/content.py",
+        "consumer/application.py",
+        "consumer/work.py",
+        "consumer/usage.py",
+        "agent/planner/__init__.py"
+      ],
+      "functions": [
+        "ConsumerData",
+        "AgentApplication.message_send",
+        "AgentApplication._source_blocks",
+        "WorkViews.run_workflow",
+        "WorkViews.advance",
+        "UsageView.summary"
+      ],
+      "examples": [
+        {
+          "id": "consumer-content-work-1",
+          "heading": "Content, conversations and executable workflows",
+          "description": "Upload a source, attach it to a message and run dependency steps through real model work."
+        }
+      ],
+      "modules": [
+        "agent/planner"
+      ]
+    },
+    {
+      "path": "integrations/external-devices.md",
+      "title": "Signed webhooks and paired device clients",
+      "sources": [
+        "consumer/webhooks.py",
+        "consumer/device.py",
+        "consumer/api.py",
+        "consumer/connections.py"
+      ],
+      "functions": [
+        "signing_bytes",
+        "device_signing_bytes",
+        "WebhookIngress.admit",
+        "DeviceService.pair",
+        "DeviceService.claim",
+        "DeviceService.poll",
+        "DeviceService.respond"
+      ],
+      "examples": [
+        {
+          "id": "integrations-external-devices-1",
+          "heading": "Signed webhooks and paired device clients",
+          "description": "Implement the one-time pairing and signed poll/respond handshake."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "integrations/media-browser.md",
+      "title": "Media adapters and the managed browser",
+      "sources": [
+        "consumer/connectors.py",
+        "consumer/browser.py",
+        "consumer/network.py",
+        "consumer/config.py"
+      ],
+      "functions": [
+        "ConnectorSuite.transcribe",
+        "ConnectorSuite.speak",
+        "ConnectorSuite.generate_image",
+        "ConnectorSuite.inspect_browser",
+        "BrowserBackend"
+      ],
+      "examples": [
+        {
+          "id": "integrations-media-browser-1",
+          "heading": "Media adapters and the managed browser",
+          "description": "Trace an audio artifact to transcription and distinguish catalog readiness from an executed operation."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "frontend/structure.md",
+      "title": "Frontend architecture and page ownership",
+      "sources": [
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/components/Shell.tsx",
+        "frontend/src/components/ui.tsx",
+        "frontend/src/lib/types.ts",
+        "frontend/src/pages/shared.tsx",
+        "frontend/vite.config.ts",
+        "frontend/src/global.css",
+        "frontend/src/material.css",
+        "frontend/src/pages/conversation.css",
+        "frontend/src/pages/work-connections.css"
+      ],
+      "functions": [
+        "App",
+        "Shell",
+        "AgentContext",
+        "Button",
+        "Modal",
+        "Select"
+      ],
+      "examples": [
+        {
+          "id": "frontend-structure-1",
+          "heading": "Frontend architecture and page ownership",
+          "description": "Add a domain screen using shared context, primitives and existing commands."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "frontend/data-events.md",
+      "title": "Queries, lifecycle fencing and event replay",
+      "sources": [
+        "frontend/src/hooks/useAgent.tsx",
+        "frontend/src/hooks/useEvents.ts",
+        "frontend/src/lib/api.ts",
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ConversationPage.tsx",
+        "consumer/api.py"
+      ],
+      "functions": [
+        "useRuntimeState",
+        "canWakeRuntime",
+        "pauseRuntimeQueries",
+        "useAgentQuery",
+        "useEvents",
+        "api",
+        "command"
+      ],
+      "examples": [
+        {
+          "id": "frontend-data-events-1",
+          "heading": "Queries, lifecycle fencing and event replay",
+          "description": "Suspend an agent and prove background refetch cannot silently wake it."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "frontend/mutation-recovery.md",
+      "title": "Mutation identities and unknown acknowledgments",
+      "sources": [
+        "frontend/src/hooks/useAgent.tsx",
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/pages/SettingsPage.tsx",
+        "frontend/src/lib/api.ts",
+        "consumer/lifecycle.py",
+        "consumer/portability.py"
+      ],
+      "functions": [
+        "useAction",
+        "fingerprint",
+        "stored",
+        "persist",
+        "requestId",
+        "Portability.restore"
+      ],
+      "examples": [
+        {
+          "id": "frontend-mutation-recovery-1",
+          "heading": "Mutation identities and unknown acknowledgments",
+          "description": "Retry the same accepted action after a network failure without repeating its effect."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "frontend/accessibility.md",
+      "title": "Accessible components and browser verification",
+      "sources": [
+        "frontend/src/components/ui.tsx",
+        "frontend/src/components/Shell.tsx",
+        "frontend/src/components/components.css",
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/pages/WorkPage.tsx",
+        "frontend/src/pages/ConnectionsPage.tsx",
+        "frontend/src/pages/FilesPage.tsx",
+        "frontend/src/pages/KnowledgePage.tsx",
+        "frontend/src/pages/SettingsPage.tsx",
+        "tests/consumer_web/journey.mjs"
+      ],
+      "functions": [
+        "Modal",
+        "Tooltip",
+        "Dropdown",
+        "Select",
+        "Shell"
+      ],
+      "examples": [
+        {
+          "id": "frontend-accessibility-1",
+          "heading": "Accessible components and browser verification",
+          "description": "Review a connection dialog with keyboard input and an actual failed probe."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "operations/packaging.md",
+      "title": "Build and operate the packaged application",
+      "sources": [
+        "packaging/build-wheel.sh",
+        "packaging/Dockerfile",
+        "packaging/sturgis.service",
+        "pyproject.toml",
+        "consumer/config.py",
+        "consumer/cli.py",
+        "consumer/__init__.py",
+        "consumer/__main__.py"
+      ],
+      "functions": [
+        "Settings.from_env",
+        "main"
+      ],
+      "examples": [
+        {
+          "id": "operations-packaging-1",
+          "heading": "Build and operate the packaged application",
+          "description": "Build a wheel and start it from an environment outside the source checkout."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "operations/debugging.md",
+      "title": "Debug failures by causal boundary",
+      "sources": [
+        "consumer/application.py",
+        "consumer/workers.py",
+        "consumer/lifecycle.py",
+        "agent/runtime/__init__.py",
+        "agent/tool_runner/__init__.py",
+        "agent/memory/client.py",
+        "consumer/usage.py"
+      ],
+      "functions": [
+        "AgentApplication.diagnostics",
+        "Lifecycle.status",
+        "WorkerManager.status",
+        "ToolDispatcher.reconcile",
+        "NativeMemoryClient.start",
+        "UsageView.summary"
+      ],
+      "examples": [
+        {
+          "id": "operations-debugging-1",
+          "heading": "Debug failures by causal boundary",
+          "description": "Investigate a message with partial text, a failed model turn and an unsettled tool reservation."
+        }
+      ],
+      "modules": [
+        "agent/runtime",
+        "agent/tool_runner",
+        "agent/memory"
+      ]
+    },
+    {
+      "path": "operations/release-migration.md",
+      "title": "Release evidence and migration boundaries",
+      "sources": [
+        "scripts/qualify_consumer.py",
+        "spec/sturgis-02/coverage.md",
+        "consumer/portability.py",
+        "agent/self_evolution/__init__.py",
+        "native/memory/PROTOCOL.md",
+        "docs/qualification.md",
+        "docs/sturgis-02/qualification.md"
+      ],
+      "functions": [
+        "snapshot",
+        "Portability.restore",
+        "SelfEvolution.activate",
+        "SelfEvolution.restore_baseline"
+      ],
+      "examples": [
+        {
+          "id": "operations-release-migration-1",
+          "heading": "Release evidence and migration boundaries",
+          "description": "Assess whether a change needs new qualification, logical restore or an unsupported state migration."
+        }
+      ],
+      "modules": [
+        "agent/self_evolution"
+      ]
+    },
+    {
+      "path": "getting-started/documentation.md",
+      "title": "Contribute to both documentation sites",
+      "sources": [
+        "scripts/docs_gate.py",
+        "documentation/package.json",
+        "documentation/requirements.txt",
+        "documentation/examples/first_mechanisms.py"
+      ],
+      "functions": [
+        "content",
+        "command_inventory",
+        "main"
+      ],
+      "examples": [
+        {
+          "id": "getting-started-documentation-1",
+          "heading": "Contribute to both documentation sites",
+          "description": "Change a guide, rebuild both sites, and close only a fresh verified docs receipt."
+        }
+      ],
+      "modules": []
+    },
+    {
+      "path": "getting-started/first-mechanisms.md",
+      "title": "Tutorial: durable state before agent behavior",
+      "sources": [
+        "documentation/examples/first_mechanisms.py",
+        "agent/state/__init__.py",
+        "agent/goals/__init__.py",
+        "agent/framing/__init__.py",
+        "agent/protocol/__init__.py"
+      ],
+      "functions": [
+        "main",
+        "Journal.put",
+        "Journal.get",
+        "GoalService.reserve",
+        "GoalService.charge",
+        "FrameCodec.feed",
+        "strict_loads"
+      ],
+      "examples": [
+        {
+          "id": "getting-started-first-mechanisms-1",
+          "heading": "Tutorial: durable state before agent behavior",
+          "description": "Run first_mechanisms.py and inspect each asserted invariant."
+        }
+      ],
+      "modules": [
+        "agent/state",
+        "agent/goals",
+        "agent/framing",
+        "agent/protocol"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "agent/acp/__init__.py": "6e0c980f80c539aeed2f79f1395597bf5c17bcaa2b20ca21b46e35158e4f19cf",
+    "agent/artifacts/__init__.py": "0ad96cd2aaf7761ec94140edf4ba672d14e0914db15d5aaa902ab0eb35e3ba56",
+    "agent/attention/__init__.py": "0eb8e257e66b28b532124485bc2bafdf7bafa9f9318493b3340f3bd0837cb0ea",
+    "agent/awareness/__init__.py": "0895b4da88ef2ef516d17b3c0fe923595365bd24e987e692c04772da19ec9557",
+    "agent/awareness/evidence.py": "79f5344e28ae5ba87bbb4421cd6bef7d7b36eb4e1801501b7aefc7f9bfbe3854",
+    "agent/channel_adapters/__init__.py": "28c8b12cc5ecfc5e53e23a04f09c4e4d5f9dd39e2a60944f4abef984c1f57ff7",
+    "agent/channel_core/__init__.py": "c6031d99accd3d531e5c0e0a7f02c4465c02a88a10342da2019143d645885e74",
+    "agent/commitments/__init__.py": "b76d9a07f2220e2f69ebe12554fbb3dea6aade6ea8ea8758f24b8624ace1d62f",
+    "agent/context/__init__.py": "12726b5a064b725ca358d2926dec25a374f849764fe7b6eb4376df83676f9d61",
+    "agent/delivery/__init__.py": "d5a480d550d4c4c2e342527b2b598ac91fd2e44a82b0ef00792835194fafb905",
+    "agent/framing/__init__.py": "f2dda34ee256a5b1af1790dfb85f4766762f9ad7289bd62e23158c4945200709",
+    "agent/goals/__init__.py": "f070a5427ceb954c08e421d0bc25eb229af493a53ef796b374733f6a9dedbec8",
+    "agent/initiative/__init__.py": "d9770e540589c04ba98750b26e21a8f3acb250a6a6d881b9cb8c157f77508f65",
+    "agent/memory/client.py": "a6e9a1d94b1c59e86788f4a77c9e8df613d7caea4833a6921edc1dd36bee29ae",
+    "agent/memory/ingestion.py": "0fe64dd2c3e0e47a44ebdc3f62114914bf7d9bc80294bcd39d1c06198f8bfcd4",
+    "agent/memory/sleep.py": "37b4d5e9e4e6b2007a5fdba16dd66a6ed995bb05c607e0416c7019b5e403380f",
+    "agent/meta_harness/__init__.py": "18a2a6b8f6177577f52e2bb1f9570a72f9e79f428476bb86f03d8fe7de4c8012",
+    "agent/planner/__init__.py": "b80a1b09472f10f8f785affc920e66aeb8c08278f60fb7a222432c1b21fb60d6",
+    "agent/plugin_host/__init__.py": "107ff64d6ba162e1197aee63be1087c16d62b16b689660c4b76e6137571c2a7b",
+    "agent/plugin_sdk/__init__.py": "0e093fda474ef7e4ada71d7e32e8d7c6853af9ae8db60e206a3750cdcf3a6876",
+    "agent/profile/__init__.py": "e9eb0c353aeef1edb13093750237a069cab7a141745131e1684daebae63886b3",
+    "agent/protocol/__init__.py": "4b58df65bc5dff0835a9ab4756be7a0e757660deb4cc51d9cc8df321bfb5ed64",
+    "agent/provider_adapters/__init__.py": "b1dcb9d4b9bf59d1bc5cae9425cab8baf820ffdd5da16919b9fea5ec0b5c9a74",
+    "agent/provider_catalog/__init__.py": "bf1e6f1f8e1b568666b2c4da1044477575fdc741bae91be45a6f2281217ec95d",
+    "agent/runtime/__init__.py": "60436d64c3c6b77c3f8700ca3295901135bf28e634475639c8a0090d880a03f6",
+    "agent/scheduler/__init__.py": "125bc581cc73893b7e1de9a2d2fab3b305092a15660d38c8d951fc2a6145f0ab",
+    "agent/self_evolution/__init__.py": "3f2392390da7986d49f8b4d8329407e30d33079c0fdbdcd8773678ef2ded58eb",
+    "agent/skills/__init__.py": "1742bb29dc6ecdb3431023150c0025845081e6fd84bfbfc47a79221bb620a23b",
+    "agent/state/__init__.py": "b3bf9b23e4e2ab7e785f94aa03ef3db9c16043da57ffaf8c40fdc182033ad9c4",
+    "agent/subagents/__init__.py": "0235e9a15d1e1c7ca120f46662d95e5865eeb61927db131aefc791af2fa40fae",
+    "agent/tool_runner/__init__.py": "4eb618bd5d1055698d5ccfa2fe9bcbad34dc3e7c06205b2d7b59e19fd5aceac1",
+    "agent/tool_runner/files.py": "3391795a3474968b68aef7182e4d1ae8fcb0081b8d3ef0af7358ac183cb2bfbf",
+    "agent/tool_runner/process.py": "fcc67caad28bb81b7e9df51444f013ab159298a999bf4223eb96445215c9d100",
+    "consumer/__init__.py": "fe98b09a89de61fa41868bbb942f8537367e419c04166dd99d2bc611d578cb4d",
+    "consumer/__main__.py": "5e970434a56697b9278f386f54e768459bfe2fc9b0a2364d77be33f5e0a1e864",
+    "consumer/api.py": "f1fff24f870c787f67f2146ea8da7dcfe0a177c283209a6528be2cdb5760e2a0",
+    "consumer/application.py": "b18491fc2c6109e7401ec67072db3753d62438b63a1261eb69ec144442949ddd",
+    "consumer/browser.py": "037c89c3fd9114267c4018291049bc10a283f5957362f471cd118e5d92393408",
+    "consumer/cli.py": "6f8a626d1f2eb37ada21cd022620208635a34396ede34190c9d1bd29f18871fa",
+    "consumer/config.py": "d7946aa462bab7f2dbaf1ee406bba8646d760e7696e37dd5b6a2d00a82b79d9c",
+    "consumer/connections.py": "01e1962040d737bca303ae2c37ee3ec6be7494b8784fcebc9d146db670d0bf86",
+    "consumer/connectors.py": "51d7b48a27e5bc59ad39769522c3932946b6c01b2967c4ebc86c39505092c529",
+    "consumer/content.py": "1b25d9e03131aa005e1714e64e21b0425b2697a3ddb2f31ae9a42fc6c3a48d58",
+    "consumer/contracts.py": "83042c61aa73a3dfa2f30ee01bed2e04eb2770943b5032cfafdb9a228b7cea17",
+    "consumer/device.py": "894ef53052cfc98b09393a5da964da804e9c5627606537eb37886327a5b288bf",
+    "consumer/identity.py": "252cc2ed2b4fd8ca880feae7828b27fb4b546d58823f04e574d21c804df21a6b",
+    "consumer/lifecycle.py": "aa7fa5494565e73224a5c5d2ca16fe5c4256088ccb5c63384b2395a6b7adb99c",
+    "consumer/network.py": "6426f2c35af695616a1a1f6206428c4d771052aab8d7bf449b41a073c9304cd1",
+    "consumer/permissions.py": "57485146889561e9d6c33784a144b7640d00f3105b7f9b7ef6b8c1eb54efd4ec",
+    "consumer/portability.py": "ed599f934435303bf8806f2f92389f42bc69214c1172d99839569bc70484fb44",
+    "consumer/providers.py": "3cb36ee15cec5f912c168e1791dd95113af25b56a04437e981aaee2a74386e9f",
+    "consumer/usage.py": "3baf3d59e60a48ad56651c4b7c3c624565f9d0666ac63a26cec908b8e7ee69b7",
+    "consumer/vault.py": "a0d916e4e6b485eea89feb5622187f3555cff62f488bae38bd624caea1daf2f3",
+    "consumer/webhooks.py": "1a57154a3d85d1aa5c82b4352a915641597f481eb5e2b856d9618a35b84e7125",
+    "consumer/work.py": "f1e3bb8f56688a3d15b1899d4648bc8ed8f4cd5552212ad1f8cfdc9826b73ab6",
+    "consumer/worker.py": "af796f37048a32798d3b97947b3977a8b73ae62648cfa56aa9020b3aec360972",
+    "consumer/workers.py": "bf376ed5bddb203fa71a5170728d541a0b04229b29c18202ae4f25e129121d72",
+    "documentation/examples/first_mechanisms.py": "bab5d5a70c6d5f2a57a39f42d389ff6a1350203e16f082aebb78dfb3c8b6d44f",
+    "frontend/src/App.tsx": "cd9fc7bd286dc609bc87bb1af0fc5c36f18f1725fdad4b20a236be3f6f1e49cb",
+    "frontend/src/components/Shell.tsx": "522550ec6e800b765e1482269a454680709fc30d737ecc4e7d351daef76915e4",
+    "frontend/src/components/components.css": "85b53447dab88fb37eda2acc4116d18714e37308df7d7c874f4dba0e5ee011ae",
+    "frontend/src/components/ui.tsx": "819ec862d6dc88352619414e15ae15b926c86636decbd501dc430ce082438c62",
+    "frontend/src/global.css": "07290efada017c31bac932595d3cebb99c31071bc310d248bac7a654f5728253",
+    "frontend/src/hooks/useAgent.tsx": "46449adbecc4c44e376997b6dc79eeb10b5bcf0db863a1c83a3aaf7e8348d422",
+    "frontend/src/hooks/useEvents.ts": "470ee0071b91ade5a761ee68bed9bdae430b5b17e27a7f8d7f3a84e74cc11c10",
+    "frontend/src/lib/api.ts": "5c1a91d7318c72e8bde82cd71963004fc73e2ce6e8365b5fb77d7b99aa0c9413",
+    "frontend/src/lib/types.ts": "993373820fe16d524821d3ca570df1e352273b9cbcbb68a90be972fbcd94f4a3",
+    "frontend/src/main.tsx": "f37d06ad10cd09251789afc494daeb32e8ea42d40c3707d58daf0725271548fa",
+    "frontend/src/material.css": "92996f152619640657114d4c65c972deb91409407a5f5d91bb3fd6f11505f296",
+    "frontend/src/pages/ConnectionsPage.tsx": "48c2e9ab9a14666dbda2bb2688f6b54c916d4054c9eed99020e04f9d978253f0",
+    "frontend/src/pages/ConversationPage.tsx": "1046d42e4a11be89c09f261ded385632b546808171b1d1609eb8286afebac09f",
+    "frontend/src/pages/FilesPage.tsx": "e4686b6aa3868045d74e65901b12b47db6d362bd6d04aa7bf62518adeefdd62c",
+    "frontend/src/pages/KnowledgePage.tsx": "70c39dbfe0919a721df823eabb1ba41b2303e3cc520ebd93f8806c6e3685ca73",
+    "frontend/src/pages/SettingsPage.tsx": "df335eab3d1d6481b0db85d30fda1f4df5cec5c6814929c5afaca0723ac4943a",
+    "frontend/src/pages/WorkPage.tsx": "112be58d7f24a82e2a3931a6d423ac05e72760139404571e21f9849b67a18e4a",
+    "frontend/src/pages/conversation.css": "80bc423f0f5c2b0207024994d0edb3d3cd95f5bb1f5e695df92b237443376757",
+    "frontend/src/pages/shared.tsx": "831e601416d63becfcd7a109bde07ceea4c582680f630b2c0f46bbfdbde62315",
+    "frontend/src/pages/work-connections.css": "5d2325f50c83d86d84c33af1485d8f837806cd597413eeea0ab607057023c455",
+    "frontend/vite.config.ts": "d642b1e8f5757bd77b3f30659ee071dc39f9461ff62c3c08b61ae03e298adfd4",
+    "native/memory/engine.cpp": "ad7b0fed47ad98fad165a5be4615f660ddaf32bf82d3371a90255cfbc70642c7",
+    "native/memory/main.cpp": "2ed927ea39871a74d5b7e984c73c53ec7aef7b37a96dd21ed3abc9ebfe55a875",
+    "scripts/docs_gate.py": "4a52e248d314d3108f8e6978017bca2fdb853d53d6e57c13a77de6b934fed4d1",
+    "scripts/qualify.py": "087deb7626aa388f308b8860feb1bb36f9ecea578c350501900c41fb3c01feaa",
+    "scripts/qualify_consumer.py": "3a1d7b04724ba32e2c4e974d85ae2d144e0e062697839e7541db75006d62d43f",
+    "scripts/verify_native.py": "75049bca6de0711300ff8e63ea8026541eff5b096784c198aaac739c49c8b947",
+    "scripts/verify_web.mjs": "b5e84b31c5f11c8f507310ec757169ab95d8fc435c8be81ea97812fcd9bede61",
+    "tests/consumer_web/coverage.mjs": "9bf9850bfc90d69752eff7768d54dd5cd69f3ae1e8d0ac681af30f1736072041",
+    "tests/consumer_web/journey.mjs": "8fae091607bf2ded1cee8a40f5c4f3143e00a84727305571e4adf252d790199c",
+    "tests/integration/test_evidence_admission.py": "a92f0f29f63d77b7457df0542664cd1209a1809a697afcb52bd6598e7dfcb8ae"
+  }
+}

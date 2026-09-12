@@ -1,0 +1,112 @@
+[meta]
+feature = "sturgis-03"
+title = "Sturgis 03 — Independent model gateway"
+status = "in_progress"
+spec_version = "1.0.0"
+intro = "Replace agent-owned provider setup with an independent, standalone model gateway inspired by an examined and pinned 9router architecture. Agents and other applications consume its standard inference endpoint."
+
+[design]
+overview = "Gateway-owned connections, encrypted credentials, catalogs, client keys, routing, cooldowns and usage; consumer-owned authentication integration; agents retain only a gateway client credential and model selection."
+include = "design.body.md"
+
+[documentation]
+mode = "manual"
+status = "pending"
+audiences = ["user", "developer", "operator"]
+targets = ["README.md", "spec/sturgis-03/**", "documentation/README.md", "documentation/closure.md", "documentation/users/src/content/docs/**", "documentation/developers/src/content/docs/**", "docs/sturgis-03/**", "model_gateway/README.md"]
+user_site = "documentation/users"
+developer_site = "documentation/developers"
+full_gate = "python3 scripts/docs_gate.py full"
+
+[req.1]
+title = "Independent subsystem and source-grounded reference"
+story = "As an operator, I can use the model gateway without creating or running an agent."
+ac_1 = "Inspect pinned 9router source, document actual persistence/authentication/executor/translator/routing boundaries and license; separate supported formats from provider-specific sign-in flows."
+ac_2 = "model_gateway imports neither agent nor consumer; owns durable state, encryption, API keys, routing and usage; runs through its own CLI/ASGI app or composition mount."
+
+[req.2]
+title = "Provider connections and current catalogs"
+story = "As a self-hosted user, I connect a preset or custom provider in one drawer."
+ac_1 = "Preset provider name and endpoint, inline encrypted API key, bounded live model discovery/import and optional custom model IDs replace credential references, required token-limit fields and manual probe/activate steps."
+ac_2 = "Include source-backed free/no-auth, free-tier, local, paid and compatible gateway presets; label account quotas and specialized authentication honestly; support custom endpoints for implemented wire formats."
+ac_3 = "Connections support multiple accounts, optimistic revisions, refresh, update and disconnect; secrets never enter frontend persistence, public responses, logs or usage records."
+
+[req.3]
+title = "Inference gateway and routing"
+story = "As any model client, I connect once and use imported models or named routes."
+ac_1 = "Authenticated OpenAI-compatible models and chat completions work in streaming and nonstreaming modes; upstream OpenAI Chat, Responses, Anthropic and Gemini translation supports arbitrary function names, usage, cancellation and honest terminal states."
+ac_2 = "Named priority and round-robin routes provide bounded fallback before output, retryable-failure cooldowns and usage for each attempt; no retry after visible output and no invented usage."
+ac_3 = "Client keys are hashed, revocable and model-scoped; tenant authority is server-derived; network destinations and local-server exceptions remain bounded and isolated from agent tool policy."
+
+[req.4]
+title = "Independent premium management and agent client"
+story = "As a user, I manage model infrastructure separately and select a gateway model for my agent."
+ac_1 = "Material 3 Model Gateway navigation works before an agent exists and while agent runtimes are stopped, with provider search, connection drawer, model import, routes, keys and usage."
+ac_2 = "Agent settings choose a gateway model through one action; only a restricted gateway credential reaches its runtime; upstream provider keys remain gateway-owned. Existing configurations and user data survive migration."
+ac_3 = "Exercise real browser setup, model import, key creation and agent model binding against controlled wire servers; rebuild and restart the authorized local service after qualification."
+
+[req.5]
+title = "Documentation and qualification"
+story = "As a user or developer, I can learn and operate every gateway feature with examples."
+ac_1 = "Both documentation sites include gateway setup, free-tier limits, local/custom providers, model discovery, keys, routes, troubleshooting, standalone operation, architecture, all source references and boundaries."
+ac_2 = "Preserve full Python/C++/client 90 percent executable-line floors; include model_gateway in production and documentation inventories, run full documentation gate, and report live vendor qualification separately from controlled wire proof."
+
+[task.1.1]
+title = "Gateway state, authority, service and composition contracts"
+status = "in_progress"
+wave = 1
+owner_lane = "root"
+requires = []
+reqs = ["1.2", "2.3", "3.2", "3.3", "4.2"]
+touches = ["model_gateway/__init__.py", "model_gateway/errors.py", "model_gateway/wire.py", "model_gateway/network.py", "model_gateway/store.py", "model_gateway/service.py", "model_gateway/api.py", "model_gateway/__main__.py", "consumer/gateway.py", "consumer/api.py", "consumer/application.py", "consumer/workers.py", "tests/gateway/test_store.py", "tests/gateway/test_service.py", "tests/gateway/test_api.py", "tests/gateway/test_integration.py", "pyproject.toml", ".gitignore", ".cgignore"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_store.py tests/gateway/test_service.py tests/gateway/test_api.py tests/gateway/test_integration.py -q"
+
+[task.1.2]
+title = "Pinned 9router architecture audit and provider registry"
+status = "in_progress"
+wave = 1
+owner_lane = "gateway_catalog"
+requires = []
+reqs = ["1.1", "2.2"]
+touches = [".research/9router-gateway.md", "model_gateway/catalog.py", "tests/gateway/test_catalog.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_catalog.py -q"
+
+[task.1.3]
+title = "Independent general-purpose format translation and model discovery"
+status = "in_progress"
+wave = 1
+owner_lane = "gateway_transports"
+requires = []
+reqs = ["2.1", "3.1"]
+touches = ["model_gateway/transports.py", "model_gateway/translation.py", "tests/gateway/test_transports.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_transports.py -q"
+
+[task.1.4]
+title = "Installation gateway management and simple agent model selection"
+status = "in_progress"
+wave = 1
+owner_lane = "gateway_ui"
+requires = []
+reqs = ["2.1", "4.1", "4.2"]
+touches = ["frontend/src/App.tsx", "frontend/src/components/Shell.tsx", "frontend/src/pages/SettingsPage.tsx", "frontend/src/pages/gateway/**", "frontend/src/lib/types.ts", "frontend/tests/**"]
+verify_cmd = "npm run typecheck:web && npx vitest run --config frontend/vitest.config.ts"
+
+[task.2.1]
+title = "Standalone and consumer integration qualification and live restart"
+status = "pending"
+wave = 2
+owner_lane = "root"
+requires = ["1.1", "1.2", "1.3", "1.4"]
+reqs = ["4.3", "5.2"]
+touches = ["scripts/qualify_consumer.py", "scripts/qualify_gateway.py", "tests/gateway/**", "tests/consumer_web/**", "tests/consumer/**", "evidence/sturgis-03/**", "spec/sturgis-03/**"]
+verify_cmd = ".venv/bin/python scripts/qualify_gateway.py"
+
+[task.2.2]
+title = "Complete user and developer gateway documentation"
+status = "pending"
+wave = 2
+owner_lane = "docs"
+requires = ["1.1", "1.2", "1.3", "1.4"]
+reqs = ["5.1", "5.2"]
+touches = ["documentation/**", "docs/sturgis-03/**", "model_gateway/README.md", "README.md", "scripts/docs_reference/**", "scripts/docs_gate.py", "tests/docs_site_gate.py", "tests/documentation/**"]
+verify_cmd = "python3 scripts/docs_gate.py full"

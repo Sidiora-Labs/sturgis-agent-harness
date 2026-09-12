@@ -1,0 +1,13 @@
+flowchart LR
+    E[Experience, corrections and performance evidence] --> DIAG[meta-harness: diagnosis and repair hypotheses]
+    DIAG --> SE[self-evolution candidate]
+    SL[Daily memory sleep] -->|optional candidate evidence| SE
+    SE --> ST[Isolated staged revision]
+    ST --> MH[meta-harness: admitted evaluation]
+    MH --> RES[Measured results and regressions]
+    RES --> EL[Activation eligibility under configured policy]
+    EL --> CAN[Shadow and canary under fixed criteria]
+    CAN --> PUB[Compatible behavior generation publication]
+    PUB --> WATCH[Observe subsequent outcomes]
+    WATCH -->|regression| RB[Rollback compatible generation]
+    RES -->|failed or unsupported| REJECT[Reject or revise candidate]

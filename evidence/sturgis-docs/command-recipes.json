@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "recipes": 95,
+  "parameter_examples": 179,
+  "private_credential_prompt": true,
+  "errors": []
+}

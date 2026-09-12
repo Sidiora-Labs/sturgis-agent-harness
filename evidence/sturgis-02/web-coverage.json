@@ -1,0 +1,1329 @@
+{
+  "version": "sturgis-web-coverage/1",
+  "measurement": "AST-aware V8 coverage of every authored frontend module; union of Vitest and production Chromium journeys",
+  "files": {
+    "frontend/src/App.tsx": {
+      "lines": {
+        "total": 142,
+        "covered": 136,
+        "skipped": 0,
+        "pct": 95.77
+      },
+      "functions": {
+        "total": 106,
+        "covered": 88,
+        "skipped": 0,
+        "pct": 83.01
+      },
+      "statements": {
+        "total": 273,
+        "covered": 246,
+        "skipped": 0,
+        "pct": 90.1
+      },
+      "branches": {
+        "total": 170,
+        "covered": 135,
+        "skipped": 0,
+        "pct": 79.41
+      },
+      "uncovered_lines": [
+        103,
+        316,
+        332,
+        334,
+        335,
+        336
+      ]
+    },
+    "frontend/src/components/Shell.tsx": {
+      "lines": {
+        "total": 35,
+        "covered": 35,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 37,
+        "covered": 32,
+        "skipped": 0,
+        "pct": 86.48
+      },
+      "statements": {
+        "total": 62,
+        "covered": 56,
+        "skipped": 0,
+        "pct": 90.32
+      },
+      "branches": {
+        "total": 123,
+        "covered": 116,
+        "skipped": 0,
+        "pct": 94.3
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/components/ui.tsx": {
+      "lines": {
+        "total": 31,
+        "covered": 31,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 36,
+        "covered": 36,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 54,
+        "covered": 52,
+        "skipped": 0,
+        "pct": 96.29
+      },
+      "branches": {
+        "total": 52,
+        "covered": 52,
+        "skipped": 0,
+        "pct": 100
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/hooks/useAgent.tsx": {
+      "lines": {
+        "total": 111,
+        "covered": 111,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 40,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 95
+      },
+      "statements": {
+        "total": 212,
+        "covered": 188,
+        "skipped": 0,
+        "pct": 88.67
+      },
+      "branches": {
+        "total": 156,
+        "covered": 127,
+        "skipped": 0,
+        "pct": 81.41
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/hooks/useEvents.ts": {
+      "lines": {
+        "total": 29,
+        "covered": 29,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 53,
+        "covered": 53,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 22,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 95.45
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/lib/api.ts": {
+      "lines": {
+        "total": 33,
+        "covered": 33,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.73
+      },
+      "statements": {
+        "total": 61,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 93.44
+      },
+      "branches": {
+        "total": 38,
+        "covered": 37,
+        "skipped": 0,
+        "pct": 97.36
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/lib/types.ts": {
+      "lines": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/main.tsx": {
+      "lines": {
+        "total": 3,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 66.66
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 4,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 50
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "uncovered_lines": [
+        13
+      ]
+    },
+    "frontend/src/pages/ConnectionsPage.tsx": {
+      "lines": {
+        "total": 123,
+        "covered": 122,
+        "skipped": 0,
+        "pct": 99.18
+      },
+      "functions": {
+        "total": 64,
+        "covered": 53,
+        "skipped": 0,
+        "pct": 82.81
+      },
+      "statements": {
+        "total": 221,
+        "covered": 181,
+        "skipped": 0,
+        "pct": 81.9
+      },
+      "branches": {
+        "total": 293,
+        "covered": 206,
+        "skipped": 0,
+        "pct": 70.3
+      },
+      "uncovered_lines": [
+        500
+      ]
+    },
+    "frontend/src/pages/ConversationPage.tsx": {
+      "lines": {
+        "total": 174,
+        "covered": 171,
+        "skipped": 0,
+        "pct": 98.27
+      },
+      "functions": {
+        "total": 87,
+        "covered": 84,
+        "skipped": 0,
+        "pct": 96.55
+      },
+      "statements": {
+        "total": 306,
+        "covered": 285,
+        "skipped": 0,
+        "pct": 93.13
+      },
+      "branches": {
+        "total": 213,
+        "covered": 186,
+        "skipped": 0,
+        "pct": 87.32
+      },
+      "uncovered_lines": [
+        483,
+        488,
+        645
+      ]
+    },
+    "frontend/src/pages/FilesPage.tsx": {
+      "lines": {
+        "total": 57,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 36,
+        "covered": 31,
+        "skipped": 0,
+        "pct": 86.11
+      },
+      "statements": {
+        "total": 104,
+        "covered": 90,
+        "skipped": 0,
+        "pct": 86.53
+      },
+      "branches": {
+        "total": 72,
+        "covered": 56,
+        "skipped": 0,
+        "pct": 77.77
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/pages/KnowledgePage.tsx": {
+      "lines": {
+        "total": 68,
+        "covered": 68,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 52,
+        "covered": 45,
+        "skipped": 0,
+        "pct": 86.53
+      },
+      "statements": {
+        "total": 118,
+        "covered": 107,
+        "skipped": 0,
+        "pct": 90.67
+      },
+      "branches": {
+        "total": 113,
+        "covered": 78,
+        "skipped": 0,
+        "pct": 69.02
+      },
+      "uncovered_lines": []
+    },
+    "frontend/src/pages/SettingsPage.tsx": {
+      "lines": {
+        "total": 176,
+        "covered": 164,
+        "skipped": 0,
+        "pct": 93.18
+      },
+      "functions": {
+        "total": 122,
+        "covered": 78,
+        "skipped": 0,
+        "pct": 63.93
+      },
+      "statements": {
+        "total": 312,
+        "covered": 210,
+        "skipped": 0,
+        "pct": 67.3
+      },
+      "branches": {
+        "total": 319,
+        "covered": 219,
+        "skipped": 0,
+        "pct": 68.65
+      },
+      "uncovered_lines": [
+        262,
+        275,
+        315,
+        421,
+        486,
+        529,
+        654,
+        842,
+        919,
+        955,
+        969,
+        1068
+      ]
+    },
+    "frontend/src/pages/WorkPage.tsx": {
+      "lines": {
+        "total": 135,
+        "covered": 126,
+        "skipped": 0,
+        "pct": 93.33
+      },
+      "functions": {
+        "total": 96,
+        "covered": 65,
+        "skipped": 0,
+        "pct": 67.7
+      },
+      "statements": {
+        "total": 229,
+        "covered": 167,
+        "skipped": 0,
+        "pct": 72.92
+      },
+      "branches": {
+        "total": 386,
+        "covered": 252,
+        "skipped": 0,
+        "pct": 65.28
+      },
+      "uncovered_lines": [
+        518,
+        533,
+        630,
+        705,
+        720,
+        784,
+        827,
+        899,
+        1045
+      ]
+    },
+    "frontend/src/pages/shared.tsx": {
+      "lines": {
+        "total": 15,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 17,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 94.11
+      },
+      "statements": {
+        "total": 24,
+        "covered": 23,
+        "skipped": 0,
+        "pct": 95.83
+      },
+      "branches": {
+        "total": 28,
+        "covered": 25,
+        "skipped": 0,
+        "pct": 89.28
+      },
+      "uncovered_lines": []
+    }
+  },
+  "totals": {
+    "lines": {
+      "total": 1132,
+      "covered": 1100,
+      "skipped": 0,
+      "pct": 97.17
+    },
+    "statements": {
+      "total": 2033,
+      "covered": 1717,
+      "skipped": 0,
+      "pct": 84.45
+    },
+    "functions": {
+      "total": 722,
+      "covered": 594,
+      "skipped": 0,
+      "pct": 82.27
+    },
+    "branches": {
+      "total": 1985,
+      "covered": 1510,
+      "skipped": 0,
+      "pct": 76.07
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "component_totals": {
+    "lines": {
+      "total": 1078,
+      "covered": 1051,
+      "skipped": 0,
+      "pct": 97.49
+    },
+    "statements": {
+      "total": 1166,
+      "covered": 1118,
+      "skipped": 0,
+      "pct": 95.88
+    },
+    "functions": {
+      "total": 403,
+      "covered": 376,
+      "skipped": 0,
+      "pct": 93.3
+    },
+    "branches": {
+      "total": 1196,
+      "covered": 1072,
+      "skipped": 0,
+      "pct": 89.63
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "browser_totals": {
+    "lines": {
+      "total": 866,
+      "covered": 597,
+      "skipped": 0,
+      "pct": 68.93
+    },
+    "statements": {
+      "total": 921,
+      "covered": 640,
+      "skipped": 0,
+      "pct": 69.48
+    },
+    "functions": {
+      "total": 402,
+      "covered": 261,
+      "skipped": 0,
+      "pct": 64.92
+    },
+    "branches": {
+      "total": 1186,
+      "covered": 751,
+      "skipped": 0,
+      "pct": 63.32
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "browser_bundles": [
+    {
+      "path": "consumer/web/assets/ConnectionsPage-BVacDQSn.js",
+      "sha256": "73bcf00e8d02e92f58888b8ec7d921354bcc8b4c58067eec6de51381d56036ea",
+      "observations": 1,
+      "source_map_sha256": "de888e94a6c2ea95266a0017e3ab67a90e50155d9610186f41153d2f46ba2bae",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/ConnectionsPage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/ConnectionsPage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/ConversationPage-B4JeWwC3.js",
+      "sha256": "d52a0c04a369e6494edb4b00593d3070203238ae7d88f313df494d469065c8bb",
+      "observations": 3,
+      "source_map_sha256": "c05f3602e9d11e041f7d0db54f78d8eb71d35a48ec089e6cbbcf346145710a42",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "node_modules/devlop/lib/default.js",
+        "node_modules/comma-separated-tokens/index.js",
+        "node_modules/estree-util-is-identifier-name/lib/index.js",
+        "node_modules/hast-util-whitespace/lib/index.js",
+        "node_modules/property-information/lib/util/schema.js",
+        "node_modules/property-information/lib/util/merge.js",
+        "node_modules/property-information/lib/normalize.js",
+        "node_modules/property-information/lib/util/info.js",
+        "node_modules/property-information/lib/util/types.js",
+        "node_modules/property-information/lib/util/defined-info.js",
+        "node_modules/property-information/lib/util/create.js",
+        "node_modules/property-information/lib/aria.js",
+        "node_modules/property-information/lib/util/case-sensitive-transform.js",
+        "node_modules/property-information/lib/util/case-insensitive-transform.js",
+        "node_modules/property-information/lib/html.js",
+        "node_modules/property-information/lib/svg.js",
+        "node_modules/property-information/lib/xlink.js",
+        "node_modules/property-information/lib/xmlns.js",
+        "node_modules/property-information/lib/xml.js",
+        "node_modules/property-information/lib/hast-to-react.js",
+        "node_modules/property-information/lib/find.js",
+        "node_modules/property-information/index.js",
+        "node_modules/space-separated-tokens/index.js",
+        "node_modules/inline-style-parser/cjs/index.js",
+        "node_modules/style-to-object/cjs/index.js",
+        "node_modules/style-to-js/cjs/utilities.js",
+        "node_modules/style-to-js/cjs/index.js",
+        "node_modules/unist-util-position/lib/index.js",
+        "node_modules/unist-util-stringify-position/lib/index.js",
+        "node_modules/vfile-message/lib/index.js",
+        "node_modules/hast-util-to-jsx-runtime/lib/index.js",
+        "node_modules/html-url-attributes/lib/index.js",
+        "node_modules/mdast-util-to-string/lib/index.js",
+        "node_modules/decode-named-character-reference/index.dom.js",
+        "node_modules/micromark-util-chunked/index.js",
+        "node_modules/micromark-util-combine-extensions/index.js",
+        "node_modules/micromark-util-decode-numeric-character-reference/index.js",
+        "node_modules/micromark-util-normalize-identifier/index.js",
+        "node_modules/micromark-util-character/index.js",
+        "node_modules/micromark-util-sanitize-uri/index.js",
+        "node_modules/micromark-factory-space/index.js",
+        "node_modules/micromark/lib/initialize/content.js",
+        "node_modules/micromark/lib/initialize/document.js",
+        "node_modules/micromark-util-classify-character/index.js",
+        "node_modules/micromark-util-resolve-all/index.js",
+        "node_modules/micromark-core-commonmark/lib/attention.js",
+        "node_modules/micromark-core-commonmark/lib/autolink.js",
+        "node_modules/micromark-core-commonmark/lib/blank-line.js",
+        "node_modules/micromark-core-commonmark/lib/block-quote.js",
+        "node_modules/micromark-core-commonmark/lib/character-escape.js",
+        "node_modules/micromark-core-commonmark/lib/character-reference.js",
+        "node_modules/micromark-core-commonmark/lib/code-fenced.js",
+        "node_modules/micromark-core-commonmark/lib/code-indented.js",
+        "node_modules/micromark-core-commonmark/lib/code-text.js",
+        "node_modules/micromark-util-subtokenize/lib/splice-buffer.js",
+        "node_modules/micromark-util-subtokenize/index.js",
+        "node_modules/micromark-core-commonmark/lib/content.js",
+        "node_modules/micromark-factory-destination/index.js",
+        "node_modules/micromark-factory-label/index.js",
+        "node_modules/micromark-factory-title/index.js",
+        "node_modules/micromark-factory-whitespace/index.js",
+        "node_modules/micromark-core-commonmark/lib/definition.js",
+        "node_modules/micromark-core-commonmark/lib/hard-break-escape.js",
+        "node_modules/micromark-core-commonmark/lib/heading-atx.js",
+        "node_modules/micromark-util-html-tag-name/index.js",
+        "node_modules/micromark-core-commonmark/lib/html-flow.js",
+        "node_modules/micromark-core-commonmark/lib/html-text.js",
+        "node_modules/micromark-core-commonmark/lib/label-end.js",
+        "node_modules/micromark-core-commonmark/lib/label-start-image.js",
+        "node_modules/micromark-core-commonmark/lib/label-start-link.js",
+        "node_modules/micromark-core-commonmark/lib/line-ending.js",
+        "node_modules/micromark-core-commonmark/lib/thematic-break.js",
+        "node_modules/micromark-core-commonmark/lib/list.js",
+        "node_modules/micromark-core-commonmark/lib/setext-underline.js",
+        "node_modules/micromark/lib/initialize/flow.js",
+        "node_modules/micromark/lib/initialize/text.js",
+        "node_modules/micromark/lib/constructs.js",
+        "node_modules/micromark/lib/create-tokenizer.js",
+        "node_modules/micromark/lib/parse.js",
+        "node_modules/micromark/lib/postprocess.js",
+        "node_modules/micromark/lib/preprocess.js",
+        "node_modules/micromark-util-decode-string/index.js",
+        "node_modules/mdast-util-from-markdown/lib/index.js",
+        "node_modules/remark-parse/lib/index.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/blockquote.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/break.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/code.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/delete.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/emphasis.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/heading.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/html.js",
+        "node_modules/mdast-util-to-hast/lib/revert.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/image-reference.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/image.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/inline-code.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/link-reference.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/link.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/list-item.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/list.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/paragraph.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/root.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/strong.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/table.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/table-row.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/table-cell.js",
+        "node_modules/trim-lines/index.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/text.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js",
+        "node_modules/mdast-util-to-hast/lib/handlers/index.js",
+        "node_modules/@ungap/structured-clone/esm/deserialize.js",
+        "node_modules/@ungap/structured-clone/esm/serialize.js",
+        "node_modules/@ungap/structured-clone/esm/index.js",
+        "node_modules/mdast-util-to-hast/lib/footer.js",
+        "node_modules/unist-util-is/lib/index.js",
+        "node_modules/unist-util-visit-parents/lib/color.js",
+        "node_modules/unist-util-visit-parents/lib/index.js",
+        "node_modules/unist-util-visit/lib/index.js",
+        "node_modules/mdast-util-to-hast/lib/state.js",
+        "node_modules/mdast-util-to-hast/lib/index.js",
+        "node_modules/remark-rehype/lib/index.js",
+        "node_modules/bail/index.js",
+        "node_modules/extend/index.js",
+        "node_modules/is-plain-obj/index.js",
+        "node_modules/trough/lib/index.js",
+        "node_modules/vfile/lib/minpath.browser.js",
+        "node_modules/vfile/lib/minproc.browser.js",
+        "node_modules/vfile/lib/minurl.shared.js",
+        "node_modules/vfile/lib/minurl.browser.js",
+        "node_modules/vfile/lib/index.js",
+        "node_modules/unified/lib/callable-instance.js",
+        "node_modules/unified/lib/index.js",
+        "node_modules/react-markdown/lib/index.js",
+        "node_modules/ccount/index.js",
+        "node_modules/escape-string-regexp/index.js",
+        "node_modules/mdast-util-find-and-replace/lib/index.js",
+        "node_modules/mdast-util-gfm-autolink-literal/lib/index.js",
+        "node_modules/mdast-util-gfm-footnote/lib/index.js",
+        "node_modules/mdast-util-gfm-strikethrough/lib/index.js",
+        "node_modules/markdown-table/index.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/blockquote.js",
+        "node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/break.js",
+        "node_modules/longest-streak/index.js",
+        "node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-fence.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/code.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-quote.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/definition.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js",
+        "node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js",
+        "node_modules/mdast-util-to-markdown/lib/util/encode-info.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/emphasis.js",
+        "node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/heading.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/html.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/image.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/image-reference.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/inline-code.js",
+        "node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/link.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/link-reference.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-bullet.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-rule.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/list.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/list-item.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/paragraph.js",
+        "node_modules/mdast-util-phrasing/lib/index.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/root.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-strong.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/strong.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/text.js",
+        "node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js",
+        "node_modules/mdast-util-to-markdown/lib/handle/index.js",
+        "node_modules/mdast-util-gfm-table/lib/index.js",
+        "node_modules/mdast-util-gfm-task-list-item/lib/index.js",
+        "node_modules/mdast-util-gfm/lib/index.js",
+        "node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js",
+        "node_modules/micromark-extension-gfm-footnote/lib/syntax.js",
+        "node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js",
+        "node_modules/micromark-extension-gfm-table/lib/edit-map.js",
+        "node_modules/micromark-extension-gfm-table/lib/infer.js",
+        "node_modules/micromark-extension-gfm-table/lib/syntax.js",
+        "node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js",
+        "node_modules/micromark-extension-gfm/index.js",
+        "node_modules/remark-gfm/lib/index.js",
+        "frontend/src/hooks/useEvents.ts",
+        "frontend/src/pages/conversation.css",
+        "frontend/src/pages/ConversationPage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/hooks/useEvents.ts",
+        "frontend/src/pages/ConversationPage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/FilesPage-B1OPPz60.js",
+      "sha256": "0bfccbd3aae572db560ed521388eda8b4c82aea4a110d6bad86e92ed47ea86df",
+      "observations": 1,
+      "source_map_sha256": "f707483c79972fd6173c05a994a74f369c5027771dff9be7ae2f9d772769bf4b",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/FilesPage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/FilesPage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/KnowledgePage-Df5LGjH1.js",
+      "sha256": "68dc84a04aafd7c2e321557a0c5e97a9dc34457cd8001a0d7efafd0ebff52ffb",
+      "observations": 1,
+      "source_map_sha256": "750ff91cd4ebaea30d7986aec0664375378b28167500c638733391a13fa689c8",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/KnowledgePage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/KnowledgePage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/SettingsPage-C0GBGQAj.js",
+      "sha256": "efd15f1e0d5da5e328a33c38f670b4a4553ff7baad4c7e9c4ed96d514a264e63",
+      "observations": 1,
+      "source_map_sha256": "15efe60636e4817df9a09a4d7aa21616eb512abb2ee5f6edd1770ff500b75b05",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/SettingsPage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/WorkPage-E1WZf-1r.js",
+      "sha256": "729b6cd13207fd4aebd7e82e24c2964b2af00d54a85d27ad0f21a9b25f5e7d74",
+      "observations": 1,
+      "source_map_sha256": "d74f4a297cfbcda6fe8e8d9f38f892c006cb922c0ba13bfc5e3d89c9e2b9427a",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/WorkPage.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/WorkPage.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/icons-Fa1M2mbg.js",
+      "sha256": "637216ef47e50b5a6eb65470d799a2d68686f55c8d7bb87dd491818c1e57e13d",
+      "observations": 2,
+      "source_map_sha256": "7a46f168bff217dda57063b4210f627d239fe836cf5f93fd0696943e2d38c68a",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/utils/toLucideIconData.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/build/defaultAttributes.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconNode.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconForReact.mjs",
+        "node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs",
+        "node_modules/lucide-react/dist/esm/context.mjs",
+        "node_modules/lucide-react/dist/esm/Icon.mjs",
+        "node_modules/lucide-react/dist/esm/createLucideIcon.mjs",
+        "node_modules/lucide-react/dist/esm/icons/archive.mjs",
+        "node_modules/lucide-react/dist/esm/icons/arrow-down.mjs",
+        "node_modules/lucide-react/dist/esm/icons/arrow-right.mjs",
+        "node_modules/lucide-react/dist/esm/icons/arrow-up-right.mjs",
+        "node_modules/lucide-react/dist/esm/icons/arrow-up.mjs",
+        "node_modules/lucide-react/dist/esm/icons/audio-lines.mjs",
+        "node_modules/lucide-react/dist/esm/icons/book-open.mjs",
+        "node_modules/lucide-react/dist/esm/icons/brain.mjs",
+        "node_modules/lucide-react/dist/esm/icons/calendar-clock.mjs",
+        "node_modules/lucide-react/dist/esm/icons/check.mjs",
+        "node_modules/lucide-react/dist/esm/icons/chevron-down.mjs",
+        "node_modules/lucide-react/dist/esm/icons/chevron-right.mjs",
+        "node_modules/lucide-react/dist/esm/icons/chevrons-up-down.mjs",
+        "node_modules/lucide-react/dist/esm/icons/circle-alert.mjs",
+        "node_modules/lucide-react/dist/esm/icons/circle.mjs",
+        "node_modules/lucide-react/dist/esm/icons/clock-3.mjs",
+        "node_modules/lucide-react/dist/esm/icons/command.mjs",
+        "node_modules/lucide-react/dist/esm/icons/compass.mjs",
+        "node_modules/lucide-react/dist/esm/icons/copy.mjs",
+        "node_modules/lucide-react/dist/esm/icons/download.mjs",
+        "node_modules/lucide-react/dist/esm/icons/earth.mjs",
+        "node_modules/lucide-react/dist/esm/icons/ellipsis.mjs",
+        "node_modules/lucide-react/dist/esm/icons/file-text.mjs",
+        "node_modules/lucide-react/dist/esm/icons/file.mjs",
+        "node_modules/lucide-react/dist/esm/icons/flag.mjs",
+        "node_modules/lucide-react/dist/esm/icons/folder-open.mjs",
+        "node_modules/lucide-react/dist/esm/icons/folder.mjs",
+        "node_modules/lucide-react/dist/esm/icons/git-branch.mjs",
+        "node_modules/lucide-react/dist/esm/icons/image.mjs",
+        "node_modules/lucide-react/dist/esm/icons/inbox.mjs",
+        "node_modules/lucide-react/dist/esm/icons/key-round.mjs",
+        "node_modules/lucide-react/dist/esm/icons/layers-2.mjs",
+        "node_modules/lucide-react/dist/esm/icons/lightbulb.mjs",
+        "node_modules/lucide-react/dist/esm/icons/link-2.mjs",
+        "node_modules/lucide-react/dist/esm/icons/loader-circle.mjs",
+        "node_modules/lucide-react/dist/esm/icons/log-out.mjs",
+        "node_modules/lucide-react/dist/esm/icons/menu.mjs",
+        "node_modules/lucide-react/dist/esm/icons/message-circle.mjs",
+        "node_modules/lucide-react/dist/esm/icons/mic.mjs",
+        "node_modules/lucide-react/dist/esm/icons/panel-left-close.mjs",
+        "node_modules/lucide-react/dist/esm/icons/panel-left-open.mjs",
+        "node_modules/lucide-react/dist/esm/icons/paperclip.mjs",
+        "node_modules/lucide-react/dist/esm/icons/pause.mjs",
+        "node_modules/lucide-react/dist/esm/icons/pencil.mjs",
+        "node_modules/lucide-react/dist/esm/icons/play.mjs",
+        "node_modules/lucide-react/dist/esm/icons/plug.mjs",
+        "node_modules/lucide-react/dist/esm/icons/plus.mjs",
+        "node_modules/lucide-react/dist/esm/icons/power.mjs",
+        "node_modules/lucide-react/dist/esm/icons/radio.mjs",
+        "node_modules/lucide-react/dist/esm/icons/refresh-cw.mjs",
+        "node_modules/lucide-react/dist/esm/icons/save.mjs",
+        "node_modules/lucide-react/dist/esm/icons/search.mjs",
+        "node_modules/lucide-react/dist/esm/icons/settings-2.mjs",
+        "node_modules/lucide-react/dist/esm/icons/shield-check.mjs",
+        "node_modules/lucide-react/dist/esm/icons/sliders-horizontal.mjs",
+        "node_modules/lucide-react/dist/esm/icons/smartphone.mjs",
+        "node_modules/lucide-react/dist/esm/icons/sparkles.mjs",
+        "node_modules/lucide-react/dist/esm/icons/square.mjs",
+        "node_modules/lucide-react/dist/esm/icons/target.mjs",
+        "node_modules/lucide-react/dist/esm/icons/trash.mjs",
+        "node_modules/lucide-react/dist/esm/icons/unplug.mjs",
+        "node_modules/lucide-react/dist/esm/icons/upload.mjs",
+        "node_modules/lucide-react/dist/esm/icons/x.mjs"
+      ],
+      "authored_sources": []
+    },
+    {
+      "path": "consumer/web/assets/index-CEapWaEf.js",
+      "sha256": "40e05a07f686f4aecff289934ee65493ddc62465d021b18a0739518ecdc589f4",
+      "observations": 3,
+      "source_map_sha256": "192189c93adea1bf0865f6b54e64d8b8952fa8272c858ac29d1f041308acb466",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "\u0000vite/modulepreload-polyfill.js",
+        "node_modules/@tanstack/query-core/build/modern/mutation.js",
+        "node_modules/@tanstack/query-core/build/modern/mutationCache.js",
+        "node_modules/@tanstack/query-core/build/modern/queryCache.js",
+        "node_modules/@tanstack/query-core/build/modern/queryClient.js",
+        "node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs",
+        "node_modules/framer-motion/dist/es/utils/use-constant.mjs",
+        "node_modules/framer-motion/dist/es/utils/is-browser.mjs",
+        "node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs",
+        "node_modules/framer-motion/dist/es/context/PresenceContext.mjs",
+        "node_modules/motion-utils/dist/es/array.mjs",
+        "node_modules/motion-utils/dist/es/clamp.mjs",
+        "node_modules/motion-utils/dist/es/errors.mjs",
+        "node_modules/motion-utils/dist/es/global-config.mjs",
+        "node_modules/motion-utils/dist/es/is-numerical-string.mjs",
+        "node_modules/motion-utils/dist/es/is-object.mjs",
+        "node_modules/motion-utils/dist/es/is-zero-value-string.mjs",
+        "node_modules/motion-utils/dist/es/memo.mjs",
+        "node_modules/motion-utils/dist/es/noop.mjs",
+        "node_modules/motion-utils/dist/es/pipe.mjs",
+        "node_modules/motion-utils/dist/es/progress.mjs",
+        "node_modules/motion-utils/dist/es/subscription-manager.mjs",
+        "node_modules/motion-utils/dist/es/time-conversion.mjs",
+        "node_modules/motion-utils/dist/es/velocity-per-second.mjs",
+        "node_modules/motion-utils/dist/es/easing/cubic-bezier.mjs",
+        "node_modules/motion-utils/dist/es/easing/modifiers/mirror.mjs",
+        "node_modules/motion-utils/dist/es/easing/modifiers/reverse.mjs",
+        "node_modules/motion-utils/dist/es/easing/back.mjs",
+        "node_modules/motion-utils/dist/es/easing/anticipate.mjs",
+        "node_modules/motion-utils/dist/es/easing/circ.mjs",
+        "node_modules/motion-utils/dist/es/easing/ease.mjs",
+        "node_modules/motion-utils/dist/es/easing/utils/is-easing-array.mjs",
+        "node_modules/motion-utils/dist/es/easing/utils/is-bezier-definition.mjs",
+        "node_modules/motion-utils/dist/es/easing/utils/map.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/order.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/render-step.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/batcher.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/frame.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/sync-time.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/is-css-variable.mjs",
+        "node_modules/motion-dom/dist/es/value/types/numbers/index.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/sanitize.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/float-regex.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/is-nullish.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/single-color-regex.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/utils.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/rgba.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/hex.mjs",
+        "node_modules/motion-dom/dist/es/value/types/numbers/units.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/hsla.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/index.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/color-regex.mjs",
+        "node_modules/motion-dom/dist/es/value/types/complex/index.mjs",
+        "node_modules/motion-dom/dist/es/value/types/color/hsla-to-rgba.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/immediate.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/number.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/color.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/visibility.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/complex.mjs",
+        "node_modules/motion-dom/dist/es/utils/mix/index.mjs",
+        "node_modules/motion-dom/dist/es/animation/drivers/frame.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/utils/linear.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/utils/calc-duration.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/utils/create-generator-easing.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/spring.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/inertia.mjs",
+        "node_modules/motion-dom/dist/es/utils/interpolate.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/offsets/fill.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/offsets/default.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/offsets/time.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/keyframes.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/utils/velocity.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/get-final.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/replace-transition-type.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/WithPromise.mjs",
+        "node_modules/motion-dom/dist/es/animation/JSAnimation.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/utils/fill-wildcards.mjs",
+        "node_modules/motion-dom/dist/es/render/dom/parse-transform.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/keys-transform.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/utils/unit-conversion.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/KeyframesResolver.mjs",
+        "node_modules/motion-dom/dist/es/render/dom/is-css-var.mjs",
+        "node_modules/motion-dom/dist/es/render/dom/style-set.mjs",
+        "node_modules/motion-dom/dist/es/utils/supports/flags.mjs",
+        "node_modules/motion-dom/dist/es/utils/supports/memo.mjs",
+        "node_modules/motion-dom/dist/es/utils/supports/scroll-timeline.mjs",
+        "node_modules/motion-dom/dist/es/utils/supports/linear-easing.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/easing/cubic-bezier.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/easing/supported.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/easing/map-easing.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/start-waapi-animation.mjs",
+        "node_modules/motion-dom/dist/es/animation/generators/utils/is-generator.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/utils/apply-generator.mjs",
+        "node_modules/motion-dom/dist/es/animation/NativeAnimation.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/utils/unsupported-easing.mjs",
+        "node_modules/motion-dom/dist/es/animation/NativeAnimationExtended.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/is-animatable.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/can-animate.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/make-animation-instant.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/utils/accelerated-values.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/utils/is-browser-color.mjs",
+        "node_modules/motion-dom/dist/es/animation/waapi/supports/waapi.mjs",
+        "node_modules/motion-dom/dist/es/animation/AsyncMotionValueAnimation.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/calc-child-stagger.mjs",
+        "node_modules/motion-dom/dist/es/value/index.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/resolve-transition.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/default-transitions.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/is-transition-defined.mjs",
+        "node_modules/motion-dom/dist/es/animation/interfaces/motion-value.mjs",
+        "node_modules/motion-dom/dist/es/animation/utils/css-variables-conversion.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/resolve-variants.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/resolve-dynamic-variants.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/keys-position.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/is-keyframes-target.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/setters.mjs",
+        "node_modules/motion-dom/dist/es/value/utils/is-motion-value.mjs",
+        "node_modules/motion-dom/dist/es/value/will-change/is.mjs",
+        "node_modules/motion-dom/dist/es/value/will-change/add-will-change.mjs",
+        "node_modules/motion-dom/dist/es/render/dom/utils/camel-to-dash.mjs",
+        "node_modules/motion-dom/dist/es/animation/optimized-appear/data-id.mjs",
+        "node_modules/motion-dom/dist/es/animation/optimized-appear/get-appear-id.mjs",
+        "node_modules/motion-dom/dist/es/animation/interfaces/visual-element-target.mjs",
+        "node_modules/motion-dom/dist/es/animation/interfaces/visual-element-variant.mjs",
+        "node_modules/motion-dom/dist/es/animation/interfaces/visual-element.mjs",
+        "node_modules/motion-dom/dist/es/value/types/auto.mjs",
+        "node_modules/motion-dom/dist/es/value/types/test.mjs",
+        "node_modules/motion-dom/dist/es/value/types/dimensions.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/utils/is-none.mjs",
+        "node_modules/motion-dom/dist/es/value/types/complex/filter.mjs",
+        "node_modules/motion-dom/dist/es/value/types/complex/mask.mjs",
+        "node_modules/motion-dom/dist/es/value/types/int.mjs",
+        "node_modules/motion-dom/dist/es/value/types/maps/transform.mjs",
+        "node_modules/motion-dom/dist/es/value/types/maps/number.mjs",
+        "node_modules/motion-dom/dist/es/value/types/maps/defaults.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/animatable-none.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/utils/make-none-animatable.mjs",
+        "node_modules/motion-dom/dist/es/animation/keyframes/DOMKeyframesResolver.mjs",
+        "node_modules/motion-dom/dist/es/utils/border-radius.mjs",
+        "node_modules/motion-dom/dist/es/utils/resolve-elements.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/get-as-type.mjs",
+        "node_modules/motion-dom/dist/es/utils/is-html-element.mjs",
+        "node_modules/motion-dom/dist/es/frameloop/microtask.mjs",
+        "node_modules/motion-dom/dist/es/gestures/drag/state/is-active.mjs",
+        "node_modules/motion-dom/dist/es/gestures/utils/setup.mjs",
+        "node_modules/motion-dom/dist/es/gestures/hover.mjs",
+        "node_modules/motion-dom/dist/es/gestures/utils/is-node-or-child.mjs",
+        "node_modules/motion-dom/dist/es/gestures/utils/is-primary-pointer.mjs",
+        "node_modules/motion-dom/dist/es/gestures/press/utils/is-keyboard-accessible.mjs",
+        "node_modules/motion-dom/dist/es/gestures/press/utils/state.mjs",
+        "node_modules/motion-dom/dist/es/gestures/press/utils/keyboard.mjs",
+        "node_modules/motion-dom/dist/es/gestures/press/index.mjs",
+        "node_modules/motion-dom/dist/es/value/types/utils/find.mjs",
+        "node_modules/motion-dom/dist/es/projection/geometry/models.mjs",
+        "node_modules/motion-dom/dist/es/render/store.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/is-animation-controls.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/is-variant-label.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/variant-props.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/is-controlling-variants.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/motion-values.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/reduced-motion/state.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/reduced-motion/index.mjs",
+        "node_modules/motion-dom/dist/es/render/VisualElement.mjs",
+        "node_modules/motion-dom/dist/es/render/dom/DOMVisualElement.mjs",
+        "node_modules/motion-dom/dist/es/render/Feature.mjs",
+        "node_modules/motion-dom/dist/es/projection/geometry/conversion.mjs",
+        "node_modules/motion-dom/dist/es/projection/utils/measure.mjs",
+        "node_modules/motion-dom/dist/es/render/html/utils/build-transform.mjs",
+        "node_modules/motion-dom/dist/es/render/html/utils/build-styles.mjs",
+        "node_modules/motion-dom/dist/es/render/html/utils/render.mjs",
+        "node_modules/motion-dom/dist/es/projection/styles/scale-border-radius.mjs",
+        "node_modules/motion-dom/dist/es/projection/styles/scale-box-shadow.mjs",
+        "node_modules/motion-dom/dist/es/projection/styles/scale-correction.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/is-forced-motion-value.mjs",
+        "node_modules/motion-dom/dist/es/render/html/utils/scrape-motion-values.mjs",
+        "node_modules/motion-dom/dist/es/render/html/HTMLVisualElement.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/path.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/build-attrs.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/camel-case-attrs.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/is-svg-tag.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/render.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/utils/scrape-motion-values.mjs",
+        "node_modules/motion-dom/dist/es/render/svg/SVGVisualElement.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/get-variant-context.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/shallow-compare.mjs",
+        "node_modules/motion-dom/dist/es/render/utils/animation-state.mjs",
+        "node_modules/motion-dom/dist/es/events/add-dom-event.mjs",
+        "node_modules/motion-dom/dist/es/value/utils/resolve-motion-value.mjs",
+        "node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs",
+        "node_modules/framer-motion/dist/es/utils/use-composed-ref.mjs",
+        "node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs",
+        "node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs",
+        "node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs",
+        "node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs",
+        "node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs",
+        "node_modules/framer-motion/dist/es/context/LazyContext.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/definitions.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/load-features.mjs",
+        "node_modules/framer-motion/dist/es/components/LazyMotion/index.mjs",
+        "node_modules/framer-motion/dist/es/components/MotionConfig/index.mjs",
+        "node_modules/framer-motion/dist/es/context/MotionContext/index.mjs",
+        "node_modules/framer-motion/dist/es/context/MotionContext/utils.mjs",
+        "node_modules/framer-motion/dist/es/context/MotionContext/create.mjs",
+        "node_modules/framer-motion/dist/es/render/html/utils/create-render-state.mjs",
+        "node_modules/framer-motion/dist/es/render/html/use-props.mjs",
+        "node_modules/framer-motion/dist/es/render/svg/utils/create-render-state.mjs",
+        "node_modules/framer-motion/dist/es/render/svg/use-props.mjs",
+        "node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs",
+        "node_modules/framer-motion/dist/es/render/dom/utils/filter-props.mjs",
+        "node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs",
+        "node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs",
+        "node_modules/framer-motion/dist/es/render/dom/use-render.mjs",
+        "node_modules/framer-motion/dist/es/motion/utils/use-visual-state.mjs",
+        "node_modules/framer-motion/dist/es/render/html/use-html-visual-state.mjs",
+        "node_modules/framer-motion/dist/es/render/svg/use-svg-visual-state.mjs",
+        "node_modules/framer-motion/dist/es/motion/utils/symbol.mjs",
+        "node_modules/framer-motion/dist/es/motion/utils/use-motion-ref.mjs",
+        "node_modules/framer-motion/dist/es/context/SwitchLayoutGroupContext.mjs",
+        "node_modules/framer-motion/dist/es/utils/is-ref-object.mjs",
+        "node_modules/framer-motion/dist/es/motion/utils/use-visual-element.mjs",
+        "node_modules/framer-motion/dist/es/motion/index.mjs",
+        "node_modules/framer-motion/dist/es/render/components/create-proxy.mjs",
+        "node_modules/framer-motion/dist/es/render/components/m/proxy.mjs",
+        "node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/animation/index.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/animation/exit.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/animations.mjs",
+        "node_modules/framer-motion/dist/es/events/event-info.mjs",
+        "node_modules/framer-motion/dist/es/gestures/hover.mjs",
+        "node_modules/framer-motion/dist/es/gestures/focus.mjs",
+        "node_modules/framer-motion/dist/es/gestures/press.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/viewport/observers.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/viewport/index.mjs",
+        "node_modules/framer-motion/dist/es/motion/features/gestures.mjs",
+        "node_modules/framer-motion/dist/es/render/dom/features-animation.mjs",
+        "node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.mjs",
+        "node_modules/motion/dist/es/react.mjs",
+        "frontend/src/components/Shell.tsx",
+        "\u0000vite/preload-helper.js",
+        "frontend/src/App.tsx",
+        "frontend/src/global.css",
+        "frontend/src/main.tsx",
+        "frontend/index.html"
+      ],
+      "authored_sources": [
+        "frontend/src/components/Shell.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/primitives-B4OQEf9S.js",
+      "sha256": "abdeb1b6a4a62fb4fbe3c6384d2c0aee25bf4bca7ebb9733006a9afd2fbd88fb",
+      "observations": 2,
+      "source_map_sha256": "42845abd4c2f8abc5d19a0868f563bfa22eda71b9f5939daad6414ee0266a27b",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "node_modules/@radix-ui/react-compose-refs/dist/index.mjs",
+        "node_modules/@radix-ui/react-slot/dist/index.mjs",
+        "node_modules/@radix-ui/react-primitive/dist/index.mjs",
+        "node_modules/@radix-ui/react-visually-hidden/dist/index.mjs",
+        "node_modules/@radix-ui/react-context/dist/index.mjs",
+        "node_modules/@radix-ui/react-collection/dist/index.mjs",
+        "node_modules/@radix-ui/primitive/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-effect-event/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs",
+        "node_modules/@radix-ui/react-presence/dist/index.mjs",
+        "node_modules/@radix-ui/react-id/dist/index.mjs",
+        "node_modules/@radix-ui/react-direction/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-callback-ref/dist/index.mjs",
+        "node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs",
+        "node_modules/@radix-ui/react-focus-scope/dist/index.mjs",
+        "node_modules/@radix-ui/react-portal/dist/index.mjs",
+        "node_modules/@radix-ui/react-focus-guards/dist/index.mjs",
+        "node_modules/@radix-ui/react-dialog/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-size/dist/index.mjs",
+        "node_modules/@radix-ui/react-arrow/dist/index.mjs",
+        "node_modules/@radix-ui/react-popper/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-is-hydrated/dist/index.mjs",
+        "node_modules/@radix-ui/react-roving-focus/dist/index.mjs",
+        "node_modules/@radix-ui/react-menu/dist/index.mjs",
+        "node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs",
+        "node_modules/@radix-ui/react-use-previous/dist/index.mjs",
+        "node_modules/@radix-ui/number/dist/index.mjs",
+        "node_modules/@radix-ui/react-scroll-area/dist/index.mjs",
+        "node_modules/@radix-ui/react-select/dist/index.mjs",
+        "node_modules/@radix-ui/react-tabs/dist/index.mjs",
+        "node_modules/@radix-ui/react-tooltip/dist/index.mjs"
+      ],
+      "authored_sources": []
+    },
+    {
+      "path": "consumer/web/assets/react-wiHys0m2.js",
+      "sha256": "dd1b6ff3bb4807997f41d1750095fa23ca43fc644b6a70644da4496d0d14dd8b",
+      "observations": 3,
+      "source_map_sha256": "da3907186bc6d21333bda32a002affcaca2d4323ed917f5620e3687535f3236d",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "node_modules/react/cjs/react.production.js",
+        "node_modules/react/index.js",
+        "node_modules/scheduler/cjs/scheduler.production.js",
+        "node_modules/scheduler/index.js",
+        "node_modules/react-dom/cjs/react-dom.production.js",
+        "node_modules/react-dom/index.js",
+        "node_modules/react-dom/cjs/react-dom-client.production.js",
+        "node_modules/react-dom/client.js",
+        "node_modules/react/cjs/react-jsx-runtime.production.js",
+        "node_modules/react/jsx-runtime.js"
+      ],
+      "authored_sources": []
+    },
+    {
+      "path": "consumer/web/assets/rolldown-runtime-hePW80VL.js",
+      "sha256": "580ad8c58061a4dde99bde0a56905e382f0568516ee2f5b84dbfb52085709021",
+      "observations": 2,
+      "source_map_sha256": null,
+      "generated_runtime": true,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "\u0000rolldown/runtime.js"
+      ],
+      "authored_sources": []
+    },
+    {
+      "path": "consumer/web/assets/shared-Dy-fnpz7.js",
+      "sha256": "ac825e7045ac2f191a74d2896ac30afc487fb15e5b486e26a00dd07023e4575b",
+      "observations": 2,
+      "source_map_sha256": "40092eb2085f21949fba954f0ba0c692a417686ef4d42a771dbecf01bc09311a",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "frontend/src/pages/shared.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/pages/shared.tsx"
+      ]
+    },
+    {
+      "path": "consumer/web/assets/ui-BKzYPz3H.js",
+      "sha256": "4d0c467cc6e8017a66e380ac0c4d4b1e1adb072f189e64e0deb57b99fdced2d5",
+      "observations": 3,
+      "source_map_sha256": "f1f84257bea7ab2fd308e5b4252a281c40ea0c6dd95ff18177ff742ba63d1082",
+      "generated_runtime": false,
+      "generated_css_bridge": false,
+      "module_ids": [
+        "node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js",
+        "node_modules/@tanstack/query-core/build/modern/timeoutManager.js",
+        "node_modules/@tanstack/query-core/build/modern/utils.js",
+        "node_modules/@tanstack/query-core/build/modern/environmentManager.js",
+        "node_modules/@tanstack/query-core/build/modern/subscribable.js",
+        "node_modules/@tanstack/query-core/build/modern/focusManager.js",
+        "node_modules/@tanstack/query-core/build/modern/notifyManager.js",
+        "node_modules/@tanstack/query-core/build/modern/onlineManager.js",
+        "node_modules/@tanstack/query-core/build/modern/retryer.js",
+        "node_modules/@tanstack/query-core/build/modern/removable.js",
+        "node_modules/@tanstack/query-core/build/modern/infiniteQueryBehavior.js",
+        "node_modules/@tanstack/query-core/build/modern/query.js",
+        "node_modules/@tanstack/query-core/build/modern/queryObserver.js",
+        "node_modules/@tanstack/react-query/build/modern/IsRestoringProvider.js",
+        "node_modules/@tanstack/react-query/build/modern/QueryErrorResetBoundary.js",
+        "node_modules/@tanstack/react-query/build/modern/errorBoundaryUtils.js",
+        "node_modules/@tanstack/react-query/build/modern/suspense.js",
+        "node_modules/@tanstack/react-query/build/modern/useBaseQuery.js",
+        "node_modules/@tanstack/react-query/build/modern/useQuery.js",
+        "frontend/src/lib/api.ts",
+        "frontend/src/hooks/useAgent.tsx",
+        "node_modules/tslib/tslib.es6.mjs",
+        "node_modules/react-remove-scroll-bar/dist/es2015/constants.js",
+        "node_modules/use-callback-ref/dist/es2015/assignRef.js",
+        "node_modules/use-callback-ref/dist/es2015/useRef.js",
+        "node_modules/use-callback-ref/dist/es2015/useMergeRef.js",
+        "node_modules/use-sidecar/dist/es2015/medium.js",
+        "node_modules/use-sidecar/dist/es2015/exports.js",
+        "node_modules/react-remove-scroll/dist/es2015/medium.js",
+        "node_modules/react-remove-scroll/dist/es2015/UI.js",
+        "node_modules/get-nonce/dist/es2015/index.js",
+        "node_modules/react-style-singleton/dist/es2015/singleton.js",
+        "node_modules/react-style-singleton/dist/es2015/hook.js",
+        "node_modules/react-style-singleton/dist/es2015/component.js",
+        "node_modules/react-style-singleton/dist/es2015/index.js",
+        "node_modules/react-remove-scroll-bar/dist/es2015/utils.js",
+        "node_modules/react-remove-scroll-bar/dist/es2015/component.js",
+        "node_modules/react-remove-scroll-bar/dist/es2015/index.js",
+        "node_modules/react-remove-scroll/dist/es2015/aggresiveCapture.js",
+        "node_modules/react-remove-scroll/dist/es2015/handleScroll.js",
+        "node_modules/react-remove-scroll/dist/es2015/SideEffect.js",
+        "node_modules/react-remove-scroll/dist/es2015/sidecar.js",
+        "node_modules/react-remove-scroll/dist/es2015/Combination.js",
+        "node_modules/aria-hidden/dist/es2015/index.js",
+        "node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs",
+        "node_modules/@floating-ui/core/dist/floating-ui.core.mjs",
+        "node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs",
+        "node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs",
+        "node_modules/@floating-ui/react-dom/dist/floating-ui.react-dom.mjs",
+        "frontend/src/components/components.css",
+        "frontend/src/components/ui.tsx"
+      ],
+      "authored_sources": [
+        "frontend/src/lib/api.ts",
+        "frontend/src/hooks/useAgent.tsx",
+        "frontend/src/components/ui.tsx"
+      ]
+    }
+  ],
+  "source_manifest_sha256": "5dd0e18ba387845bc8fad5cb569158bdf78cb82f254714803b3fae95cdfa81f5",
+  "evidence_sha256": {
+    "evidence/sturgis-02/browser-v8.json": "ef975bb594cab5692a7e5bd70cc185a79c404c9b3361ba75879fa0b2ee49396b",
+    ".build/web-vitest/coverage-final.json": "a73262ee468bcb5619ac1a327161f27ccec60875e0cac4a336e0f8b406451ee5"
+  }
+}

@@ -1,0 +1,26 @@
+[Unit]
+Description=Sturgis consumer server and private agent workers
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sturgis
+Group=sturgis
+Environment=STURGIS_ROOT=/var/lib/sturgis
+Environment=STURGIS_MODE=self_hosted
+Environment=STURGIS_HOST=127.0.0.1
+Environment=STURGIS_PORT=8787
+Environment=STURGIS_PUBLIC_ORIGIN=http://127.0.0.1:8787
+ExecStart=/opt/sturgis/bin/sturgis --config-dir /var/lib/sturgis/client serve
+WorkingDirectory=/var/lib/sturgis
+StateDirectory=sturgis
+StateDirectoryMode=0700
+UMask=0077
+Restart=on-failure
+RestartSec=3
+KillMode=control-group
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

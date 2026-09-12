@@ -1,0 +1,25 @@
+flowchart TB
+    INPUT[Accepted channel input] --> SCHED[scheduler]
+    EVENTS[Journal events and domain transitions] --> AWARE[awareness]
+    PROFILE[profile] --> AWARE
+    GOALS[goals] --> AWARE
+    COMMIT[commitments] --> AWARE
+    AWARE --> INIT[initiative]
+    INIT --> POLICY[attention: proactive policy]
+    POLICY -->|eligible work proposal| SCHED
+    AWARE --> PLAN[planner]
+    GOALS --> PLAN
+    COMMIT --> PLAN
+    SKILLS[skills] --> PLAN
+    PLAN -->|plan and ready steps| SCHED
+    SCHED -->|admitted reasoning budget| ATT[attention]
+    AWARE --> ATT
+    MEM[Memory retrieval and recent evidence] --> ATT
+    ATT --> FRAME[context compiler]
+    FRAME --> PROVIDER[provider-adapters]
+    PROVIDER -->|action or delegation proposal| SCHED
+    SCHED --> RUN[tool-runner]
+    RUN -->|recorded delegation control| SUB[subagents]
+    SUB --> EVENTS
+    RUN --> EVENTS
+    PROVIDER -->|visible output via outbox| DEL[delivery]
