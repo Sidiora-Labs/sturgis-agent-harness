@@ -5,16 +5,23 @@ description: "Use device codes or browser sign-in, import account models, and re
 
 The gateway can sign in directly to supported accounts. The current native choices are GitHub Copilot, Codex, Gemini CLI, and Kiro. Account credentials stay in the gateway's encrypted storage. The browser receives sign-in instructions and account metadata, not access or refresh tokens.
 
+Gemini CLI sign-in requires the installation operator to configure a registered
+OAuth application first. Supply `STURGIS_GATEWAY_GEMINI_CLIENT_ID` and
+`STURGIS_GATEWAY_GEMINI_CLIENT_SECRET` privately to the gateway process before
+startup. Sturgis does not bundle another application's OAuth credentials. If
+sign-in reports `auth_not_configured`, ask the operator to configure these values
+and restart the gateway, then retry. Other provider connections remain available.
+
 Use an account you are entitled to connect. A successful login does not create paid access, remove provider limits, or guarantee that every model is available. A consumer API key and a provider subscription can grant different access even when both belong to the same company.
 
 ## Pick the appropriate account flow
 
-| Preset | Sign-in method | Account-specific setup |
-| --- | --- | --- |
-| GitHub Copilot | Device code | Requires Copilot access for the GitHub account you authorize. |
-| Codex | Browser authorization with PKCE | Uses an eligible ChatGPT/Codex account. The default callback is `http://localhost:1455/auth/callback`. |
-| Gemini CLI | Browser authorization with PKCE | Uses Google Code Assist access. The default callback is `http://localhost:8085/oauth2callback`. A Google Cloud project may be required for your account. |
-| Kiro | Device code | Uses AWS Builder ID or IAM Identity Center. Optional account settings choose the AWS region and access portal. |
+| Preset         | Sign-in method                  | Account-specific setup                                                                                                                                   |
+| -------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub Copilot | Device code                     | Requires Copilot access for the GitHub account you authorize.                                                                                            |
+| Codex          | Browser authorization with PKCE | Uses an eligible ChatGPT/Codex account. The default callback is `http://localhost:1455/auth/callback`.                                                   |
+| Gemini CLI     | Browser authorization with PKCE | Uses Google Code Assist access. The default callback is `http://localhost:8085/oauth2callback`. A Google Cloud project may be required for your account. |
+| Kiro           | Device code                     | Uses AWS Builder ID or IAM Identity Center. Optional account settings choose the AWS region and access portal.                                           |
 
 PKCE binds the browser authorization to a verifier retained by the gateway. You do not create or paste that verifier.
 
@@ -67,16 +74,16 @@ If the account changes while the confirmation is open, the gateway reports a con
 
 **Cancel** closes a pending sign-in only after the gateway confirms its cancellation. If cancellation cannot be confirmed, the error remains visible so you can retry. An expired or denied sign-in offers **Start again**. Starting again creates a new authorization attempt; an old code or URL will not complete the new one.
 
-| Status or error | Meaning and recovery |
-| --- | --- |
-| Waiting for sign-in | Finish on the provider page; the gateway polls at the advertised interval. |
-| Sign-in expired | Start again and use the new code or URL. |
-| Invalid callback state | Use the callback from this exact pending sign-in. If you mixed windows or sessions, start again. |
-| Account mismatch | The imported preset or endpoint does not match the signed-in account. Use the original provider account. |
-| Account not eligible | Check the provider's subscription, organization, project, region, and model permissions. |
-| Account refreshing | Retry shortly. Another request may already be refreshing the credential. |
-| Previous refresh interrupted | Sign in again. The gateway does not blindly replay a refresh token that may already have rotated. |
-| Account disconnected | Sign in again and replace or reconnect the affected model connection. |
+| Status or error              | Meaning and recovery                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Waiting for sign-in          | Finish on the provider page; the gateway polls at the advertised interval.                               |
+| Sign-in expired              | Start again and use the new code or URL.                                                                 |
+| Invalid callback state       | Use the callback from this exact pending sign-in. If you mixed windows or sessions, start again.         |
+| Account mismatch             | The imported preset or endpoint does not match the signed-in account. Use the original provider account. |
+| Account not eligible         | Check the provider's subscription, organization, project, region, and model permissions.                 |
+| Account refreshing           | Retry shortly. Another request may already be refreshing the credential.                                 |
+| Previous refresh interrupted | Sign in again. The gateway does not blindly replay a refresh token that may already have rotated.        |
+| Account disconnected         | Sign in again and replace or reconnect the affected model connection.                                    |
 
 The gateway refreshes supported credentials when they approach expiry. It does not expose refresh tokens in the UI. A restart or network failure during a rotating refresh may require a fresh sign-in, because retrying a token with an unknown result could invalidate the account's remaining credentials.
 

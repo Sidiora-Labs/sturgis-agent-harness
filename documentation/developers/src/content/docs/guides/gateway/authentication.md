@@ -23,12 +23,24 @@ Authentication is repeated immediately before provider dispatch. Rotation/revoca
 
 ## Native account providers
 
-| Provider | Authorization | Bootstrap and execution |
-| --- | --- | --- |
-| `github-copilot` | GitHub device authorization | Exchanges the account credential for a current Copilot token, fetches permitted chat models, and selects Chat Completions, Responses, or Anthropic transport from model metadata or recognized native model IDs for explicit manual imports. |
-| `codex` | Authorization code with PKCE | Requires the account routing identity from the trusted token response. Uses the Codex Responses endpoint and account headers; the adapter sets `store:false` and applies Codex-specific request restrictions. |
-| `gemini-cli` | Authorization code with PKCE | Discovers an actual Code Assist project/default tier, completes account bootstrap, fetches actual account models, and wraps Gemini requests with the project identity. |
-| `kiro` | AWS device authorization | Registers the supported public client, selects the account profile, discovers account models, and uses Kiro's AWS event-stream response. |
+`GatewayAuth` reads `STURGIS_GATEWAY_GEMINI_CLIENT_ID` and
+`STURGIS_GATEWAY_GEMINI_CLIENT_SECRET` from the process environment at construction.
+Trusted `ModelGateway(auth_configs={"gemini-cli": {...}})` configuration overrides
+these values through `client_id` and `client_secret`. Use a registered OAuth
+application with the documented callback; there are no bundled Gemini defaults.
+Missing or malformed values produce a sanitized `auth_not_configured` HTTP 503
+before session writes, provider requests, callback listeners or refresh leases.
+The browser cannot supply these operator credentials. The client secret is never
+included in public account/provider projections or errors; the public client ID
+is necessarily part of the provider authorization URL. Restart the gateway after
+changing environment values. The application does not automatically load `.env`.
+
+| Provider         | Authorization                | Bootstrap and execution                                                                                                                                                                                                                      |
+| ---------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `github-copilot` | GitHub device authorization  | Exchanges the account credential for a current Copilot token, fetches permitted chat models, and selects Chat Completions, Responses, or Anthropic transport from model metadata or recognized native model IDs for explicit manual imports. |
+| `codex`          | Authorization code with PKCE | Requires the account routing identity from the trusted token response. Uses the Codex Responses endpoint and account headers; the adapter sets `store:false` and applies Codex-specific request restrictions.                                |
+| `gemini-cli`     | Authorization code with PKCE | Discovers an actual Code Assist project/default tier, completes account bootstrap, fetches actual account models, and wraps Gemini requests with the project identity.                                                                       |
+| `kiro`           | AWS device authorization     | Registers the supported public client, selects the account profile, discovers account models, and uses Kiro's AWS event-stream response.                                                                                                     |
 
 The `auth/providers` projection exposes provider ID, name, flow, description, registered default redirect URI, and supported option names. It does not expose token endpoints or server credentials. Kiro accepts optional `region` and `start_url`; Gemini CLI accepts `project_id`; other option keys are rejected.
 

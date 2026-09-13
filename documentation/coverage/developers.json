@@ -1920,7 +1920,7 @@
     "model_gateway/__init__.py": "2753ee6f6861c42c174a44be308322562a68cef80de8509e3cc2cc4415e13b14",
     "model_gateway/__main__.py": "3c8fa7d2e6af0ee5fe686327a7add470e681b5db8af5f4e1af45d320d75c1c41",
     "model_gateway/api.py": "3097707a3cbbdee1d13270f66c755ad715fac5c3eb6d1893d365b66c1b3eefed",
-    "model_gateway/auth.py": "f5113aa12b2f1e58ffb3242bd5c90fb69cd58b5e29d1e0ac66bf053a80a33dc5",
+    "model_gateway/auth.py": "92589582738ee129eae11caebd779fd289a9d96e01af40b1016e62406c482fea",
     "model_gateway/auth_state.py": "9e2f481f19bfd8a2e0ace0dab991c02934431d3dc10a9106f3e011f4f2a70a4f",
     "model_gateway/auth_transports.py": "1383f88528f7ae8df109db5f5e92a19535711e3fb71d9fe411dcb7414e99994d",
     "model_gateway/callbacks.py": "a5aeaff08dfdc3224a09fe4bf4803b9056c2c4ddb39dcc573cfdc9f92e9cb288",
