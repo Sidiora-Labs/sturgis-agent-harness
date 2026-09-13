@@ -1,7 +1,7 @@
 [meta]
 name = "Sturgis implementation workflow"
-active_feature = "sturgis-03"
-source_of_truth = "spec/sturgis-03/spec.kvx"
+active_feature = "repository-foundations"
+source_of_truth = "spec/repository-foundations/spec.kvx"
 
 [mode]
 name = "parallel"
@@ -23,9 +23,9 @@ step_1 = "Read the active spec and contracts; inspect only current relevant sour
 step_2 = "Root claims ready tasks with explicit owner and dependencies; one active task per agent."
 step_3 = "Implement only declared paths and publish interface changes before dependent work."
 step_4 = "Run focused verification; root reconciles integration and completes tasks through cg spec done."
-step_5 = "Run the aggregate coverage/recovery/scope gate once after integration; retain truthful evidence."
+step_5 = "Run the active feature verification after integration. Runtime changes require the aggregate coverage/recovery gate; repository-only work uses its declared tooling checks and must preserve pending runtime status."
 step_6 = "Maintain both documentation sites: complete user manuals/examples and developer architecture, file/function contracts, important source branches and operating guides."
-step_7 = "Run python3 scripts/docs_gate.py full. Both site builds, independent feature/source completeness, rendered links, examples and browser journeys must pass before cg docs close."
+step_7 = "For product/manual changes, run python3 scripts/docs_gate.py full before closing the two-site documentation work. Root repository maintenance validates its declared documents and must not claim the stopped product documentation gate complete."
 
 [documentation]
 user_site = "documentation/users"
@@ -34,7 +34,7 @@ verify_cmd = "python3 scripts/docs_gate.py full"
 completeness = "Every feature must have user guidance and examples; every first-party file and symbol must have source-grounded developer reference with important behavior explained. Generated lists alone do not qualify."
 
 [hard_rules]
-active_scope = "Sturgis-03 adds an independent model gateway and consumer client integration; preserve completed core/consumer work and historical evidence. No paid/public deployment is authorized."
+active_scope = "Repository-foundations adds project documentation, Apache-2.0 licensing, local tooling, CI and devcontainer configuration. User-stopped sturgis-03 runtime qualification remains incomplete. Preserve application work and private data; no publishing or production deployment is authorized."
 no_false_done = "Source presence and coverage alone are not runtime qualification; record exact executed evidence."
 coverage = "Never lower 90 percent Python, C++ and client JavaScript line coverage gates or omit first-party production files to pass."
 preserve_work = "Exclusive module/test ownership; do not overwrite another agent's files or modify prior research."

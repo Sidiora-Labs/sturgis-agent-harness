@@ -21,7 +21,7 @@ Expect the response and original input in the same history. Open **Knowledge →
 
 ## Search and restore archived conversations
 
-The sidebar lists recent conversations. The command palette searches navigation views; full conversation search is available through `conversations.list` using the CLI/API. Save `search.json`:
+The sidebar lists conversations by creation time, newest first, with a stable order when timestamps match. Renaming one does not move it as though it were newly created. The command palette searches navigation views; full conversation search is available through `conversations.list` using the CLI/API. Save `search.json`:
 
 ```json
 {"query":"maintenance","include_archived":true}
@@ -46,6 +46,14 @@ sturgis events AGENT_ID --conversation CONVERSATION_ID --after 0 --follow
 ```
 
 Save the latest cursor and use it after reconnecting. `messages.events` exposes the bounded command form with `conversation_id`, `after`, and `limit`. Read replay as recorded history, not as a request to rerun a tool. Imported backup history carries `portable.import` provenance and cannot become fresh input.
+
+When you open a saved thread, **Opening your conversation…** means its recorded messages are still loading. Sturgis shows the empty welcome view only after that thread's initial history is loaded and contains no messages. The history query selects that conversation's public events directly; maintenance activity does not need to be displayed or paged through first.
+
+If the connection fails after messages appear, they stay visible with **Showing loaded messages while reconnecting.** If none have loaded yet, the notice says **Reconnecting to load your saved messages.** Sturgis retries automatically. Switching threads clears the previous thread from view and loads the selected one; it does not mix their messages.
+
+Pausing the runtime keeps already loaded messages and your draft in place while stopping updates. A thread with no loaded history shows **Waiting to load conversation history…** until private reads can resume. Resuming continues the current thread from its saved replay cursor without duplicating messages.
+
+For CLI/API consumers, reuse the page's returned cursor even when the page has no items. A cursor is a position in the recorded event history, so it can advance past maintenance events that are not part of the visible conversation. `has_more` indicates more matching events in that snapshot. No history is deleted to make replay faster.
 
 If history appears unavailable while the runtime is suspended, start the runtime from Agent & data. If a download belongs to another agent, its authorization failure is expected; select the agent that owns the source rather than altering the download URL. [Knowledge](../knowledge/source-library.md) and [memory](../knowledge/memory.md) explain how source revisions differ from recalled facts.
 

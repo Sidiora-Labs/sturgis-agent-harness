@@ -6,6 +6,7 @@ import hashlib
 import hmac
 import io
 from pathlib import Path
+import subprocess
 import time
 import wave
 
@@ -18,7 +19,10 @@ from consumer.device import DeviceService, device_signing_bytes
 from consumer.network import NetworkPolicy
 from .test_connections import wire, services, admit_work
 
-CHROME = "/root/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome"
+CHROME = subprocess.check_output(
+    ["node", "--input-type=module", "-e", "import { chromium } from 'playwright'; console.log(chromium.executablePath())"],
+    cwd=Path(__file__).resolve().parents[2], text=True,
+).strip()
 PNG = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a6m8AAAAASUVORK5CYII=")
 
 

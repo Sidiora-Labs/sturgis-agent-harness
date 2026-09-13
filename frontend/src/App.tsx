@@ -397,9 +397,9 @@ export default function App() {
             <m.div
               className={"toast " + (toast.tone === "error" ? "error" : "")}
               key={toast.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 4 }}
+              initial={{ y: 8 }}
+              animate={{ y: 0 }}
+              exit={{ y: 4 }}
               transition={{ duration: 0.16 }}
               role={toast.tone === "error" ? "alert" : "status"}
             >

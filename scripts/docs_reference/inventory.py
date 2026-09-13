@@ -3,7 +3,7 @@
 from pathlib import Path
 
 
-ROOTS = ("agent", "consumer", "native", "frontend", "tests", "scripts", "packaging", "documentation", "docs", "spec")
+ROOTS = ("agent", "consumer", "model_gateway", "native", "frontend", "tests", "scripts", "packaging", "documentation", "docs", "spec")
 IGNORED_DIRECTORIES = {
     "__pycache__", ".pytest_cache", "node_modules", ".git", ".astro", "dist",
     ".cache", "htmlcov", "coverage", ".venv", "vendor",

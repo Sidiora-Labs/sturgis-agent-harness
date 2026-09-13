@@ -2,7 +2,7 @@
 import pytest
 
 from model_gateway.errors import GatewayError
-from model_gateway.ingress import collect_chat, from_chat, from_completion, to_chat
+from model_gateway.ingress import collect_chat, collect_native, from_chat, from_completion, to_chat
 from model_gateway.transports import GatewayTransport, discover_models
 from model_gateway.wire import json_dumps
 from tests.gateway.test_transports import function_stream, native_text, payload, wire
@@ -187,3 +187,61 @@ async def test_discovery_omits_specialized_nonchat_models():
         models = await discover_models("openai", url, None, policy)
         assert [m["id"] for m in models] == ["chat", "unknown"]
         assert models[0]["tools"] is True and "tools" not in models[1]
+
+
+def record(kind, **data):
+    return {"event": kind, "data": {"type": kind, **data}}
+
+
+async def test_native_collect_preserves_thinking_signatures_cache_usage_and_citations():
+    response = await collect_native("anthropic", chunks(
+        record("message_start", message={"id": "msg", "type": "message", "model": "m", "role": "assistant", "content": [],
+            "usage": {"input_tokens": 3, "cache_read_input_tokens": 5}}),
+        record("content_block_start", index=0, content_block={"type": "thinking", "thinking": "", "signature": ""}),
+        record("content_block_delta", index=0, delta={"type": "thinking_delta", "thinking": "native-thought"}),
+        record("content_block_delta", index=0, delta={"type": "signature_delta", "signature": "signed-opaque"}),
+        record("content_block_stop", index=0),
+        record("content_block_start", index=1, content_block={"type": "text", "text": "Answer "}),
+        record("content_block_delta", index=1, delta={"type": "text_delta", "text": "here"}),
+        record("content_block_delta", index=1, delta={"type": "citations_delta", "citation": {"type": "char_location", "cited_text": "evidence"}}),
+        record("content_block_stop", index=1),
+        record("content_block_start", index=2, content_block={"type": "tool_use", "id": "c", "name": "f", "input": {}}),
+        record("content_block_delta", index=2, delta={"type": "input_json_delta", "partial_json": '{"arg":1}'}),
+        record("content_block_stop", index=2), record("message_delta", delta={"stop_reason": "tool_use"}, usage={"output_tokens": 7}),
+        record("message_stop")))
+    assert response["content"][0] == {"type": "thinking", "thinking": "native-thought", "signature": "signed-opaque"}
+    assert response["content"][1]["text"] == "Answer here" and response["content"][1]["citations"][0]["cited_text"] == "evidence"
+    assert response["content"][2]["input"] == {"arg": 1}
+    assert response["usage"] == {"input_tokens": 3, "cache_read_input_tokens": 5, "output_tokens": 7}
+
+
+async def test_native_collect_responses_returns_opaque_final_object_unchanged():
+    final = {"id": "resp", "status": "completed", "output": [{"type": "reasoning", "encrypted_content": "opaque"}], "usage": {"input_tokens": 1}}
+    result = await collect_native("openai-responses", chunks(record("response.created", response={}), record("response.completed", response=final)))
+    assert result == final
+
+
+async def test_native_gemini_collect_preserves_signed_parts_and_blocking():
+    result = await collect_native("gemini", chunks({"event": None, "data": {"modelVersion": "m", "candidates": [
+        {"index": 0, "content": {"parts": [{"thought": True, "text": "native"}, {"text": "Hello"}]}}]}},
+        {"event": None, "data": {"usageMetadata": {"totalTokenCount": 2}, "candidates": [{"index": 0, "content": {"parts": [
+        {"functionCall": {"name": "tool", "args": {}}, "thoughtSignature": "opaque"}]}, "finishReason": "STOP"}]}}))
+    assert len(result["candidates"][0]["content"]["parts"]) == 3
+    assert result["candidates"][0]["content"]["parts"][-1]["thoughtSignature"] == "opaque"
+    assert result["modelVersion"] == "m" and result["usageMetadata"]["totalTokenCount"] == 2
+    assert (await collect_native("gemini", chunks({"event": None, "data": {"promptFeedback": {"blockReason": "SAFETY"}}})))["candidates"] == []
+
+
+async def test_native_collect_truncated_tool_and_unknown_delta():
+    common = [record("message_start", message={"content": [], "usage": {}}),
+        record("content_block_start", index=0, content_block={"type": "tool_use", "id": "c", "name": "f", "input": {}})]
+    result = await collect_native("anthropic", chunks(*common, record("content_block_delta", index=0,
+        delta={"type": "input_json_delta", "partial_json": "{"}), record("message_delta", delta={"stop_reason": "max_tokens"}), record("message_stop")))
+    assert result["content"] == []
+    with pytest.raises(GatewayError, match="losing information"):
+        await collect_native("anthropic", chunks(*common, record("content_block_delta", index=0, delta={"type": "new_delta"})))
+    with pytest.raises(GatewayError):
+        await collect_native("unknown", chunks(record("anything")))
+    with pytest.raises(GatewayError) as caught:
+        await collect_native("anthropic", chunks())
+    assert caught.value.code == "provider_incomplete"

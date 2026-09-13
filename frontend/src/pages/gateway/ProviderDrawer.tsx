@@ -48,6 +48,11 @@ export default function ProviderDrawer({
   const [selected, setSelected] = useState<string[]>(
     connection?.models.map((model) => model.id) || [],
   );
+  const [manualIds, setManualIds] = useState<string[]>(
+    connection?.catalog_mode === "manual"
+      ? connection.models.map((model) => model.id)
+      : [],
+  );
   const [search, setSearch] = useState("");
   const [manual, setManual] = useState("");
   const [pending, setPending] = useState<"discover" | "connect" | null>(null);
@@ -68,6 +73,7 @@ export default function ProviderDrawer({
   function resetModels() {
     setModels([]);
     setSelected([]);
+    setManualIds([]);
     setError("");
   }
   async function discover() {
@@ -85,6 +91,7 @@ export default function ProviderDrawer({
         },
       );
       setModels(result.models);
+      setManualIds([]);
       setSelected((current) =>
         current.filter((id) => result.models.some((model) => model.id === id)),
       );
@@ -115,6 +122,9 @@ export default function ProviderDrawer({
           ...(key ? { api_key: key } : {}),
           ...(authAccount ? { auth_account_id: authAccount.id } : {}),
           models: selected,
+          ...(selected.some((id) => manualIds.includes(id))
+            ? { catalog_mode: "manual" }
+            : {}),
           ...(connection ? { expected_revision: connection.revision } : {}),
         },
         { method: connection ? "PATCH" : "POST" },
@@ -142,11 +152,13 @@ export default function ProviderDrawer({
   function addManual() {
     const id = manual.trim();
     if (!id) return;
-    if (!models.some((model) => model.id === id))
+    if (!models.some((model) => model.id === id)) {
+      setManualIds((current) => [...current, id]);
       setModels((current) => [
         ...current,
         { id, name: id, context_limit: 0, output_limit: 0, tools: false },
       ]);
+    }
     setSelected((current) =>
       current.includes(id) ? current : [...current, id],
     );
@@ -221,6 +233,7 @@ export default function ProviderDrawer({
                     value={endpoint}
                     type="url"
                     required
+                    readOnly={!!authAccount}
                     disabled={!!pending}
                     placeholder="https://api.example.com/v1"
                     onChange={(event) => {
@@ -229,8 +242,9 @@ export default function ProviderDrawer({
                     }}
                   />
                   <span className="field-hint" id="gateway-endpoint-hint">
-                    The API base URL is filled in for you. Change it for a proxy
-                    or your own server.
+                    {authAccount
+                      ? "This address is managed by your provider sign-in."
+                      : "The API base URL is filled in for you. Change it for a proxy or your own server."}
                   </span>
                 </label>
                 {!authAccount && (
@@ -373,7 +387,8 @@ export default function ProviderDrawer({
                   <summary>Advanced: add a model ID</summary>
                   <p className="field-hint">
                     For servers that don’t offer a model catalog. Use the exact
-                    model ID from your provider.
+                    model ID from your provider. Connecting runs a short test
+                    request to verify access.
                   </p>
                   <div className="row">
                     <Input

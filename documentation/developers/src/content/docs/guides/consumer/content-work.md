@@ -5,6 +5,14 @@ description: "Connect product features to source artifacts and existing work own
 
 ConsumerData owns uploaded attachments, public workspace content, knowledge revisions and the user-facing native-memory bridge. AgentApplication owns conversations, immutable message receipts and source-inclusion requests. These services reuse artifact, context and memory owners rather than maintaining a second conversation engine.
 
+## Conversation history projection
+
+`AgentApplication.conversation_list` applies archive and optional title/message search filters, then orders records by `(created_at, id)` descending. The ID is a stable tie-breaker for equal creation timestamps; updates and renames do not move a conversation as though it had just been created.
+
+`AgentApplication.events` resolves an optional conversation through the same scoped owner and calls `Journal.routed_events` with only `user.prompt`, `user.steer`, `user.cancel`, `output.persisted`, and the completed/failed/interrupted runtime-turn kinds. Scope, public kind, and binding filtering happen before the page limit. Terminal events without an explicit binding resolve through their scoped runtime work record. This lets a saved thread be read directly even when its journal also contains extensive maintenance history.
+
+The public envelope remains `{items, cursor, has_more}`. Each item retains its event ID, sequence cursor, kind, source as `origin`, and original payload. An exhausted page may advance the cursor across hidden events; clients must use the returned cursor instead of deriving one from item counts. See [routed event snapshots](../core/state.md#indexed-routed-event-pages) and [client catch-up](../frontend/data-events.md#event-replay). The projection preserves the original messages, output chunks, terminal evidence, and import provenance.
+
 ## Source-to-context walkthrough
 
 1. Upload bounded base64 bytes with a stable operation ID.
@@ -41,5 +49,6 @@ UsageView reports factual consumption and reservations from the same execution o
 - [consumer/work.py](/reference/files/consumer/work.py/)
 - [consumer/usage.py](/reference/files/consumer/usage.py/)
 - [agent/planner/__init__.py](/reference/files/agent/planner/__init__.py/)
+- [agent/state/__init__.py](/reference/files/agent/state/__init__.py/)
 
 [Developer manual](../index.md)

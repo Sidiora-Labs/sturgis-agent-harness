@@ -38,12 +38,14 @@ import type {
 import { PageHeader, QueryState } from "../shared";
 import ProviderDrawer from "./ProviderDrawer";
 import NativeAuthDialog from "./NativeAuthDialog";
+import GatewayControlsPanel from "./GatewayControlsPanel";
 import { useGatewayAction, useGatewayQuery } from "./useGateway";
 import "./gateway.css";
 
 const categories = [
   { id: "all", name: "All providers" },
   { id: "free_tier", name: "Free options" },
+  { id: "account", name: "Account sign-in" },
   { id: "local", name: "Local" },
   { id: "paid", name: "API providers" },
   { id: "gateway", name: "Gateways" },
@@ -51,6 +53,7 @@ const categories = [
 ];
 const categoryName = (category: string) =>
   ({
+    account: "Account sign-in",
     free: "Free access",
     free_tier: "Free tier available",
     local: "Runs locally",
@@ -72,6 +75,8 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
   const [authProvider, setAuthProvider] = useState<GatewayAuthProvider | null>(
     null,
   );
+  const [authConnection, setAuthConnection] =
+    useState<GatewayConnection | null>(null);
   const authProviders = useGatewayQuery<GatewayAuthProvider[]>(
     accountId,
     "auth/providers",
@@ -81,6 +86,8 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
     "auth/accounts",
   );
   const [authError, setAuthError] = useState("");
+  const [disconnectingAccount, setDisconnectingAccount] =
+    useState<GatewayAuthAccount | null>(null);
   function useAccount(providerId: string, id: string, name: string) {
     const preset = presets.data?.find((item) => item.id === providerId);
     if (!preset) {
@@ -90,7 +97,12 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
       return;
     }
     setAuthProvider(null);
-    setDrawer({ preset, authAccount: { id, name } });
+    setDrawer({
+      preset,
+      ...(authConnection ? { connection: authConnection } : {}),
+      authAccount: { id, name },
+    });
+    setAuthConnection(null);
   }
   const [removing, setRemoving] = useState<GatewayConnection | null>(null);
   const [copied, setCopied] = useState(false);
@@ -154,7 +166,7 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
         </Button>
         <div className="gateway-endpoint-stats">
           <strong>{status.data?.models ?? "—"}</strong>
-          <span>models available</span>
+          <span>models imported</span>
         </div>
       </section>
       {copyError && (
@@ -187,46 +199,45 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
               void connections.refetch();
             }}
           />
-          {!!authProviders.data?.length && (
+          {!!authAccounts.data?.some(
+            (account) => account.status === "connected",
+          ) && (
             <section aria-labelledby="gateway-signin-title">
               <div className="gateway-section-heading">
                 <div>
-                  <h2 id="gateway-signin-title">Sign in with your account</h2>
+                  <h2 id="gateway-signin-title">Your signed-in accounts</h2>
                   <p>
-                    Connect a supported provider account directly. Your sign-in
-                    stays in the gateway.
+                    Choose an account to import or update its available models.
                   </p>
                 </div>
-              </div>
-              <div className="gateway-signin-grid">
-                {authProviders.data.map((provider) => (
-                  <article className="gateway-signin" key={provider.id}>
-                    <h3>{provider.name}</h3>
-                    <p>{provider.description}</p>
-                    <Button onClick={() => setAuthProvider(provider)}>
-                      Sign in to {provider.name}
-                    </Button>
-                  </article>
-                ))}
               </div>
               <div className="gateway-native-accounts">
                 {authAccounts.data
                   ?.filter((account) => account.status === "connected")
                   .map((account) => (
-                    <Button
-                      key={account.id}
-                      size="sm"
-                      onClick={() =>
-                        useAccount(
-                          account.provider_id,
-                          account.id,
-                          account.name,
-                        )
-                      }
-                    >
-                      <Check size={15} />
-                      Use {account.name}
-                    </Button>
+                    <div className="gateway-account-actions" key={account.id}>
+                      <Button
+                        size="sm"
+                        onClick={() =>
+                          useAccount(
+                            account.provider_id,
+                            account.id,
+                            account.name,
+                          )
+                        }
+                      >
+                        <Check size={15} />
+                        Use {account.name}
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Disconnect account ${account.name}`}
+                        onClick={() => setDisconnectingAccount(account)}
+                      >
+                        <Trash2 size={15} />
+                      </Button>
+                    </div>
                   ))}
               </div>
             </section>
@@ -255,7 +266,7 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
               <div className="gateway-section-heading">
                 <div>
                   <h2 id="gateway-connected-title">Your connections</h2>
-                  <p>Models ready to use through your gateway.</p>
+                  <p>Imported models for your agents and apps.</p>
                 </div>
                 <Badge>{connections.data.length} connections</Badge>
               </div>
@@ -284,8 +295,10 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
                         }
                       >
                         {connection.status === "connected"
-                          ? "Connected"
-                          : "Needs attention"}
+                          ? "Models imported"
+                          : connection.error?.code === "reconnect_required"
+                            ? "Reconnect required"
+                            : "Needs attention"}
                       </Badge>
                     </header>
                     <div className="gateway-connected-models">
@@ -301,9 +314,11 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
                     <footer>
                       <span className="field-hint">
                         {connection.models.length} models ·{" "}
-                        {connection.credential_configured
-                          ? "Key secured"
-                          : "No key required"}
+                        {connection.auth_account_id
+                          ? "Account connected"
+                          : connection.credential_configured
+                            ? "Key secured"
+                            : "No key required"}
                       </span>
                       <div className="row">
                         <Button
@@ -328,7 +343,40 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
                             const preset = presets.data?.find(
                               (item) => item.id === connection.preset_id,
                             );
-                            if (preset) setDrawer({ preset, connection });
+                            if (preset) {
+                              const account = authAccounts.data?.find(
+                                (item) =>
+                                  item.id === connection.auth_account_id,
+                              );
+                              if (
+                                preset.auth === "oauth" &&
+                                account?.status !== "connected"
+                              ) {
+                                const provider = authProviders.data?.find(
+                                  (item) => item.id === preset.id,
+                                );
+                                if (provider) {
+                                  setAuthConnection(connection);
+                                  setAuthProvider(provider);
+                                } else
+                                  setAuthError(
+                                    "The account sign-in service is unavailable. Retry account connections to continue.",
+                                  );
+                                return;
+                              }
+                              setDrawer({
+                                preset,
+                                connection,
+                                ...(connection.auth_account_id
+                                  ? {
+                                      authAccount: {
+                                        id: connection.auth_account_id,
+                                        name: account?.name || connection.name,
+                                      },
+                                    }
+                                  : {}),
+                              });
+                            }
                           }}
                         >
                           Edit
@@ -397,11 +445,18 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
                     const provider = authProviders.data?.find(
                       (item) => item.id === preset.id,
                     );
-                    if (provider && preset.auth === "oauth")
-                      setAuthProvider(provider);
-                    else setDrawer({ preset });
+                    if (preset.auth === "oauth") {
+                      if (provider) {
+                        setAuthConnection(null);
+                        setAuthProvider(provider);
+                      } else
+                        setAuthError(
+                          "The account sign-in service is unavailable. Retry account connections to continue.",
+                        );
+                    } else setDrawer({ preset });
                   }}
-                  aria-label={`Connect ${preset.name}`}
+                  disabled={preset.auth === "oauth" && authProviders.isPending}
+                  aria-label={`${preset.auth === "oauth" ? "Sign in to" : "Connect"} ${preset.name}`}
                 >
                   <span
                     className={`gateway-provider-monogram category-${preset.category}`}
@@ -448,7 +503,10 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
         <NativeAuthDialog
           accountId={accountId}
           provider={authProvider}
-          onClose={() => setAuthProvider(null)}
+          onClose={() => {
+            setAuthProvider(null);
+            setAuthConnection(null);
+          }}
           onConnected={(id, name) => useAccount(authProvider.id, id, name)}
         />
       )}
@@ -460,6 +518,44 @@ export default function GatewayPage({ accountId }: { accountId: string }) {
           onClose={() => setDrawer(null)}
         />
       )}
+      <Modal
+        open={!!disconnectingAccount}
+        onOpenChange={(open) => {
+          if (!open && !action.pending) setDisconnectingAccount(null);
+        }}
+        title="Disconnect signed-in account?"
+        description={`Stored sign-in credentials for ${disconnectingAccount?.name || "this account"} will be deleted from this gateway. Connections using the account will require a new sign-in.`}
+      >
+        <div className="row">
+          <Button
+            disabled={action.pending}
+            onClick={() => setDisconnectingAccount(null)}
+          >
+            Keep account
+          </Button>
+          <Button
+            variant="danger"
+            loading={action.pending}
+            onClick={async () => {
+              if (
+                await action.run(
+                  `auth/accounts/${encodeURIComponent(disconnectingAccount!.id)}`,
+                  { expected_revision: disconnectingAccount!.revision },
+                  "DELETE",
+                )
+              )
+                setDisconnectingAccount(null);
+            }}
+          >
+            Disconnect account
+          </Button>
+        </div>
+        {action.error && (
+          <p role="alert" className="gateway-error">
+            {action.error}
+          </p>
+        )}
+      </Modal>
       <Modal
         open={!!removing}
         onOpenChange={(open) => {
@@ -585,6 +681,8 @@ function RoutesPanel({ accountId }: { accountId: string }) {
   const routes = useGatewayQuery<GatewayRoute[]>(accountId, "routes");
   const models = useGatewayQuery<GatewayModel[]>(accountId, "models");
   const [editing, setEditing] = useState<GatewayRoute | "new" | null>(null);
+  const [removing, setRemoving] = useState<GatewayRoute | null>(null);
+  const action = useGatewayAction(accountId);
   return (
     <div className="gateway-tab-content">
       <Card
@@ -622,9 +720,19 @@ function RoutesPanel({ accountId }: { accountId: string }) {
                         : "Round robin"}
                     </p>
                   </div>
-                  <Button size="sm" onClick={() => setEditing(route)}>
-                    Edit route
-                  </Button>
+                  <div className="row">
+                    <Button size="sm" onClick={() => setEditing(route)}>
+                      Edit route
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      aria-label={`Delete route ${route.name}`}
+                      onClick={() => setRemoving(route)}
+                    >
+                      <Trash2 size={16} />
+                    </Button>
+                  </div>
                 </div>
                 <ol className="gateway-route-sequence">
                   {route.models.map((model) => (
@@ -649,6 +757,41 @@ function RoutesPanel({ accountId }: { accountId: string }) {
           onClose={() => setEditing(null)}
         />
       )}
+      <Modal
+        open={!!removing}
+        onOpenChange={(open) => {
+          if (!open && !action.pending) setRemoving(null);
+        }}
+        title="Delete model route?"
+        description={`Apps using ${removing?.id || "this route"} will need another model ID. The underlying providers and models stay connected.`}
+      >
+        <div className="row">
+          <Button disabled={action.pending} onClick={() => setRemoving(null)}>
+            Keep route
+          </Button>
+          <Button
+            variant="danger"
+            loading={action.pending}
+            onClick={async () => {
+              if (
+                await action.run(
+                  `routes/${encodeURIComponent(removing!.id)}`,
+                  { expected_revision: removing!.revision },
+                  "DELETE",
+                )
+              )
+                setRemoving(null);
+            }}
+          >
+            Delete route
+          </Button>
+        </div>
+        {action.error && (
+          <p role="alert" className="gateway-error">
+            {action.error}
+          </p>
+        )}
+      </Modal>
     </div>
   );
 }
@@ -832,7 +975,7 @@ function AccessPanel({ accountId }: { accountId: string }) {
     <div className="gateway-tab-content">
       <div className="gateway-usage-grid">
         {[
-          { label: "Requests", value: usage.data?.requests },
+          { label: "Provider requests", value: usage.data?.requests },
           { label: "Tokens used", value: usage.data?.total_tokens },
           { label: "Failed requests", value: usage.data?.failures },
         ].map((metric) => (
@@ -842,6 +985,12 @@ function AccessPanel({ accountId }: { accountId: string }) {
           </div>
         ))}
       </div>
+      {!!usage.data?.unreported && (
+        <p className="field-hint">
+          Usage is missing for {usage.data.unreported} provider requests. Totals
+          include reported usage only.
+        </p>
+      )}
       <Card
         title="Keys for your apps"
         description="Give each app its own gateway key. Your upstream provider keys stay private."
@@ -918,12 +1067,14 @@ function AccessPanel({ accountId }: { accountId: string }) {
                 <div>
                   <strong>{request.model}</strong>
                   <p className="record-subtitle">
-                    {request.tokens.toLocaleString()} tokens
+                    {request.tokens === null
+                      ? "Usage not reported"
+                      : `${request.tokens.toLocaleString()} tokens`}
                   </p>
                 </div>
                 <Badge
                   tone={
-                    request.status === "ok" || request.status === "success"
+                    ["completed", "ok", "success"].includes(request.status)
                       ? "success"
                       : "neutral"
                   }
@@ -940,6 +1091,7 @@ function AccessPanel({ accountId }: { accountId: string }) {
               />
             )}
       </Card>
+      <GatewayControlsPanel accountId={accountId} />
       <Modal
         open={creating}
         onOpenChange={(open) => {

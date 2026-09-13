@@ -29,6 +29,16 @@ The ingestion cursor advances after native acknowledgment, a durable explicit re
 
 Sleep records one scoped cycle per local calendar day and timezone. Its phases, source snapshot, candidate list, stage index, operation IDs and publication progress survive interruption. A claimed cycle has a bounded lease. Cancellation releases its owner; parent conflict starts a fresh bounded attempt on a later invocation.
 
+### Check the day before scheduling work
+
+`MemorySleep.due(scope, now=None)` is a read-only pre-admission check. It and `run_cycle` share `_cycle_identity`: finite UTC seconds become an IANA-timezone calendar date, and the durable key is `timezone|YYYY-MM-DD` within the supplied scope. The day is calendar-based, including daylight-saving changes, rather than a fixed 24-hour interval since the last attempt.
+
+The check returns true for a missing cycle and false for a cycle whose phase is `complete`, including a completed cycle that reported rejected candidates. An incomplete cycle remains eligible unless another owner holds an unexpired lease. Lease expiry uses the actual wall clock, matching `_claim`; an injected `now` selects the cycle date and does not expire someone else's lease. An unowned, expired, or same-owner incomplete cycle can resume.
+
+The runtime calls `due` before `scheduler.submit`, then gives `run_cycle` that same captured timestamp. Repeated idle polls after completion therefore allocate no redundant sleep work. The due check itself creates no work record, cycle, or lease. It is advisory: `_claim` still checks the current durable owner and completion phase transactionally if another worker changes them between check and execution.
+
+The normal memory polling interval still controls ingestion and recall refresh. It does not schedule a new consolidation for every poll, and completion suppression does not delete past work or memory history. Background admission, cancellation, bounded attempts, and native operation receipts remain authoritative for an incomplete cycle.
+
 ## What consolidation can change
 
 The default consolidator merges exact repeated content. An injected consolidator receives frozen source records and the cycle, then returns at most the configured candidate bound. Derived records must be observation, belief or procedure kinds with citations contained in the frozen evidence ranges. Invalid candidates are reported and excluded.

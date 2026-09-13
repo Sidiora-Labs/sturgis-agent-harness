@@ -1,0 +1,90 @@
+name: Development checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  quality:
+    name: Lint and type checks
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - run: make lint typecheck format-check
+      - name: Verify repository tooling and its coverage floor
+        run: make test-tooling
+      - name: Check development shell scripts
+        run: shellcheck .github/scripts/check-isolation.sh .devcontainer/post-create.sh packaging/build-wheel.sh
+
+  qualification:
+    name: Complete product qualification (90% floors)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          browsers: "true"
+      - name: Verify required Linux isolation
+        run: bash .github/scripts/check-isolation.sh
+      - name: Run complete Python, C++, client and gateway checks
+        run: make qualify
+      - name: Retain qualification evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: product-qualification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            evidence/sturgis-03/qualification.json
+            evidence/sturgis-03/source-manifest.json
+            evidence/sturgis-03/*-coverage.json
+            evidence/sturgis-03/*-coverage.xml
+            evidence/sturgis-03/*-coverage.txt
+            evidence/sturgis-03/*-quality.json
+            evidence/sturgis-03/web-source-manifest.json
+          retention-days: 7
+          if-no-files-found: warn
+
+  documentation:
+    name: Complete user and developer documentation
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          browsers: "true"
+      - name: Build source artifacts referenced by the manuals
+        run: make build
+      - name: Run both complete documentation gates
+        run: make docs-check
+      - name: Retain documentation evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: documentation-qualification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            evidence/sturgis-docs/*.json
+            documentation/dist/
+          retention-days: 7
+          if-no-files-found: warn

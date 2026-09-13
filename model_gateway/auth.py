@@ -81,7 +81,7 @@ def _token(value, label="token", maximum=32768):
 def _number(value, default, maximum=31_536_000):
     if value is None:
         return default
-    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 < value <= maximum:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= maximum or not math.isfinite(value):
         raise GatewayError("invalid_auth_response", "The provider returned an invalid expiry or polling interval.", 502)
     return float(value)
 
@@ -210,6 +210,8 @@ class GatewayAuth:
         now, id = self.clock(), "signin_" + secrets.token_hex(16)
         body = {"provider_id": provider_id, "name": text(name or c["name"], "account name", 120), "flow": c["flow"],
                 "status": "pending", "expires_at": now + SESSION_TTL, "next_poll_at": now, "interval": 5}
+        if provider_id == "gemini-cli" and "project_id" in options:
+            options = {"project_id": text(options["project_id"], "Google project identifier", 256)}
         private = {"options": options}
         if c["flow"] == "authorization_code_pkce":
             redirect = self._redirect(c, redirect_uri)
@@ -238,7 +240,7 @@ class GatewayAuth:
                 self._success(status, registration)
                 private.update({"client_id": _token(registration.get("clientId"), "client identifier"),
                                 "client_secret": _token(registration.get("clientSecret"), "client credential"), "region": region,
-                                "token_url": oidc + "/token", "registration_expires_at": registration.get("clientSecretExpiresAt")})
+                                "token_url": oidc + "/token", "registration_expires_at": _number(registration.get("clientSecretExpiresAt"), None, 10_000_000_000)})
                 status, data = await self._request("POST", oidc + "/device_authorization", body={
                     "clientId": private["client_id"], "clientSecret": private["client_secret"], "startUrl": start_url})
                 data = {**data, "device_code": data.get("deviceCode"), "user_code": data.get("userCode"),
@@ -261,64 +263,75 @@ class GatewayAuth:
                          "interval": interval, "next_poll_at": now + interval})
             if complete:
                 body["verification_uri_complete"] = complete
-        row = self.store.put(tenant, SESSION_KIND, id, body, secret=_secret_json(private))
+        row = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, id, body, secret=_secret_json(private))
         return self._public_session(row)
 
     async def poll(self, tenant, session_id):
         """Perform at most one due device exchange or post-login bootstrap request."""
         async with self._lock(tenant, session_id):
-            row = self._session(tenant, session_id)
+            row = await asyncio.to_thread(self._session, tenant, session_id)
             if row["status"] != "pending" or row["next_poll_at"] > self.clock():
                 return self._public_session(row)
-            private = self._secret(tenant, row)
+            private = await asyncio.to_thread(self._secret, tenant, row)
             if "tokens" in private:
                 return await self._finish(tenant, row, private)
             if row["flow"] != "device_code":
                 return self._public_session(row)
             c = self._config(row["provider_id"])
-            row = self.store.put(tenant, SESSION_KIND, session_id, {**row, "next_poll_at": self.clock() + row["interval"]}, row["revision"])
-            if row["provider_id"] == "kiro":
-                status, result = await self._request("POST", private["token_url"], body={"clientId": private["client_id"],
-                    "clientSecret": private["client_secret"], "deviceCode": private["device_code"],
-                    "grantType": "urn:ietf:params:oauth:grant-type:device_code"})
-            else:
-                status, result = await self._request("POST", c["token_url"], form={"client_id": c["client_id"],
-                    "device_code": private["device_code"], "grant_type": "urn:ietf:params:oauth:grant-type:device_code"})
+            row = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, session_id, {**row, "status": "exchanging", "next_poll_at": self.clock() + row["interval"]}, row["revision"])
+            try:
+                if row["provider_id"] == "kiro":
+                    status, result = await self._request("POST", private["token_url"], body={"clientId": private["client_id"],
+                        "clientSecret": private["client_secret"], "deviceCode": private["device_code"],
+                        "grantType": "urn:ietf:params:oauth:grant-type:device_code"})
+                else:
+                    status, result = await self._request("POST", c["token_url"], form={"client_id": c["client_id"],
+                        "device_code": private["device_code"], "grant_type": "urn:ietf:params:oauth:grant-type:device_code"})
+            except BaseException:
+                await asyncio.to_thread(self._fail, tenant, session_id, "failed", "authorization_exchange_failed")
+                raise
             error = result.get("error", result.get("__type", ""))
             if isinstance(error, str):
                 error = error.rsplit("#", 1)[-1]
             if not isinstance(error, str):
                 error = "invalid_provider_error"
             if error in {"authorization_pending", "AuthorizationPendingException"}:
-                return self._public_session(self._session(tenant, session_id))
+                current = await asyncio.to_thread(self._session, tenant, session_id)
+                if current["status"] == "exchanging":
+                    current = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, session_id, {**current, "status": "pending"}, current["revision"])
+                return self._public_session(current)
             if error in {"slow_down", "SlowDownException"}:
-                current = self._session(tenant, session_id)
-                if current["status"] == "pending":
+                current = await asyncio.to_thread(self._session, tenant, session_id)
+                if current["status"] == "exchanging":
                     interval = min(60, current["interval"] + 5)
-                    current = self.store.put(tenant, SESSION_KIND, session_id, {**current, "interval": interval,
+                    current = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, session_id, {**current, "status": "pending", "interval": interval,
                         "next_poll_at": self.clock() + interval}, current["revision"])
                 return self._public_session(current)
             if error in {"access_denied", "authorization_declined", "AccessDeniedException", "expired_token", "ExpiredTokenException"}:
-                return self._fail(tenant, session_id, "expired" if error in {"expired_token", "ExpiredTokenException"} else "failed", "authorization_denied")
-            self._success(status, result)
+                return await asyncio.to_thread(self._fail, tenant, session_id, "expired" if error in {"expired_token", "ExpiredTokenException"} else "failed", "authorization_denied")
+            try:
+                self._success(status, result)
+            except GatewayError:
+                await asyncio.to_thread(self._fail, tenant, session_id, "failed", "authorization_exchange_failed")
+                raise
             return await self._save_tokens(tenant, row, private, result)
 
     async def complete(self, tenant, session_id, state, code):
         """Exchange one tenant/state-bound authorization code with its saved PKCE verifier."""
         async with self._lock(tenant, session_id):
-            row = self._session(tenant, session_id)
-            if not isinstance(state, str) or len(state) > 256 or not secrets.compare_digest(
+            row = await asyncio.to_thread(self._session, tenant, session_id)
+            if not isinstance(state, str) or len(state) > 256 or any(ord(c) < 33 or ord(c) > 126 for c in state) or not secrets.compare_digest(
                     hashlib.sha256(state.encode()).hexdigest(), row.get("state_digest", "")):
                 raise GatewayError("invalid_auth_state", "This sign-in callback does not match the pending sign-in.", 403)
             if row["status"] == "connected":
                 return self._public_session(row)
             if row["status"] != "pending" or row["flow"] != "authorization_code_pkce":
                 raise GatewayError("auth_session_closed", "This sign-in is no longer pending. Start again.", 409)
-            private, c = self._secret(tenant, row), self._config(row["provider_id"])
+            private, c = await asyncio.to_thread(self._secret, tenant, row), self._config(row["provider_id"])
             if "tokens" in private:
                 return await self._finish(tenant, row, private)
             code = _token(code, "authorization code", 8192)
-            row = self.store.put(tenant, SESSION_KIND, session_id, {**row, "status": "exchanging"}, row["revision"])
+            row = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, session_id, {**row, "status": "exchanging"}, row["revision"])
             form = {"grant_type": "authorization_code", "client_id": c["client_id"], "redirect_uri": row["redirect_uri"],
                     "code": code, "code_verifier": private["verifier"]}
             if c.get("client_secret"):
@@ -327,7 +340,7 @@ class GatewayAuth:
                 status, result = await self._request("POST", c["token_url"], form=form)
                 self._success(status, result)
             except BaseException:
-                self._fail(tenant, session_id, "failed", "authorization_exchange_failed")
+                await asyncio.to_thread(self._fail, tenant, session_id, "failed", "authorization_exchange_failed")
                 raise
             return await self._save_tokens(tenant, row, private, result)
 
@@ -350,19 +363,21 @@ class GatewayAuth:
             value["refresh_token"] = _token(refresh, "refresh token")
         if result.get("id_token"):
             value["id_token"] = _token(result["id_token"], "identity token")
+        if result.get("profileArn"):
+            value["profile_arn"] = _token(result["profileArn"], "profile identifier", 512)
         return value
 
     async def _save_tokens(self, tenant, row, private, result):
-        current = self._session(tenant, row["id"])
+        current = await asyncio.to_thread(self._session, tenant, row["id"])
         if current["status"] not in {"pending", "exchanging"}:
             return self._public_session(current)
         private = {key: value for key, value in private.items() if key not in {"device_code", "verifier"}}
         try:
             private["tokens"] = self._tokens(result)
         except GatewayError:
-            self._fail(tenant, row["id"], "failed", "invalid_auth_response")
+            await asyncio.to_thread(self._fail, tenant, row["id"], "failed", "invalid_auth_response")
             raise
-        current = self.store.put(tenant, SESSION_KIND, row["id"], {**current, "status": "pending"}, current["revision"], secret=_secret_json(private))
+        current = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, row["id"], {**current, "status": "pending"}, current["revision"], secret=_secret_json(private))
         return await self._finish(tenant, current, private)
 
     async def _finish(self, tenant, row, private):
@@ -384,28 +399,29 @@ class GatewayAuth:
         elif provider == "gemini-cli":
             project = await self._gemini_project(c, tokens, private)
             if not project:
-                current = self._session(tenant, row["id"])
+                current = await asyncio.to_thread(self._session, tenant, row["id"])
                 if current["status"] != "pending":
                     return self._public_session(current)
-                current = self.store.put(tenant, SESSION_KIND, row["id"], {**current, "next_poll_at": self.clock() + 5},
+                current = await asyncio.to_thread(self.store.put, tenant, SESSION_KIND, row["id"], {**current, "next_poll_at": self.clock() + 5},
                                          current["revision"], secret=_secret_json(private))
                 return self._public_session(current)
             tokens["project_id"] = project
         elif provider == "kiro":
             tokens.update({key: private[key] for key in ("client_id", "client_secret", "region", "token_url", "registration_expires_at")})
-            endpoint = c.get("profile_url", f"https://codewhisperer.{private['region']}.amazonaws.com/ListAvailableProfiles")
-            status, data = await self._request("POST", endpoint, body={"maxResults": 10}, headers={"Authorization": "Bearer " + tokens["access_token"]})
-            self._success(status, data)
-            profiles = data.get("profiles", [])
-            profile = next((p.get("arn") for p in profiles if isinstance(p, dict) and p.get("arn")), None) if isinstance(profiles, list) else None
-            if not profile:
-                raise GatewayError("account_unavailable", "No accessible Kiro profile was returned for this account.", 502)
-            tokens["profile_arn"] = _token(profile, "profile identifier", 512)
-        current = self._session(tenant, row["id"])
+            if not tokens.get("profile_arn"):
+                endpoint = c.get("profile_url", f"https://codewhisperer.{private['region']}.amazonaws.com/ListAvailableProfiles")
+                status, data = await self._request("POST", endpoint, body={"maxResults": 10}, headers={"Authorization": "Bearer " + tokens["access_token"]})
+                self._success(status, data)
+                profiles = data.get("profiles", [])
+                profile = next((p.get("arn") for p in profiles if isinstance(p, dict) and p.get("arn")), None) if isinstance(profiles, list) else None
+                if not profile:
+                    raise GatewayError("account_unavailable", "No accessible Kiro profile was returned for this account.", 502)
+                tokens["profile_arn"] = _token(profile, "profile identifier", 512)
+        current = await asyncio.to_thread(self._session, tenant, row["id"])
         if current["status"] != "pending":
             return self._public_session(current)
         account_id = "account_" + row["id"].removeprefix("signin_")
-        current = finish_session(self.store, tenant, row["id"], account_id,
+        current = await asyncio.to_thread(finish_session, self.store, tenant, row["id"], account_id,
             {"provider_id": provider, "name": row["name"], "status": "connected", "expires_at": tokens["expires_at"]},
             _secret_json(tokens), self.clock())
         return self._public_session(current)
@@ -459,23 +475,25 @@ class GatewayAuth:
         private["onboard_tier"] = text(tier, "Google account tier", 128)
         return None
 
-    async def credential(self, tenant, account_id, force_refresh=False):
+    async def credential(self, tenant, account_id, force_refresh=False, expected_revision=None):
         """Resolve a server-only transport binding; refresh at most once concurrently."""
-        observed = self.store.get(tenant, ACCOUNT_KIND, account_id)
+        if expected_revision is not None:
+            self.store._revision(expected_revision)
+        observed = await asyncio.to_thread(self.store.get, tenant, ACCOUNT_KIND, account_id)
         async with self._lock(tenant, account_id):
-            row = self.store.get(tenant, ACCOUNT_KIND, account_id)
+            row = await asyncio.to_thread(self.store.get, tenant, ACCOUNT_KIND, account_id)
             if row["status"] != "connected":
                 raise GatewayError("account_disconnected", "This provider account was disconnected. Sign in again.", 503)
-            tokens, c = self._secret(tenant, row), self._config(row["provider_id"])
-            force_refresh = bool(force_refresh) and observed["revision"] == row["revision"]
+            tokens, c = await asyncio.to_thread(self._secret, tenant, row), self._config(row["provider_id"])
+            force_refresh = bool(force_refresh) and observed["revision"] == row["revision"] and expected_revision in (None, row["revision"])
             oauth_due = tokens["expires_at"] <= self.clock() + TOKEN_LEAD or force_refresh
             copilot_due = row["provider_id"] == "github-copilot" and (tokens.get("copilot_expires_at", 0) <= self.clock() + TOKEN_LEAD or force_refresh)
             if row.get("refresh_uncertain") or row.get("refresh_lease"):
                 # The persisted lease fences other instances before any token is
                 # reused, even if this process still holds a cached access token.
-                claim_refresh(self.store, tenant, account_id, row["revision"], self.clock(), 60)
+                await asyncio.to_thread(claim_refresh, self.store, tenant, account_id, row["revision"], self.clock(), 60)
             if oauth_due or copilot_due:
-                row = claim_refresh(self.store, tenant, account_id, row["revision"], self.clock(),
+                row = await asyncio.to_thread(claim_refresh, self.store, tenant, account_id, row["revision"], self.clock(),
                                     max(60, self.network_policy.timeout * 2 + 10))
                 rotating = False
                 try:
@@ -506,10 +524,10 @@ class GatewayAuth:
                         if force_refresh:
                             tokens["copilot_expires_at"] = 0
                         await self._copilot(c, tokens)
-                    row = finish_refresh(self.store, tenant, row, secret=_secret_json(tokens), expires_at=tokens["expires_at"])
+                    row = await asyncio.to_thread(finish_refresh, self.store, tenant, row, secret=_secret_json(tokens), expires_at=tokens["expires_at"])
                 except BaseException:
                     try:
-                        finish_refresh(self.store, tenant, row, uncertain=rotating)
+                        await asyncio.to_thread(finish_refresh, self.store, tenant, row, uncertain=rotating)
                     except GatewayError:
                         pass  # A disconnect or newer writer keeps its authority.
                     raise
@@ -529,10 +547,14 @@ class GatewayAuth:
         return {"provider_id": provider, "preset_id": provider, "credential": credential, "protocol": c["protocol"],
                 "endpoint": c["endpoint"], "headers": headers, "project_id": tokens.get("project_id"),
                 "profile_arn": tokens.get("profile_arn"), "region": tokens.get("region"),
-                "models_endpoint": c.get("models_endpoint"), "account_id": row["id"]}
+                "models_endpoint": c.get("models_endpoint"), "account_id": row["id"], "account_revision": row["revision"]}
 
-    def disconnect(self, tenant, account_id):
+    def disconnect(self, tenant, account_id, expected_revision=None):
         """Destroy the encrypted account tokens and prevent future resolution."""
         row = self.store.get(tenant, ACCOUNT_KIND, account_id)
+        if expected_revision is not None:
+            self.store._revision(expected_revision)
+            if expected_revision != row["revision"]:
+                raise GatewayError("conflict", "This account changed. Refresh it before disconnecting.", 409)
         row = self.store.put(tenant, ACCOUNT_KIND, account_id, {**row, "status": "disconnected"}, row["revision"], secret="")
         return self._public_account(row)

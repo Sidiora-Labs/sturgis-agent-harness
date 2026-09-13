@@ -36,6 +36,8 @@ sturgis agents get AGENT_ID
 
 Save the returned IDs. Names are display labels; IDs identify the owned resources used by commands and downloads. The sidebar opens Conversation, Work, Knowledge, Files, Connections, and Settings. `Ctrl+K` or `Cmd+K` opens the view selector. Its search finds views, not all conversation content.
 
+Each private space runs Sturgis, developed by Sidiora Labs. The display name helps you choose the right space; it does not replace the agent's runtime identity. The model selected for inference can have its own name and developer. [Conversation identity](../conversations/continuing-conversations.md#agent-identity-and-the-selected-model) explains this distinction.
+
 ## Rename, archive, and profile boundaries
 
 Use **Settings → Agent & data → Rename** to change the display name. CLI rename requires the current metadata revision:

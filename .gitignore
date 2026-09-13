@@ -1,22 +1,46 @@
+# Local environments, credentials, and installation data.
+.env
+.env.*
+!.env.example
 .venv/
+.sturgis-local/
+.data/
+*.local
+
+# Build products, caches, and temporary qualification output.
 .build/
 __pycache__/
-*.pyc
-.pytest_cache/
-.coverage*
+*.py[cod]
 *.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage*
+htmlcov/
+node_modules/
+test-results/
+playwright-report/
+.eslintcache
+
+# Local Codify state and spec writer locks; retain the actual specifications.
+.codegraph/
+spec/**/*.kvx.lock
+spec/**/*.kvx.claim.lock
+
+# Generated documentation. Authored manuals, coverage maps, and evidence remain tracked.
+documentation/dist/
+documentation/users/.astro/
+documentation/developers/.astro/
+documentation/developers/src/content/docs/reference/files/
 evidence/sturgis-01/*-html/
 evidence/sturgis-02/*-html/
-node_modules/
-.sturgis-local/
-test-results/
-.codegraph/
+evidence/sturgis-03/*-html/
 
-documentation/node_modules/**
-documentation/dist/**
-documentation/users/.astro/**
-documentation/developers/.astro/**
-documentation/developers/src/content/docs/reference/files/**
-
+# Downloaded research checkouts and editor/OS scratch files.
 .research/9router-reference/
-.env
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+evidence/

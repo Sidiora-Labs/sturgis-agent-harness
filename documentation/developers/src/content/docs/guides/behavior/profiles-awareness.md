@@ -9,6 +9,8 @@ Profile roots must exist, remain within the workspace, and use distinct nonoverl
 
 `ProfileRegistry.update` uses an expected revision. Configuration cannot contain installation or self-evolution authority fields. Renaming an agent in the consumer UI does not change its immutable scope or substitute a new resource root.
 
+Profile scope, consumer display name, and product identity are separate fields with separate purposes. The canonical identity in `agent/runtime/identity.py` identifies Sturgis as developed by Sidiora Labs. It is supplied through the runtime's required system instructions, not a profile migration or an awareness observation. The current composition does not substitute the consumer display name into that prompt. Model vendor and model ID likewise remain inference provenance, not profile or product identity. See [canonical identity context](../core/context.md#canonical-agent-identity).
+
 ## Awareness is an observation projection
 
 A watcher has a registered source identity and active revision. It records a scoped object observation with an explicit dedupe key:
@@ -39,6 +41,6 @@ Use [state transactions](../core/state.md) for revision consistency and [authori
 - [agent/profile/__init__.py](/reference/files/agent/profile/__init__.py/)
 - [agent/awareness/__init__.py](/reference/files/agent/awareness/__init__.py/)
 - [agent/runtime/__init__.py](/reference/files/agent/runtime/__init__.py/)
+- [agent/runtime/identity.py](/reference/files/agent/runtime/identity.py/)
 
 [Developer manual](../index.md)
-

@@ -129,11 +129,13 @@ class NetworkPolicy:
         current = httpx.URL(url, params=params) if params is not None else httpx.URL(url)
         outgoing = dict(headers or {})
         if (len(outgoing) > 64 or any(not isinstance(k, str) or not isinstance(v, str)
-                or not k or len(k) > 128 or len(v) > 8192
+                or not k or len(k) > 128 or len(v) > (65536 if k.lower() == "authorization" else 8192)
                 or any(ord(c) < 32 or ord(c) > 126 for c in k + v)
                 or k.lower() in {"host", "connection", "content-length", "transfer-encoding", "proxy-authorization"}
                 for k, v in outgoing.items())):
             raise GatewayError("invalid_headers", "Invalid or transport-owned HTTP headers", effects="none")
+        if sum(len(k) + len(v) for k, v in outgoing.items()) > 131072:
+            raise GatewayError("invalid_headers", "HTTP headers exceed the aggregate byte limit", effects="none")
         redirects = []
         try:
             async with asyncio.timeout(deadline), self._slots:

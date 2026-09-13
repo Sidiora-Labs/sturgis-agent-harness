@@ -21,21 +21,33 @@ export default function AgentGatewayModel({
   const models = useGatewayQuery<GatewayModel[]>(accountId, "models");
   const client = useQueryClient();
   const [pending, setPending] = useState<string | null>(null);
-  const [error, setError] = useState("");
+  const [failure, setFailure] = useState<{
+    model: string;
+    message: string;
+  } | null>(null);
   const active = providers.find((provider) => provider.active);
   async function select(model: string) {
     setPending(model);
-    setError("");
+    setFailure(null);
     try {
-      await api(`/agents/${agentId}/gateway-model`, { model });
+      const selected = await api<Provider>(`/agents/${agentId}/gateway-model`, {
+        model,
+      });
       await client.invalidateQueries({ queryKey: ["agent", agentId] });
-      notify("Gateway model selected. Your agent is ready.");
-    } catch (caught) {
-      setError(
-        caught instanceof Error
-          ? caught.message
-          : "Could not select this model. Check the gateway connection and try again.",
+      notify(
+        selected.tools
+          ? "Gateway model selected. Chat and tools are ready."
+          : "Gateway model selected for chat only. Tool use is not verified.",
       );
+    } catch (caught) {
+      setFailure({
+        model,
+        message:
+          caught instanceof Error
+            ? caught.message
+            : "Could not select this model. Check the gateway connection and try again.",
+      });
+      await client.invalidateQueries({ queryKey: ["agent", agentId] });
     } finally {
       setPending(null);
     }
@@ -43,7 +55,7 @@ export default function AgentGatewayModel({
   return (
     <Card
       title="Your agent’s model"
-      description="Choose a model from your gateway. Provider connections are managed once for your whole installation."
+      description="Choose an imported model. Sturgis checks that it is ready before selecting it for your agent."
       actions={
         onOpenGateway && (
           <Button onClick={onOpenGateway}>
@@ -60,35 +72,70 @@ export default function AgentGatewayModel({
         retry={() => models.refetch()}
       />
       {active && (
-        <p className="gateway-active-model">
-          <Check size={16} />
-          <span>
-            Currently using <strong>{active.model}</strong>
-          </span>
-        </p>
+        <div>
+          <p className="gateway-active-model">
+            <Check size={16} />
+            <span>
+              Currently using <strong>{active.model}</strong>{" "}
+              <Badge tone={active.tools ? "accent" : "warning"}>
+                {active.tools ? "Chat and tools" : "Chat only"}
+              </Badge>
+            </span>
+          </p>
+          {!active.tools && (
+            <p className="record-subtitle">
+              This model can reply, but tool use has not been verified. Retry
+              the tool check or choose a model that supports tools to use
+              actions.
+            </p>
+          )}
+        </div>
       )}
       {models.data?.length
-        ? models.data.map((model) => (
-            <article className="record row spread" key={model.id}>
-              <div>
-                <h3>{model.name}</h3>
-                <p className="record-subtitle">{model.provider_name}</p>
-              </div>
-              {active?.model === model.id ? (
-                <Badge tone="accent">Selected</Badge>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="primary"
-                  loading={pending === model.id}
-                  disabled={!!pending}
-                  onClick={() => select(model.id)}
-                >
-                  Use model
-                </Button>
-              )}
-            </article>
-          ))
+        ? models.data.map((model) => {
+            const selected = active?.model === model.id;
+            const retryTools = selected && !active.tools;
+            return (
+              <article className="record" key={model.id}>
+                <div className="row spread">
+                  <div>
+                    <h3>{model.name}</h3>
+                    <p className="record-subtitle">{model.provider_name}</p>
+                  </div>
+                  <div className="row">
+                    {selected && failure?.model !== model.id && (
+                      <Badge tone="accent">Selected</Badge>
+                    )}
+                    {(!selected ||
+                      retryTools ||
+                      failure?.model === model.id) && (
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        loading={pending === model.id}
+                        disabled={!!pending}
+                        onClick={() => select(model.id)}
+                      >
+                        {pending === model.id
+                          ? "Checking model…"
+                          : failure?.model === model.id
+                            ? "Retry"
+                            : retryTools
+                              ? "Retry tool check"
+                              : "Use model"}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                {failure?.model === model.id && (
+                  <div className="gateway-error" role="alert">
+                    <strong>Could not use {model.name}</strong>
+                    <p>{failure.message}</p>
+                  </div>
+                )}
+              </article>
+            );
+          })
         : !models.isPending && (
             <EmptyState
               icon={<Network size={25} />}
@@ -103,11 +150,6 @@ export default function AgentGatewayModel({
               }
             />
           )}
-      {error && (
-        <p className="gateway-error" role="alert">
-          {error}
-        </p>
-      )}
     </Card>
   );
 }

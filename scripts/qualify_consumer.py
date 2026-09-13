@@ -1,5 +1,6 @@
 """Run real consumer journeys and independent, complete language coverage gates."""
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import platform
@@ -13,17 +14,20 @@ from coverage.exceptions import CoverageException
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "evidence/sturgis-02"
 FLOOR = 90.0
+PYTHON_ROOTS = ("agent", "consumer", "model_gateway")
+PYTHON_TESTS = ("tests/core", "tests/integration", "tests/consumer", "tests/consumer_integration", "tests/gateway")
 NATIVE_SUFFIXES = {".cpp", ".cc", ".cxx", ".h", ".hpp"}
 
 
 def production_files(root=ROOT):
-    files = {p for folder in ("agent", "consumer") for p in (root / folder).rglob("*.py")}
+    files = {p for folder in PYTHON_ROOTS for p in (root / folder).rglob("*.py")}
     files |= {p for p in (root / "consumer/web").rglob("*") if p.is_file()}
     files |= {p for p in (root / "frontend/src").rglob("*") if p.is_file()}
     files |= {p for p in (root / "frontend/licenses").rglob("*") if p.is_file()}
     files |= {p for p in (root / "frontend").glob("*") if p.is_file()}
     files |= {p for p in (root / "native/memory").rglob("*") if p.suffix in NATIVE_SUFFIXES and "vendor" not in p.parts}
     files |= {p for folder in ("scripts", "packaging") for p in (root / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts}
+    files |= {p for p in (root / "tests").rglob("*") if p.is_file() and "__pycache__" not in p.parts}
     files |= {root / p for p in ("pyproject.toml", "package.json", "package-lock.json", "CMakeLists.txt") if (root / p).is_file()}
     return sorted(files)
 
@@ -53,9 +57,9 @@ def _python_lines(values, filename):
     return set(values)
 
 
-def validate_python(data, root=ROOT):
+def validate_python(data, root=ROOT, *, folders=PYTHON_ROOTS):
     root = Path(root).resolve()
-    expected = {str(p.relative_to(root)) for folder in ("agent", "consumer") for p in (root / folder).rglob("*.py")}
+    expected = {str(p.relative_to(root)) for folder in folders for p in (root / folder).rglob("*.py")}
     try:
         actual = {str((root / p).resolve().relative_to(root)) for p in data["files"]}
     except ValueError:
@@ -91,6 +95,18 @@ def validate_python(data, root=ROOT):
     return line_gate(counts["covered_lines"], counts["num_statements"], "Python")
 
 
+def gateway_report(data, root=ROOT):
+    """Independently qualify gateway lines so older modules cannot dilute gaps."""
+    root = Path(root).resolve()
+    files = {name: record for name, record in data["files"].items()
+        if (root / name).resolve().is_relative_to(root / "model_gateway")}
+    totals = {key: sum(record["summary"][key] for record in files.values())
+        for key in ("covered_lines", "num_statements", "missing_lines", "excluded_lines")}
+    result = {"files": files, "totals": totals}
+    validate_python(result, root, folders=("model_gateway",))
+    return result
+
+
 def validate_native(data, root=ROOT):
     expected = {str(p.relative_to(root)) for p in (root / "native/memory").rglob("*") if p.suffix in {".cpp", ".cc", ".cxx"} and "vendor" not in p.parts}
     allowed = {str(p.relative_to(root)) for p in (root / "native/memory").rglob("*") if p.suffix in NATIVE_SUFFIXES and "vendor" not in p.parts}
@@ -111,42 +127,67 @@ def validate_web(data, root=ROOT):
     return line_gate(covered, total, "JavaScript")
 
 
-def main():
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "qualification.json").unlink(missing_ok=True)
+def arguments(argv=None):
+    """Preserve the sturgis-02 entry point while isolating later spec evidence."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--spec", choices=("sturgis-02", "sturgis-03"), default="sturgis-02")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--gateway-browser", action="store_true")
+    options = parser.parse_args(argv)
+    options.output = (options.output or ROOT / "evidence" / options.spec).resolve()
+    return options
+
+
+def python_command(out):
+    """Include the complete current Python runtime and all integration suites."""
+    return [sys.executable, "-m", "pytest", *PYTHON_TESTS, "-o", "faulthandler_timeout=60",
+        *("--cov=" + folder for folder in PYTHON_ROOTS), "--cov-branch",
+        f"--cov-report=json:{out/'python-coverage.json'}", f"--cov-report=xml:{out/'python-coverage.xml'}", "--cov-report=term-missing", "-q"]
+
+
+def main(argv=None):
+    options = arguments(argv)
+    out = options.output
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "qualification.json").unlink(missing_ok=True)
     subprocess.run(["npm", "run", "build:web"], cwd=ROOT, check=True)
     source_before = snapshot()
-    subprocess.run([sys.executable, "scripts/verify_native.py", "--output", str(OUT)], cwd=ROOT, check=True)
-    subprocess.run([sys.executable, "-m", "pytest", "tests/core", "tests/integration", "tests/consumer", "tests/consumer_integration", "-o", "faulthandler_timeout=60", "--cov=agent", "--cov=consumer", "--cov-branch", f"--cov-report=json:{OUT/'python-coverage.json'}", f"--cov-report=xml:{OUT/'python-coverage.xml'}", "--cov-report=term-missing", "-q"], cwd=ROOT, check=True, timeout=900)
-    subprocess.run(["npm", "run", "test:web"], cwd=ROOT, check=True)
-    python = json.loads((OUT / "python-coverage.json").read_text())
-    native = json.loads((OUT / "native-coverage.json").read_text())
-    web = json.loads((OUT / "web-coverage.json").read_text())
-    report = {"spec": "sturgis-02", "required_line_percent": FLOOR,
+    subprocess.run([sys.executable, "scripts/verify_native.py", "--output", str(out)], cwd=ROOT, check=True)
+    subprocess.run(python_command(out), cwd=ROOT, check=True, timeout=900)
+    subprocess.run(["node", "scripts/verify_web.mjs", "--output", str(out),
+        *(["--gateway-browser"] if options.gateway_browser else [])], cwd=ROOT, check=True)
+    python = json.loads((out / "python-coverage.json").read_text())
+    native = json.loads((out / "native-coverage.json").read_text())
+    web = json.loads((out / "web-coverage.json").read_text())
+    report = {"spec": options.spec, "required_line_percent": FLOOR,
               "python_line_percent": validate_python(python), "native_line_percent": validate_native(native),
               "javascript_line_percent": validate_web(web),
               "python_branches": {k: v for k, v in python["totals"].items() if "branch" in k},
               "javascript_branches": web["totals"]["branches"],
               "live_remote_provider_certified": False, "public_deployment_certified": False,
               "python_version": platform.python_version(), "system": platform.system()}
+    gateway = gateway_report(python)
+    report["gateway_python_line_percent"] = line_gate(gateway["totals"]["covered_lines"], gateway["totals"]["num_statements"], "Gateway Python")
     native_lines = [line for f in native["files"] for line in f["lines"] if not line.get("gcovr/noncode", False)]
     native_branches = [branch for line in native_lines for branch in line.get("branches", [])]
     report["executable_lines"] = {
         "python": {"covered": python["totals"]["covered_lines"], "total": python["totals"]["num_statements"]},
+        "gateway_python": {"covered": gateway["totals"]["covered_lines"], "total": gateway["totals"]["num_statements"]},
         "native": {"covered": sum(line["count"] > 0 for line in native_lines), "total": len(native_lines)},
         "javascript": web["totals"]["lines"],
     }
     report["native_branches"] = {"covered": sum(branch["count"] > 0 for branch in native_branches), "total": len(native_branches)}
     report["evidence_sha256"] = {
-        name: hashlib.sha256((OUT / name).read_bytes()).hexdigest()
-        for name in ("python-coverage.json", "native-coverage.json", "web-coverage.json", "web-source-manifest.json", "browser-quality.json")
+        name: hashlib.sha256((out / name).read_bytes()).hexdigest()
+        for name in ("python-coverage.json", "native-coverage.json", "web-coverage.json", "web-source-manifest.json", "browser-quality.json",
+            *(("gateway-browser-quality.json",) if options.gateway_browser else ()))
     }
     if source_before != snapshot():
         raise SystemExit("Production source changed during qualification")
     manifest = json.dumps(source_before, sort_keys=True, indent=2) + "\n"
-    (OUT / "source-manifest.json").write_text(manifest)
+    (out / "source-manifest.json").write_text(manifest)
     report.update(completed_at=time.time(), source_manifest_sha256=hashlib.sha256(manifest.encode()).hexdigest())
-    (OUT / "qualification.json").write_text(json.dumps(report, indent=2) + "\n")
+    (out / "qualification.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
 
 

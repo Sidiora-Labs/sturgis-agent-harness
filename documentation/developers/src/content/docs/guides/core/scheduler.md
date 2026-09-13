@@ -32,6 +32,10 @@ Resource dimensions are nonnegative integers defined by GoalService, including t
 
 `admit` respects global capacity and priority plus aging. `eligible_ids` lets an execution owner identify ready jobs, such as bindings that are not already busy; it does not bypass ordering or capacity.
 
+`Scheduler._all` obtains membership from `work_index` in the reserved control scope, groups authorized IDs by their work scope, then uses `Journal.list_states` to load only `running` and `queued` work bodies. It filters each result back through that scope's membership IDs. Global running capacity therefore still includes all indexed scopes, while an orphan work record absent from the control index cannot enter admission. Queue ordering, aging, authority, and cleanup checks keep their existing roles.
+
+The optimization avoids deserializing every terminal work body during admission. It still reads the membership index; it is not a claim of constant-time scheduling at arbitrary historical size. Historical work, events, usage, and reconciliation records are preserved. State transitions update the journal's expression index transactionally, so completed work leaves the active projection without losing its audit trail.
+
 At tool claim time, scope, generation, lease, ancestor state, capabilities, goal state and remaining allocation are checked in the intent transaction. Child workspace constraints come from admitted work, not model arguments.
 
 ## Factual usage survives failure
@@ -45,6 +49,6 @@ An overrun records the real amount before blocking future work. Do not clamp a r
 - [agent/scheduler/__init__.py](/reference/files/agent/scheduler/__init__.py/)
 - [agent/goals/__init__.py](/reference/files/agent/goals/__init__.py/)
 - [agent/tool_runner/__init__.py](/reference/files/agent/tool_runner/__init__.py/)
+- [agent/state/__init__.py](/reference/files/agent/state/__init__.py/)
 
 [Developer manual](../index.md)
-

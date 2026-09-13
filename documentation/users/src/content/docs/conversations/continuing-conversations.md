@@ -11,6 +11,14 @@ Select the right agent and a [ready model](../models/connect-a-model.md). You ca
 
 Choose **New conversation** in the sidebar. Type in **Message** and use **Send message**. The app records the input before waking a dormant worker. It then follows durable output events; connection state, admission, running work, and a terminal model turn are different observations.
 
+## Agent identity and the selected model
+
+You are using **Sturgis**, an agent developed by **Sidiora Labs**. The model selected in Settings supplies inference; its name and vendor are separate from the agent's identity. Changing providers does not turn the agent into that provider's product. Sidiora Labs develops the agent and its runtime, not necessarily the underlying model.
+
+Ask `What is your agent name, who developed it, and how is that different from the model you use?` The expected answer identifies Sturgis and Sidiora Labs, and distinguishes model provenance using only verified configuration. A previous incorrect self-description should be corrected in the next reply; the original conversation record remains preserved.
+
+Agent names such as **Research companion** are display labels for your private spaces. Renaming that label does not replace the runtime's Sturgis identity. See [accounts and agents](../getting-started/account-and-agents.md) for the resource boundaries.
+
 ## Worked example: keep a research thread
 
 Create a conversation and send:
@@ -36,6 +44,8 @@ The first command prompts for text. Save the returned conversation ID to continu
 ## Return, rename, or archive
 
 Recent conversations appear in the sidebar. Open one to replay its persisted history. **Conversation options → Rename conversation** changes its title. **Archive conversation** asks for confirmation and removes it from the active list while preserving history.
+
+An existing thread shows **Opening your conversation…** until its initial saved history is loaded. It should not look like a new, empty conversation while that replay is pending. Loaded messages stay visible if updates reconnect or the runtime pauses. See [history loading and recovery](sources-history-search.md#replay-and-recover) for the notices and cursor behavior.
 
 The CLI/API can include archived conversations in `conversations.list` and revise the archived flag with `conversations.update`. This differs from archiving an entire agent, which has no unarchive action. See [history and search](sources-history-search.md) for examples.
 

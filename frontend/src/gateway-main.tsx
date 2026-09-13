@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StandaloneGateway from "./pages/gateway/StandaloneGateway";
 import "./global.css";
+import { configureApiSession } from "./lib/api";
+configureApiSession("gateway");
 const client = new QueryClient({
   defaultOptions: {
     queries: { retry: false, refetchOnWindowFocus: false },

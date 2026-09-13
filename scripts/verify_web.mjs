@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { parseArgs } from "node:util";
 import {
   snapshot,
   assertSnapshot,
@@ -12,13 +13,23 @@ import {
   mergeCoverage,
 } from "../tests/consumer_web/coverage.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const out = path.join(root, "evidence/sturgis-02");
+const { values } = parseArgs({
+  options: {
+    output: { type: "string" },
+    "gateway-browser": { type: "boolean", default: false },
+  },
+});
+const out = path.resolve(values.output || path.join(root, "evidence/sturgis-02"));
 await fs.mkdir(out, { recursive: true });
 for (const file of [
   "web-coverage.json",
   "web-istanbul.json",
   "web-source-manifest.json",
   "browser-v8.json",
+  "consumer-browser-v8.json",
+  "gateway-browser-v8.json",
+  "browser-quality.json",
+  "gateway-browser-quality.json",
 ])
   await fs.rm(path.join(out, file), { force: true });
 const before = await snapshot(root);
@@ -45,7 +56,15 @@ run(
   180_000,
 );
 const raw = path.join(out, "browser-v8.json");
-run(["tests/consumer_web/journey.mjs", raw], 300_000);
+const consumerRaw = path.join(out, "consumer-browser-v8.json");
+run(["tests/consumer_web/journey.mjs", consumerRaw], 300_000);
+const batches = JSON.parse(await fs.readFile(consumerRaw, "utf8"));
+if (values["gateway-browser"]) {
+  const gatewayRaw = path.join(out, "gateway-browser-v8.json");
+  run(["tests/gateway/browser_journey.mjs", gatewayRaw], 300_000);
+  batches.push(...JSON.parse(await fs.readFile(gatewayRaw, "utf8")));
+}
+await fs.writeFile(raw, JSON.stringify(batches));
 assertSnapshot(before, await snapshot(root));
 const base = await baseline(root);
 const browser = await browserCoverage(
@@ -69,12 +88,9 @@ result.summary.source_manifest_sha256 = createHash("sha256")
   .update(JSON.stringify(before, null, 2))
   .digest("hex");
 result.summary.evidence_sha256 = {};
-for (const file of [
-  "evidence/sturgis-02/browser-v8.json",
-  ".build/web-vitest/coverage-final.json",
-])
-  result.summary.evidence_sha256[file] = createHash("sha256")
-    .update(await fs.readFile(path.join(root, file)))
+for (const file of [raw, path.join(root, ".build/web-vitest/coverage-final.json")])
+  result.summary.evidence_sha256[path.relative(root, file)] = createHash("sha256")
+    .update(await fs.readFile(file))
     .digest("hex");
 await fs.writeFile(
   path.join(out, "web-istanbul.json"),

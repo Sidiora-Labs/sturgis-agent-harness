@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Build a platform-specific Python wheel containing compiled native/web assets.
 set -euo pipefail
-release_source=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+release_source=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 release_output=${1:-"$release_source/.build/release"}
 release_python=${STURGIS_BUILD_PYTHON:-"$release_source/.venv/bin/python"}
 release_stage=$(mktemp -d "${TMPDIR:-/tmp}/sturgis-release.XXXXXX")
 trap 'rm -rf -- "$release_stage"' EXIT
 mkdir -p -- "$release_output"
-release_output=$(CDPATH= cd -- "$release_output" && pwd)
+release_output=$(CDPATH='' cd -- "$release_output" && pwd)
 cd -- "$release_source"
 if [[ "${STURGIS_USE_BUILT_WEB:-0}" != "1" ]]; then
     npm run build:web
@@ -22,10 +22,12 @@ import sys
 source, stage = map(Path, sys.argv[1:])
 package = stage / "package"
 package.mkdir()
-for name in ("agent", "consumer"):
+for name in ("agent", "consumer", "model_gateway"):
     shutil.copytree(source / name, package / name,
                     ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.gcda"))
 shutil.copy2(source / "pyproject.toml", package / "pyproject.toml")
+for name in ("README.md", "LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"):
+    shutil.copy2(source / name, package / name)
 binary = package / "consumer/bin/sturgis-memory"
 binary.parent.mkdir(exist_ok=True)
 shutil.copy2(stage / "native/sturgis-memory", binary)

@@ -19,6 +19,7 @@ export default function NativeAuthDialog({
 }) {
   const client = useQueryClient();
   const [name, setName] = useState(provider.name);
+  const [options, setOptions] = useState<Record<string, string>>({});
   const [session, setSession] = useState<GatewayAuthSession | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -130,6 +131,38 @@ export default function NativeAuthDialog({
                 onChange={(event) => setName(event.target.value)}
               />
             </label>
+            {!!provider.options.length && (
+              <details className="gateway-advanced">
+                <summary>Advanced account options</summary>
+                {provider.options
+                  .filter(
+                    (option): option is string =>
+                      typeof option === "string" &&
+                      ["region", "start_url", "project_id"].includes(option),
+                  )
+                  .map((option) => (
+                    <label key={option}>
+                      {
+                        {
+                          region: "AWS region",
+                          start_url: "AWS access portal URL",
+                          project_id: "Google Cloud project ID",
+                        }[option]
+                      }
+                      <Input
+                        value={options[option] || ""}
+                        placeholder="Use provider default"
+                        onChange={(event) =>
+                          setOptions((current) => ({
+                            ...current,
+                            [option]: event.target.value,
+                          }))
+                        }
+                      />
+                    </label>
+                  ))}
+              </details>
+            )}
             <Button
               variant="primary"
               loading={pending}
@@ -138,6 +171,15 @@ export default function NativeAuthDialog({
                 request("start", {
                   provider_id: provider.id,
                   name: name.trim(),
+                  ...(Object.values(options).some((value) => value.trim())
+                    ? {
+                        options: Object.fromEntries(
+                          Object.entries(options)
+                            .filter(([, value]) => value.trim())
+                            .map(([key, value]) => [key, value.trim()]),
+                        ),
+                      }
+                    : {}),
                   ...(provider.default_redirect_uri
                     ? { redirect_uri: provider.default_redirect_uri }
                     : {}),
@@ -185,8 +227,9 @@ export default function NativeAuthDialog({
               </a>
             )}
             <p className="field-hint" role="status">
-              Finish signing in on the provider’s page. This window will update
-              when your account is connected.
+              {session.callback_mode === "manual"
+                ? "Automatic return is unavailable. Finish signing in, then use the callback URL option below."
+                : "Finish signing in on the provider’s page. This window will update when your account is connected."}
             </p>
             <Button
               loading={pending}
@@ -199,7 +242,11 @@ export default function NativeAuthDialog({
             </Button>
             {session.flow === "authorization_code_pkce" && (
               <details className="gateway-advanced">
-                <summary>Sign-in did not return automatically?</summary>
+                <summary>
+                  {session.callback_mode === "manual"
+                    ? "Complete with callback URL"
+                    : "Sign-in did not return automatically?"}
+                </summary>
                 <p className="field-hint">
                   Copy the final callback URL from your browser and paste it
                   here. The code is sent directly to your gateway.

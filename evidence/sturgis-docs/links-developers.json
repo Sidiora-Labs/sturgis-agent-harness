@@ -1,12 +1,12 @@
 {
   "audience": "developers",
   "status": "passed",
-  "pages": 275,
-  "expected_routes": 274,
-  "source_lines": 46782,
-  "source_symbols": 3126,
-  "local_links": 185670,
+  "pages": 347,
+  "expected_routes": 346,
+  "source_lines": 62632,
+  "source_symbols": 4254,
+  "local_links": 267763,
   "external_links_not_fetched": 0,
-  "canonical_metadata_not_navigation": 275,
+  "canonical_metadata_not_navigation": 347,
   "errors": []
 }

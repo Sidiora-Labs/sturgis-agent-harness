@@ -184,6 +184,7 @@ test("source maps require content and the full manifest detects built asset chan
     ".build/native/sturgis-memory",
     "agent/runtime.py",
     "consumer/api.py",
+    "model_gateway/service.py",
     "native/memory/main.cpp",
     "frontend/index.html",
     "frontend/tsconfig.json",
@@ -194,6 +195,7 @@ test("source maps require content and the full manifest detects built asset chan
     "tests/consumer_web/journey.mjs",
     "tests/consumer_web/server.py",
     "tests/consumer_web/coverage.mjs",
+    "tests/gateway/browser_journey.mjs",
     "frontend/tests/example.test.ts",
   ]) {
     const file = path.join(f.root, name);
@@ -207,6 +209,8 @@ test("source maps require content and the full manifest detects built asset chan
   );
   assert.equal(before.files["package-lock.json"].sha256.length, 64);
   assert.equal(before.files["consumer/api.py"].sha256.length, 64);
+  assert.equal(before.files["model_gateway/service.py"].sha256.length, 64);
+  assert.equal(before.files["tests/gateway/browser_journey.mjs"].sha256.length, 64);
   assert.equal(
     before.files["frontend/licenses/dependency.LICENSE"].sha256.length,
     64,

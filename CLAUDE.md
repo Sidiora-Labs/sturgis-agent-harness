@@ -5,7 +5,7 @@
 The single source of truth for how to work in this repo is **`spec/`** (kvx).
 This file is a GENERATED pointer to it. Do not hand-edit it; edit `spec/workflow.kvx` and run `spec/specgen`.
 
-> spec/sturgis-03/spec.kvx
+> spec/repository-foundations/spec.kvx
 
 ## Principles
 
@@ -18,20 +18,20 @@ This file is a GENERATED pointer to it. Do not hand-edit it; edit `spec/workflow
 2. Root claims ready tasks with explicit owner and dependencies; one active task per agent.
 3. Implement only declared paths and publish interface changes before dependent work.
 4. Run focused verification; root reconciles integration and completes tasks through cg spec done.
-5. Run the aggregate coverage/recovery/scope gate once after integration; retain truthful evidence.
+5. Run the active feature verification after integration. Runtime changes require the aggregate coverage/recovery gate; repository-only work uses its declared tooling checks and must preserve pending runtime status.
 6. Maintain both documentation sites: complete user manuals/examples and developer architecture, file/function contracts, important source branches and operating guides.
-7. Run python3 scripts/docs_gate.py full. Both site builds, independent feature/source completeness, rendered links, examples and browser journeys must pass before cg docs close.
+7. For product/manual changes, run python3 scripts/docs_gate.py full before closing the two-site documentation work. Root repository maintenance validates its declared documents and must not claim the stopped product documentation gate complete.
 
 ## Persistent project memory (when configured)
 
 
 ## Active feature
 
-`spec/sturgis-03/spec.kvx` — read its `[meta]` status, `[req.*]` acceptance criteria, and the `[task.*]` list (status + wave + requires). Work one task at a time in wave order; update `status` in the kvx as you go.
+`spec/repository-foundations/spec.kvx` — read its `[meta]` status, `[req.*]` acceptance criteria, and the `[task.*]` list (status + wave + requires). Work one task at a time in wave order; update `status` in the kvx as you go.
 
 ## Hard rules
 
-- **Active Scope**: Sturgis-03 adds an independent model gateway and consumer client integration; preserve completed core/consumer work and historical evidence. No paid/public deployment is authorized.
+- **Active Scope**: Repository-foundations adds project documentation, Apache-2.0 licensing, local tooling, CI and devcontainer configuration. User-stopped sturgis-03 runtime qualification remains incomplete. Preserve application work and private data; no publishing or production deployment is authorized.
 - **No False Done**: Source presence and coverage alone are not runtime qualification; record exact executed evidence.
 - **Coverage**: Never lower 90 percent Python, C++ and client JavaScript line coverage gates or omit first-party production files to pass.
 - **Preserve Work**: Exclusive module/test ownership; do not overwrite another agent's files or modify prior research.

@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import aclosing
+import math
 import re
 from urllib.parse import quote, urlsplit, urlunsplit
 from uuid import uuid4
@@ -48,7 +50,8 @@ def _base(protocol, endpoint, preset_id):
 
 def _headers(protocol, credential, preset_id, *, stream=False):
     headers = {"Accept": "text/event-stream" if stream else "application/json", "Content-Type": "application/json"}
-    if credential is not None and (not isinstance(credential, str) or not credential or len(credential) > 8192
+    credential_limit = 32768 if preset_id in {"codex", "github-copilot"} else 8192
+    if credential is not None and (not isinstance(credential, str) or not credential or len(credential) > credential_limit
                                   or any(ord(c) < 33 or ord(c) > 126 for c in credential)):
         raise GatewayError("invalid_credential", "The API key must be nonempty text without spaces or control characters.")
     if protocol == "anthropic":
@@ -65,6 +68,42 @@ def _headers(protocol, credential, preset_id, *, stream=False):
                         "x-opencode-client": "desktop", "x-opencode-session": "ses_" + uuid4().hex,
                         "x-opencode-request": "msg_" + uuid4().hex, "x-opencode-project": "global"})
     return headers
+
+
+def native_client_headers(headers, protocol):
+    """Forward only protocol negotiation headers from an external API client."""
+    allowed = {"anthropic": {"anthropic-version", "anthropic-beta"},
+               "openai-responses": {"openai-beta"}, "openai": set(), "gemini": set()}
+    result = {}
+    for key, value in headers.items():
+        name = key.lower()
+        if name in allowed.get(protocol, set()):
+            if not isinstance(value, str) or len(value) > 2048 or any(ord(c) < 32 or ord(c) > 126 for c in value):
+                raise GatewayError("invalid_headers", "Protocol headers must be bounded printable text.")
+            result[name] = value
+    return result
+
+
+def _upstream_url(protocol, base, model):
+    if protocol == "gemini":
+        return base + "/models/" + quote(model.removeprefix("models/"), safe="") + ":streamGenerateContent?alt=sse"
+    return base + {"openai": "/chat/completions", "anthropic": "/messages", "openai-responses": "/responses"}[protocol]
+
+
+def _request_headers(protocol, credential, preset_id, extra_headers):
+    defaults = _headers(protocol, credential, preset_id, stream=True)
+    # Auth is always credential-owned; explicit native version negotiation may
+    # override only the ordinary default version rather than being discarded.
+    negotiation = native_client_headers(extra_headers or {}, protocol)
+    return {**(extra_headers or {}), **defaults, **negotiation}
+
+
+def _codex_body(body):
+    body["store"] = False
+    body.setdefault("instructions", "")
+    for key in ("max_output_tokens", "temperature", "top_p"):
+        body.pop(key, None)
+    return body
 
 
 async def _sse(response):
@@ -115,8 +154,25 @@ class GatewayTransport:
         self.network_policy = network_policy
         self._signatures = {}
 
-    async def stream(self, protocol, endpoint, payload, credential=None, *, preset_id=None, cancel=None, extra_headers=None):
+    async def stream(self, protocol, endpoint, payload, credential=None, *, preset_id=None, cancel=None, extra_headers=None, request_timeout=None):
+        async with aclosing(self._managed(self._stream(protocol, endpoint, payload, credential, preset_id, extra_headers), cancel, request_timeout)) as managed:
+            async for chunk in managed:
+                yield chunk
+
+    async def native_stream(self, protocol, endpoint, native_payload, credential=None, *, preset_id=None, cancel=None, extra_headers=None, request_timeout=None):
+        """Preserve native signed/opaque blocks when client and upstream match."""
+        async with aclosing(self._managed(self._native_stream(protocol, endpoint, native_payload, credential, preset_id, extra_headers), cancel, request_timeout)) as managed:
+            async for event in managed:
+                yield event
+
+    async def _managed(self, source, cancel, request_timeout=None):
+        if request_timeout is not None and (isinstance(request_timeout, bool)
+                or not isinstance(request_timeout, (int, float)) or not 0 < request_timeout <= self.network_policy.timeout
+                or not math.isfinite(request_timeout)):
+            await source.aclose()
+            raise GatewayError("invalid_timeout", "The request timeout must be positive and within the operator network limit.")
         if cancel is not None and cancel.is_set():
+            await source.aclose()
             raise GatewayError("cancelled", "The model request was cancelled.", status=499)
         queue = asyncio.Queue(maxsize=1)
 
@@ -124,8 +180,12 @@ class GatewayTransport:
             # One task owns the entire HTTP context, preserving its deadline and
             # cancellation scope across every yielded chunk and backpressure wait.
             try:
-                async for event in self._stream(protocol, endpoint, payload, credential, preset_id, extra_headers):
-                    await queue.put((True, event))
+                async with asyncio.timeout(request_timeout):
+                    async with aclosing(source):
+                        async for event in source:
+                            await queue.put((True, event))
+            except TimeoutError:
+                await queue.put((False, GatewayError("timeout", "The provider request exceeded its time limit. Try again or choose another provider.", status=504, retryable=True)))
             except Exception as exc:
                 await queue.put((False, exc))
             else:
@@ -143,24 +203,16 @@ class GatewayTransport:
         finally:
             producer.cancel()
             await asyncio.gather(producer, return_exceptions=True)
+            await source.aclose()
 
     async def _stream(self, protocol, endpoint, payload, credential, preset_id, extra_headers=None):
         try:
             base = _base(protocol, endpoint, preset_id)
             body = translate_request(protocol, payload, self._signatures)
             if preset_id == "codex":
-                body["store"] = False
-                body.setdefault("instructions", "")
-                # The subscription endpoint rejects these Chat/Responses options;
-                # the gateway still bounds time, bytes, concurrency and tools.
-                for key in ("max_output_tokens", "temperature", "top_p"):
-                    body.pop(key, None)
-            headers = {**(extra_headers or {}), **_headers(protocol, credential, preset_id, stream=True)}
-            if protocol == "gemini":
-                model = payload["model"].removeprefix("models/")
-                url = base + "/models/" + quote(model, safe="") + ":streamGenerateContent?alt=sse"
-            else:
-                url = base + {"openai": "/chat/completions", "anthropic": "/messages", "openai-responses": "/responses"}[protocol]
+                body = _codex_body(body)
+            headers = _request_headers(protocol, credential, preset_id, extra_headers)
+            url = _upstream_url(protocol, base, payload["model"])
             translator, marker = StreamTranslator(protocol, payload["model"], self._signatures), False
             async with self.network_policy.stream("POST", url, allowed_origins=(origin(base),),
                     headers=headers, content=json_dumps(body).encode(),
@@ -180,6 +232,44 @@ class GatewayTransport:
             raise
         except (ValueError, TypeError, KeyError, AttributeError, UnicodeError, OverflowError):
             raise GatewayError("provider_protocol", "The provider response or request could not be read. Check the selected protocol.", status=502) from None
+
+    async def _native_stream(self, protocol, endpoint, payload, credential, preset_id, extra_headers):
+        try:
+            base = _base(protocol, endpoint, preset_id)
+            body = json_loads(json_dumps(payload))
+            if not isinstance(body, dict) or not isinstance(body.get("model"), str) or not body["model"]:
+                raise GatewayError("invalid_request", "Provide a model and native request body.")
+            model = body["model"]
+            if protocol == "gemini":
+                body.pop("model")
+                body.pop("stream", None)
+            else:
+                body["stream"] = True
+            if protocol == "openai-responses":
+                body.setdefault("store", False)
+            if preset_id == "codex":
+                body = _codex_body(body)
+            validator, marker = StreamTranslator(protocol, model, self._signatures), False
+            async with self.network_policy.stream("POST", _upstream_url(protocol, base, model),
+                    allowed_origins=(origin(base),), headers=_request_headers(protocol, credential, preset_id, extra_headers),
+                    content=json_dumps(body).encode(), follow_redirects=False) as response:
+                if response.status != 200:
+                    raise provider_failure(response.status)
+                async for data in _sse(response):
+                    if data == b"[DONE]":
+                        marker = True
+                        break
+                    event = json_loads(data)
+                    validator.feed(event)
+                    event_name = event.get("type")
+                    if event_name is not None and (not isinstance(event_name, str) or re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", event_name) is None):
+                        raise GatewayError("provider_protocol", "The provider returned an invalid native event name.", status=502)
+                    yield {"event": event_name, "data": event}
+                validator.end(marker)
+        except GatewayError:
+            raise
+        except (ValueError, TypeError, KeyError, AttributeError, UnicodeError, OverflowError):
+            raise GatewayError("provider_protocol", "The native provider stream could not be read. Check the selected protocol.", status=502) from None
 
 
 def _model(row, protocol, preset_id):
@@ -203,9 +293,10 @@ def _model(row, protocol, preset_id):
         name, context, output = row.get("displayName", identity), row.get("inputTokenLimit"), row.get("outputTokenLimit")
     else:
         identity = row.get("id")
-        name = row.get("display_name", row.get("name", identity))
+        name = row.get("display_name") or row.get("name") or identity
         context = row.get("context_length", row.get("context_window", row.get("max_input_tokens")))
-        output = row.get("max_output_tokens", row.get("top_provider", {}).get("max_completion_tokens"))
+        top = row.get("top_provider")
+        output = row.get("max_output_tokens", top.get("max_completion_tokens") if isinstance(top, dict) else None)
     if (not isinstance(identity, str) or not identity or len(identity) > 256 or any(ord(c) < 32 for c in identity)
             or not isinstance(name, str) or not name or len(name) > 512):
         raise GatewayError("invalid_catalog", "The provider returned an invalid model name.", status=502)

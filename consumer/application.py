@@ -63,7 +63,7 @@ class AgentApplication:
         self.providers = ProviderSettings(self.core, self.vault, self.network)
         if config.gateway_endpoint:
             from consumer.network import origin
-            self.providers.network_policy = NetworkPolicy(private_origins=(*config.private_network_origins, origin(config.gateway_endpoint)))
+            self.providers.network_policy = NetworkPolicy(private_origins=(*config.private_network_origins, origin(config.gateway_endpoint)), timeout=120)
         self.providers.install()
         self.core.prepare_provider = self.providers.ensure_selected_ready
         self.usage = UsageView(self.core)
@@ -196,10 +196,10 @@ class AgentApplication:
                 try:
                     await self.message_send(**row.value["request"])
                 except CoreError as error:
-                    def failed():
+                    def failed(failure=error.as_dict()):
                         current = self.journal.get(row.namespace, row.id, self.scope)
                         self.journal.put(row.namespace, row.id, self.scope,
-                            {**current.value, "status": "failed", "error": error.as_dict()}, current.revision)
+                            {**current.value, "status": "failed", "error": failure}, current.revision)
                     await asyncio.to_thread(failed)
         return self
 
@@ -249,7 +249,8 @@ class AgentApplication:
             matched = {r.value["conversation_id"] for r in self.journal.list("consumer.messages", self.scope)
                        if query.casefold() in r.value["request"]["text"].casefold()}
             rows = [r for r in rows if r.id in matched or query.casefold() in r.value["title"].casefold()]
-        return {"items": [public_record(r) for r in reversed(rows)]}
+        rows.sort(key=lambda row: (row.value["created_at"], row.id), reverse=True)
+        return {"items": [public_record(r) for r in rows]}
 
     def conversation_get(self, id):
         row = self._conversation(id)
@@ -337,19 +338,12 @@ class AgentApplication:
         if type(after) is not int or after < 0 or type(limit) is not int or not 1 <= limit <= 1000:
             raise CoreError("invalid_cursor", "Event cursor and page limit must be bounded integers")
         binding = self._conversation(conversation_id).value["binding_id"] if conversation_id else None
-        records = self.journal.events(self.scope, after=after, limit=limit)
-        public = []
-        for event in records:
-            if event.kind not in {"user.prompt", "user.steer", "user.cancel", "output.persisted", "runtime.turn_completed", "runtime.turn_failed", "runtime.turn_interrupted"}:
-                continue
-            event_binding = event.payload.get("binding_id")
-            if event_binding is None and event.payload.get("work_id"):
-                row = self.journal.get("runtime_turns", event.payload["work_id"], self.scope)
-                event_binding = row.value["binding_id"] if row else None
-            if binding and event_binding != binding:
-                continue
-            public.append({"id": event.id, "cursor": event.seq, "kind": event.kind, "origin": event.source, "payload": event.payload})
-        return {"items": public, "cursor": records[-1].seq if records else after, "has_more": len(records) == limit}
+        page = self.journal.routed_events(self.scope, {"user.prompt", "user.steer", "user.cancel", "output.persisted",
+            "runtime.turn_completed", "runtime.turn_failed", "runtime.turn_interrupted"},
+            after=after, limit=limit, binding_id=binding)
+        return {"items": [{"id": event.id, "cursor": event.seq, "kind": event.kind, "origin": event.source,
+                           "payload": event.payload} for event in page["events"]],
+                "cursor": page["cursor"], "has_more": page["has_more"]}
 
     def overview(self):
         return {"agent_id": self.config.agent_id, "mode": self.config.mode,
@@ -377,16 +371,26 @@ class AgentApplication:
                 if credential is None or not credential["active"]:
                     credential = self.vault.put(self.scope, provider_id, api_key, credential["revision"] if credential else 0)
                 existing = self.journal.get("consumer.providers", provider_id, self.scope)
-                if existing:
+                if existing and all(existing.value.get(field) == value for field, value in
+                    (("context_limit", context_limit), ("output_limit", output_limit), ("tools", tools), ("credential_ref", credential["reference"]))):
                     return self.providers.inspect(provider_id)
                 return self.providers.configure(provider_id, endpoint=endpoint, model=model,
                     context_limit=context_limit, output_limit=output_limit, tools=tools,
-                    credential_ref=credential["reference"])
+                    credential_ref=credential["reference"], expected_revision=existing.revision if existing else 0)
             configured = await asyncio.to_thread(prepare)
             if not configured["ready"]:
                 configured = await self.providers.probe(provider_id, configured["revision"])
+            probe_error = (configured.get("probe") or {}).get("error") or {}
+            authority_ended = probe_error.get("code") in {
+                "cancelled", "authority_revoked", "stale_authority", "budget_exceeded", "profile_disabled"}
+            if not configured["ready"] and tools and not authority_ended:
+                configured = await asyncio.to_thread(self.providers.configure, provider_id, endpoint=endpoint, model=model,
+                    context_limit=context_limit, output_limit=output_limit, tools=False,
+                    credential_ref=configured["credential_ref"], expected_revision=configured["revision"])
+                configured = await self.providers.probe(provider_id, configured["revision"])
             if not configured["ready"]:
-                raise CoreError("provider_unavailable", "The gateway could not complete a model check. Open Model Gateway to check the connection and retry.")
+                failure = configured["probe"]["error"]
+                raise CoreError("provider_unavailable", failure["message"], probe_code=failure["code"])
             return await asyncio.to_thread(self.providers.activate, provider_id, configured["revision"])
 
     def credential_put(self, name, secret, expected_revision=0):
@@ -568,7 +572,7 @@ class AgentApplication:
     async def lifecycle_snapshot(self):
         def read():
             with self.journal.transaction():
-                rows = self.journal.list("work", self.scope)
+                rows = self.journal.list_states("work", self.scope, ("running", "queued", "waiting"))
                 outbox = self.journal.list("outbox", self.scope)
                 due = [r.value["next_due"] for r in self.journal.list("schedules", self.scope)
                        if r.value["state"] == "active" and r.value["next_due"] is not None]

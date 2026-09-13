@@ -1,0 +1,32 @@
+{
+  "name": "Sturgis development",
+  "build": { "dockerfile": "Dockerfile", "context": ".." },
+  "remoteUser": "sturgis",
+  "containerUser": "sturgis",
+  "updateRemoteUserUID": true,
+  "init": true,
+  "forwardPorts": [8787, 8790, 5173, 4321, 4322],
+  "portsAttributes": {
+    "8787": { "label": "Sturgis", "onAutoForward": "notify" },
+    "8790": { "label": "Standalone model gateway", "onAutoForward": "silent" },
+    "5173": { "label": "Web development", "onAutoForward": "silent" },
+    "4321": { "label": "User documentation", "onAutoForward": "silent" },
+    "4322": { "label": "Developer documentation", "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}

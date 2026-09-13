@@ -1,12 +1,12 @@
 {
   "audience": "users",
   "status": "passed",
-  "pages": 41,
-  "expected_routes": 40,
+  "pages": 45,
+  "expected_routes": 44,
   "source_lines": 0,
   "source_symbols": 0,
-  "local_links": 3380,
+  "local_links": 3900,
   "external_links_not_fetched": 0,
-  "canonical_metadata_not_navigation": 41,
+  "canonical_metadata_not_navigation": 45,
   "errors": []
 }

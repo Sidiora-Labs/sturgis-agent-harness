@@ -7,6 +7,8 @@ Lifecycle stores desired and observed runtime state in the control journal. Proc
 
 A safe suspend operation pauses the product workflow monitor, fences new core model/background admission, and inspects actual work, output, pending commands and unresolved reservations. It records the next scheduled wake before stopping the worker that owns the schedule. A cold agent may need to start briefly to inspect its durable scheduler before it can safely suspend.
 
+`AgentApplication.lifecycle_snapshot` uses the scoped indexed work projection for `running`, `queued`, and `waiting` records. Those rows determine active/queued work counts; terminal historical jobs are retained but do not need to be decoded for this snapshot. Pending deliveries and active schedules are checked separately in the same short transaction. This changes the read path, not which in-flight work or undelivered output prevents suspension.
+
 ## Worked sequence
 
 1. The owner sends an explicit suspend request.
@@ -40,4 +42,3 @@ Backups reuse lifecycle's stopped-worker snapshot boundary. See [frontend data](
 - [agent/runtime/__init__.py](/reference/files/agent/runtime/__init__.py/)
 
 [Developer manual](../index.md)
-

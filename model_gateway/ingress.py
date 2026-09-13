@@ -379,3 +379,72 @@ async def collect_chat(protocol, chunks):
                 block["input"] = json_loads(block.pop("_arguments"))
             response["content"].append(block)
     return response
+
+
+async def collect_native(protocol, records):
+    """Collect a native stream while retaining signed and opaque provider data."""
+    response, blocks, arguments, complete = None, {}, {}, False
+    try:
+        async for record in records:
+            kind, data = record.get("event"), record["data"]
+            if protocol == "openai-responses":
+                if kind in {"response.completed", "response.incomplete"}:
+                    response, complete = data["response"], True
+            elif protocol == "anthropic":
+                if kind == "message_start":
+                    response = json_loads(json_dumps(data["message"]))
+                elif kind == "content_block_start":
+                    blocks[data["index"]] = json_loads(json_dumps(data["content_block"]))
+                elif kind == "content_block_delta":
+                    index, delta = data["index"], data["delta"]
+                    block, delta_type = blocks[index], delta.get("type")
+                    if delta_type == "input_json_delta":
+                        arguments[index] = arguments.get(index, "") + delta["partial_json"]
+                    elif delta_type == "citations_delta":
+                        block.setdefault("citations", []).append(delta["citation"])
+                    elif delta_type in {"text_delta", "thinking_delta", "signature_delta"}:
+                        field = {"text_delta": "text", "thinking_delta": "thinking", "signature_delta": "signature"}[delta_type]
+                        block[field] = block.get(field, "") + delta[field]
+                    else:
+                        _invalid("This native delta cannot be collected without losing information; use streaming mode.")
+                elif kind == "message_delta":
+                    response.update(data.get("delta", {}))
+                    response.setdefault("usage", {}).update(data.get("usage", {}))
+                elif kind == "message_stop":
+                    complete = True
+            elif protocol == "gemini":
+                if response is None:
+                    response = {"candidates": []}
+                for key, value in data.items():
+                    if key != "candidates":
+                        response[key] = value
+                for candidate in data.get("candidates", []):
+                    index = candidate.get("index", 0)
+                    current = blocks.setdefault(index, {"index": index, "content": {"role": "model", "parts": []}})
+                    current["content"]["parts"].extend(candidate.get("content", {}).get("parts", []))
+                    for key, value in candidate.items():
+                        if key != "content":
+                            current[key] = value
+                    complete = bool(candidate.get("finishReason")) or complete
+                if data.get("promptFeedback", {}).get("blockReason"):
+                    complete = True
+            else:
+                _invalid("Choose a native Messages, Responses, or Gemini client protocol.")
+    finally:
+        close = getattr(records, "aclose", None)
+        if close:
+            await close()
+    if response is None or not complete:
+        raise GatewayError("provider_incomplete", "The provider disconnected before completing its native response.", 502, retryable=True)
+    if protocol == "anthropic":
+        for index, text in arguments.items():
+            if text:
+                if response.get("stop_reason") == "tool_use":
+                    blocks[index]["input"] = json_loads(text)
+                else:
+                    # A truncated argument string is not an executable JSON call.
+                    blocks.pop(index, None)
+        response["content"] = [blocks[index] for index in sorted(blocks)]
+    elif protocol == "gemini":
+        response["candidates"] = [blocks[index] for index in sorted(blocks)]
+    return response

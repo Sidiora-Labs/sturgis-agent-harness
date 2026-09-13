@@ -28,7 +28,7 @@ def main(argv=None):
         built = Path(__file__).resolve().parents[1] / "consumer/web"
         if (built / "gateway.html").is_file():
             web_root = built
-    app = create_app(args.root, public_origin=public, network_policy=NetworkPolicy(private_origins=args.private_origin),
+    app = create_app(args.root, public_origin=public, network_policy=NetworkPolicy(private_origins=args.private_origin, timeout=120),
                      allow_local_servers=not args.deny_local_servers, web_root=web_root)
     print(f"Model Gateway: {public}\nManagement key file: {app.state.auth.key_path}", flush=True)
     import uvicorn

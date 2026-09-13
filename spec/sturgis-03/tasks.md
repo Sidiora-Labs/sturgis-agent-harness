@@ -4,26 +4,31 @@
 
 ## Tasks
 
-  - [-] 1.1 Gateway state, authority, service and composition contracts
+  - [x] 1.1 Gateway state, authority, service and composition contracts
     - _Requirements: 1.2, 2.3, 3.2, 3.3, 4.2_
-  - [-] 1.2 Pinned 9router architecture audit and provider registry
+  - [x] 1.2 Pinned 9router architecture audit and provider registry
     - _Requirements: 1.1, 2.2_
-  - [-] 1.3 Independent general-purpose format translation and model discovery
+  - [x] 1.3 Independent general-purpose format translation and model discovery
     - _Requirements: 2.1, 3.1_
-  - [-] 1.4 Installation gateway management and simple agent model selection
+  - [x] 1.4 Installation gateway management and simple agent model selection
     - _Requirements: 2.1, 4.1, 4.2_
-  - [ ] 2.1 Standalone and consumer integration qualification and live restart
+  - [x] 1.5 Native sign-in, atomic refresh and account-specific inference
+    - _Requirements: 6.1, 6.3_
+  - [x] 2.1 Standalone and consumer integration qualification and live restart
     - _Requirements: 4.3, 5.2_
-  - [ ] 2.2 Complete user and developer gateway documentation
+  - [x] 2.2 Complete user and developer gateway documentation
     - _Requirements: 5.1, 5.2_
+  - [-] 3.1 Repair live model readiness, agent identity and runtime continuity
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9_
 
 ## Task Dependency Graph
 
 ```json
 {
   "waves": [
-    { "id": 1,  "tasks": ["1.1", "1.2", "1.3", "1.4"] },
-    { "id": 2,  "tasks": ["2.1", "2.2"] }
+    { "id": 1,  "tasks": ["1.1", "1.2", "1.3", "1.4", "1.5"] },
+    { "id": 2,  "tasks": ["2.1", "2.2"] },
+    { "id": 3,  "tasks": ["3.1"] }
   ]
 }
 ```

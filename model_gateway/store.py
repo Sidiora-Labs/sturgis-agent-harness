@@ -193,6 +193,19 @@ class GatewayStore:
                     db.execute("DELETE FROM objects WHERE tenant=? AND kind='route' AND id=?", (tenant, route["id"]))
         return {"disconnected": True}
 
+    def delete_route(self, tenant, id, expected_revision):
+        """Remove exactly the reviewed route revision within its owning tenant."""
+        tenant, id = self._tenant(tenant), text(id)
+        self._revision(expected_revision)
+        with self.transaction() as db:
+            row = db.execute("SELECT revision FROM objects WHERE tenant=? AND kind='route' AND id=?", (tenant, id)).fetchone()
+            if row is None:
+                raise GatewayError("not_found", "This model route is unavailable.", 404)
+            if row["revision"] != expected_revision:
+                raise GatewayError("conflict", "This model route changed. Refresh it first.", 409)
+            db.execute("DELETE FROM objects WHERE tenant=? AND kind='route' AND id=?", (tenant, id))
+        return {"deleted": True}
+
     @staticmethod
     def public_connection(value):
         return {**{k: v for k, v in value.items() if k != "secret_ref"}, "credential_configured": bool(value.get("secret_ref"))}

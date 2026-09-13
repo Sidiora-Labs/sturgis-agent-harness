@@ -250,11 +250,18 @@ export interface GatewayPreset {
   id: string;
   name: string;
   endpoint: string;
-  protocol: "openai" | "anthropic" | "gemini" | "openai-responses";
+  protocol:
+    | "openai"
+    | "anthropic"
+    | "gemini"
+    | "openai-responses"
+    | "gemini-cli"
+    | "kiro";
   auth: "api_key" | "none" | "oauth";
   auth_modes?: string[];
   integration_status?: string;
-  category: "free_tier" | "free" | "local" | "paid" | "gateway" | "custom";
+  category:
+    "free_tier" | "free" | "local" | "paid" | "gateway" | "custom" | "account";
   description: string;
   key_url?: string;
   defaults: Record<string, unknown>;
@@ -268,6 +275,8 @@ export interface GatewayConnection {
   protocol: GatewayPreset["protocol"];
   models: GatewayModel[];
   credential_configured: boolean;
+  auth_account_id?: string | null;
+  catalog_mode?: "discover" | "manual";
   status: "connected" | "error";
   error: null | { code: string; message: string };
 }
@@ -292,10 +301,11 @@ export interface GatewayUsage {
   output_tokens: number;
   total_tokens: number;
   failures: number;
+  unreported?: number | null;
   recent: Array<{
     model: string;
     status: string;
-    tokens: number;
+    tokens: number | null;
     created_at: number;
   }>;
 }
@@ -319,6 +329,7 @@ export interface GatewayAuthSession {
   poll_after: number;
   authorization_url?: string;
   redirect_uri?: string;
+  callback_mode?: "automatic" | "manual";
   user_code?: string;
   verification_uri?: string;
   verification_uri_complete?: string;
@@ -332,4 +343,12 @@ export interface GatewayAuthAccount {
   status: "connected" | "disconnected";
   expires_at: number;
   revision: number;
+}
+
+export interface GatewaySettings {
+  revision: number;
+  request_timeout: number;
+  max_concurrency: number;
+  requests_per_minute: number;
+  operator_limits: { request_timeout: number; max_concurrency: number };
 }

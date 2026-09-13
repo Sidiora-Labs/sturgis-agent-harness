@@ -7,10 +7,18 @@
     "test:web": "npm run build:web && node scripts/verify_web.mjs",
     "dev:web": "vite --config frontend/vite.config.ts",
     "build:web": "tsc -p frontend/tsconfig.json && vite build --config frontend/vite.config.ts",
-    "typecheck:web": "tsc -p frontend/tsconfig.json"
+    "typecheck:web": "tsc -p frontend/tsconfig.json",
+    "lint": "npm run lint:web && npm run typecheck:web",
+    "lint:web": "eslint --config eslint.config.mjs . --max-warnings=0",
+    "typecheck": "npm run typecheck:web",
+    "format:check": "make format-check",
+    "test:components": "vitest run --config frontend/vitest.config.ts",
+    "build": "npm run build:web",
+    "dev": "npm run dev:web"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
     "@material/material-color-utilities": "0.4.0",
     "@tailwindcss/vite": "4.3.3",
     "@testing-library/react": "16.3.3",
@@ -21,6 +29,8 @@
     "@vitejs/plugin-react": "6.1.1",
     "@vitest/coverage-v8": "5.0.0",
     "ast-v8-to-istanbul": "1.0.6",
+    "eslint": "10.10.0",
+    "globals": "17.12.0",
     "istanbul-lib-coverage": "3.2.2",
     "jsdom": "30.0.1",
     "playwright": "1.63.0",
@@ -40,5 +50,18 @@
     "react-dom": "19.3.0",
     "react-markdown": "10.1.0",
     "remark-gfm": "4.0.1"
+  },
+  "license": "Apache-2.0",
+  "author": "Sidiora Labs",
+  "homepage": "https://github.com/Sidiora-Labs/sturgis-agent-harness#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sidiora-Labs/sturgis-agent-harness.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sidiora-Labs/sturgis-agent-harness/issues"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   }
 }

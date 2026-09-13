@@ -155,7 +155,9 @@ def translate_request(protocol, payload, signatures):
                 parts.append({"type": "tool_result", "tool_use_id": identity, "content": message.get("content", "")})
             else:
                 content = message.get("content", "")
-                parts.append({"functionResponse": {"name": calls[identity], "id": identity,
+                saved = signatures.get(identity)
+                native_identity = saved.get("native_id", identity) if isinstance(saved, dict) else identity
+                parts.append({"functionResponse": {"name": calls[identity], "id": native_identity,
                               "response": content if isinstance(content, dict) else {"result": content}}})
         else:
             parts.extend(_parts(message.get("content"), protocol))
@@ -167,7 +169,10 @@ def translate_request(protocol, payload, signatures):
                     parts.append({"type": "tool_use", "id": call["id"], "name": function["name"], "input": arguments})
                 else:
                     part = {"functionCall": {"id": call["id"], "name": function["name"], "args": arguments}}
-                    signature = signatures.get(call["id"])
+                    saved = signatures.get(call["id"])
+                    signature = saved.get("signature") if isinstance(saved, dict) else saved
+                    if isinstance(saved, dict) and saved.get("native_id"):
+                        part["functionCall"]["id"] = saved["native_id"]
                     if signature:
                         part["thoughtSignature"] = signature
                     parts.append(part)
@@ -214,7 +219,7 @@ def translate_request(protocol, payload, signatures):
             if response.get("type") == "json_schema":
                 config["responseJsonSchema"] = response["json_schema"]["schema"]
     else:
-        result = {"model": body["model"], "input": messages, "max_output_tokens": limit, "stream": True}
+        result = {"model": body["model"], "input": messages, "max_output_tokens": limit, "stream": True, "store": False}
         if systems:
             result["instructions"] = "\n\n".join(p["text"] for p in systems)
         if functions:
@@ -241,6 +246,7 @@ class StreamTranslator:
         self.usage, self.native_usage, self.reason, self.done = None, {}, None, False
         self.tools, self.parts, self.tool_bytes = {}, 0, 0
         self.blocks, self.response_tools = {}, {}
+        self.response_text = {}
         self.started = False
 
     def chunk(self, delta=None, reason=None, usage=None):
@@ -315,9 +321,21 @@ class StreamTranslator:
             fail()
         for choice in choices:
             choice = object_value(choice)
-            if choice.get("index", 0) != 0 or self.reason is not None:
+            if type(choice.get("index", 0)) is not int or choice.get("index", 0) != 0:
                 fail()
             delta = object_value(choice.get("delta", {}))
+            if self.reason is not None:
+                # OpenRouter repeats the completed choice in its final usage
+                # envelope. Consume its accounting without emitting a second
+                # terminal or accepting any output after completion.
+                if (event.get("usage") is None or choice.get("finish_reason") != self.reason
+                        or set(delta) - {"role", "content", "refusal", "tool_calls"}
+                        or delta.get("role") not in (None, "assistant")
+                        or delta.get("content") not in (None, "")
+                        or delta.get("refusal") not in (None, "")
+                        or delta.get("tool_calls") not in (None, [])):
+                    fail("The provider emitted output after its completion reason.")
+                continue
             out = {}
             if delta.get("role") is not None:
                 if delta["role"] != "assistant":
@@ -370,6 +388,8 @@ class StreamTranslator:
             if block["closed"]:
                 fail()
             block["closed"] = True
+            if block["kind"] == "tool_use" and not self.tools[block["tool"]]["arguments"]:
+                result.append(self.tool(block["tool"], {"arguments": "{}"}))
         elif kind == "message_delta":
             self.native_usage.update(object_value(event.get("usage", {})))
             reason = object_value(event["delta"]).get("stop_reason")
@@ -404,11 +424,16 @@ class StreamTranslator:
                 if "functionCall" in part:
                     call = object_value(part["functionCall"])
                     identity = "call_" + uuid4().hex
+                    native_id = call.get("id")
+                    if native_id is not None and (not isinstance(native_id, str) or not native_id or len(native_id) > 256):
+                        fail("The provider returned an invalid native function identity.")
+                    signature = None
                     if part.get("thoughtSignature"):
                         signature = text_value(part["thoughtSignature"])
                         if len(signature) > 65536:
                             fail("The provider signature exceeded its size limit.")
-                        self.signatures[identity] = signature
+                    if signature or native_id:
+                        self.signatures[identity] = {"signature": signature, "native_id": native_id or identity}
                         while len(self.signatures) > 512:
                             self.signatures.pop(next(iter(self.signatures)))
                     result.append(self.tool(len(self.tools), {"name": call["name"], "arguments": json_dumps(call.get("args", {}))}, identity))
@@ -427,17 +452,27 @@ class StreamTranslator:
                 result.append(self.chunk({"role": "assistant"}))
                 self.started = True
         elif kind in {"response.output_text.delta", "response.refusal.delta"}:
-            result.append(self.chunk({"content" if kind == "response.output_text.delta" else "refusal": text_value(event["delta"])}))
+            field = "content" if kind == "response.output_text.delta" else "refusal"
+            key = (event.get("item_id", "_text"), event.get("content_index", 0), field)
+            value = text_value(event["delta"])
+            self.response_text[key] = self.response_text.get(key, "") + value
+            result.append(self.chunk({field: value}))
+        elif kind in {"response.output_text.done", "response.refusal.done"}:
+            field = "content" if kind == "response.output_text.done" else "refusal"
+            result.extend(self._response_complete_text(event.get("item_id", "_text"), event.get("content_index", 0), field,
+                                                     event["text" if field == "content" else "refusal"]))
         elif kind == "response.output_item.added" and event["item"].get("type") == "function_call":
-            item, index = event["item"], len(self.tools)
-            if item["id"] in self.response_tools:
+            if event["item"]["id"] in self.response_tools:
                 fail()
-            self.response_tools[item["id"]] = index
-            result.append(self.tool(index, {"name": item["name"], "arguments": item.get("arguments", "")}, item["call_id"]))
+            result.extend(self._response_complete_item(event["item"], complete=False))
+        elif kind == "response.output_item.done":
+            result.extend(self._response_complete_item(event["item"]))
         elif kind == "response.function_call_arguments.delta":
             result.append(self.tool(self.response_tools[event["item_id"]], {"arguments": text_value(event["delta"])}))
         elif kind in {"response.completed", "response.incomplete"}:
             response = object_value(event["response"])
+            for item in response.get("output", []):
+                result.extend(self._response_complete_item(item))
             if response.get("usage") is not None:
                 self.usage = token_usage(response["usage"], "openai-responses")
             if kind == "response.incomplete":
@@ -451,6 +486,37 @@ class StreamTranslator:
                 reason = "tool_calls" if self.tools else "stop"
             result.append(self.finish(reason))
             self.done = True
+        return result
+
+    def _response_complete_text(self, identity, index, field, value):
+        """Recover final-only vendor text while preventing duplicate replay."""
+        value = text_value(value)
+        key = (identity, index, field)
+        previous = self.response_text.get(key, "")
+        if not value.startswith(previous):
+            fail("The provider changed previously streamed response content.")
+        self.response_text[key] = value
+        return [self.chunk({field: value[len(previous):]})] if len(value) > len(previous) else []
+
+    def _response_complete_item(self, item, complete=True):
+        result = []
+        if item.get("type") == "function_call":
+            identity = item["id"]
+            if identity not in self.response_tools:
+                self.response_tools[identity] = len(self.tools)
+                result.append(self.tool(self.response_tools[identity], {"name": item["name"], "arguments": item.get("arguments", "")}, item["call_id"]))
+            elif complete:
+                index = self.response_tools[identity]
+                previous, arguments = self.tools[index], text_value(item.get("arguments", ""))
+                if previous["id"] != item["call_id"] or previous["name"] != item["name"] or not arguments.startswith(previous["arguments"]):
+                    fail("The provider changed a previously streamed function call.")
+                if len(arguments) > len(previous["arguments"]):
+                    result.append(self.tool(index, {"arguments": arguments[len(previous["arguments"]):]}))
+        elif item.get("type") == "message":
+            for index, part in enumerate(item.get("content", [])):
+                if part.get("type") in {"output_text", "refusal"}:
+                    field = "content" if part["type"] == "output_text" else "refusal"
+                    result.extend(self._response_complete_text(item.get("id", "_text"), index, field, part["text" if field == "content" else "refusal"]))
         return result
 
     def end(self, marker=False):

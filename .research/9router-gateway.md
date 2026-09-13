@@ -256,3 +256,85 @@ All 122 registry files are mapped below: 119 are imported by the active registry
 - [src/lib/oauth/providers/index.js](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/index.js)
 - [src/lib/oauth/providers/xiaomi-mimo.js](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/xiaomi-mimo.js)
 - [src/app/api/providers/suggested-models/filters.js](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/app/api/providers/suggested-models/filters.js)
+
+## Native account gateway implementation audit (2026-09-12)
+
+The standalone Python gateway implements four account sign-in families directly;
+it does not read another application's saved sessions or require the 9router
+engine. `model_gateway/auth.py` owns sign-in and account resolution,
+`auth_state.py` owns atomic account finalization and refresh leases, and
+`auth_transports.py` owns the provider-specific catalog and inference wires.
+`model_gateway/THIRD_PARTY_NOTICES.md` retains the pinned MIT attribution.
+
+| Account | Native sign-in | Account bootstrap | Live model discovery | Inference wire |
+| --- | --- | --- | --- | --- |
+| GitHub Copilot | GitHub OAuth device authorization; provider interval and `slow_down` handled | Exchange GitHub access token at `api.github.com/copilot_internal/v2/token` for short-lived Copilot token | `api.githubcopilot.com/models`, chat-capable entries excluding disabled policy; endpoint choice retained per model | OpenAI Chat Completions, native Anthropic `/v1/messages`, or Responses according to the selected model |
+| ChatGPT / Codex | Authorization code with PKCE S256, state and installed-app redirect validation | Account routing identifier from the trusted token endpoint's returned token claims; claims do not authenticate gateway tenants | `/backend-api/codex/models?client_version=0.144.6`; actual advertised models only, no generated review aliases | Responses with account header, `store:false`, instructions and subscription endpoint option constraints |
+| Gemini CLI | Google authorization code with PKCE S256 and offline access | `:loadCodeAssist`; explicit default tier then resumable `:onboardUser` if necessary; never invent a project | `:fetchAvailableModels`, authenticated POST with actual project | `:streamGenerateContent?alt=sse`, `{project,model,request}` wrapper and response-envelope unwrapping |
+| Kiro | AWS SSO OIDC public client registration and device authorization; Builder ID or supplied AWS access portal | Use token-returned `profileArn`, or fetch accessible profiles; no shared placeholder ARN | Regional `q.<region>.amazonaws.com/ListAvailableModels` with actual profile | Native `generateAssistantResponse`, bearer/SSO headers and verified AWS binary EventStream |
+
+The installed-app defaults are `http://localhost:1455/auth/callback` for Codex
+and `http://localhost:8085/oauth2callback` for Gemini CLI. The gateway may bind a
+bounded local listener for these paths. A browser on another computer cannot
+reach that gateway listener via its own localhost. Hosted operators need their
+own registered OAuth configuration and an approved redirect, or an explicitly
+configured tunnel/manual callback completion workflow. Arbitrary client-supplied
+redirects are rejected. Device flows do not require a loopback listener.
+
+The account API exposes provider descriptors and safe session/account summaries.
+Device codes, PKCE verifiers, registration secrets, access/refresh tokens and
+project/profile credentials remain encrypted. Session states are tenant-bound
+and expire after at most 15 minutes. Both PKCE and device exchanges acquire a
+persisted `exchanging` state before remote I/O, preventing another process from
+exchanging the same code concurrently. Finishing a session creates its account
+and destroys temporary secrets in a single SQLite transaction. Cancellation and
+expiry win that transaction; a late provider response cannot resurrect a
+cancelled sign-in.
+
+Refresh is serialized within a process and fenced by a durable lease across
+processes. A one-shot refresh after a rejected access token can include the
+failed binding's account revision, preventing concurrent stale failures from
+rotating credentials repeatedly. Disconnect uses revision checks and destroys
+local encrypted tokens. An interrupted or uncertain rotating refresh requires a
+new sign-in; the gateway does not replay a token that may already have been
+consumed. The `expires_at` field is the gateway's renewal-check timestamp; for
+providers that declare token expiry it follows that expiry, while GitHub's
+classic non-expiring OAuth token is checked on a renewal schedule. Storage I/O
+in async account workflows is dispatched to worker threads.
+
+Kiro preserves text, inline base64 images, function definitions, assistant
+function calls and matching tool results. Its native API has no dedicated
+system role: system/developer instructions are placed in a labeled instructions
+block on the first user message. The current implementation rejects forced tool
+choice, structured JSON output requests and reasoning-effort overrides instead
+of silently dropping them. It does not synthesize function IDs or repair invalid
+function JSON. A frame may contain at most 1 MiB; prelude/message CRCs, typed
+header bounds and strict JSON are validated. A clean HTTP EOF ending on a complete
+frame is a native completion boundary. Truncated frames, invalid function
+arguments, contradictory stop reasons and explicit EventStream errors fail.
+Reported token metrics are used as token counts; billing credits and context
+percentages are not converted into invented counts. Internal reasoning events
+are not exposed as answer text.
+
+The implemented account family count does **not** claim native support for every
+OAuth/web-cookie family in the upstream registry. In particular, private web
+session import, desktop credential extraction, browser impersonation and
+anti-abuse identity markers are not represented as working API-key presets.
+Those upstream families remain classified in the complete provider matrix above.
+
+Qualification uses controlled real HTTP sockets and the public management and
+inference adapters: sign-in, automatic loopback callbacks, model discovery,
+account attachment, scoped gateway keys, streaming/non-streaming inference,
+refresh and cancellation. These tests exercise the wire contracts without
+logging into a real provider account. No vendor account entitlement, free quota
+or production service availability is implied by local qualification.
+
+Additional protocol evidence:
+
+- [GitHub OAuth device flow and polling errors](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps)
+- [AWS RegisterClient](https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_RegisterClient.html), [StartDeviceAuthorization](https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_StartDeviceAuthorization.html), [CreateToken](https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
+- [Public Codex login implementation](https://github.com/openai/codex/blob/main/codex-rs/login/src/server.rs)
+- [Public Gemini CLI OAuth implementation](https://github.com/google-gemini/gemini-cli/blob/main/packages/core/src/code_assist/oauth2.ts)
+- [Pinned 9router GitHub OAuth](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/github.js), [Codex](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/codex.js), [Gemini CLI](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/gemini-cli.js), [Kiro](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/lib/oauth/providers/kiro.js)
+- [Pinned native model discovery handlers](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/src/app/api/providers/%5Bid%5D/models/route.js)
+- [Pinned Kiro EventStream executor](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/open-sse/executors/kiro.js), [Kiro request translation](https://github.com/decolua/9router/blob/17c4cc76877bd1755030a8414f8d0083f48dcccf/open-sse/translator/request/openai-to-kiro.js)

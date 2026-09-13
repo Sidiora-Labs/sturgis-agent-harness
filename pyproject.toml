@@ -1,13 +1,30 @@
 [build-system]
-requires = ["setuptools>=75"]
+requires = ["setuptools==84.0.0", "wheel==0.48.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "sturgis-core"
 version = "0.2.0"
-description = "Portable persistent agent with consumer services and isolated native memory"
+description = "Persistent agent runtime with explicit world state, action contracts and temporal memory"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+authors = [{name = "Sidiora Labs"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: C++",
+    "Operating System :: POSIX :: Linux",
+]
 requires-python = ">=3.12"
 dependencies = ["jsonschema==4.23.0", "httpx==0.28.1", "starlette==1.6.0", "uvicorn==0.52.4", "cryptography==50.0.1", "websockets==17.1"]
+
+[project.urls]
+Homepage = "https://github.com/Sidiora-Labs/sturgis-agent-harness"
+Repository = "https://github.com/Sidiora-Labs/sturgis-agent-harness"
+Documentation = "https://github.com/Sidiora-Labs/sturgis-agent-harness#documentation"
+Issues = "https://github.com/Sidiora-Labs/sturgis-agent-harness/issues"
 
 [project.scripts]
 sturgis = "consumer.cli:main"
@@ -15,12 +32,24 @@ sturgis-gateway = "model_gateway.__main__:main"
 
 [project.optional-dependencies]
 test = ["pytest==8.3.5", "pytest-asyncio==0.25.3", "coverage==7.10.7", "pytest-cov==6.0.0", "gcovr==8.3"]
+dev = ["ruff==0.16.7", "pre-commit==4.6.2", "clang-format==18.1.8", "build==1.6.1", "setuptools==84.0.0", "wheel==0.48.0"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["native/memory/vendor", "consumer/web", "documentation/developers/src/content/docs/reference/files"]
+
+[tool.ruff.lint]
+# Correctness first: syntax, invalid comparisons/control flow and undefined names.
+# Existing compact layout is tracked separately in .format-debt.json.
+select = ["E9", "F63", "F7", "F82", "F901"]
 
 [tool.setuptools.packages.find]
 include = ["agent*", "consumer*", "model_gateway*"]
 
 [tool.setuptools.package-data]
 consumer = ["web/*.html", "web/assets/*", "bin/*"]
+model_gateway = ["*.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

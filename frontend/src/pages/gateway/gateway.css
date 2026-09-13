@@ -1,5 +1,9 @@
 .gateway-page {
   max-width: 1220px;
+  --success: #14775e;
+}
+.gateway-login-story {
+  --muted: #596579;
 }
 .gateway-endpoint {
   display: flex;
@@ -825,11 +829,37 @@
   align-self: flex-start;
   margin-top: auto;
 }
+.gateway-page .st-button--secondary,
+.gateway-drawer .st-button--secondary,
+.gateway-standalone .st-button--secondary {
+  color: var(--md-sys-color-on-primary-container);
+}
+
 .gateway-native-accounts {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   padding-top: 16px;
+}
+
+.gateway-account-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+}
+.gateway-limit-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 16px;
+}
+.gateway-transfer {
+  display: grid;
+  gap: 14px;
+  padding-block: 18px 4px;
+  border-top: 1px solid var(--border);
 }
 /* Tinted containers need a little more contrast than the neutral surface. */
 .gateway-kicker,

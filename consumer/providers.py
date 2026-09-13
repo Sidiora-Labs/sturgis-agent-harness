@@ -3,11 +3,12 @@ from __future__ import annotations
 
 import asyncio
 import time
-from contextlib import asynccontextmanager
+from contextlib import aclosing, asynccontextmanager
 from urllib.parse import urlsplit
 
 from agent.protocol import CoreError, ToolCall, canonical_json, new_id
 from agent.provider_adapters import HTTPProvider
+from agent.runtime import INVOKE_SCHEMA
 from consumer.contracts import identifier, public_record
 from consumer.network import NetworkPolicy, origin
 
@@ -15,6 +16,39 @@ CONFIGS = "consumer.providers"
 PROBES = "consumer.provider_probes"
 SELECTION = "consumer.provider_selection"
 PROBE_TTL = 300
+
+
+def probe_failure(error):
+    """Explain a categorized failure without projecting upstream response text."""
+    category = error.details.get("provider_code")
+    messages = {
+        "provider_auth": "The provider rejected the API key or account. Reconnect it in Model Gateway and check model access.",
+        "provider_rate_limit": "The provider has reached its rate or quota limit. Wait a moment or choose another model.",
+        "insufficient_quota": "The provider account has no available quota or credits. Check its billing and limits.",
+        "provider_not_found": "The provider could not find this model. Refresh its model list in Model Gateway.",
+        "provider_request": "The provider rejected this model request. Check the selected model and its supported capabilities.",
+        "provider_protocol": "The model returned a stream the gateway could not read. Retry the model check; if it persists, check the gateway connection.",
+        "provider_incomplete": "The provider stopped before finishing its response. Retry the model check.",
+        "provider_unavailable": "The provider is temporarily unavailable. Retry or choose another imported model.",
+        "timeout": "The model check timed out. Retry or choose another model.",
+        "probe_incompatible": "The model did not complete the requested capability check. Retry or choose another imported model.",
+    }
+    aliases = {"authentication_error": "provider_auth", "invalid_api_key": "provider_auth",
+        "permission_error": "provider_auth", "account_reauth_required": "provider_auth",
+        "account_disconnected": "provider_auth", "credential_unavailable": "provider_auth",
+        "rate_limit_error": "provider_rate_limit", "rate_limited": "provider_rate_limit",
+        "model_not_found": "provider_not_found", "model_unavailable": "provider_not_found",
+        "invalid_request_error": "provider_request", "context_length_exceeded": "provider_request",
+        "overloaded_error": "provider_unavailable"}
+    # Only recognized categories and integer status codes can influence public text.
+    category = aliases.get(category, category) if isinstance(category, str) else None
+    if category not in messages:
+        category = aliases.get(error.code, error.code)
+    if category not in messages and error.code == "provider_http":
+        status = error.details.get("status")
+        category = {401: "provider_auth", 403: "provider_auth", 402: "insufficient_quota",
+                    404: "provider_not_found", 429: "provider_rate_limit"}.get(status) if type(status) is int else None
+    return {"code": error.code, "message": messages.get(category, "The model check failed. Retry or check this connection in Model Gateway.")}
 
 
 class _PolicyClient:
@@ -120,7 +154,7 @@ class ProviderSettings:
                 "probe": public_record(probe) if probe else None}
 
     def _adapter(self, endpoint):
-        return HTTPProvider(timeout=min(30, self.network_policy.timeout), client_factory=lambda **kwargs:
+        return HTTPProvider(timeout=min(120, self.network_policy.timeout), client_factory=lambda **kwargs:
             _PolicyClient(self.network_policy, endpoint, kwargs["timeout"]))
 
     def _probe_begin(self, provider_id, expected_revision):
@@ -146,16 +180,24 @@ class ProviderSettings:
 
     def _probe_finish(self, row, work, claim_id, *, status, error, tokens):
         # Factual consumption survives concurrent config rotation and probe rejection.
-        if tokens is not None:
-            self.core.scheduler.record_usage(self.scope, work.id, claim_id + ":tokens", {"tokens": tokens}, claim_id=claim_id)
-        current_work = self.core.scheduler.get(self.scope, work.id)
-        if current_work.value["state"] == "running":
-            self.core.scheduler.finish(self.scope, work.id, current_work.value["generation"], state="completed" if status == "ready" else "failed")
-        if current_work.value["budget_overrun"]:
-            status, error = "failed", {"code": "budget_exceeded", "message": "Probe exceeded its token allocation"}
-        self.journal.append(self.scope, "provider.probe_finished", {"provider_id": row.id,
-            "config_revision": row.revision, "work_id": work.id, "claim_id": claim_id,
-            "status": status, "error": error, "usage_reported": tokens is not None}, source="consumer.providers")
+        with self.journal.transaction():
+            if tokens is not None:
+                self.core.scheduler.record_usage(self.scope, work.id, claim_id + ":tokens", {"tokens": tokens}, claim_id=claim_id)
+            current_work = self.core.scheduler.get(self.scope, work.id)
+            if current_work.value["budget_overrun"]:
+                status, error = "failed", {"code": "budget_exceeded", "message": "Probe exceeded its token allocation"}
+            elif (current_work.value["state"] != "running" or current_work.value["revoked"]
+                    or current_work.value["generation"] != work.value["generation"]):
+                status, error = "failed", probe_failure(CoreError("authority_revoked", "Probe authority ended"))
+            if current_work.value["state"] == "running":
+                try:
+                    self.core.scheduler.finish(self.scope, work.id, work.value["generation"], state="completed" if status == "ready" else "failed")
+                except CoreError as exc:
+                    status, error = "failed", probe_failure(exc)
+                    self.core.scheduler.cancel(self.scope, work.id, reason="provider_probe_authority_lost")
+            self.journal.append(self.scope, "provider.probe_finished", {"provider_id": row.id,
+                "config_revision": row.revision, "work_id": work.id, "claim_id": claim_id,
+                "status": status, "error": error, "usage_reported": tokens is not None}, source="consumer.providers")
         with self.journal.transaction():
             current = self._config(row.id)
             self._expected(current, row.revision)
@@ -169,31 +211,80 @@ class ProviderSettings:
                 "error": error}, prior.revision if prior else 0)
         return self.inspect(row.id)
 
+    def _probe_renew(self, work, stop, deadline):
+        # Recheck inside the authority transaction: a queued thread must not renew
+        # after its caller completed, cancelled, or exhausted the inference deadline.
+        with self.journal.transaction():
+            if stop.is_set():
+                return False
+            if time.monotonic() >= deadline:
+                raise CoreError("timeout", "Provider probe deadline expired")
+            self.core.scheduler.heartbeat(self.scope, work.id, work.value["generation"])
+            return True
+
+    async def _probe_lease(self, work, stop, deadline):
+        interval = min(1., self.core.scheduler.lease_seconds / 3)
+        while await asyncio.to_thread(self._probe_renew, work, stop, deadline):
+            try:
+                await asyncio.wait_for(stop.wait(), interval)
+                return
+            except TimeoutError:
+                pass
+
     async def probe(self, provider_id, expected_revision):
         row, work, claim_id = await asyncio.to_thread(self._probe_begin, provider_id, expected_revision)
-        descriptor = {**row.value, "output_limit": min(row.value["output_limit"], 128)}
+        descriptor = {**row.value, "output_limit": min(row.value["output_limit"], 1024 if row.value["tools"] else 128)}
         tokens, terminal, proposal, error = None, None, False, None
-        try:
+        stop, cancel = asyncio.Event(), asyncio.Event()
+        deadline = time.monotonic() + min(120, self.network_policy.timeout)
+
+        async def exchange():
+            nonlocal tokens, terminal, proposal
             credential = await asyncio.to_thread(self.vault.resolve, self.scope, row.value["credential_ref"]) if row.value["credential_ref"] else None
             call = ToolCall("consumer.probe", {}).as_dict()
             messages = [{"role": "user", "content": "Reply with OK." if not row.value["tools"] else
                 "Call invoke exactly once with these arguments: " + canonical_json(call)}]
-            tools = [{"type": "function", "function": {"name": "invoke", "description": "Validate tool transport without executing an action", "parameters": {"type": "object"}}}] if row.value["tools"] else None
-            async for event in self._adapter(row.value["endpoint"]).stream(descriptor, messages, tools=tools, credential=credential):
-                if event.kind == "usage":
-                    tokens = event.data["total_tokens"]
-                elif event.kind == "terminal":
-                    terminal = event.data["status"]
-                elif event.kind == "tool":
-                    proposal = event.data["call"] == call
+            tools = INVOKE_SCHEMA if row.value["tools"] else None
+            async with aclosing(self._adapter(row.value["endpoint"]).stream(
+                    descriptor, messages, tools=tools, credential=credential, cancel=cancel)) as stream:
+                async for event in stream:
+                    if event.kind == "usage":
+                        tokens = event.data["total_tokens"]
+                    elif event.kind == "terminal":
+                        terminal = event.data["status"]
+                    elif event.kind == "tool":
+                        proposal = event.data["call"] == call
             if terminal != "completed" or row.value["tools"] and not proposal:
                 raise CoreError("probe_incompatible", "Provider did not demonstrate the configured response capability")
+
+        async def bounded_exchange():
+            inference = asyncio.create_task(exchange(), name="consumer:provider-probe:" + work.id)
+            lease = asyncio.create_task(self._probe_lease(work, stop, deadline), name="consumer:provider-probe-lease:" + work.id)
+            try:
+                done, _ = await asyncio.wait((inference, lease), timeout=max(0., deadline - time.monotonic()),
+                                             return_when=asyncio.FIRST_COMPLETED)
+                if not done:
+                    raise CoreError("timeout", "Provider probe deadline expired")
+                if lease in done:
+                    await lease
+                    raise CoreError("authority_revoked", "Provider probe lease ended")
+                await inference
+            finally:
+                stop.set(); cancel.set()
+                if not inference.done():
+                    inference.cancel()
+                # Do not cancel a heartbeat's to_thread call: join it so no renewal
+                # can survive the returned probe or race its final settlement.
+                await asyncio.gather(inference, lease, return_exceptions=True)
+
+        try:
+            await bounded_exchange()
         except asyncio.CancelledError:
             await asyncio.shield(asyncio.to_thread(self._probe_finish, row, work, claim_id,
                 status="failed", error={"code": "cancelled", "message": "Provider probe was cancelled"}, tokens=tokens))
             raise
         except CoreError as exc:
-            error = {"code": exc.code, "message": "Provider probe failed"}
+            error = probe_failure(exc)
         except Exception:
             error = {"code": "provider_error", "message": "Provider probe failed"}
         return await asyncio.to_thread(self._probe_finish, row, work, claim_id,

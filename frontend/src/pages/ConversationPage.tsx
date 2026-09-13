@@ -149,10 +149,12 @@ export default function ConversationPage({
   const [archiving, setArchiving] = useState(false);
   const room =
     rooms.data?.items.find((r) => r.id === selected) || rooms.data?.items[0];
-  const { events, connection } = useEvents(
-    agentId,
-    available ? room?.id || null : null,
-  );
+  const {
+    events,
+    connection,
+    loading: historyLoading,
+    error: historyError,
+  } = useEvents(agentId, room?.id || null, { enabled: available });
   useEffect(() => onConnection(connection), [connection, onConnection]);
   const messages = useMemo(() => messagesFrom(events), [events]);
   const scroll = useRef<HTMLDivElement>(null);
@@ -235,7 +237,9 @@ export default function ConversationPage({
           <div className="runtime-notice" role="status">
             <span>
               {runtime.error?.message ||
-                `Your agent is ${runtime.data?.observed || "unavailable"}. Your draft stays here.`}
+                (runtime.data?.private_queries_paused
+                  ? "Conversation updates are paused. Your loaded messages and draft stay here."
+                  : `Your agent is ${runtime.data?.observed || "unavailable"}. Your draft stays here.`)}
             </span>
             {runtime.data?.desired === "suspended" ? (
               <Button
@@ -269,6 +273,16 @@ export default function ConversationPage({
             )}
           </div>
         )}
+        {historyError && available && (
+          <div className="runtime-notice" role="alert">
+            <span>
+              {historyError}{" "}
+              {messages.length
+                ? "Showing loaded messages while reconnecting."
+                : "Reconnecting to load your saved messages."}
+            </span>
+          </div>
+        )}
         <div
           className="message-scroll"
           role="region"
@@ -288,15 +302,16 @@ export default function ConversationPage({
               messages.map((message) => (
                 <MessageBubble key={message.id} message={message} />
               ))
-            ) : rooms.isPending ||
-              (available && room && connection !== "live") ? (
+            ) : rooms.isPending || (room && historyLoading) ? (
               <div
                 className="stack py-12"
                 role="status"
                 aria-label="Opening conversation"
               >
                 <span className="muted text-sm">
-                  Opening your conversation…
+                  {available
+                    ? "Opening your conversation…"
+                    : "Waiting to load conversation history…"}
                 </span>
                 <Skeleton className="h-5 w-3/4" />
                 <Skeleton className="h-5 w-1/2" />

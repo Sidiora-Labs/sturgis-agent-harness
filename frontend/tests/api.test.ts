@@ -3,6 +3,7 @@ import {
   api,
   ApiError,
   command,
+  configureApiSession,
   decodeText,
   downloadBody,
   fileBase64,
@@ -17,9 +18,52 @@ const response = (
 ) => new Response(JSON.stringify({ version, data, error }), { status });
 afterEach(() => {
   document.cookie = "sturgis_csrf=; Max-Age=0; path=/";
+  document.cookie = "sturgis_gateway_csrf=; Max-Age=0; path=/";
+  configureApiSession("consumer");
 });
 
 describe("consumer API requests", () => {
+  it("keeps standalone and consumer CSRF cookies independent when both share a host", async () => {
+    document.cookie = "sturgis_csrf=consumer%20token; path=/";
+    document.cookie = "sturgis_gateway_csrf=gateway%20token; path=/";
+    const fetcher = vi
+      .fn()
+      .mockImplementation(async () => response({ ok: true }));
+    vi.stubGlobal("fetch", fetcher);
+    // Gateway paths embedded in the consumer still use the consumer session.
+    await api("/gateway/settings", { expected_revision: 0 });
+    expect(fetcher.mock.calls[0][1].headers["X-CSRF-Token"]).toBe(
+      "consumer token",
+    );
+    configureApiSession("gateway");
+    await api("/gateway/settings", { expected_revision: 0 });
+    expect(fetcher.mock.calls[1][1].headers["X-CSRF-Token"]).toBe(
+      "gateway token",
+    );
+    document.cookie = "sturgis_gateway_csrf=; Max-Age=0; path=/";
+    await api("/gateway/session", {}, { method: "DELETE" });
+    expect(fetcher.mock.calls[2][1].headers["X-CSRF-Token"]).toBe("");
+    configureApiSession("consumer");
+    await api("/agents/id", { name: "still signed in" }, { method: "PATCH" });
+    expect(fetcher.mock.calls[3][1].headers["X-CSRF-Token"]).toBe(
+      "consumer token",
+    );
+  });
+
+  it("accepts the standalone envelope only within the gateway API boundary", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockImplementation(async () =>
+          response({ ok: true }, 200, "gateway/1"),
+        ),
+    );
+    expect(await api("/gateway/status")).toEqual({ ok: true });
+    await expect(api("/agents")).rejects.toMatchObject({
+      code: "version_mismatch",
+    });
+  });
   it("uses cookie auth, CSRF on writes and stable explicit request IDs without caller authority", async () => {
     document.cookie = "sturgis_csrf=encoded%20token; path=/";
     const fetcher = vi

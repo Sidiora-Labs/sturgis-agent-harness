@@ -1,0 +1,35 @@
+name: Set up Sturgis development dependencies
+description: Install the same Python, Node, native and documentation tools used locally.
+inputs:
+  browsers:
+    description: Install Chromium and its Linux libraries for browser verification.
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version-file: .python-version
+        cache: pip
+        cache-dependency-path: |
+          pyproject.toml
+          documentation/requirements.txt
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version-file: .node-version
+        cache: npm
+        cache-dependency-path: |
+          package-lock.json
+          documentation/package-lock.json
+    - name: Install native build and isolation tools
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install --yes --no-install-recommends build-essential cmake libsqlite3-dev bubblewrap util-linux shellcheck
+    - name: Install locked project dependencies
+      shell: bash
+      run: make bootstrap
+    - name: Install browser dependencies
+      if: inputs.browsers == 'true'
+      shell: bash
+      run: npx --no-install playwright install --with-deps chromium

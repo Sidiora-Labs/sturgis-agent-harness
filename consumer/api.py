@@ -108,11 +108,13 @@ class ConsumerControl:
             raise
 
     async def start(self):
+        await self.gateway.service.start()
         await self.portability.recover()
         await self.lifecycle.start()
 
     async def close(self):
         await self.lifecycle.close()
+        await self.gateway.service.close()
         await asyncio.to_thread(self.journal.close)
 
     def security(self, request):

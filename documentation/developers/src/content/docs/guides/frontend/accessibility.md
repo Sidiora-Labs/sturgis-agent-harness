@@ -17,6 +17,8 @@ Buttons show pending state and avoid double submission. Empty collections explai
 
 The responsive shell keeps navigation usable on narrow screens through a modal sheet. Motion respects reduced-motion preferences. Code blocks, filenames and long messages should remain readable without forcing horizontal page overflow. Color alone must not carry success, error or current selection.
 
+Shared notifications in `frontend/src/App.tsx` retain full opacity during their 160 ms vertical entrance and exit. Their text must remain readable throughout the animation; fading an otherwise compliant foreground/background pair can temporarily reduce contrast. Success notifications use `role="status"`, errors use `role="alert"`, and each notification has a labeled dismiss button. Inspect actual animation frames when validating a notification change.
+
 ## Evidence
 
 Component and page tests check real behavior and request shapes. The browser journey exercises the built client against the actual service, including desktop/mobile paths and accessibility inspection. Coverage alone cannot establish focus correctness or contrast, so inspect both the automated findings and real browser interaction.
@@ -27,6 +29,7 @@ See [frontend structure](structure.md), [data states](data-events.md) and [quali
 
 ## Implementation sources
 
+- [frontend/src/App.tsx](/reference/files/frontend/src/App.tsx/)
 - [frontend/src/components/ui.tsx](/reference/files/frontend/src/components/ui.tsx/)
 - [frontend/src/components/Shell.tsx](/reference/files/frontend/src/components/Shell.tsx/)
 - [frontend/src/components/components.css](/reference/files/frontend/src/components/components.css/)
@@ -39,4 +42,3 @@ See [frontend structure](structure.md), [data states](data-events.md) and [quali
 - [tests/consumer_web/journey.mjs](/reference/files/tests/consumer_web/journey.mjs/)
 
 [Developer manual](../index.md)
-

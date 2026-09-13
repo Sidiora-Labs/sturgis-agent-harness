@@ -10,11 +10,17 @@ export class ApiError extends Error {
   }
 }
 export const requestId = () => crypto.randomUUID();
+let csrfCookie = "sturgis_csrf";
+/** Separate independently hosted dashboards even when they share a hostname. */
+export function configureApiSession(audience: "consumer" | "gateway") {
+  csrfCookie = audience === "gateway" ? "sturgis_gateway_csrf" : "sturgis_csrf";
+}
 function csrf(): string {
+  const prefix = csrfCookie + "=";
   const value = document.cookie
     .split("; ")
-    .find((part) => part.startsWith("sturgis_csrf="));
-  return value ? decodeURIComponent(value.slice("sturgis_csrf=".length)) : "";
+    .find((part) => part.startsWith(prefix));
+  return value ? decodeURIComponent(value.slice(prefix.length)) : "";
 }
 export async function api<T>(
   path: string,

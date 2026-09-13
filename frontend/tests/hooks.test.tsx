@@ -50,20 +50,30 @@ it("event replay deduplicates, advances cursor, reconnects and cancels obsolete 
     ({ conversation }) => useEvents("agent-a", conversation),
     { initialProps: { conversation: null as string | null } },
   );
-  expect(hook.result.current).toEqual({ events: [], connection: "idle" });
+  expect(hook.result.current).toEqual({
+    events: [],
+    connection: "idle",
+    loading: false,
+    error: null,
+  });
   hook.rerender({ conversation: "conversation-a" });
   await flush();
   expect(hook.result.current.events).toEqual([one]);
-  expect(hook.result.current.connection).toBe("live");
+  expect(hook.result.current.connection).toBe("idle");
+  expect(hook.result.current.loading).toBe(true);
   await act(async () => {
     await vi.advanceTimersByTimeAsync(1);
   });
   expect(hook.result.current.events).toEqual([one, two]);
+  expect(hook.result.current.loading).toBe(false);
+  expect(hook.result.current.connection).toBe("live");
   expect(fetcher.mock.calls[1][0]).toContain("after=1");
   await act(async () => {
     await vi.advanceTimersByTimeAsync(20);
   });
   expect(hook.result.current.connection).toBe("reconnecting");
+  expect(hook.result.current.events).toEqual([one, two]);
+  expect(hook.result.current.error).toBe("Disconnected");
   await act(async () => {
     await vi.advanceTimersByTimeAsync(1200);
   });
@@ -74,7 +84,12 @@ it("event replay deduplicates, advances cursor, reconnects and cancels obsolete 
   await act(async () =>
     late(reply({ items: [two], cursor: 3, has_more: false })),
   );
-  expect(hook.result.current).toEqual({ events: [], connection: "idle" });
+  expect(hook.result.current).toEqual({
+    events: [],
+    connection: "idle",
+    loading: false,
+    error: null,
+  });
   hook.unmount();
 });
 
@@ -105,6 +120,96 @@ it("empty replay remains live and an aborted rejected request never schedules a 
   expect(fetcher).toHaveBeenCalledTimes(2);
 });
 
+it("switching saved rooms resets readiness, drains empty history pages and resumes a paused cursor without losing messages", async () => {
+  vi.useFakeTimers();
+  const first = {
+    id: "first",
+    cursor: 10,
+    kind: "user.prompt",
+    payload: { text: "Saved first room" },
+  };
+  const second = {
+    id: "second",
+    cursor: 30,
+    kind: "user.prompt",
+    payload: { text: "Saved second room" },
+  };
+  let obsolete: (response: Response) => void = () => {};
+  const fetcher = vi
+    .fn()
+    .mockResolvedValueOnce(
+      reply({ items: [first], cursor: 10, has_more: false }),
+    )
+    .mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          obsolete = resolve;
+        }),
+    )
+    .mockResolvedValueOnce(reply({ items: [], cursor: 20, has_more: true }))
+    .mockResolvedValueOnce(
+      reply({ items: [second], cursor: 30, has_more: false }),
+    )
+    .mockResolvedValueOnce(
+      reply({ items: [second], cursor: 30, has_more: false }),
+    )
+    .mockResolvedValueOnce(
+      reply({ items: [first], cursor: 10, has_more: false }),
+    );
+  vi.stubGlobal("fetch", fetcher);
+  const hook = renderHook(
+    ({ conversation, enabled }) =>
+      useEvents("agent", conversation, { enabled }),
+    {
+      initialProps: { conversation: "first", enabled: true },
+    },
+  );
+  await flush();
+  expect(hook.result.current.events).toEqual([first]);
+  expect(hook.result.current.loading).toBe(false);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(20);
+  });
+  const obsoleteSignal = fetcher.mock.calls[1][1].signal as AbortSignal;
+  hook.rerender({ conversation: "second", enabled: true });
+  expect(hook.result.current.events).toEqual([]);
+  expect(hook.result.current.loading).toBe(true);
+  expect(hook.result.current.connection).toBe("idle");
+  expect(obsoleteSignal.aborted).toBe(true);
+  await flush();
+  expect(hook.result.current.loading).toBe(true);
+  expect(hook.result.current.connection).toBe("idle");
+  expect(fetcher.mock.calls[2][0]).toContain("conversation_id=second&after=0");
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(1);
+  });
+  expect(fetcher.mock.calls[3][0]).toContain("after=20");
+  expect(hook.result.current.events).toEqual([second]);
+  expect(hook.result.current.loading).toBe(false);
+  await act(async () =>
+    obsolete(reply({ items: [first], cursor: 40, has_more: false })),
+  );
+  expect(hook.result.current.events).toEqual([second]);
+  hook.rerender({ conversation: "second", enabled: false });
+  expect(hook.result.current.events).toEqual([second]);
+  expect(hook.result.current.connection).toBe("idle");
+  expect((fetcher.mock.calls[3][1].signal as AbortSignal).aborted).toBe(true);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(5000);
+  });
+  expect(fetcher).toHaveBeenCalledTimes(4);
+  hook.rerender({ conversation: "second", enabled: true });
+  await flush();
+  expect(fetcher.mock.calls[4][0]).toContain("conversation_id=second&after=30");
+  expect(hook.result.current.events).toEqual([second]);
+  hook.rerender({ conversation: "first", enabled: true });
+  expect(hook.result.current.loading).toBe(true);
+  await flush();
+  expect(fetcher.mock.calls[5][0]).toContain("conversation_id=first&after=0");
+  expect(hook.result.current.events).toEqual([first]);
+  hook.unmount();
+});
+
 function wrapper(agentId = "agent-a", notify = vi.fn()) {
   const client = new QueryClient({
     defaultOptions: { queries: { retry: false, gcTime: 0 } },
@@ -119,21 +224,19 @@ function wrapper(agentId = "agent-a", notify = vi.fn()) {
   return { Wrapper, client, notify };
 }
 it("agent queries have agent-specific keys, pass cancellation and can be disabled", async () => {
-  const fetcher = vi
-    .fn()
-    .mockImplementation(async (url: string) =>
-      reply(
-        url.endsWith("/agents/agent-a")
-          ? {
-              runtime: {
-                agent_id: "agent-a",
-                desired: "running",
-                observed: "running",
-              },
-            }
-          : { objective: "Read evidence" },
-      ),
-    );
+  const fetcher = vi.fn().mockImplementation(async (url: string) =>
+    reply(
+      url.endsWith("/agents/agent-a")
+        ? {
+            runtime: {
+              agent_id: "agent-a",
+              desired: "running",
+              observed: "running",
+            },
+          }
+        : { objective: "Read evidence" },
+    ),
+  );
   vi.stubGlobal("fetch", fetcher);
   const { Wrapper, client } = wrapper();
   const hook = renderHook(

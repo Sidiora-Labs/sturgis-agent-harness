@@ -13,12 +13,14 @@ import AgentGatewayModel from "../src/pages/gateway/AgentGatewayModel";
 import App from "../src/App";
 import StandaloneGateway from "../src/pages/gateway/StandaloneGateway";
 import NativeAuthDialog from "../src/pages/gateway/NativeAuthDialog";
+import { useAgentQuery } from "../src/hooks/useAgent";
 import type {
   GatewayConnection,
   GatewayKey,
   GatewayModel,
   GatewayPreset,
   GatewayRoute,
+  Provider,
 } from "../src/lib/types";
 import { mountPage } from "./harness";
 const model = (id: string): GatewayModel => ({
@@ -349,6 +351,10 @@ it("edits secured connections without reentering a key, refreshes and disconnect
     },
   });
   await screen.findByRole("heading", { name: "My Groq" });
+  expect(screen.getByText("Models imported")).toBeTruthy();
+  expect(
+    screen.queryByText("Models ready to use through your gateway."),
+  ).toBeNull();
   await click("Edit");
   expect((screen.getByLabelText("API key") as HTMLInputElement).required).toBe(
     false,
@@ -533,7 +539,7 @@ it("agent model selection only binds a gateway model and surfaces failed probes"
       "POST /agents/agent/gateway-model": (params) => {
         expect(params).toEqual({ model: "alpha" });
         if (fail) throw new Error("Gateway probe failed. Check the provider.");
-        return {};
+        return { tools: true };
       },
     },
   );
@@ -542,16 +548,183 @@ it("agent model selection only binds a gateway model and surfaces failed probes"
   expect(open).toHaveBeenCalledOnce();
   await click("Use model");
   await screen.findByRole("alert");
+  expect(screen.getByText("Could not use Alpha model")).toBeTruthy();
+  expect(
+    screen.getByText("Gateway probe failed. Check the provider."),
+  ).toBeTruthy();
   fail = false;
-  await click("Use model");
+  await click("Retry");
   await waitFor(() =>
     expect(page.notify).toHaveBeenCalledWith(
-      "Gateway model selected. Your agent is ready.",
+      "Gateway model selected. Chat and tools are ready.",
     ),
   );
   expect(
     page.calls.filter((call) => call.method.startsWith("providers.")).length,
   ).toBe(0);
+});
+
+it("identifies the failed model, shows check progress and refreshes agent state before a scoped retry", async () => {
+  let overviewReads = 0,
+    attempts = 0;
+  let failCheck: (error: Error) => void = () => {};
+  function ObservedModelSettings() {
+    const overview = useAgentQuery<{ provider_settings: Provider[] }>(
+      "overview",
+    );
+    return (
+      <AgentGatewayModel providers={overview.data?.provider_settings || []} />
+    );
+  }
+  const page = mountPage(<ObservedModelSettings />, {
+    overview: () => {
+      overviewReads += 1;
+      return { provider_settings: [] };
+    },
+    "GET /gateway/models": () => [model("alpha"), model("beta")],
+    "POST /agents/agent/gateway-model": (params) => {
+      expect(params).toEqual({ model: "alpha" });
+      attempts += 1;
+      if (attempts === 1)
+        return new Promise((_resolve, reject) => {
+          failCheck = reject;
+        });
+      return { tools: true };
+    },
+  });
+  await screen.findByRole("heading", { name: "Alpha model" });
+  await waitFor(() => expect(overviewReads).toBeGreaterThan(0));
+  const previousReads = overviewReads;
+  const alpha = within(
+    screen.getByRole("heading", { name: "Alpha model" }).closest("article")!,
+  );
+  const beta = within(
+    screen.getByRole("heading", { name: "Beta model" }).closest("article")!,
+  );
+  await userEvent.click(alpha.getByRole("button", { name: "Use model" }));
+  expect(
+    alpha
+      .getByRole("button", { name: "Checking model…" })
+      .hasAttribute("disabled"),
+  ).toBe(true);
+  expect(
+    beta.getByRole("button", { name: "Use model" }).hasAttribute("disabled"),
+  ).toBe(true);
+  expect(page.notify).not.toHaveBeenCalled();
+  failCheck(new Error("The provider timed out. Retry this model."));
+  const error = await alpha.findByRole("alert");
+  expect(error.textContent).toContain("Could not use Alpha model");
+  expect(error.textContent).toContain(
+    "The provider timed out. Retry this model.",
+  );
+  expect(beta.queryByRole("alert")).toBeNull();
+  await waitFor(() => expect(overviewReads).toBeGreaterThan(previousReads));
+  expect(page.notify).not.toHaveBeenCalled();
+  await userEvent.click(await alpha.findByRole("button", { name: "Retry" }));
+  await waitFor(() =>
+    expect(page.notify).toHaveBeenCalledWith(
+      "Gateway model selected. Chat and tools are ready.",
+    ),
+  );
+  expect(alpha.queryByRole("alert")).toBeNull();
+  expect(attempts).toBe(2);
+});
+
+it("identifies chat-only fallback and retries the selected model before reporting tools ready", async () => {
+  let active: Provider | undefined;
+  let attempts = 0;
+  let completeToolCheck: (provider: Provider) => void = () => {};
+  function ObservedModelSettings() {
+    const overview = useAgentQuery<{ provider_settings: Provider[] }>(
+      "overview",
+    );
+    return (
+      <AgentGatewayModel providers={overview.data?.provider_settings || []} />
+    );
+  }
+  const page = mountPage(<ObservedModelSettings />, {
+    overview: () => ({ provider_settings: active ? [active] : [] }),
+    "GET /gateway/models": () => [model("alpha"), model("beta")],
+    "POST /agents/agent/gateway-model": (params) => {
+      expect(params).toEqual({ model: "alpha" });
+      attempts += 1;
+      if (attempts === 1) {
+        active = {
+          id: "gateway",
+          revision: 1,
+          model: "alpha",
+          endpoint: "http://127.0.0.1/model-gateway/v1/chat/completions",
+          context_limit: 8192,
+          output_limit: 1024,
+          tools: false,
+          credential_ref: "gateway-key",
+          ready: true,
+          active: true,
+        };
+        return active;
+      }
+      return new Promise<Provider>((resolve) => {
+        completeToolCheck = resolve;
+      });
+    },
+  });
+  const alpha = within(
+    (await screen.findByRole("heading", { name: "Alpha model" })).closest(
+      "article",
+    )!,
+  );
+  const beta = within(
+    screen.getByRole("heading", { name: "Beta model" }).closest("article")!,
+  );
+  await userEvent.click(alpha.getByRole("button", { name: "Use model" }));
+  await screen.findByText("Chat only");
+  expect(screen.queryByText("Chat and tools")).toBeNull();
+  expect(
+    screen.getByText(
+      /This model can reply, but tool use has not been verified/,
+    ),
+  ).toBeTruthy();
+  expect(alpha.getByText("Selected")).toBeTruthy();
+  await waitFor(() =>
+    expect(page.notify).toHaveBeenCalledWith(
+      "Gateway model selected for chat only. Tool use is not verified.",
+    ),
+  );
+  await userEvent.click(
+    alpha.getByRole("button", { name: "Retry tool check" }),
+  );
+  expect(attempts).toBe(2);
+  expect(
+    alpha
+      .getByRole("button", { name: "Checking model…" })
+      .hasAttribute("disabled"),
+  ).toBe(true);
+  expect(
+    beta.getByRole("button", { name: "Use model" }).hasAttribute("disabled"),
+  ).toBe(true);
+  expect(screen.getByText("Chat only")).toBeTruthy();
+  expect(page.notify).toHaveBeenCalledTimes(1);
+  active = { ...active!, revision: 2, tools: true };
+  completeToolCheck(active);
+  await screen.findByText("Chat and tools");
+  expect(screen.queryByText("Chat only")).toBeNull();
+  expect(
+    screen.queryByText(
+      /This model can reply, but tool use has not been verified/,
+    ),
+  ).toBeNull();
+  expect(alpha.queryByRole("button", { name: "Retry tool check" })).toBeNull();
+  expect(alpha.getByText("Selected")).toBeTruthy();
+  await waitFor(() =>
+    expect(page.notify).toHaveBeenLastCalledWith(
+      "Gateway model selected. Chat and tools are ready.",
+    ),
+  );
+  expect(
+    page.calls
+      .filter((call) => call.method === "POST /agents/agent/gateway-model")
+      .map((call) => call.params),
+  ).toEqual([{ model: "alpha" }, { model: "alpha" }]);
 });
 
 it("standalone dashboard authenticates with an ephemeral administrator key and clears metadata on logout", async () => {
@@ -909,4 +1082,428 @@ it("retains route and key forms on rejected operations and never stores a failed
   );
   await userEvent.keyboard("{Escape}");
   expect(screen.queryByDisplayValue("one-time-key")).toBeNull();
+});
+
+it("manual model imports declare their mode and supported native account options stay optional", async () => {
+  const page = gateway({ "POST connections": () => connection() });
+  await screen.findByRole("button", { name: "Connect Custom" });
+  await click("Connect Custom");
+  fill("Endpoint", "https://private.example.com/v1");
+  await userEvent.click(screen.getByText("Advanced: add a model ID"));
+  fill("Model ID", "private-model");
+  await click("Add model ID");
+  await click("Connect provider");
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(
+    page.calls.find(
+      (call) => call.path === "connections" && call.method === "POST",
+    )?.body,
+  ).toMatchObject({ catalog_mode: "manual", models: ["private-model"] });
+});
+
+it("passes only explicitly filled advanced sign-in options and permits cancelling before authorization", async () => {
+  const close = vi.fn();
+  const provider = {
+    ...authProvider,
+    id: "kiro",
+    name: "Kiro",
+    options: ["region", "start_url", "project_id", "unsupported"],
+  };
+  const page = mountPage(
+    <NativeAuthDialog
+      accountId="owner"
+      provider={provider}
+      onConnected={vi.fn()}
+      onClose={close}
+    />,
+    {
+      "POST /gateway/auth/start": () => ({
+        ...authSession,
+        status: "failed",
+        error_code: "not_eligible",
+      }),
+    },
+  );
+  await userEvent.click(screen.getByText("Advanced account options"));
+  fill("AWS region", " eu-west-1 ");
+  fill("AWS access portal URL", " ");
+  await click("Continue with Kiro");
+  await screen.findByText(
+    "Sign-in could not finish (not_eligible). Start again or check your provider account.",
+  );
+  expect(
+    page.calls.find((call) => call.method === "POST /gateway/auth/start")
+      ?.params.options,
+  ).toEqual({ region: "eu-west-1" });
+  await click("Cancel");
+  expect(close).toHaveBeenCalledOnce();
+});
+
+it("keeps missing provider usage distinct from zero tokens", async () => {
+  gateway({
+    "GET usage": () => ({
+      requests: 1,
+      total_tokens: 0,
+      failures: 0,
+      unreported: 1,
+      input_tokens: 0,
+      output_tokens: 0,
+      recent: [
+        { model: "alpha", status: "completed", tokens: null, created_at: 1 },
+      ],
+    }),
+  });
+  await screen.findByRole("button", { name: "Connect Groq" });
+  await userEvent.click(screen.getByRole("tab", { name: "Access & usage" }));
+  await screen.findByText("Usage not reported");
+  expect(
+    screen.getByText(
+      "Usage is missing for 1 provider requests. Totals include reported usage only.",
+    ),
+  ).toBeTruthy();
+});
+
+const gatewaySettings = {
+  revision: 0,
+  request_timeout: 30,
+  max_concurrency: 4,
+  requests_per_minute: 120,
+  operator_limits: { request_timeout: 30, max_concurrency: 4 },
+};
+const configuration = {
+  format: "sturgis-gateway-config/1",
+  created_at: 1,
+  credentials_included: false,
+  connections: [{ id: "old" }],
+  routes: [],
+  settings: gatewaySettings,
+};
+async function openControls() {
+  await screen.findByRole("button", { name: "Connect Groq" });
+  await userEvent.click(screen.getByRole("tab", { name: "Access & usage" }));
+  await userEvent.click(
+    screen.getByText("Advanced: limits & configuration transfer"),
+  );
+  await screen.findByLabelText("Request timeout (seconds)");
+}
+function importFile(
+  body: string,
+  options: { size?: number; failure?: boolean } = {},
+) {
+  const file = new File([body], "gateway.json", { type: "application/json" });
+  Object.defineProperty(file, "text", {
+    value: options.failure
+      ? () => Promise.reject(new Error("The file could not be read."))
+      : () => Promise.resolve(body),
+  });
+  if (options.size)
+    Object.defineProperty(file, "size", { value: options.size });
+  fireEvent.change(screen.getByLabelText("Import configuration file"), {
+    target: { files: [file] },
+  });
+}
+
+it("saves gateway limits with their revision and preserves inputs on conflicts", async () => {
+  let fail = true;
+  let current = { ...gatewaySettings };
+  const page = gateway({
+    "GET settings": () => current,
+    "POST settings": (body) => {
+      if (fail) throw new Error("Settings changed. Reload and try again.");
+      current = {
+        ...current,
+        request_timeout: Number(body.request_timeout),
+        revision: 1,
+      };
+      return current;
+    },
+  });
+  await openControls();
+  fill("Request timeout (seconds)", "15");
+  fill("Concurrent requests", "2");
+  fill("Requests per minute", "60");
+  await click("Save gateway limits");
+  await screen.findByText("Settings changed. Reload and try again.");
+  expect(
+    (screen.getByLabelText("Request timeout (seconds)") as HTMLInputElement)
+      .value,
+  ).toBe("15");
+  fail = false;
+  await click("Save gateway limits");
+  await screen.findByText("Gateway limits saved.");
+  expect(
+    page.calls.find(
+      (call) => call.path === "settings" && call.method === "POST",
+    )?.body,
+  ).toEqual({
+    expected_revision: 0,
+    request_timeout: 15,
+    max_concurrency: 2,
+    requests_per_minute: 60,
+  });
+});
+
+it("downloads credential-free metadata directly without persisting the export", async () => {
+  const page = gateway({
+    "GET settings": () => gatewaySettings,
+    "GET export": () => configuration,
+  });
+  const create = vi.fn(() => "blob:gateway-export"),
+    revoke = vi.fn();
+  Object.defineProperty(URL, "createObjectURL", {
+    configurable: true,
+    value: create,
+  });
+  Object.defineProperty(URL, "revokeObjectURL", {
+    configurable: true,
+    value: revoke,
+  });
+  const anchor = vi
+    .spyOn(HTMLAnchorElement.prototype, "click")
+    .mockImplementation(() => {});
+  await openControls();
+  await click("Download configuration");
+  await screen.findByText(
+    "Configuration downloaded. Provider credentials and app keys are excluded.",
+  );
+  expect(create).toHaveBeenCalledOnce();
+  expect(anchor).toHaveBeenCalledOnce();
+  expect(revoke).toHaveBeenCalledWith("blob:gateway-export");
+  expect(
+    page.client
+      .getQueryCache()
+      .findAll()
+      .some((query) => query.queryKey.includes("export")),
+  ).toBe(false);
+  expect(page.client.getMutationCache().getAll()).toHaveLength(0);
+});
+
+it("confirms configuration import, keeps failed imports retryable, and explains remapped authority", async () => {
+  let fail = true;
+  const page = gateway({
+    "GET settings": () => gatewaySettings,
+    "POST import": () => {
+      if (fail) throw new Error("A provider preset is unavailable.");
+      return {
+        imported_connections: 1,
+        imported_routes: 0,
+        reconnection_required: true,
+        settings_applied: false,
+      };
+    },
+  });
+  await openControls();
+  importFile(JSON.stringify(configuration));
+  await screen.findByRole("dialog", { name: "Import gateway configuration?" });
+  expect(page.calls.some((call) => call.path === "import")).toBe(false);
+  await click("Cancel import");
+  expect(screen.queryByRole("dialog")).toBeNull();
+  importFile(JSON.stringify(configuration));
+  await screen.findByRole("dialog");
+  await userEvent.keyboard("{Escape}");
+  expect(screen.queryByRole("dialog")).toBeNull();
+  importFile(JSON.stringify(configuration));
+  await screen.findByRole("dialog");
+  await click("Import configuration");
+  await screen.findByText("A provider preset is unavailable.");
+  expect(screen.getByRole("dialog")).toBeTruthy();
+  fail = false;
+  await click("Import configuration");
+  await screen.findByText(
+    "Imported 1 connections and 0 routes. Reconnect each provider, copy its new model IDs, and create app keys. Gateway limits were not changed.",
+  );
+  expect(screen.queryByRole("dialog")).toBeNull();
+  expect(page.calls.find((call) => call.path === "import")?.body).toEqual({
+    archive: configuration,
+  });
+});
+
+it("rejects invalid, oversized and unreadable transfers and reports download failures", async () => {
+  const page = gateway({
+    "GET settings": () => gatewaySettings,
+    "GET export": () => {
+      throw new Error("Export unavailable. Try again.");
+    },
+  });
+  await openControls();
+  await click("Download configuration");
+  await screen.findByText("Export unavailable. Try again.");
+  importFile("not-json");
+  await screen.findByText(
+    "This file is not valid JSON. Choose a gateway configuration export.",
+  );
+  importFile(JSON.stringify({ ...configuration, credentials_included: true }));
+  await screen.findByText(
+    "Choose a credential-free Sturgis gateway configuration export.",
+  );
+  importFile("{}", { size: 2 * 1024 * 1024 + 1 });
+  await screen.findByText("Choose a gateway configuration file up to 2 MiB.");
+  importFile("{}", { failure: true });
+  await screen.findByText("The file could not be read.");
+  expect(page.calls.some((call) => call.path === "import")).toBe(false);
+  fireEvent.change(screen.getByLabelText("Import configuration file"), {
+    target: { files: [] },
+  });
+});
+
+it("disconnects a native account only after confirmation and checks its revision", async () => {
+  let connected = true,
+    fail = true;
+  const page = gateway({
+    "GET auth/accounts": () =>
+      connected
+        ? [
+            {
+              id: "account",
+              provider_id: "codex",
+              name: "My Codex",
+              status: "connected",
+              revision: 8,
+            },
+          ]
+        : [],
+    "DELETE auth/accounts/account": () => {
+      if (fail) throw new Error("Account changed. Refresh and retry.");
+      connected = false;
+      return { disconnected: true };
+    },
+  });
+  await screen.findByRole("button", { name: "Disconnect account My Codex" });
+  await click("Disconnect account My Codex");
+  await click("Keep account");
+  expect(page.calls.some((call) => call.method === "DELETE")).toBe(false);
+  await click("Disconnect account My Codex");
+  await userEvent.keyboard("{Escape}");
+  expect(screen.queryByRole("dialog")).toBeNull();
+  await click("Disconnect account My Codex");
+  await click("Disconnect account");
+  await within(screen.getByRole("dialog")).findByText(
+    "Account changed. Refresh and retry.",
+  );
+  fail = false;
+  await click("Disconnect account");
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(screen.queryByRole("button", { name: "Use My Codex" })).toBeNull();
+  expect(page.calls.find((call) => call.method === "DELETE")?.body).toEqual({
+    expected_revision: 8,
+  });
+});
+
+it("makes manual callback recovery explicit when the registered listener is unavailable", async () => {
+  mountPage(
+    <NativeAuthDialog
+      accountId="owner"
+      provider={{ ...authProvider, flow: "authorization_code_pkce" }}
+      onConnected={vi.fn()}
+      onClose={vi.fn()}
+    />,
+    {
+      "POST /gateway/auth/start": () => ({
+        ...authSession,
+        flow: "authorization_code_pkce",
+        callback_mode: "manual",
+      }),
+      "DELETE /gateway/auth/session": () => ({
+        ...authSession,
+        status: "cancelled",
+      }),
+    },
+  );
+  await click(`Continue with ${authProvider.name}`);
+  await screen.findByText(
+    "Automatic return is unavailable. Finish signing in, then use the callback URL option below.",
+  );
+  expect(screen.getByText("Complete with callback URL")).toBeTruthy();
+});
+
+it("reconnects an imported native connection through sign-in without replacing its model IDs", async () => {
+  const imported = {
+    ...connection(),
+    preset_id: "copilot",
+    auth_account_id: null,
+    credential_configured: false,
+    status: "error",
+    error: { code: "reconnect_required", message: "Reconnect this provider." },
+  };
+  const page = gateway({
+    "GET presets": () => [
+      { ...presets[0], id: "copilot", auth: "oauth", name: "GitHub Copilot" },
+    ],
+    "GET auth/providers": () => [authProvider],
+    "GET connections": () => [imported],
+    "POST auth/start": () => ({
+      ...authSession,
+      status: "connected",
+      account_id: "restored-account",
+    }),
+    "PATCH connections/conn": () => ({
+      ...imported,
+      auth_account_id: "restored-account",
+      status: "connected",
+    }),
+  });
+  await screen.findByRole("button", { name: "Edit" });
+  await click("Edit");
+  await screen.findByRole("dialog", { name: "Sign in to GitHub Copilot" });
+  await click("Continue with GitHub Copilot");
+  await screen.findByText("Signed in as My account");
+  expect(screen.queryByLabelText("API key")).toBeNull();
+  await click("Save connection");
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(
+    page.calls.find((call) => call.method === "PATCH")?.body,
+  ).toMatchObject({
+    expected_revision: 3,
+    auth_account_id: "restored-account",
+    models: ["alpha", "beta"],
+  });
+  expect(
+    page.calls.some(
+      (call) => call.path === "connections" && call.method === "POST",
+    ),
+  ).toBe(false);
+});
+
+it("confirms route deletion with revision checking and preserves providers", async () => {
+  let routes = [
+    {
+      id: "daily",
+      name: "Daily",
+      models: ["conn/alpha"],
+      revision: 5,
+      strategy: "priority",
+    },
+  ];
+  let fail = true;
+  const page = gateway({
+    "GET routes": () => routes,
+    "GET models": () => [{ ...model("alpha"), id: "conn/alpha" }],
+    "DELETE routes/daily": () => {
+      if (fail) throw new Error("The route changed. Refresh and retry.");
+      routes = [];
+      return { deleted: true };
+    },
+  });
+  await screen.findByRole("button", { name: "Connect Groq" });
+  await userEvent.click(screen.getByRole("tab", { name: "Model routes" }));
+  await screen.findByRole("button", { name: "Delete route Daily" });
+  await click("Delete route Daily");
+  await click("Keep route");
+  expect(page.calls.some((call) => call.method === "DELETE")).toBe(false);
+  await click("Delete route Daily");
+  await userEvent.keyboard("{Escape}");
+  expect(screen.queryByRole("dialog")).toBeNull();
+  await click("Delete route Daily");
+  await click("Delete route");
+  await screen.findByText("The route changed. Refresh and retry.");
+  fail = false;
+  await click("Delete route");
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(
+    screen.queryByRole("button", { name: "Delete route Daily" }),
+  ).toBeNull();
+  expect(page.calls.filter((call) => call.method === "DELETE")).toEqual([
+    { path: "routes/daily", method: "DELETE", body: { expected_revision: 5 } },
+    { path: "routes/daily", method: "DELETE", body: { expected_revision: 5 } },
+  ]);
 });

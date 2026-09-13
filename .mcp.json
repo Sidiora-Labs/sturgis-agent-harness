@@ -1,5 +1,8 @@
 {
   "mcpServers": {
-    "codify":{"command":"/usr/local/bin/cg","args":["mcp"]}
+    "codify": {
+      "command": "cg",
+      "args": ["mcp"]
+    }
   }
 }

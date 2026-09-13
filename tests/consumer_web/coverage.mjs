@@ -44,8 +44,9 @@ export async function snapshot(root) {
     ),
   );
   const tests = await walk(path.join(root, "frontend/tests"));
+  tests.push(...(await walk(path.join(root, "tests/gateway"))).filter((file) => /\.(?:py|mjs|json)$/.test(file)));
   const runtime = [];
-  for (const directory of ["agent", "consumer"])
+  for (const directory of ["agent", "consumer", "model_gateway"])
     runtime.push(
       ...(await walk(path.join(root, directory))).filter((file) =>
         file.endsWith(".py"),

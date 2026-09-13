@@ -55,6 +55,8 @@ A received successful HTTP envelope can still contain an unavailable native resu
 
 Background memory consolidation may update derived recall without changing original source bytes. Its sleep/freshness process is not an exposed button for training model weights. For replacing a whole source or index, use [knowledge revisions](source-library.md); for changing a workspace document, use [Files](../files/workspace.md).
 
+Consolidation has one recorded cycle per day, using UTC in the standard runtime, and runs when background work can be admitted. Once that day's cycle is complete, later idle checks do not create additional sleep jobs. Interrupted or unfinished cycles can resume when their ownership permits. Regular ingestion and recall updates continue independently, so daily consolidation does not mean new inputs wait until the next day to become eligible for memory. Existing work and memory history remain available.
+
 ## Command examples
 
 These are command-specific examples, not a script to run every operation. Replace uppercase IDs, example endpoints, timestamps, and revision numbers with the actual intended values. Save one JSON object as `params.json`, then run `sturgis command AGENT_ID METHOD --params-file params.json`. Omit the file for `{}`. If acknowledgement is unknown, keep request and domain operation identities unchanged. For an acknowledged unavailable result, follow the feature-specific recovery instructions.

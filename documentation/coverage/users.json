@@ -31,7 +31,7 @@
           "ui_actions": []
         }
       ],
-      "words": 568
+      "words": 528
     },
     {
       "path": "connections/browser.md",
@@ -63,7 +63,7 @@
           "ui_actions": []
         }
       ],
-      "words": 492
+      "words": 498
     },
     {
       "path": "connections/devices.md",
@@ -128,7 +128,7 @@
           }
         }
       ],
-      "words": 583
+      "words": 585
     },
     {
       "path": "connections/mcp.md",
@@ -158,7 +158,7 @@
           "ui_actions": []
         }
       ],
-      "words": 463
+      "words": 458
     },
     {
       "path": "connections/media.md",
@@ -219,7 +219,7 @@
           }
         }
       ],
-      "words": 665
+      "words": 671
     },
     {
       "path": "connections/overview.md",
@@ -335,7 +335,7 @@
           "ui_actions": []
         }
       ],
-      "words": 501
+      "words": 503
     },
     {
       "path": "connections/webhooks.md",
@@ -363,7 +363,7 @@
           "ui_actions": []
         }
       ],
-      "words": 448
+      "words": 457
     },
     {
       "path": "conversations/continuing-conversations.md",
@@ -375,14 +375,22 @@
         "frontend/src/hooks/useEvents.ts",
         "consumer/application.py",
         "consumer/lifecycle.py",
-        "consumer/cli.py"
+        "consumer/cli.py",
+        "agent/runtime/identity.py",
+        "agent/runtime/__init__.py",
+        "agent/state/__init__.py"
       ],
       "commands": [
         "conversations.create"
       ],
       "features": [
         "conversation.continuity",
-        "conversation.stream_reconnect"
+        "conversation.stream_reconnect",
+        "agent.canonical_identity",
+        "agent.model_provenance",
+        "conversation.history_loading",
+        "conversation.scoped_replay",
+        "conversation.pause_preservation"
       ],
       "ui_actions": [],
       "examples": [
@@ -408,9 +416,16 @@
               "title": "Maintenance review"
             }
           }
+        },
+        {
+          "id": "agent-identity-and-model",
+          "heading": "Agent identity and the selected model",
+          "description": "Ask for Sturgis agent identity and Sidiora Labs attribution separately from verified model provenance.",
+          "commands": [],
+          "ui_actions": []
         }
       ],
-      "words": 561
+      "words": 734
     },
     {
       "path": "conversations/sources-history-search.md",
@@ -422,7 +437,9 @@
         "consumer/application.py",
         "consumer/content.py",
         "consumer/api.py",
-        "consumer/portability.py"
+        "consumer/portability.py",
+        "agent/state/__init__.py",
+        "frontend/src/hooks/useEvents.ts"
       ],
       "commands": [
         "conversations.get",
@@ -435,7 +452,10 @@
         "conversation.history",
         "conversation.search",
         "conversation.archive",
-        "conversation.imported_history"
+        "conversation.imported_history",
+        "conversation.history_loading",
+        "conversation.scoped_replay",
+        "conversation.pause_preservation"
       ],
       "ui_actions": [],
       "examples": [
@@ -478,7 +498,7 @@
           }
         }
       ],
-      "words": 556
+      "words": 774
     },
     {
       "path": "conversations/steering-and-cancellation.md",
@@ -540,7 +560,7 @@
           }
         }
       ],
-      "words": 534
+      "words": 502
     },
     {
       "path": "files/workspace.md",
@@ -617,7 +637,7 @@
           }
         }
       ],
-      "words": 564
+      "words": 558
     },
     {
       "path": "getting-started/account-and-agents.md",
@@ -629,7 +649,9 @@
         "consumer/identity.py",
         "consumer/api.py",
         "consumer/cli.py",
-        "agent/profile/__init__.py"
+        "agent/profile/__init__.py",
+        "agent/runtime/identity.py",
+        "agent/runtime/__init__.py"
       ],
       "commands": [],
       "features": [
@@ -640,7 +662,9 @@
         "agents.create",
         "agents.rename",
         "agents.archive",
-        "agents.profile_identity"
+        "agents.profile_identity",
+        "agent.canonical_identity",
+        "agent.model_provenance"
       ],
       "ui_actions": [
         "Rename"
@@ -654,7 +678,7 @@
           "ui_actions": []
         }
       ],
-      "words": 479
+      "words": 492
     },
     {
       "path": "getting-started/hosted.md",
@@ -687,7 +711,7 @@
           "ui_actions": []
         }
       ],
-      "words": 472
+      "words": 484
     },
     {
       "path": "getting-started/installation-choices.md",
@@ -714,7 +738,7 @@
           "ui_actions": []
         }
       ],
-      "words": 477
+      "words": 465
     },
     {
       "path": "getting-started/self-hosted.md",
@@ -743,7 +767,7 @@
           "ui_actions": []
         }
       ],
-      "words": 427
+      "words": 421
     },
     {
       "path": "index.md",
@@ -768,7 +792,7 @@
           "ui_actions": []
         }
       ],
-      "words": 417
+      "words": 609
     },
     {
       "path": "knowledge/memory.md",
@@ -779,7 +803,8 @@
         "consumer/content.py",
         "agent/memory/__init__.py",
         "agent/memory/sleep.py",
-        "native/memory/PROTOCOL.md"
+        "native/memory/PROTOCOL.md",
+        "agent/runtime/__init__.py"
       ],
       "commands": [
         "memory.correct",
@@ -795,7 +820,9 @@
         "memory.daily_sleep",
         "memory.validity_not_knowledge_as_of",
         "memory.user_correction_belief",
-        "memory.identity_retraction_future_revisions"
+        "memory.identity_retraction_future_revisions",
+        "memory.daily_admission",
+        "memory.cycle_resume"
       ],
       "ui_actions": [],
       "examples": [
@@ -843,7 +870,7 @@
           }
         }
       ],
-      "words": 741
+      "words": 798
     },
     {
       "path": "knowledge/source-library.md",
@@ -936,18 +963,21 @@
           }
         }
       ],
-      "words": 661
+      "words": 660
     },
     {
       "path": "models/connect-a-model.md",
       "title": "Connect and select a model",
-      "description": "Configure the supported streaming protocol, probe actual readiness, and choose text-only or tool-capable operation.",
+      "description": "Import gateway models, check readiness with Use model, recover from explained failures, and verify a completed conversation.",
       "sources": [
         "frontend/src/pages/SettingsPage.tsx",
         "consumer/providers.py",
         "agent/provider_catalog/__init__.py",
         "agent/provider_adapters/__init__.py",
-        "consumer/application.py"
+        "consumer/application.py",
+        "frontend/src/pages/gateway/AgentGatewayModel.tsx",
+        "agent/runtime/identity.py",
+        "agent/runtime/__init__.py"
       ],
       "commands": [
         "providers.activate",
@@ -960,13 +990,39 @@
         "provider.chat_completions",
         "provider.text_only",
         "provider.readiness",
-        "provider.activation"
+        "provider.activation",
+        "provider.tool_readiness",
+        "provider.text_fallback",
+        "provider.tool_recheck",
+        "provider.probe_lease",
+        "provider.probe_cancellation",
+        "agent.canonical_identity",
+        "agent.model_provenance"
       ],
-      "ui_actions": [],
+      "ui_actions": [
+        "Use model",
+        "Checking model\u2026",
+        "Retry",
+        "Retry tool check",
+        "Chat and tools",
+        "Chat only"
+      ],
       "examples": [
         {
+          "id": "gateway-select-and-chat",
+          "heading": "Connect and select through the gateway",
+          "description": "Import a catalog, check the actual selected chat/tool capability, retry tool readiness when needed, and confirm a conversation.",
+          "commands": [],
+          "ui_actions": [
+            "Load models",
+            "Use model",
+            "Retry",
+            "Retry tool check"
+          ]
+        },
+        {
           "id": "worked-example-a-text-only-research-model",
-          "heading": "Worked example: a text-only research model",
+          "heading": "Legacy CLI example: a text-only research model",
           "description": "A text-only research model",
           "commands": [
             "providers.activate",
@@ -1012,7 +1068,7 @@
           }
         }
       ],
-      "words": 530
+      "words": 1076
     },
     {
       "path": "models/credentials.md",
@@ -1063,7 +1119,7 @@
           }
         }
       ],
-      "words": 548
+      "words": 573
     },
     {
       "path": "reference/commands.md",
@@ -1191,7 +1247,7 @@
           "ui_actions": []
         }
       ],
-      "words": 1989
+      "words": 1687
     },
     {
       "path": "reference/glossary.md",
@@ -1219,7 +1275,7 @@
           "ui_actions": []
         }
       ],
-      "words": 701
+      "words": 612
     },
     {
       "path": "reference/limits.md",
@@ -1255,7 +1311,7 @@
           "ui_actions": []
         }
       ],
-      "words": 604
+      "words": 577
     },
     {
       "path": "reference/troubleshooting.md",
@@ -1292,7 +1348,7 @@
           "ui_actions": []
         }
       ],
-      "words": 654
+      "words": 580
     },
     {
       "path": "settings/backup-restore.md",
@@ -1328,7 +1384,7 @@
           ]
         }
       ],
-      "words": 600
+      "words": 580
     },
     {
       "path": "settings/lifecycle.md",
@@ -1362,7 +1418,7 @@
           "ui_actions": []
         }
       ],
-      "words": 483
+      "words": 468
     },
     {
       "path": "settings/permissions.md",
@@ -1436,7 +1492,7 @@
           }
         }
       ],
-      "words": 582
+      "words": 558
     },
     {
       "path": "settings/plugins.md",
@@ -1519,7 +1575,7 @@
           }
         }
       ],
-      "words": 568
+      "words": 536
     },
     {
       "path": "settings/procedures.md",
@@ -1593,7 +1649,7 @@
           }
         }
       ],
-      "words": 580
+      "words": 519
     },
     {
       "path": "settings/usage-diagnostics.md",
@@ -1649,7 +1705,7 @@
           }
         }
       ],
-      "words": 537
+      "words": 505
     },
     {
       "path": "work/commitments.md",
@@ -1732,7 +1788,7 @@
           }
         }
       ],
-      "words": 570
+      "words": 573
     },
     {
       "path": "work/delegation.md",
@@ -1805,7 +1861,7 @@
           }
         }
       ],
-      "words": 545
+      "words": 521
     },
     {
       "path": "work/evidence.md",
@@ -1840,7 +1896,7 @@
           "ui_actions": []
         }
       ],
-      "words": 471
+      "words": 488
     },
     {
       "path": "work/goals.md",
@@ -1918,7 +1974,7 @@
           }
         }
       ],
-      "words": 518
+      "words": 501
     },
     {
       "path": "work/initiative-and-attention.md",
@@ -1995,7 +2051,7 @@
           }
         }
       ],
-      "words": 517
+      "words": 523
     },
     {
       "path": "work/overview.md",
@@ -2056,7 +2112,7 @@
           }
         }
       ],
-      "words": 567
+      "words": 520
     },
     {
       "path": "work/schedules.md",
@@ -2137,7 +2193,7 @@
           }
         }
       ],
-      "words": 622
+      "words": 607
     },
     {
       "path": "work/workflows.md",
@@ -2266,7 +2322,7 @@
           }
         }
       ],
-      "words": 820
+      "words": 809
     },
     {
       "path": "reference/command-recipes.md",
@@ -3161,7 +3217,174 @@
             "plugins.uninstall"
           ]
         }
-      ]
+      ],
+      "words": 10991
+    },
+    {
+      "path": "guides/gateway-routing-keys.md",
+      "title": "Model routes, app keys, and usage",
+      "sources": [
+        "model_gateway/store.py",
+        "model_gateway/service.py",
+        "model_gateway/controls.py",
+        "model_gateway/api.py",
+        "frontend/src/pages/gateway/GatewayControlsPanel.tsx",
+        "model_gateway/ingress.py",
+        "model_gateway/transports.py"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.models.list",
+        "gateway.routes.create",
+        "gateway.routes.update",
+        "gateway.routes.delete",
+        "gateway.routes.priority",
+        "gateway.routes.round_robin",
+        "gateway.routes.pre_output_fallback",
+        "gateway.routes.cooldown",
+        "gateway.routes.scope",
+        "gateway.keys.create",
+        "gateway.keys.list",
+        "gateway.keys.one_time_copy",
+        "gateway.keys.revoke",
+        "gateway.keys.model_scope",
+        "gateway.usage.attempts",
+        "gateway.usage.unreported",
+        "gateway.inference.chat_completions",
+        "gateway.inference.responses",
+        "gateway.inference.messages",
+        "gateway.inference.streaming",
+        "gateway.inference.cancellation",
+        "gateway.inference.native_preservation"
+      ],
+      "examples": [
+        {
+          "id": "gateway-routing-keys-3",
+          "heading": "Worked example: test from any Python environment",
+          "description": "Worked example: test from any Python environment"
+        }
+      ],
+      "words": 1055
+    },
+    {
+      "path": "guides/model-gateway.md",
+      "title": "Connect providers with Model Gateway",
+      "sources": [
+        "model_gateway/service.py",
+        "model_gateway/catalog.py",
+        "frontend/src/pages/gateway/ProviderDrawer.tsx",
+        "consumer/gateway.py",
+        "model_gateway/transports.py",
+        "model_gateway/translation.py",
+        "frontend/src/pages/gateway/GatewayPage.tsx",
+        "frontend/src/pages/gateway/AgentGatewayModel.tsx"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.providers.presets",
+        "gateway.providers.search",
+        "gateway.providers.api_key",
+        "gateway.providers.no_auth",
+        "gateway.providers.free_catalog",
+        "gateway.providers.custom_endpoint",
+        "gateway.models.discover",
+        "gateway.models.import",
+        "gateway.models.manual_probe",
+        "gateway.models.capability_provenance",
+        "gateway.connections.create",
+        "gateway.connections.edit",
+        "gateway.connections.refresh",
+        "gateway.connections.disconnect",
+        "gateway.agent.select",
+        "gateway.agent.probe",
+        "gateway.agent.credential_scope",
+        "gateway.agent.binding_recovery",
+        "gateway.catalog_evidence",
+        "gateway.final_usage",
+        "gateway.model_check_recovery"
+      ],
+      "examples": [
+        {
+          "id": "model-gateway-2",
+          "heading": "Worked example: a local model",
+          "description": "Worked example: a local model"
+        }
+      ],
+      "words": 1657
+    },
+    {
+      "path": "guides/gateway-accounts.md",
+      "title": "Connect provider accounts",
+      "sources": [
+        "model_gateway/auth.py",
+        "model_gateway/auth_transports.py",
+        "model_gateway/callbacks.py",
+        "frontend/src/pages/gateway/NativeAuthDialog.tsx",
+        "model_gateway/auth_state.py"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.accounts.providers",
+        "gateway.accounts.device_start",
+        "gateway.accounts.device_poll",
+        "gateway.accounts.pkce_start",
+        "gateway.accounts.pkce_complete",
+        "gateway.accounts.callback_listener",
+        "gateway.accounts.callback_manual",
+        "gateway.accounts.cancel",
+        "gateway.accounts.list",
+        "gateway.accounts.disconnect",
+        "gateway.accounts.refresh",
+        "gateway.accounts.reauthenticate",
+        "gateway.accounts.codex",
+        "gateway.accounts.github_copilot",
+        "gateway.accounts.gemini_cli",
+        "gateway.accounts.kiro"
+      ],
+      "examples": [
+        {
+          "id": "gateway-accounts-operation",
+          "heading": "Pick the appropriate account flow",
+          "description": "Follow the concrete operation and recovery steps in this manual."
+        }
+      ],
+      "words": 1206
+    },
+    {
+      "path": "getting-started/standalone-gateway.md",
+      "title": "Run Model Gateway on its own",
+      "sources": [
+        "model_gateway/__main__.py",
+        "model_gateway/api.py",
+        "frontend/src/pages/gateway/StandaloneGateway.tsx"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.standalone.serve",
+        "gateway.standalone.storage",
+        "gateway.standalone.admin_session",
+        "gateway.standalone.csrf",
+        "gateway.standalone.host_origin",
+        "gateway.standalone.loopback",
+        "gateway.standalone.private_origins",
+        "gateway.standalone.hosted_embedding",
+        "gateway.standalone.restart",
+        "gateway.standalone.web_assets",
+        "gateway.settings.timeout",
+        "gateway.settings.concurrency",
+        "gateway.settings.rate_limit",
+        "gateway.configuration.export",
+        "gateway.configuration.import",
+        "gateway.configuration.reconnect"
+      ],
+      "examples": [
+        {
+          "id": "standalone-gateway-operation",
+          "heading": "Start from this checkout",
+          "description": "Follow the concrete operation and recovery steps in this manual."
+        }
+      ],
+      "words": 1444
     }
   ],
   "routes": [
@@ -3457,6 +3680,483 @@
         "poll",
         "respond"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/session",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/session",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/session",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/status",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/settings",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/settings",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/export",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/import",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/presets",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/connections",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/discover",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/connections",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/gateway/connections/{connection_id}",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/connections/{connection_id}",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/connections/{connection_id}/refresh",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/auth/providers",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/auth/accounts",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/auth/start",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/auth/{session_id}/poll",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/auth/{session_id}/complete",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/auth/{session_id}",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/auth/accounts/{account_id}",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/models",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/routes",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/routes",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/routes/{route_id}",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/keys",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/gateway/keys",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/gateway/keys/{key_id}",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/gateway/usage",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone_and_embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/responses",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "standalone",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/model-gateway/v1/models",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/model-gateway/v1/chat/completions",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/model-gateway/v1/responses",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "POST",
+      "path": "/model-gateway/v1/messages",
+      "page": "guides/gateway-routing-keys.md",
+      "example": "gateway-routing-keys-3",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "composition": "embedded",
+      "developer_page": "guides/gateway/http-api.md"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/api.py"
+      ],
+      "composition": "standalone"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/agents/{agent_id}/gateway-model",
+      "page": "guides/model-gateway.md",
+      "example": "model-gateway-2",
+      "sources": [
+        "consumer/api.py",
+        "consumer/gateway.py"
+      ],
+      "composition": "embedded"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/callback",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/callbacks.py",
+        "model_gateway/auth.py"
+      ],
+      "composition": "provider_registered_loopback"
+    },
+    {
+      "method": "GET",
+      "path": "/oauth2callback",
+      "page": "guides/gateway-accounts.md",
+      "example": "gateway-accounts-operation",
+      "sources": [
+        "model_gateway/callbacks.py",
+        "model_gateway/auth.py"
+      ],
+      "composition": "provider_registered_loopback"
     }
   ],
   "internal_ingress": [
@@ -3655,6 +4355,24 @@
       "sources": [
         "consumer/cli.py"
       ]
+    },
+    {
+      "command": "sturgis-gateway serve",
+      "equivalent": "python -m model_gateway serve",
+      "page": "getting-started/standalone-gateway.md",
+      "example": "standalone-gateway-operation",
+      "sources": [
+        "model_gateway/__main__.py"
+      ],
+      "options": [
+        "--root",
+        "--host",
+        "--port",
+        "--public-origin",
+        "--private-origin",
+        "--deny-local-servers",
+        "--web-root"
+      ]
     }
   ],
   "source_sha256": {
@@ -3664,21 +4382,23 @@
     "agent/goals/__init__.py": "f070a5427ceb954c08e421d0bc25eb229af493a53ef796b374733f6a9dedbec8",
     "agent/initiative/__init__.py": "d9770e540589c04ba98750b26e21a8f3acb250a6a6d881b9cb8c157f77508f65",
     "agent/memory/__init__.py": "35b35a3df70c69b86068cef2583ec22bf2edff16c9dedbe8b54336f81790f21a",
-    "agent/memory/sleep.py": "37b4d5e9e4e6b2007a5fdba16dd66a6ed995bb05c607e0416c7019b5e403380f",
+    "agent/memory/sleep.py": "3a1d34a87cb35ae8143a2bb54963f174ba02102ebfd318dcc8abc0215fa76144",
     "agent/planner/__init__.py": "b80a1b09472f10f8f785affc920e66aeb8c08278f60fb7a222432c1b21fb60d6",
     "agent/plugin_host/__init__.py": "107ff64d6ba162e1197aee63be1087c16d62b16b689660c4b76e6137571c2a7b",
     "agent/plugin_sdk/__init__.py": "0e093fda474ef7e4ada71d7e32e8d7c6853af9ae8db60e206a3750cdcf3a6876",
     "agent/profile/__init__.py": "e9eb0c353aeef1edb13093750237a069cab7a141745131e1684daebae63886b3",
-    "agent/provider_adapters/__init__.py": "b1dcb9d4b9bf59d1bc5cae9425cab8baf820ffdd5da16919b9fea5ec0b5c9a74",
+    "agent/provider_adapters/__init__.py": "9d7401d0f4a68dfda3a4f108e34dc13bce5334d4c94532547d4ed2367064fe36",
     "agent/provider_catalog/__init__.py": "bf1e6f1f8e1b568666b2c4da1044477575fdc741bae91be45a6f2281217ec95d",
-    "agent/runtime/__init__.py": "60436d64c3c6b77c3f8700ca3295901135bf28e634475639c8a0090d880a03f6",
-    "agent/scheduler/__init__.py": "125bc581cc73893b7e1de9a2d2fab3b305092a15660d38c8d951fc2a6145f0ab",
+    "agent/runtime/__init__.py": "73cbd4a57c92c1c111c353767b786353362d341fc1ede123f9d6986dfcc44c84",
+    "agent/runtime/identity.py": "851a61ff38aee678edd24c5119a06d4eb6ee36f30aebfc0eecd1beb17e4aa114",
+    "agent/scheduler/__init__.py": "7555dfac397fae0976b41756b1e582d41ab2378d139ecf116cb6e4f5bd8900b0",
     "agent/skills/__init__.py": "1742bb29dc6ecdb3431023150c0025845081e6fd84bfbfc47a79221bb620a23b",
+    "agent/state/__init__.py": "23ce2056f53ae2d3b3986ed2810144a9a04967e19e150cbb0caedb2d1138af11",
     "agent/subagents/__init__.py": "0235e9a15d1e1c7ca120f46662d95e5865eeb61927db131aefc791af2fa40fae",
     "agent/tool_runner/__init__.py": "4eb618bd5d1055698d5ccfa2fe9bcbad34dc3e7c06205b2d7b59e19fd5aceac1",
     "agent/tool_runner/files.py": "3391795a3474968b68aef7182e4d1ae8fcb0081b8d3ef0af7358ac183cb2bfbf",
-    "consumer/api.py": "f1fff24f870c787f67f2146ea8da7dcfe0a177c283209a6528be2cdb5760e2a0",
-    "consumer/application.py": "b18491fc2c6109e7401ec67072db3753d62438b63a1261eb69ec144442949ddd",
+    "consumer/api.py": "634045b885519eae126d8c8c96ab9cd0926e7ce89c257009061908293b6235a0",
+    "consumer/application.py": "6197194030d9438f5c39c93140475f037cab19eb622a88b304fcd93f1f8799f8",
     "consumer/browser.py": "037c89c3fd9114267c4018291049bc10a283f5957362f471cd118e5d92393408",
     "consumer/cli.py": "6f8a626d1f2eb37ada21cd022620208635a34396ede34190c9d1bd29f18871fa",
     "consumer/config.py": "d7946aa462bab7f2dbaf1ee406bba8646d760e7696e37dd5b6a2d00a82b79d9c",
@@ -3687,52 +4407,70 @@
     "consumer/content.py": "1b25d9e03131aa005e1714e64e21b0425b2697a3ddb2f31ae9a42fc6c3a48d58",
     "consumer/contracts.py": "83042c61aa73a3dfa2f30ee01bed2e04eb2770943b5032cfafdb9a228b7cea17",
     "consumer/device.py": "894ef53052cfc98b09393a5da964da804e9c5627606537eb37886327a5b288bf",
+    "consumer/gateway.py": "a6573734750cdf66572726bb829199f1bb6d98a4ce4bb569d6438700d17a55ef",
     "consumer/identity.py": "252cc2ed2b4fd8ca880feae7828b27fb4b546d58823f04e574d21c804df21a6b",
     "consumer/lifecycle.py": "aa7fa5494565e73224a5c5d2ca16fe5c4256088ccb5c63384b2395a6b7adb99c",
     "consumer/network.py": "6426f2c35af695616a1a1f6206428c4d771052aab8d7bf449b41a073c9304cd1",
     "consumer/permissions.py": "57485146889561e9d6c33784a144b7640d00f3105b7f9b7ef6b8c1eb54efd4ec",
     "consumer/portability.py": "ed599f934435303bf8806f2f92389f42bc69214c1172d99839569bc70484fb44",
-    "consumer/providers.py": "3cb36ee15cec5f912c168e1791dd95113af25b56a04437e981aaee2a74386e9f",
+    "consumer/providers.py": "a23ccb34cf73b3efa48bdd53bd170f82f172ce7cd94537fd1e4c36d53688213b",
     "consumer/usage.py": "3baf3d59e60a48ad56651c4b7c3c624565f9d0666ac63a26cec908b8e7ee69b7",
     "consumer/vault.py": "a0d916e4e6b485eea89feb5622187f3555cff62f488bae38bd624caea1daf2f3",
     "consumer/webhooks.py": "1a57154a3d85d1aa5c82b4352a915641597f481eb5e2b856d9618a35b84e7125",
     "consumer/work.py": "f1e3bb8f56688a3d15b1899d4648bc8ed8f4cd5552212ad1f8cfdc9826b73ab6",
-    "consumer/workers.py": "bf376ed5bddb203fa71a5170728d541a0b04229b29c18202ae4f25e129121d72",
-    "frontend/src/App.tsx": "cd9fc7bd286dc609bc87bb1af0fc5c36f18f1725fdad4b20a236be3f6f1e49cb",
-    "frontend/src/components/Shell.tsx": "522550ec6e800b765e1482269a454680709fc30d737ecc4e7d351daef76915e4",
+    "consumer/workers.py": "bc2776080bc4b8f10c988f88d839d9f32d434360c99a2b69379d6bdd2ca9013f",
+    "frontend/src/App.tsx": "be2af8fd36dfbcbac8f5de5e599c5b5ff8d80879c5c39b0e3220a6dfbab03bed",
+    "frontend/src/components/Shell.tsx": "01463b8f665a4a761691aac5c642ce58bf61b0307de8d94b589fb2526e78e5b0",
     "frontend/src/hooks/useAgent.tsx": "46449adbecc4c44e376997b6dc79eeb10b5bcf0db863a1c83a3aaf7e8348d422",
-    "frontend/src/hooks/useEvents.ts": "470ee0071b91ade5a761ee68bed9bdae430b5b17e27a7f8d7f3a84e74cc11c10",
+    "frontend/src/hooks/useEvents.ts": "3d232c1acee3a153412a0dae5be752621563c02fcdd616b212a3ace5e62733ab",
     "frontend/src/pages/ConnectionsPage.tsx": "48c2e9ab9a14666dbda2bb2688f6b54c916d4054c9eed99020e04f9d978253f0",
-    "frontend/src/pages/ConversationPage.tsx": "1046d42e4a11be89c09f261ded385632b546808171b1d1609eb8286afebac09f",
+    "frontend/src/pages/ConversationPage.tsx": "e8b659afccfdc771b2e1c1bda07f235bed2b47aae1ea1c58a81f5f0c0c2fa2d7",
     "frontend/src/pages/FilesPage.tsx": "e4686b6aa3868045d74e65901b12b47db6d362bd6d04aa7bf62518adeefdd62c",
     "frontend/src/pages/KnowledgePage.tsx": "70c39dbfe0919a721df823eabb1ba41b2303e3cc520ebd93f8806c6e3685ca73",
-    "frontend/src/pages/SettingsPage.tsx": "df335eab3d1d6481b0db85d30fda1f4df5cec5c6814929c5afaca0723ac4943a",
+    "frontend/src/pages/SettingsPage.tsx": "3820204ec3637b7e903af0edb1c8dd8eed007da82a3db27c55d92a44d2cfb7ed",
     "frontend/src/pages/WorkPage.tsx": "112be58d7f24a82e2a3931a6d423ac05e72760139404571e21f9849b67a18e4a",
+    "frontend/src/pages/gateway/AgentGatewayModel.tsx": "f8f0b807d3fbe7c882d032057a77f91fa4353877309ddbed27721e5802ad58e8",
+    "frontend/src/pages/gateway/GatewayControlsPanel.tsx": "182e144c4522889f95b04f5f3f49d4cb2f809175b60b151f98dca15f680140e6",
+    "frontend/src/pages/gateway/GatewayPage.tsx": "22fcc091a48778948e25dd8391d196420c27e4bc0119ee920900f5b6e2ef7463",
+    "frontend/src/pages/gateway/NativeAuthDialog.tsx": "dd0aba47cb0ad0399cc1769b7af113e8b82021a820f67aa0b1023bfff78e269d",
+    "frontend/src/pages/gateway/ProviderDrawer.tsx": "f3abf76a7be12c936f88ee08b3c78b986fd5d5ee23a8fee112ed77499b1e4758",
+    "frontend/src/pages/gateway/StandaloneGateway.tsx": "70b2fd641998d4869a2daa49da24a0245639ed0aa384be0d286da794973a2e40",
+    "model_gateway/__main__.py": "3c8fa7d2e6af0ee5fe686327a7add470e681b5db8af5f4e1af45d320d75c1c41",
+    "model_gateway/api.py": "3097707a3cbbdee1d13270f66c755ad715fac5c3eb6d1893d365b66c1b3eefed",
+    "model_gateway/auth.py": "f5113aa12b2f1e58ffb3242bd5c90fb69cd58b5e29d1e0ac66bf053a80a33dc5",
+    "model_gateway/auth_state.py": "9e2f481f19bfd8a2e0ace0dab991c02934431d3dc10a9106f3e011f4f2a70a4f",
+    "model_gateway/auth_transports.py": "1383f88528f7ae8df109db5f5e92a19535711e3fb71d9fe411dcb7414e99994d",
+    "model_gateway/callbacks.py": "a5aeaff08dfdc3224a09fe4bf4803b9056c2c4ddb39dcc573cfdc9f92e9cb288",
+    "model_gateway/catalog.py": "cd96ce93e2d93cd9ca9f3d6efe2771129419447253fff517442fa1cc8ec7ebe5",
+    "model_gateway/controls.py": "1036932b10804af11e40c612734fc4d0669e83c8ec6076a245da66c7246ca225",
+    "model_gateway/ingress.py": "db2a86bf73073658e59a7d87dbc8a0c92a986e4b1562f1f201f2f6ae93633b44",
+    "model_gateway/service.py": "8b50befa5a88ca583c3922ab0ad17032991a567e12f1db2614623a78aa2cd325",
+    "model_gateway/store.py": "c19674514eac795856f80d9fcca501267ab72014d9e323f1eb7a45685db9b363",
+    "model_gateway/translation.py": "0ad24676138d0e83fc2c99a282599dde23635e79bc155e31daa94bd28b5696f3",
+    "model_gateway/transports.py": "136190f996260ab6b85e3fa3d468e8dd0fd60b8b59bc602e115f9917fbc732aa",
     "native/memory/PROTOCOL.md": "02d881a19a9a0c17c1ac8874f4488709736bacfdbb5f60110d7c1d548e62fdaa",
     "packaging/Dockerfile": "1f772c2e9e357dbabcb6eeed0e406ea4559f8cf81529f3f3e66d77dbc18e3d3f",
-    "packaging/build-wheel.sh": "6ffb1227edd025f9ace6d8f30c6814b10143d8941ac7dcc7b953138c466478d6",
+    "packaging/build-wheel.sh": "f78b9d650d0864140e91df177b110e5b1588cfc0c3dbb5b0b44adec57c73ac9a",
     "packaging/sturgis.service": "218fa62142bba6383a5af92ebdca82fc4e2ccb1f2bad0f46959e75ab5539555c",
-    "pyproject.toml": "931237ef83bbfabc6ec4ba270ceef069a6a42c51789b22662c239ab23ff52485",
+    "pyproject.toml": "2b590cfbe7a6374a1bcee94b35a945337c2db5795bdef959a2b9af69595cae6d",
     "spec/sturgis-02/http-contract.md": "48ea12cc7ced817552a7c5b9db69aac59219f92d3f1bf7a13de79322e7817bb7"
   },
   "totals": {
-    "pages": 40,
-    "words": 33373,
+    "pages": 44,
+    "words": 39921,
     "unique_commands": 95,
-    "features": 159,
-    "sources": 56,
-    "routes": 20,
-    "cli_entries": 18,
-    "internal_ingress": 5
+    "features": 246,
+    "sources": 78,
+    "routes": 62,
+    "cli_entries": 19,
+    "internal_ingress": 5,
+    "examples": 165
   },
   "validation": {
-    "method": "Read-only source AST and Markdown/JSON content checks; no product runtime executed.",
-    "allowlisted_commands": 95,
-    "parameter_examples_checked": 94,
-    "private_prompt_examples": 1,
-    "local_links_checked": 146,
-    "missing_links": 0,
-    "command_parameter_fields": "Exact source-declared allowed and required fields checked; behavioral prerequisites are described in manuals.",
-    "sources_exist": 56
+    "method": "Authored Markdown and source-contract review. Execution, rendered links, examples and browser checks are recorded separately by scripts/docs_gate.py.",
+    "gateway_management_resources": 30,
+    "gateway_inference_routes": 8,
+    "gateway_cli_flags": 7,
+    "gateway_callbacks": "Only provider-registered loopback callback paths are mapped; these are not public management endpoints."
   }
 }

@@ -33,7 +33,12 @@ class Journal:
             PRAGMA synchronous=FULL;
             CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY AUTOINCREMENT,id TEXT UNIQUE NOT NULL,scope TEXT NOT NULL,kind TEXT NOT NULL,source TEXT NOT NULL,payload TEXT NOT NULL,created REAL NOT NULL,dedupe TEXT,UNIQUE(scope,dedupe));
             CREATE INDEX IF NOT EXISTS events_scope ON events(scope,seq);
+            CREATE INDEX IF NOT EXISTS events_kinds ON events(scope,kind,seq);
+            CREATE INDEX IF NOT EXISTS events_binding ON events(scope,json_extract(payload,'$.binding_id'),kind,seq);
+            CREATE INDEX IF NOT EXISTS events_work ON events(scope,json_extract(payload,'$.work_id'),kind,seq);
             CREATE TABLE IF NOT EXISTS records(namespace TEXT NOT NULL,id TEXT NOT NULL,scope TEXT NOT NULL,revision INTEGER NOT NULL,body TEXT NOT NULL,PRIMARY KEY(namespace,id,scope));
+            CREATE INDEX IF NOT EXISTS records_states ON records(namespace,scope,json_extract(body,'$.state'),id);
+            CREATE INDEX IF NOT EXISTS records_bindings ON records(namespace,scope,json_extract(body,'$.binding_id'),id);
             CREATE TABLE IF NOT EXISTS cursors(scope TEXT NOT NULL,consumer TEXT NOT NULL,seq INTEGER NOT NULL,PRIMARY KEY(scope,consumer));
         """)
 
@@ -74,6 +79,27 @@ class Journal:
         validate_scope(scope)
         with self._lock:
             return [self._record(r) for r in self._db.execute("SELECT * FROM records WHERE namespace=? AND scope=? ORDER BY id", (namespace,scope))]
+
+    def list_states(self, namespace, scope, states):
+        """Read one scope's matching states without decoding unrelated history.
+
+        Accept 1–64 state strings, each nonblank and at most 128 characters.
+        Results retain the same identifier ordering and Record shape as list.
+        """
+        validate_scope(scope)
+        if not isinstance(states, (list, tuple, set, frozenset)) or not 1 <= len(states) <= 64:
+            raise CoreError("invalid_states", "States must be a nonempty collection of at most 64 strings")
+        if any(not isinstance(state, str) or not state.strip() or len(state) > 128 or "\0" in state for state in states):
+            raise CoreError("invalid_states", "State names must be nonblank strings of at most 128 characters")
+        states = sorted(set(states))
+        placeholders = ",".join("?" for _ in states)
+        with self._lock:
+            rows = self._db.execute(
+                # Without the explicit index, SQLite can prefer the primary
+                # key's ID ordering over filtering states when IN has >1 value.
+                "SELECT * FROM records INDEXED BY records_states WHERE namespace=? AND scope=? AND json_extract(body,'$.state') IN ("
+                + placeholders + ") ORDER BY id", (namespace, scope, *states))
+            return [self._record(row) for row in rows]
 
     def put(self, namespace, key, scope, body, expected_revision=0):
         validate_scope(scope)
@@ -129,6 +155,44 @@ class Journal:
         with self._lock:
             row = self._db.execute("SELECT * FROM events WHERE scope=? AND id=?", (scope,event_id)).fetchone()
             return self._event(row) if row else None
+
+    def routed_events(self, scope, kinds, *, after=0, limit=1000, binding_id=None):
+        """Page visible routed events before decoding, retaining a global cursor.
+
+        A missing event binding may resolve through its scoped runtime turn.
+        The watermark and page share one transaction; unseen matching events
+        keep the cursor at the page tail, while exhausted pages skip hidden work.
+        """
+        validate_scope(scope)
+        if type(after) is not int or after < 0 or type(limit) is not int or not 1 <= limit <= 1000:
+            raise CoreError("invalid_cursor", "Invalid routed event range")
+        if (not isinstance(kinds, (list, tuple, set, frozenset)) or not 1 <= len(kinds) <= 64
+                or any(not isinstance(kind, str) or not kind or len(kind) > 128 or "\0" in kind for kind in kinds)):
+            raise CoreError("invalid_event", "Routed events require bounded explicit kinds")
+        if binding_id is not None and (not isinstance(binding_id, str) or not binding_id or len(binding_id) > 256 or "\0" in binding_id):
+            raise CoreError("invalid_binding", "Event binding must be a bounded identifier")
+        kinds = sorted(set(kinds))
+        placeholders = ",".join("?" for _ in kinds)
+        with self.transaction():
+            watermark = self._db.execute("SELECT COALESCE(MAX(seq),0) FROM events WHERE scope=?", (scope,)).fetchone()[0]
+            if binding_id is None:
+                sql = "SELECT * FROM events INDEXED BY events_kinds WHERE scope=? AND kind IN (" + placeholders + ") AND seq>? AND seq<=? ORDER BY seq LIMIT ?"
+                args = (scope, *kinds, after, watermark, limit + 1)
+            else:
+                # The two branches are disjoint: an explicit binding always wins
+                # over a work reference, including conflicting imported evidence.
+                sql = ("SELECT * FROM (SELECT e.* FROM events e INDEXED BY events_binding "
+                    "WHERE e.scope=? AND json_extract(e.payload,'$.binding_id')=? AND e.kind IN (" + placeholders + ") AND e.seq>? AND e.seq<=? "
+                    "UNION ALL SELECT e.* FROM records r INDEXED BY records_bindings CROSS JOIN events e INDEXED BY events_work "
+                    "WHERE r.namespace='runtime_turns' AND r.scope=? AND json_extract(r.body,'$.binding_id')=? "
+                    "AND e.scope=r.scope AND json_extract(e.payload,'$.work_id')=r.id AND json_extract(e.payload,'$.binding_id') IS NULL "
+                    "AND e.kind IN (" + placeholders + ") AND e.seq>? AND e.seq<=?) ORDER BY seq LIMIT ?")
+                args = (scope, binding_id, *kinds, after, watermark, scope, binding_id, *kinds, after, watermark, limit + 1)
+            rows = self._db.execute(sql, args).fetchall()
+            has_more = len(rows) > limit
+            rows = rows[:limit]
+            cursor = rows[-1]["seq"] if has_more else max(after, watermark)
+            return {"events": [self._event(row) for row in rows], "cursor": cursor, "has_more": has_more}
 
     def cursor(self, scope, consumer):
         validate_scope(scope)

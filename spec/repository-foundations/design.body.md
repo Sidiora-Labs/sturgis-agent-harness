@@ -1,0 +1,24 @@
+# Repository foundations
+
+The product is an active development preview. Root documentation must say this
+before any installation or feature claim. Apache-2.0 is the user's explicit
+license choice; third-party components retain their own terms.
+
+Parallel ownership for this task:
+
+| Lane | Owned work |
+| --- | --- |
+| Root | README, license/notices, ignore files, environment example, portable MCP pointer, spec state and integration review |
+| Tooling | Root Makefile, Python/npm metadata, tool versions, linters, formatter policy and local checks |
+| Infrastructure | `.github/`, `.devcontainer/`, complete wheel staging and validation of those definitions |
+| Documentation | Contribution entrypoints, security policy, contributors and truthful Unreleased changelog |
+
+The lanes publish root command interfaces before writing dependent instructions.
+No lane edits agent behavior or resumes the stopped sturgis-03 qualification.
+Existing production and documentation gates remain available through local
+commands and CI; adding a workflow does not prove it has run on GitHub.
+
+Validate the new lint/typecheck/format commands, config syntax, root documentation
+links and packaging inputs. Report Docker or hosted-runner checks that could not
+be executed. Preserve the separate unfinished runtime handoff and do not turn a
+documentation warning into a claim of production fitness.

@@ -1,11 +1,11 @@
 {
   "audience": "users",
   "status": "passed",
-  "manuals": 40,
-  "words": 33373,
-  "examples": 159,
+  "manuals": 44,
+  "words": 39921,
+  "examples": 165,
   "mapped_commands": 95,
-  "mapped_sources": 56,
-  "manifest_sha256": "4a4a6be7cb69d2a456d4a190d7360bc1c3a7e613b525adb69139c3133ad84a50",
+  "mapped_sources": 78,
+  "manifest_sha256": "6beaa0ca994db67ba482fd173a6ceaaf356713cce4e265040d0724cb1cd08f4d",
   "errors": []
 }

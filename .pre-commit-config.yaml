@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: sturgis-lint
+        name: Sturgis correctness lint
+        entry: make lint
+        language: system
+        pass_filenames: false
+      - id: sturgis-types
+        name: Sturgis strict TypeScript check
+        entry: make typecheck
+        language: system
+        pass_filenames: false
+      - id: sturgis-format
+        name: Sturgis formatting with explicit legacy debt
+        entry: make format-check
+        language: system
+        pass_filenames: false

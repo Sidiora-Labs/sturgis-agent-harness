@@ -7,7 +7,7 @@
       "theme_persistence": "passed",
       "search": {
         "query": "connect model",
-        "result": "/models/connect-a-model/"
+        "result": "/guides/model-gateway/"
       },
       "copied_example_route": "/cli/using-the-cli/",
       "copied_characters": 135,
@@ -53,5 +53,5 @@
     }
   ],
   "errors": [],
-  "completed_at": "2026-09-12T17:45:23.417Z"
+  "completed_at": "2026-09-12T22:37:59.099Z"
 }

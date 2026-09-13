@@ -6,6 +6,7 @@ evidence/**
 node_modules/**
 consumer/web/assets/**
 .sturgis-local/**
+.data/**
 test-results/**
 
 documentation/node_modules/**
@@ -16,3 +17,8 @@ documentation/developers/src/content/docs/reference/files/**
 
 .research/9router-reference/
 .env
+.coverage*
+.ruff_cache/**
+.mypy_cache/**
+spec/**/*.kvx.lock
+spec/**/*.kvx.claim.lock

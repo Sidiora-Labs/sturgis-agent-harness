@@ -147,3 +147,31 @@ def test_changed_optional_parameter_invalidates_documented_command_contract(tmp_
     source.write_text(ast.unparse(ast.fix_missing_locations(tree)))
     with pytest.raises(ValueError,match='work.cancel'):
         gate.contracts()
+
+
+def test_gateway_surface_new_resource_or_cli_option_requires_a_manual(tmp_path, monkeypatch):
+    monkeypatch.setattr(gate, 'ROOT', tmp_path)
+    monkeypatch.setattr(gate, 'DOCS', tmp_path/'documentation')
+    monkeypatch.setattr(gate, 'EVIDENCE', tmp_path/'evidence')
+    assert gate.gateway_surface()['status'] == 'absent'
+    source = tmp_path/'model_gateway'
+    source.mkdir()
+    (source/'api.py').write_text('''
+def routes():
+    reads = {"models": handler}
+    reads["settings"] = handler
+    if resource == "discover": pass
+    return Route(prefix + "/chat/completions", handler)
+''')
+    (source/'__main__.py').write_text('parser.add_argument("--port")\nparser.add_argument("serve")\n')
+    guide = tmp_path/'documentation/users/src/content/docs/gateway.md'
+    guide.parent.mkdir(parents=True)
+    guide.write_text('/models /settings /discover /chat/completions --port')
+    assert gate.gateway_surface()['status'] == 'passed'
+    (source/'api.py').write_text((source/'api.py').read_text() + '\nreads["new-operation"] = handler\n')
+    with pytest.raises(ValueError, match='new-operation'):
+        gate.gateway_surface()
+    guide.write_text(guide.read_text() + ' /new-operation')
+    (source/'__main__.py').write_text('parser.add_argument("--new-limit")\n')
+    with pytest.raises(ValueError, match='--new-limit'):
+        gate.gateway_surface()

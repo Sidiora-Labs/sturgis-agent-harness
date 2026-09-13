@@ -165,8 +165,7 @@ class MemorySleep:
         keys = {"cycle_id", "status", "state", "phase", "cursor", "generation", "source_watermark", "attempt", "rejected", "pending_prune", "error"}
         return {key: value[key] for key in keys if key in value}
 
-    async def run_cycle(self, scope, now=None):
-        validate_scope(scope)
+    def _cycle_identity(self, now=None):
         timestamp = time.time() if now is None else now
         if type(timestamp) not in (int, float) or not math.isfinite(timestamp) or timestamp < 0:
             raise CoreError("memory_time", "Cycle time must be finite UTC seconds")
@@ -174,7 +173,23 @@ class MemorySleep:
             day = datetime.fromtimestamp(timestamp, utc_timezone.utc).astimezone(self.timezone).date().isoformat()
         except (OverflowError, OSError, ValueError) as exc:
             raise CoreError("memory_time", "Cycle timestamp is outside the supported calendar") from exc
-        key = self.timezone.key + "|" + day
+        return timestamp, self.timezone.key + "|" + day
+
+    def due(self, scope, now=None):
+        """Check durable day/lease state before allocating background work."""
+        validate_scope(scope)
+        _, key = self._cycle_identity(now)
+        row = self.journal.get(self.namespace, key, scope)
+        if row is None:
+            return True
+        if row.value["phase"] == "complete":
+            return False
+        return not (row.value.get("owner") not in (None, self.owner)
+                    and row.value.get("owner_until", 0) > time.time())
+
+    async def run_cycle(self, scope, now=None):
+        validate_scope(scope)
+        timestamp, key = self._cycle_identity(now)
         async with self._locks.setdefault(scope, asyncio.Lock()):
             value, claimed = await asyncio.to_thread(self._claim, scope, key, timestamp)
             if not claimed:

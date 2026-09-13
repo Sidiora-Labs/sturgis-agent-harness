@@ -8,6 +8,16 @@ and qualification workflow:
 | Users | `users/src/content/docs/` | `dist/users/` | `http://127.0.0.1:4321` |
 | Developers | `developers/src/content/docs/guides/` and generated `reference/files/` | `dist/developers/` | `http://127.0.0.1:4322` |
 
+For the independent Model Gateway, begin with the [user connection manual](users/src/content/docs/guides/model-gateway.md),
+[native account guide](users/src/content/docs/guides/gateway-accounts.md),
+[routing and keys](users/src/content/docs/guides/gateway-routing-keys.md), and
+[standalone installation](users/src/content/docs/getting-started/standalone-gateway.md).
+Developer coverage starts with [gateway architecture](developers/src/content/docs/guides/gateway/architecture.md),
+[HTTP contracts](developers/src/content/docs/guides/gateway/http-api.md),
+[authentication](developers/src/content/docs/guides/gateway/authentication.md), and
+[frontend implementation](developers/src/content/docs/guides/gateway/frontend.md).
+The source inventory includes the complete `model_gateway/` package independently of agent modules.
+
 User manuals teach actual product tasks, with prerequisites, worked examples,
 expected results, errors and recovery. Developer guides explain architecture,
 contracts, data ownership, important control paths, extensions, frontend behavior,

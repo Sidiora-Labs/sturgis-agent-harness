@@ -1,0 +1,52 @@
+[meta]
+feature = "repository-foundations"
+title = "Repository foundations for an active development project"
+status = "done"
+spec_version = "1.0.0"
+intro = "The user stopped runtime repair qualification and requested professional root documentation, Apache-2.0 licensing, contributor workflows, local tooling, CI and a development container. This pass does not certify or publish Sturgis for production."
+
+[design]
+overview = "Preserve application work and private installation data. Add a shared root command interface used by contributors, CI and the development container. Keep runtime coverage requirements intact and distinguish current local validation from pending complete system qualification."
+include = "design.body.md"
+
+[documentation]
+mode = "manual"
+status = "done"
+audiences = ["user", "developer", "maintainer"]
+targets = ["README.md", "LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md", "CONTRIBUTING.md", "CONTRIBUTE.md", "CHANGELOG.md", "SECURITY.md", "CONTRIBUTORS.md", ".github/**", ".devcontainer/**", "spec/repository-foundations/**", "documentation/developers/src/content/docs/reference/files/agent/memory/sleep.py.md", "documentation/developers/src/content/docs/reference/files/agent/provider_adapters/__init__.py.md", "documentation/developers/src/content/docs/reference/files/agent/runtime/__init__.py.md", "documentation/developers/src/content/docs/reference/files/agent/scheduler/__init__.py.md", "documentation/developers/src/content/docs/reference/files/agent/state/__init__.py.md", "documentation/developers/src/content/docs/reference/files/consumer/application.py.md", "documentation/developers/src/content/docs/reference/files/consumer/gateway.py.md", "documentation/developers/src/content/docs/reference/files/consumer/providers.py.md", "documentation/developers/src/content/docs/reference/files/frontend/src/pages/ConversationPage.tsx.md", "documentation/developers/src/content/docs/reference/files/frontend/tests/conversation.test.tsx.md", "documentation/developers/src/content/docs/reference/files/frontend/tests/gateway.test.tsx.md", "documentation/developers/src/content/docs/reference/files/frontend/tests/hooks.test.tsx.md", "documentation/developers/src/content/docs/reference/files/model_gateway/service.py.md", "documentation/developers/src/content/docs/reference/files/model_gateway/translation.py.md", "documentation/developers/src/content/docs/reference/files/tests/consumer/test_connectors.py.md", "documentation/developers/src/content/docs/reference/files/tests/consumer/test_gateway_probe_authority.py.md", "documentation/developers/src/content/docs/reference/files/tests/consumer/test_gateway_readiness.py.md", "documentation/developers/src/content/docs/reference/files/tests/consumer/test_probe_lease.py.md", "documentation/developers/src/content/docs/reference/files/tests/consumer/test_probe_tool_schema.py.md", "documentation/developers/src/content/docs/reference/files/tests/core/test_active_work_queries.py.md", "documentation/developers/src/content/docs/reference/files/tests/core/test_agent_identity.py.md", "documentation/developers/src/content/docs/reference/files/tests/core/test_memory_sleep_cadence.py.md", "documentation/developers/src/content/docs/reference/files/tests/core/test_provider_error_details.py.md", "documentation/developers/src/content/docs/reference/files/tests/gateway/native_browser.mjs.md", "documentation/developers/src/content/docs/reference/files/tests/gateway/test_gateway_agent_identity.py.md", "documentation/developers/src/content/docs/reference/files/tests/gateway/test_gateway_boundaries.py.md", "documentation/developers/src/content/docs/reference/files/tests/gateway/test_model_limit_compat.py.md", "documentation/developers/src/content/docs/reference/files/tests/gateway/test_openrouter_compat.py.md"]
+scope = "Root repository documentation and contributor workflows. Existing source-reference targets are read-only supporting documents for the preserved snapshot; their inclusion does not certify the stopped runtime or two-site qualification, which remains incomplete in sturgis-03."
+
+[req.1]
+title = "Honest project documentation and license"
+story = "A reader immediately understands the project's purpose, development-only status, setup, contribution path and licensing."
+ac_1 = "README prominently states under active development and not fit for production use, describes current scope and limitations, and links real setup, architecture and both documentation sites."
+ac_2 = "Add the user-selected unmodified Apache-2.0 LICENSE, first-party NOTICE and retained third-party notices; package metadata agrees."
+ac_3 = "Provide CONTRIBUTING and requested CONTRIBUTE entrypoint, Unreleased CHANGELOG, SECURITY and CONTRIBUTORS without invented release history, maintainers, contact addresses or support guarantees."
+
+[req.2]
+title = "Shared local tooling and safe repository hygiene"
+story = "Contributors can install, lint, format-check, typecheck, build and run existing qualification from documented root commands."
+ac_1 = "Add version guidance, editor/format/lint configuration and root command targets that work with current Python, C++ and frontend code. Any existing formatting debt is explicitly bounded and cannot exempt newly changed source."
+ac_2 = "Ignore local credentials, caches and writer locks; relocate disposable root coverage shards into ignored build storage while preserving prior work, evidence and user data."
+ac_3 = "Keep independent 90 percent executable-line coverage requirements intact. Local tooling validation must not be represented as complete runtime or production qualification."
+
+[req.3]
+title = "CI, development container and package completeness"
+story = "A fresh contributor checkout has reproducible development entrypoints and CI definitions that exercise the real gates."
+ac_1 = "GitHub Actions use verified pinned actions, least-privilege tokens, explicit toolchains and independent quality/runtime/docs jobs with no fabricated pass or swallowed failures."
+ac_2 = "Provide non-root self-hosted development container setup without privileged execution, embedded credentials or host Docker socket; document hosted namespace restrictions and actual local validation limits."
+ac_3 = "Wheel staging includes the independent gateway and project license/readme/notices alongside existing native and web assets."
+
+[task.1.1]
+title = "Repository documents, toolchain and contributor infrastructure"
+status = "done"
+wave = 1
+owner_lane = "root"
+requires = []
+reqs = ["1.1", "1.2", "1.3", "2.1", "2.2", "2.3", "3.1", "3.2", "3.3"]
+touches = ["README.md", "LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md", "CONTRIBUTING.md", "CONTRIBUTE.md", "CHANGELOG.md", "SECURITY.md", "CONTRIBUTORS.md", "Makefile", ".github/**", ".gitignore", ".cgignore", "eslint.config.mjs", "pyproject.toml", "package.json", "scripts/check_format.py", "tests/test_repository_tooling.py", "tests/consumer/test_connectors.py", "consumer/application.py", "documentation/developers/src/content/docs/guides/getting-started/contribution.md", "packaging/build-wheel.sh", "spec/repository-foundations/**", "spec/workflow.kvx"]
+verify_cmd = "make lint typecheck format-check test-tooling"
+
+[verification]
+configuration_paths = [".devcontainer/devcontainer.json", ".devcontainer/Dockerfile", ".devcontainer/post-create.sh", ".devcontainer/README.md", ".dockerignore", ".env.example", ".mcp.json", ".editorconfig", ".clang-format", ".prettierrc.json", ".format-debt.json", ".pre-commit-config.yaml", ".python-version", ".nvmrc", ".node-version", "package-lock.json", "documentation/coverage/developers.json", ".research/readme-writing.md"]
+configuration_scope = "These additional owned configuration and research files are validated by root tooling, schema/shell checks, license/package inspection and documentation link checks. The local code graph omits these dot paths, lockfiles and generated coverage catalogs, so graph trace is limited to its indexed source paths."

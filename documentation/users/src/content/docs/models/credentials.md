@@ -3,11 +3,13 @@ title: "Store, rotate, and revoke credentials"
 description: "Keep model and connection secrets in the private vault and reconnect their exact revisions when values change."
 ---
 
-Credentials are private values referenced by model and connection configurations. Store the value once and select its returned reference. Inspection returns names, revisions, references, and state; it does not reveal stored secrets.
+For normal model setup, enter a provider key directly in the [Model Gateway connection drawer](../guides/model-gateway.md), or use [provider account sign-in](../guides/gateway-accounts.md). Gateway provider credentials and app keys belong to the gateway; they do not require an agent vault reference.
+
+This guide covers the existing agent vault used by legacy model and external connection configurations. Credentials are private values referenced by those configurations. Store the value once and select its returned reference. Inspection returns names, revisions, references, and state; it does not reveal stored secrets.
 
 ## Store a credential
 
-In **Settings → Models & credentials**, choose **Add credential**. Enter a short credential name and the secret in the password field, then choose **Store credential**. The successful form clears the secret. Select the saved reference when configuring a model or connection.
+In **Settings → Agent model → Advanced: legacy model connections, credentials & usage**, choose **Add credential**. Enter a short credential name and the secret in the password field, then choose **Store credential**. The successful form clears the secret. Select the saved reference when configuring a model or connection.
 
 The CLI provides a private prompt:
 

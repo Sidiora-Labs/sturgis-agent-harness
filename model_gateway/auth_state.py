@@ -9,7 +9,7 @@ from __future__ import annotations
 import secrets
 
 from .errors import GatewayError
-from .wire import json_dumps, json_loads
+from .wire import json_dumps
 
 
 def _read(store, db, tenant, kind, id):

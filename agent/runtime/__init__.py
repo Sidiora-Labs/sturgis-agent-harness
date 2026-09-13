@@ -27,6 +27,7 @@ from agent.skills import SkillRegistry
 from agent.state import Journal
 from agent.subagents import Subagents
 from agent.tool_runner import ToolDispatcher
+from agent.runtime.identity import AGENT_NAME, AGENT_DEVELOPER, IDENTITY_VERSION, IDENTITY_INSTRUCTIONS
 
 
 INVOKE_SCHEMA = [{"type": "function", "function": {"name": "invoke",
@@ -209,7 +210,7 @@ class CoreRuntime:
         with self.journal.transaction():
             if self._admission_paused: return
             self.scheduler.tick(self.scope)
-            for work in self.journal.list("work", self.scope):
+            for work in self.journal.list_states("work", self.scope, ("queued",)):
                 if work.value["kind"] != "scheduled_prompt" or work.value["state"] != "queued" or self.journal.get("runtime_turns", work.id, self.scope): continue
                 payload = work.value["payload"]["input"]
                 binding = self.channels.resolve(self.scope, payload["binding_id"])
@@ -462,10 +463,11 @@ class CoreRuntime:
         tools_available = bool(self.tools.registry) and descriptor.get("tools", False)
         overhead = len(canonical_json(INVOKE_SCHEMA if tools_available else []).encode()) + 256
         budget = descriptor["context_limit"] - descriptor["output_limit"] - overhead
-        instructions = self.instructions + "\nRegistered capabilities:\n" + canonical_json(self.tools.descriptors() if tools_available else [])
+        instructions = IDENTITY_INSTRUCTIONS + "\n\n" + self.instructions + "\nRegistered capabilities:\n" + canonical_json(self.tools.descriptors() if tools_available else [])
         if not descriptor.get("tools", False):
             instructions += "\nThis invocation is text-only. No tools are available; do not propose tool calls."
-        blocks = [ContextBlock("instructions", self.scope, "instructions", instructions, "system", True)]
+        blocks = [ContextBlock("instructions", self.scope, "instructions", instructions, "system", True,
+                               origin="harness_configuration")]
         previous = [r for r in self.journal.list("runtime_turns", self.scope) if r.id != work_id
                     and r.value["binding_id"] == row.value["binding_id"] and r.value["state"] in TERMINAL]
         previous.sort(key=lambda r: r.value.get("source_seq", 0))
@@ -519,6 +521,7 @@ class CoreRuntime:
             output_reserve=descriptor["output_limit"], protocol_overhead=overhead,
             selected_ids=[item["id"] for item in selection.value["selected"]],
             metadata={"selection_id": selection.id, "profile_revision": self.profiles.get(self.scope).revision,
+                "agent_identity": {"name": AGENT_NAME, "developer": AGENT_DEVELOPER, "version": IDENTITY_VERSION},
                 "provider_revision": descriptor.get("revision"), "memory_observed_at": memory.value["at"] if memory else None})
         with self.journal.transaction():
             self.journal.put("context_packets", packet.id, self.scope, packet.as_dict())
@@ -671,13 +674,15 @@ class CoreRuntime:
             work, admitted = None, None
             async with self._background_lock:
                 turns = await asyncio.to_thread(self.journal.list, "runtime_turns", self.scope)
-                if not self._admission_paused and not any(row.value["state"] not in TERMINAL for row in turns):
+                sleep_now = time.time()
+                if (not self._admission_paused and not any(row.value["state"] not in TERMINAL for row in turns)
+                        and await asyncio.to_thread(self.memory_sleep.due, self.scope, now=sleep_now)):
                     work = await asyncio.to_thread(self.scheduler.submit, self.scope, "memory_sleep", {},
                         resources={"elapsed_ms": 60000}, priority=-10)
                     admitted = await asyncio.to_thread(self.scheduler.admit, self.scope, work.id, eligible_ids=[work.id])
                     if admitted:
                         self._sleep_work = work.id
-                        self._sleep_task = asyncio.create_task(self.memory_sleep.run_cycle(self.scope))
+                        self._sleep_task = asyncio.create_task(self.memory_sleep.run_cycle(self.scope, now=sleep_now))
                     else: await asyncio.to_thread(self.scheduler.cancel, self.scope, work.id, reason="foreground_priority")
             if admitted:
                 status = "failed"

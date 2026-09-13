@@ -22,15 +22,16 @@ def test_language_floors_use_unrounded_executable_lines():
 
 
 def test_complete_denominators_and_totals(tmp_path):
-    for name in ("agent/a.py", "consumer/a.py", "native/memory/a.cpp", "frontend/src/a.ts"):
+    for name in ("agent/a.py", "consumer/a.py", "model_gateway/a.py", "tests/gateway/wire.py", "native/memory/a.cpp", "frontend/src/a.ts"):
         p = tmp_path / name
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("source\n")
     py = {"files": {name: {"executed_lines": [1], "missing_lines": [], "summary": {
         "covered_lines": 1, "num_statements": 1, "missing_lines": 0, "excluded_lines": 0}}
-        for name in ("agent/a.py", "consumer/a.py")}, "totals": {
-        "covered_lines": 2, "num_statements": 2, "missing_lines": 0, "excluded_lines": 0}}
+        for name in ("agent/a.py", "consumer/a.py", "model_gateway/a.py")}, "totals": {
+        "covered_lines": 3, "num_statements": 3, "missing_lines": 0, "excluded_lines": 0}}
     assert gate.validate_python(py, tmp_path) == 100
+    assert gate.gateway_report(py, tmp_path)["totals"]["covered_lines"] == 1
     py["totals"]["covered_lines"] = 1
     with pytest.raises(SystemExit, match="totals"):
         gate.validate_python(py, tmp_path)
@@ -47,10 +48,38 @@ def test_complete_denominators_and_totals(tmp_path):
     js["totals"]["lines"]["total"] = 2
     with pytest.raises(SystemExit):
         gate.validate_web(js, tmp_path)
-    assert set(gate.snapshot(tmp_path)) == {"agent/a.py", "consumer/a.py", "native/memory/a.cpp", "frontend/src/a.ts"}
+    assert set(gate.snapshot(tmp_path)) == {"agent/a.py", "consumer/a.py", "model_gateway/a.py", "tests/gateway/wire.py", "native/memory/a.cpp", "frontend/src/a.ts"}
     before = gate.snapshot(tmp_path)
     (tmp_path / "consumer/a.py").write_text("new source\n")
     assert before != gate.snapshot(tmp_path)
+
+
+def test_gateway_coverage_cannot_be_diluted_by_other_python(tmp_path):
+    for name, lines in (("agent/a.py", 100), ("model_gateway/a.py", 10)):
+        path = tmp_path / name
+        path.parent.mkdir(parents=True)
+        path.write_text("value = 1\n" * lines)
+    def record(total, covered):
+        return {"executed_lines": list(range(1, covered + 1)), "missing_lines": list(range(covered + 1, total + 1)),
+                "summary": {"covered_lines": covered, "num_statements": total, "missing_lines": total - covered, "excluded_lines": 0}}
+    report = {"files": {"agent/a.py": record(100, 100), "model_gateway/a.py": record(10, 8)},
+              "totals": {"covered_lines": 108, "num_statements": 110, "missing_lines": 2, "excluded_lines": 0}}
+    assert gate.validate_python(report, tmp_path) > 90
+    with pytest.raises(SystemExit, match="below 90"):
+        gate.gateway_report(report, tmp_path)
+    del report["files"]["model_gateway/a.py"]
+    with pytest.raises(SystemExit, match="denominator"):
+        gate.gateway_report(report, tmp_path)
+
+
+def test_qualification_output_isolated_and_python_scope_complete(tmp_path):
+    assert gate.arguments([]).output == gate.ROOT / "evidence/sturgis-02"
+    options = gate.arguments(["--spec", "sturgis-03", "--gateway-browser"])
+    assert options.output == gate.ROOT / "evidence/sturgis-03" and options.gateway_browser
+    assert gate.arguments(["--output", str(tmp_path)]).output == tmp_path
+    command = gate.python_command(tmp_path)
+    assert {"--cov=agent", "--cov=consumer", "--cov=model_gateway", "tests/gateway"} <= set(command)
+    assert "--cov-report=json:" + str(tmp_path / "python-coverage.json") in command
 
 
 @pytest.fixture

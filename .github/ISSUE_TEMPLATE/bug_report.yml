@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible problem in the current development version.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Sturgis is under active development. Share a minimal reproduction; remove
+        credentials, private conversations and personal data from diagnostics.
+        For security issues, follow SECURITY.md instead of posting exploit details.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Expected and actual behavior
+      description: What did you expect, and what happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the smallest configuration and sequence that reproduce the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Commit/version, operating system, Python/Node versions, browser and self-hosted/hosted mode.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Exact error codes, relevant output and checks already attempted. Never include API keys or session tokens.

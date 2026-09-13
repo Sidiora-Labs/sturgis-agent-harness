@@ -8,7 +8,7 @@ import pytest
 from model_gateway.errors import GatewayError
 from model_gateway.network import NetworkPolicy
 from model_gateway.translation import StreamTranslator, token_usage, translate_request
-from model_gateway.transports import GatewayTransport, discover_models
+from model_gateway.transports import GatewayTransport, discover_models, native_client_headers
 from model_gateway.wire import json_dumps, json_loads
 
 
@@ -109,6 +109,8 @@ async def test_real_native_text_usage_and_header_translation(protocol, path, aut
         assert "secret-key" in requests[0]["headers"][auth]
         assert "secret-key" not in requests[0]["path"]
         assert "private" not in json_dumps(events)
+        if protocol == "openai-responses":
+            assert requests[0]["body"]["store"] is False
 
 
 @pytest.mark.parametrize("protocol,reason,expected", [("anthropic", "max_tokens", "length"), ("anthropic", "refusal", "content_filter"),
@@ -249,6 +251,54 @@ async def test_precancel_and_absolute_deadline_survive_first_chunk():
         assert seen[0]["choices"][0]["delta"]["content"] == "first"
 
 
+@pytest.mark.parametrize("native", [False, True])
+async def test_per_request_deadline_survives_output_and_releases_network_slot(native):
+    first = {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": "first"}}
+    gate = asyncio.Event()
+    async with wire([sse(first) if native else sse(oai({"content": "first"}))], timeout=3, delay_body=gate) as (url, policy, requests):
+        transport = GatewayTransport(policy)
+        stream = transport.native_stream("anthropic", url, {"model": "m"}, request_timeout=.3) if native else transport.stream("openai", url, payload(), request_timeout=.3)
+        available = policy._slots._value
+        seen = []
+        with pytest.raises(GatewayError) as caught:
+            async for event in stream:
+                seen.append(event)
+        assert caught.value.code == "timeout" and caught.value.retryable
+        assert caught.value.status == 504 and seen and len(requests) == 1
+        assert policy.timeout == 3 and policy._slots._value == available
+
+
+async def test_request_deadline_closes_upstream_during_downstream_backpressure():
+    gate = asyncio.Event()
+    async with wire([sse(*(oai({"content": str(index)}) for index in range(4)))], timeout=3, delay_body=gate) as (url, policy, _):
+        stream = GatewayTransport(policy).stream("openai", url, payload(), request_timeout=.3)
+        available = policy._slots._value
+        try:
+            assert (await anext(stream))["choices"][0]["delta"]["content"] == "0"
+            # The client pauses while the bounded queue fills. The producer's
+            # deadline must close HTTP without waiting for the next client read.
+            async def released():
+                while policy._slots._value != available:
+                    await asyncio.sleep(.005)
+            await asyncio.wait_for(released(), 1)
+            with pytest.raises(GatewayError) as caught:
+                assert [event async for event in stream]
+            assert caught.value.code == "timeout"
+        finally:
+            await stream.aclose()
+
+
+@pytest.mark.parametrize("native", [False, True])
+@pytest.mark.parametrize("limit", [True, 0, -1, float("inf"), float("nan"), "1", 4, 10**1000])
+async def test_request_deadline_cannot_expand_operator_authority(native, limit):
+    async with wire([native_text("openai")], timeout=3) as (url, policy, requests):
+        transport = GatewayTransport(policy)
+        stream = transport.native_stream("openai", url, payload(), request_timeout=limit) if native else transport.stream("openai", url, payload(), request_timeout=limit)
+        with pytest.raises(GatewayError) as caught:
+            assert [event async for event in stream]
+        assert caught.value.code == "invalid_timeout" and not requests
+
+
 async def test_network_policy_remains_authority():
     async with wire([native_text("openai")]) as (url, _, requests):
         with pytest.raises(GatewayError) as caught:
@@ -281,7 +331,7 @@ async def test_event_bound_is_enforced(body):
         assert caught.value.code == "provider_bounds"
 
 
-@pytest.mark.parametrize("catalog", [{"data": {}}, {"data": [None]}, {"data": [{"id": ""}]}, {"data": [{"id": "a", "name": None}]},
+@pytest.mark.parametrize("catalog", [{"data": {}}, {"data": [None]}, {"data": [{"id": ""}]}, {"data": [{"id": "a", "name": 1}]},
     {"data": [{}]}, [], {"data": [{"id": "a"}] * 2001}])
 async def test_bad_catalog_rejected(catalog):
     async with wire([catalog]) as (url, policy, _):
@@ -459,3 +509,138 @@ def test_repeated_provider_tool_id_is_emitted_once():
     t = StreamTranslator("openai", "m", {})
     assert t.tool(0, {"name": "tool", "arguments": "{"}, "same")["choices"][0]["delta"]["tool_calls"][0]["id"] == "same"
     assert "id" not in t.tool(0, {"arguments": "}"}, "same")["choices"][0]["delta"]["tool_calls"][0]
+
+
+@pytest.mark.parametrize("protocol", ["openai", "anthropic", "gemini", "openai-responses"])
+async def test_direct_native_stream_preserves_body_and_events(protocol):
+    body = {"model": "model", "input": [{"type": "reasoning", "encrypted_content": "opaque-past"}],
+            "messages": [{"role": "assistant", "content": [{"type": "thinking", "thinking": "prior", "signature": "signed"}]}],
+            "thinking": {"type": "adaptive"}, "max_tokens": 123, "max_output_tokens": 123,
+            "system": [{"type": "text", "text": "instructions", "cache_control": {"type": "ephemeral"}}]}
+    if protocol == "anthropic":
+        events = [{"type": "message_start", "message": {"usage": {"input_tokens": 2}}},
+            {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}},
+            {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "provider-native"}},
+            {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "opaque-signed-proof"}},
+            {"type": "content_block_stop", "index": 0},
+            {"type": "message_delta", "delta": {"stop_reason": "end_turn"}, "usage": {"output_tokens": 2}}, {"type": "message_stop"}]
+        response = sse(*events)
+    elif protocol == "openai-responses":
+        events = [{"type": "response.created"}, {"type": "response.output_item.added", "item": {"type": "reasoning", "id": "rs_new", "encrypted_content": "opaque-new"}},
+                  {"type": "response.completed", "response": {"output": [{"type": "reasoning", "encrypted_content": "opaque-new"}]}}]
+        response = sse(*events)
+    else:
+        events, response = None, native_text(protocol)
+    async with wire([response]) as (url, policy, requests):
+        output = [e async for e in GatewayTransport(policy).native_stream(protocol, url, body, "secret", extra_headers=
+            {"anthropic-beta": "prompt-caching-test", "anthropic-version": "2023-06-01"} if protocol == "anthropic" else {})]
+        if events:
+            assert [e["data"] for e in output] == events
+        transmitted = requests[0]["body"]
+        assert transmitted["system"] == body["system"] and transmitted["input"] == body["input"]
+        assert transmitted["messages"] == body["messages"]
+        if protocol == "anthropic":
+            assert requests[0]["headers"]["anthropic-beta"] == "prompt-caching-test"
+        if protocol == "openai-responses":
+            assert transmitted["store"] is False
+        if protocol == "gemini":
+            assert "model" not in transmitted
+
+
+def test_native_negotiation_headers_do_not_forward_client_authority():
+    assert native_client_headers({"X-Api-Key": "gateway-key", "Authorization": "Bearer gateway-key", "Host": "evil",
+        "Anthropic-Version": "2023-06-01", "Anthropic-Beta": "feature"}, "anthropic") == {
+        "anthropic-version": "2023-06-01", "anthropic-beta": "feature"}
+    with pytest.raises(GatewayError):
+        native_client_headers({"Anthropic-Beta": "evil\nheader"}, "anthropic")
+
+
+@pytest.mark.parametrize("reply,body,code", [((401, b"secret"), {"model": "m"}, "provider_auth"),
+    (sse({"type": "response.function_call_arguments.delta", "item_id": "unknown", "delta": "x"}), {"model": "m"}, "provider_protocol"),
+    (sse({"type": "injected\n\nevent"}), {"model": "m"}, "provider_protocol"),
+    (native_text("openai-responses"), {}, "invalid_request")])
+async def test_native_error_and_injection_bounds(reply, body, code):
+    async with wire([reply]) as (url, policy, _):
+        with pytest.raises(GatewayError) as caught:
+            assert [e async for e in GatewayTransport(policy).native_stream("openai-responses", url, body)]
+        assert caught.value.code == code
+
+
+async def test_native_cancel_and_codex_request_specialization():
+    async with wire([native_text("openai-responses")]) as (url, policy, requests):
+        assert [e async for e in GatewayTransport(policy).native_stream("openai-responses", url, {"model": "m", "max_output_tokens": 100}, preset_id="codex")]
+        assert requests[0]["body"]["store"] is False and "max_output_tokens" not in requests[0]["body"]
+    gate, cancel = asyncio.Event(), asyncio.Event()
+    async with wire([b""], delay_headers=gate) as (url, policy, requests):
+        async def consume():
+            return [e async for e in GatewayTransport(policy).native_stream("anthropic", url, {"model": "m"}, cancel=cancel)]
+        task = asyncio.create_task(consume())
+        for _ in range(100):
+            if requests:
+                break
+            await asyncio.sleep(.005)
+        cancel.set()
+        with pytest.raises(GatewayError, match="cancelled"):
+            await asyncio.wait_for(task, .3)
+
+
+def test_empty_native_function_object_has_valid_arguments():
+    t = StreamTranslator("anthropic", "m", {})
+    t.feed({"type": "message_start", "message": {}})
+    t.feed({"type": "content_block_start", "index": 0, "content_block": {"type": "tool_use", "id": "id", "name": "empty", "input": {}}})
+    close = t.feed({"type": "content_block_stop", "index": 0})
+    assert close[0]["choices"][0]["delta"]["tool_calls"][0]["function"]["arguments"] == "{}"
+    t.feed({"type": "message_delta", "delta": {"stop_reason": "tool_use"}})
+    t.feed({"type": "message_stop"})
+    t.end()
+
+
+def test_gemini_native_tool_identity_and_signature_replay_are_opaque():
+    signatures = {}
+    t = StreamTranslator("gemini", "m", signatures)
+    event = t.feed({"candidates": [{"content": {"parts": [{"functionCall": {"id": "provider-call", "name": "weather", "args": {}},
+        "thoughtSignature": "signed-content"}]}, "finishReason": "STOP"}]})[0]
+    call = event["choices"][0]["delta"]["tool_calls"][0]
+    identity = call["id"]
+    assert identity != "provider-call" and "signed-content" not in json_dumps(event)
+    request = translate_request("gemini", payload(messages=[{"role": "assistant", "tool_calls": [call]},
+        {"role": "tool", "tool_call_id": identity, "content": "Sunny"}]), signatures)
+    assert request["contents"][0]["parts"][0]["functionCall"]["id"] == "provider-call"
+    assert request["contents"][0]["parts"][0]["thoughtSignature"] == "signed-content"
+    assert request["contents"][1]["parts"][0]["functionResponse"]["id"] == "provider-call"
+    with pytest.raises(GatewayError):
+        StreamTranslator("gemini", "m", {}).feed({"candidates": [{"content": {"parts": [{"functionCall": {"id": [], "name": "x"}}]}}]})
+
+
+async def test_responses_done_only_vendor_content_and_functions_are_not_lost():
+    text_item = {"type": "message", "id": "m", "content": [{"type": "output_text", "text": "Full answer"}]}
+    tool_item = {"type": "function_call", "id": "f", "call_id": "c", "name": "weather", "arguments": '{"city":"Paris"}'}
+    events = [{"type": "response.output_text.delta", "item_id": "m", "content_index": 0, "delta": "Full "},
+        {"type": "response.output_text.done", "item_id": "m", "content_index": 0, "text": "Full answer"},
+        {"type": "response.output_item.done", "item": text_item},
+        {"type": "response.output_item.added", "item": {**tool_item, "arguments": ""}},
+        {"type": "response.output_item.done", "item": tool_item},
+        {"type": "response.completed", "response": {"output": [text_item, tool_item]}}]
+    async with wire([sse(*events)]) as (url, policy, _):
+        result = await collect("openai-responses", url, policy)
+        assert "".join(c["delta"].get("content", "") for e in result for c in e["choices"]) == "Full answer"
+        fragments = [part for e in result for c in e["choices"] for part in c["delta"].get("tool_calls", [])]
+        assert "".join(p["function"].get("arguments", "") for p in fragments) == tool_item["arguments"]
+    t = StreamTranslator("openai-responses", "m", {})
+    result = t.feed({"type": "response.completed", "response": {"output": [text_item, tool_item]}})
+    assert any(e["choices"][0]["delta"].get("content") == "Full answer" for e in result)
+
+
+def test_responses_completed_content_cannot_rewrite_observed_output():
+    t = StreamTranslator("openai-responses", "m", {})
+    t.feed({"type": "response.output_text.delta", "delta": "original"})
+    with pytest.raises(GatewayError):
+        t.feed({"type": "response.output_text.done", "text": "changed"})
+    item = {"type": "function_call", "id": "f", "call_id": "c", "name": "a", "arguments": "{"}
+    t.feed({"type": "response.output_item.added", "item": item})
+    with pytest.raises(GatewayError):
+        t.feed({"type": "response.output_item.done", "item": {**item, "name": "changed"}})
+    with pytest.raises(GatewayError):
+        t.feed({"type": "response.output_item.added", "item": item})
+    refusal = StreamTranslator("openai-responses", "m", {}).feed({"type": "response.refusal.done", "refusal": "No"})
+    assert refusal[0]["choices"][0]["delta"]["refusal"] == "No"

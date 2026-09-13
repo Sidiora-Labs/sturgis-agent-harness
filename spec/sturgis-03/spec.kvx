@@ -17,6 +17,18 @@ targets = ["README.md", "spec/sturgis-03/**", "documentation/README.md", "docume
 user_site = "documentation/users"
 developer_site = "documentation/developers"
 full_gate = "python3 scripts/docs_gate.py full"
+qualification_receipt = "evidence/sturgis-docs/qualification.json"
+runtime_qualification_receipt = "evidence/sturgis-03/qualification.json"
+live_verification = "evidence/sturgis-03/live.json"
+live_openrouter_chat = "evidence/sturgis-03/openrouter-live.json"
+live_openrouter_tools = "evidence/sturgis-03/openrouter-live-tools.json"
+live_agent_identity = "evidence/sturgis-03/identity-live.json"
+live_conversation_history = "evidence/sturgis-03/history-live.json"
+qualified_user_pages = 45
+qualified_developer_pages = 347
+qualified_source_reference_files = 288
+qualified_source_lines = 62632
+qualified_source_symbols = 4254
 
 [req.1]
 title = "Independent subsystem and source-grounded reference"
@@ -51,62 +63,107 @@ story = "As a user or developer, I can learn and operate every gateway feature w
 ac_1 = "Both documentation sites include gateway setup, free-tier limits, local/custom providers, model discovery, keys, routes, troubleshooting, standalone operation, architecture, all source references and boundaries."
 ac_2 = "Preserve full Python/C++/client 90 percent executable-line floors; include model_gateway in production and documentation inventories, run full documentation gate, and report live vendor qualification separately from controlled wire proof."
 
+[req.6]
+title = "Complete native account lifecycle and client protocols"
+story = "As a gateway user, I sign in to supported provider accounts and use native model clients without configuring an agent."
+ac_1 = "Implement native GitHub Copilot and Kiro device flows plus Codex and Gemini CLI PKCE, tenant-bound expiring sessions, cancellation, encrypted token bundles, account discovery, provider-specific inference and durable refresh fencing. No third-party gateway installation substitutes for these paths."
+ac_2 = "Standalone administration includes its own authenticated UI, management sessions, settings, export/import recovery and client-key lifecycle; provider entitlements and actual remote sign-in qualification remain explicit."
+ac_3 = "Expose OpenAI Chat, Responses and Anthropic Messages client APIs. Preserve native signed/opaque state for matching protocols and reject unsupported lossy cross-format transformations explicitly. Exercise streams, nonstream collection, failure after output, request cancellation and account restart paths."
+
 [task.1.1]
 title = "Gateway state, authority, service and composition contracts"
-status = "in_progress"
+status = "done"
 wave = 1
 owner_lane = "root"
 requires = []
 reqs = ["1.2", "2.3", "3.2", "3.3", "4.2"]
-touches = ["model_gateway/__init__.py", "model_gateway/errors.py", "model_gateway/wire.py", "model_gateway/network.py", "model_gateway/store.py", "model_gateway/service.py", "model_gateway/api.py", "model_gateway/__main__.py", "consumer/gateway.py", "consumer/api.py", "consumer/application.py", "consumer/workers.py", "tests/gateway/test_store.py", "tests/gateway/test_service.py", "tests/gateway/test_api.py", "tests/gateway/test_integration.py", "pyproject.toml", ".gitignore", ".cgignore"]
-verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_store.py tests/gateway/test_service.py tests/gateway/test_api.py tests/gateway/test_integration.py -q"
+touches = ["model_gateway/__init__.py", "model_gateway/errors.py", "model_gateway/wire.py", "model_gateway/network.py", "model_gateway/store.py", "model_gateway/service.py", "model_gateway/api.py", "model_gateway/__main__.py", "consumer/gateway.py", "consumer/api.py", "consumer/application.py", "consumer/workers.py", "tests/gateway/test_store.py", "tests/gateway/test_service.py", "tests/gateway/test_api.py", "tests/gateway/test_integration.py", "pyproject.toml", ".gitignore", ".cgignore", "model_gateway/controls.py", "model_gateway/callbacks.py", "consumer/providers.py", "frontend/src/lib/api.ts", "frontend/src/gateway-main.tsx", "frontend/vite.config.ts", "tests/gateway/test_controls.py", "tests/gateway/test_callbacks.py", "tests/gateway/test_cli.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_store.py tests/gateway/test_service.py tests/gateway/test_api.py tests/gateway/test_integration.py tests/gateway/test_controls.py tests/gateway/test_callbacks.py tests/gateway/test_cli.py -q"
 
 [task.1.2]
 title = "Pinned 9router architecture audit and provider registry"
-status = "in_progress"
+status = "done"
 wave = 1
 owner_lane = "gateway_catalog"
 requires = []
 reqs = ["1.1", "2.2"]
-touches = [".research/9router-gateway.md", "model_gateway/catalog.py", "tests/gateway/test_catalog.py"]
+touches = ["spec/sturgis-03/reference.md", "model_gateway/catalog.py", "tests/gateway/test_catalog.py"]
 verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_catalog.py -q"
 
 [task.1.3]
 title = "Independent general-purpose format translation and model discovery"
-status = "in_progress"
+status = "done"
 wave = 1
 owner_lane = "gateway_transports"
 requires = []
 reqs = ["2.1", "3.1"]
-touches = ["model_gateway/transports.py", "model_gateway/translation.py", "tests/gateway/test_transports.py"]
-verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_transports.py -q"
+touches = ["model_gateway/transports.py", "model_gateway/translation.py", "model_gateway/ingress.py", "tests/gateway/test_transports.py", "tests/gateway/test_ingress.py", "tests/gateway/test_gateway_boundaries.py"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_transports.py tests/gateway/test_ingress.py -q"
 
 [task.1.4]
 title = "Installation gateway management and simple agent model selection"
-status = "in_progress"
+status = "done"
 wave = 1
 owner_lane = "gateway_ui"
 requires = []
 reqs = ["2.1", "4.1", "4.2"]
-touches = ["frontend/src/App.tsx", "frontend/src/components/Shell.tsx", "frontend/src/pages/SettingsPage.tsx", "frontend/src/pages/gateway/**", "frontend/src/lib/types.ts", "frontend/tests/**"]
+touches = ["frontend/src/App.tsx", "frontend/src/components/Shell.tsx", "frontend/src/pages/SettingsPage.tsx", "frontend/src/pages/gateway/**", "frontend/src/gateway-main.tsx", "frontend/gateway.html", "frontend/src/lib/types.ts", "frontend/tests/**"]
 verify_cmd = "npm run typecheck:web && npx vitest run --config frontend/vitest.config.ts"
+
+[task.1.5]
+title = "Native sign-in, atomic refresh and account-specific inference"
+status = "done"
+wave = 1
+owner_lane = "gateway_catalog"
+requires = ["1.2"]
+reqs = ["6.1", "6.3"]
+touches = ["model_gateway/auth.py", "model_gateway/auth_state.py", "model_gateway/auth_transports.py", "tests/gateway/test_auth.py", "tests/gateway/test_auth_transports.py", "tests/gateway/test_auth_integration.py", "model_gateway/THIRD_PARTY_NOTICES.md"]
+verify_cmd = ".venv/bin/python -m pytest tests/gateway/test_auth.py tests/gateway/test_auth_transports.py tests/gateway/test_auth_integration.py -q"
 
 [task.2.1]
 title = "Standalone and consumer integration qualification and live restart"
-status = "pending"
+status = "done"
 wave = 2
 owner_lane = "root"
-requires = ["1.1", "1.2", "1.3", "1.4"]
+requires = ["1.1", "1.2", "1.3", "1.4", "1.5"]
 reqs = ["4.3", "5.2"]
-touches = ["scripts/qualify_consumer.py", "scripts/qualify_gateway.py", "tests/gateway/**", "tests/consumer_web/**", "tests/consumer/**", "evidence/sturgis-03/**", "spec/sturgis-03/**"]
-verify_cmd = ".venv/bin/python scripts/qualify_gateway.py"
+touches = ["scripts/qualify_consumer.py", "scripts/qualify_gateway.py", "tests/gateway/**", "tests/consumer_web/**", "tests/consumer/**", "frontend/src/App.tsx", "frontend/vitest.config.ts", "spec/sturgis-03/**", "scripts/verify_web.mjs"]
+verify_cmd = ".venv/bin/python scripts/qualify_gateway.py --check"
 
 [task.2.2]
 title = "Complete user and developer gateway documentation"
-status = "pending"
+status = "done"
 wave = 2
 owner_lane = "docs"
-requires = ["1.1", "1.2", "1.3", "1.4"]
+requires = ["1.2", "1.4"]
 reqs = ["5.1", "5.2"]
-touches = ["documentation/**", "docs/sturgis-03/**", "model_gateway/README.md", "README.md", "scripts/docs_reference/**", "scripts/docs_gate.py", "tests/docs_site_gate.py", "tests/documentation/**"]
-verify_cmd = "python3 scripts/docs_gate.py full"
+touches = ["documentation/**", "docs/sturgis-03/**", "model_gateway/README.md", "README.md", "scripts/docs_reference/**", "scripts/docs_gate.py", "tests/docs_site_gate.py"]
+verify_cmd = "python3 scripts/docs_gate.py verify-receipt"
+
+[req.7]
+title = "Real OpenRouter activation and truthful readiness"
+story = "As a user, an imported OpenRouter model can be activated and produce an actual agent response, and failures identify the affected model without exposing secrets."
+ac_1 = "Accept an unchanged empty terminal choice accompanying final OpenRouter usage without duplicating output or terminal events; reject changed finishes, new output, tool calls and backwards usage."
+ac_2 = "Distinguish catalog import from verified inference in gateway labels. Preserve safe categorized HTTP and stream failures through provider probes to contextual model selection feedback and retry."
+ac_3 = "Exercise the actual failing stream shape through consumer binding and real HTTP fixtures, then activate the user's configured model and verify a real agent response. Preserve existing data and independent 90 percent coverage floors and refresh both documentation sites."
+ac_4 = "Models with an advertised output limit above 262144 can complete ordinary agent chat after activation. Align generic request validation with the existing 2000000-token capability domain while retaining imported-model limits and strict integer bounds."
+
+ac_5 = "Tool capability probes use the same canonical invocation schema as agent execution. Any text-only fallback is visible and can be retried with a new completed-request identity while pending uncertain requests retain reconciliation identity. Verify a real read-only tool action and its final model response."
+
+ac_6 = "An existing installation remains responsive after thousands of historical jobs: completed daily memory sleep does not enqueue redundant work, scoped state queries exclude terminal history from admission and status paths, and old records remain intact across restart."
+
+ac_7 = "Readiness checks renew their scheduler lease while bounded model I/O runs, stop renewal and close the stream on cancellation or authority loss, and retain factual usage. Slow successful tool checks can activate without extending global budgets or ignoring lease expiry."
+
+ac_8 = "Every agent model invocation receives mandatory harness-owned identity: Sturgis, developed by Sidiora Labs, distinct from its underlying model. Preserve identity with custom instructions, tool continuations, provider changes, and restored transcripts; retain prior incorrect self-descriptions as attributed history rather than authority. Verify the user-selected live model corrects its prior identity claim."
+
+ac_9 = "Opening an existing listed conversation promptly displays its saved messages without scanning unrelated maintenance history. Public event pagination filters by authorized scope and binding before limiting, preserves cursor continuity and terminal events, and the UI distinguishes loading, reconnecting and genuinely empty history. Verify switching and reloading existing chats with original data preserved."
+
+[task.3.1]
+title = "Repair live model readiness, agent identity and runtime continuity"
+status = "in_progress"
+wave = 3
+owner_lane = "root"
+requires = ["2.1", "2.2"]
+reqs = ["7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7", "7.8", "7.9"]
+touches = ["frontend/src/hooks/useEvents.ts", "frontend/src/pages/ConversationPage.tsx", "frontend/tests/**", "agent/runtime/identity.py", "tests/core/test_agent_identity.py", "tests/gateway/test_gateway_agent_identity.py", "tests/gateway/native_browser.mjs", "agent/memory/sleep.py", "agent/runtime/__init__.py", "agent/state/__init__.py", "agent/scheduler/__init__.py", "tests/core/test_memory_sleep_cadence.py", "tests/core/test_active_work_queries.py", "consumer/gateway.py", "tests/gateway/test_gateway_boundaries.py", "model_gateway/service.py", "tests/gateway/test_model_limit_compat.py", "model_gateway/translation.py", "agent/provider_adapters/__init__.py", "consumer/providers.py", "consumer/application.py", "frontend/src/pages/gateway/**", "frontend/tests/gateway.test.tsx", "tests/gateway/test_openrouter_compat.py", "tests/core/test_provider_error_details.py", "tests/consumer/**", "spec/sturgis-03/**"]
+verify_cmd = ".venv/bin/python scripts/qualify_gateway.py --check"

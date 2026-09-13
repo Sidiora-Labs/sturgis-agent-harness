@@ -1,0 +1,1193 @@
+{
+  "version": 1,
+  "formatters": {
+    "ruff": "0.16.7",
+    "prettier": "3.9.6",
+    "clang-format": "18.1.8"
+  },
+  "config_sha256": {
+    ".prettierrc.json": "9e6955963b9b7a93b7fa5ba5f538da9d595be48cc33cf5ea5f5c66f414ae8063",
+    ".editorconfig": "22ed7db3571572d708812eafc91232c95ebade3898cc3b8f9c3ab54d60eb09b3",
+    ".clang-format": "ea04e710dfe0a172a2907ca2f7ddc7c4b697d3f0d38a9ee604016013d0476c0f",
+    "tool.ruff": "dbf71007595e6d1bc347045e3b1bcc882e357c98f75c2842b0e1147cb0248d51"
+  },
+  "description": "Unchanged historical formatting debt only; changed or new violations fail.",
+  "files": {
+    ".research/9router-gateway.md": {
+      "formatter": "prettier",
+      "sha256": "8b93934dde70ea937708957a4d6ea2f562f3918ac4ec0f00c8beecdca9b019d3"
+    },
+    ".research/agent-architecture-v0.1.md": {
+      "formatter": "prettier",
+      "sha256": "a66f5acacc7e79ec6f0148d42ac728e86ff6463c3645ed81d3251ea4bdda21a9"
+    },
+    ".research/agent-architecture-v0.2.md": {
+      "formatter": "prettier",
+      "sha256": "39a8149907a139ceda5331491b03c64e95fbccb54016959cd80bfde1de940217"
+    },
+    ".research/agent-interface-contracts-v0.1.md": {
+      "formatter": "prettier",
+      "sha256": "d26e3b7c99cbb4aa911cf82ac0ad56354c174be5a59cf49aa44f5d0de1aa7e19"
+    },
+    ".research/agent-interface-contracts-v0.2.md": {
+      "formatter": "prettier",
+      "sha256": "a8412329ba8a74d741b6fef62b1ab2c79f82ecf2a4421c4f931dd5390f9aa412"
+    },
+    ".research/agent-memory-systems-2026-09-12.md": {
+      "formatter": "prettier",
+      "sha256": "52240acebcb24d1c277d0325b0fde860b6453cf2457e75cd9d9fc2f495685576"
+    },
+    ".research/agent-module-map-v0.2.md": {
+      "formatter": "prettier",
+      "sha256": "d083295d71a9b535789a5fb9094b764786871424b5538bdce4abb6cdeca53b55"
+    },
+    ".research/diagrams/render_overview.py": {
+      "formatter": "ruff",
+      "sha256": "9a6c509c98404f0a5c43007a1945974faedb84c15c088dc275977345baffe6be"
+    },
+    ".research/diagrams/v0.2/render_module_map.py": {
+      "formatter": "ruff",
+      "sha256": "9e787d98301627115023fce7d61d32f4c83a7afb424d618a216dd372072148a1"
+    },
+    ".research/keith-module-reference-2026-09-12.md": {
+      "formatter": "prettier",
+      "sha256": "42935b703ef0353ca7601f68799cafe135e1094e39d5f77a7fd323ee68ff046a"
+    },
+    ".research/sturgis-02-core-boundaries.md": {
+      "formatter": "prettier",
+      "sha256": "16d6bc5c68e7287da80e64e0d21f5e9fb8305d8978577ac982f9aee8aebde593"
+    },
+    ".research/sturgis-02-gideon-reference.md": {
+      "formatter": "prettier",
+      "sha256": "2d1d2f4b46340809327b861ac1d6e356362c6e30ac4ccc061ce00c580da72aa1"
+    },
+    ".research/sturgis-02-hermes-reference.md": {
+      "formatter": "prettier",
+      "sha256": "24cd1787fd61bd61778ec1383ecbbcbf9e7fc4b0c3d96ea2d38f7622c6511bcf"
+    },
+    ".research/sturgis-02-neo-reference.md": {
+      "formatter": "prettier",
+      "sha256": "ff8cc2e2060f642651242632b38ee4f789f106d69ac02e0c9e225801abc6ac89"
+    },
+    ".research/sturgis-02-reference-synthesis.md": {
+      "formatter": "prettier",
+      "sha256": "327c651d2d41ea9def7045726bb00cfa1ddd4df1ddb8e6c75481f2f5c1de941d"
+    },
+    "agent/acp/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "6e0c980f80c539aeed2f79f1395597bf5c17bcaa2b20ca21b46e35158e4f19cf"
+    },
+    "agent/artifacts/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "0ad96cd2aaf7761ec94140edf4ba672d14e0914db15d5aaa902ab0eb35e3ba56"
+    },
+    "agent/attention/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "0eb8e257e66b28b532124485bc2bafdf7bafa9f9318493b3340f3bd0837cb0ea"
+    },
+    "agent/awareness/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "0895b4da88ef2ef516d17b3c0fe923595365bd24e987e692c04772da19ec9557"
+    },
+    "agent/awareness/evidence.py": {
+      "formatter": "ruff",
+      "sha256": "79f5344e28ae5ba87bbb4421cd6bef7d7b36eb4e1801501b7aefc7f9bfbe3854"
+    },
+    "agent/channel_adapters/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "28c8b12cc5ecfc5e53e23a04f09c4e4d5f9dd39e2a60944f4abef984c1f57ff7"
+    },
+    "agent/channel_core/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "c6031d99accd3d531e5c0e0a7f02c4465c02a88a10342da2019143d645885e74"
+    },
+    "agent/commitments/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "b76d9a07f2220e2f69ebe12554fbb3dea6aade6ea8ea8758f24b8624ace1d62f"
+    },
+    "agent/context/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "12726b5a064b725ca358d2926dec25a374f849764fe7b6eb4376df83676f9d61"
+    },
+    "agent/delivery/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "d5a480d550d4c4c2e342527b2b598ac91fd2e44a82b0ef00792835194fafb905"
+    },
+    "agent/framing/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "f2dda34ee256a5b1af1790dfb85f4766762f9ad7289bd62e23158c4945200709"
+    },
+    "agent/goals/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "f070a5427ceb954c08e421d0bc25eb229af493a53ef796b374733f6a9dedbec8"
+    },
+    "agent/initiative/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "d9770e540589c04ba98750b26e21a8f3acb250a6a6d881b9cb8c157f77508f65"
+    },
+    "agent/memory/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "35b35a3df70c69b86068cef2583ec22bf2edff16c9dedbe8b54336f81790f21a"
+    },
+    "agent/memory/client.py": {
+      "formatter": "ruff",
+      "sha256": "a6e9a1d94b1c59e86788f4a77c9e8df613d7caea4833a6921edc1dd36bee29ae"
+    },
+    "agent/memory/ingestion.py": {
+      "formatter": "ruff",
+      "sha256": "0fe64dd2c3e0e47a44ebdc3f62114914bf7d9bc80294bcd39d1c06198f8bfcd4"
+    },
+    "agent/memory/sleep.py": {
+      "formatter": "ruff",
+      "sha256": "3a1d34a87cb35ae8143a2bb54963f174ba02102ebfd318dcc8abc0215fa76144"
+    },
+    "agent/meta_harness/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "18a2a6b8f6177577f52e2bb1f9570a72f9e79f428476bb86f03d8fe7de4c8012"
+    },
+    "agent/planner/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "b80a1b09472f10f8f785affc920e66aeb8c08278f60fb7a222432c1b21fb60d6"
+    },
+    "agent/plugin_host/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "107ff64d6ba162e1197aee63be1087c16d62b16b689660c4b76e6137571c2a7b"
+    },
+    "agent/plugin_sdk/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "0e093fda474ef7e4ada71d7e32e8d7c6853af9ae8db60e206a3750cdcf3a6876"
+    },
+    "agent/profile/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "e9eb0c353aeef1edb13093750237a069cab7a141745131e1684daebae63886b3"
+    },
+    "agent/protocol/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "4b58df65bc5dff0835a9ab4756be7a0e757660deb4cc51d9cc8df321bfb5ed64"
+    },
+    "agent/provider_adapters/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "9d7401d0f4a68dfda3a4f108e34dc13bce5334d4c94532547d4ed2367064fe36"
+    },
+    "agent/provider_catalog/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "bf1e6f1f8e1b568666b2c4da1044477575fdc741bae91be45a6f2281217ec95d"
+    },
+    "agent/runtime/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "73cbd4a57c92c1c111c353767b786353362d341fc1ede123f9d6986dfcc44c84"
+    },
+    "agent/scheduler/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "7555dfac397fae0976b41756b1e582d41ab2378d139ecf116cb6e4f5bd8900b0"
+    },
+    "agent/self_evolution/README.md": {
+      "formatter": "prettier",
+      "sha256": "ef8acf12b35d21c343d08314ce1b9102fe69738dc778cce80b39b1f1692664bc"
+    },
+    "agent/self_evolution/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "3f2392390da7986d49f8b4d8329407e30d33079c0fdbdcd8773678ef2ded58eb"
+    },
+    "agent/skills/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "1742bb29dc6ecdb3431023150c0025845081e6fd84bfbfc47a79221bb620a23b"
+    },
+    "agent/state/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "23ce2056f53ae2d3b3986ed2810144a9a04967e19e150cbb0caedb2d1138af11"
+    },
+    "agent/subagents/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "0235e9a15d1e1c7ca120f46662d95e5865eeb61927db131aefc791af2fa40fae"
+    },
+    "agent/tool_runner/__init__.py": {
+      "formatter": "ruff",
+      "sha256": "4eb618bd5d1055698d5ccfa2fe9bcbad34dc3e7c06205b2d7b59e19fd5aceac1"
+    },
+    "agent/tool_runner/files.py": {
+      "formatter": "ruff",
+      "sha256": "3391795a3474968b68aef7182e4d1ae8fcb0081b8d3ef0af7358ac183cb2bfbf"
+    },
+    "agent/tool_runner/process.py": {
+      "formatter": "ruff",
+      "sha256": "fcc67caad28bb81b7e9df51444f013ab159298a999bf4223eb96445215c9d100"
+    },
+    "consumer/__main__.py": {
+      "formatter": "ruff",
+      "sha256": "5e970434a56697b9278f386f54e768459bfe2fc9b0a2364d77be33f5e0a1e864"
+    },
+    "consumer/api.py": {
+      "formatter": "ruff",
+      "sha256": "634045b885519eae126d8c8c96ab9cd0926e7ce89c257009061908293b6235a0"
+    },
+    "consumer/application.py": {
+      "formatter": "ruff",
+      "sha256": "6197194030d9438f5c39c93140475f037cab19eb622a88b304fcd93f1f8799f8"
+    },
+    "consumer/browser.py": {
+      "formatter": "ruff",
+      "sha256": "037c89c3fd9114267c4018291049bc10a283f5957362f471cd118e5d92393408"
+    },
+    "consumer/cli.py": {
+      "formatter": "ruff",
+      "sha256": "6f8a626d1f2eb37ada21cd022620208635a34396ede34190c9d1bd29f18871fa"
+    },
+    "consumer/config.py": {
+      "formatter": "ruff",
+      "sha256": "d7946aa462bab7f2dbaf1ee406bba8646d760e7696e37dd5b6a2d00a82b79d9c"
+    },
+    "consumer/connections.py": {
+      "formatter": "ruff",
+      "sha256": "01e1962040d737bca303ae2c37ee3ec6be7494b8784fcebc9d146db670d0bf86"
+    },
+    "consumer/connectors.py": {
+      "formatter": "ruff",
+      "sha256": "51d7b48a27e5bc59ad39769522c3932946b6c01b2967c4ebc86c39505092c529"
+    },
+    "consumer/content.py": {
+      "formatter": "ruff",
+      "sha256": "1b25d9e03131aa005e1714e64e21b0425b2697a3ddb2f31ae9a42fc6c3a48d58"
+    },
+    "consumer/contracts.py": {
+      "formatter": "ruff",
+      "sha256": "83042c61aa73a3dfa2f30ee01bed2e04eb2770943b5032cfafdb9a228b7cea17"
+    },
+    "consumer/device.py": {
+      "formatter": "ruff",
+      "sha256": "894ef53052cfc98b09393a5da964da804e9c5627606537eb37886327a5b288bf"
+    },
+    "consumer/gateway.py": {
+      "formatter": "ruff",
+      "sha256": "a6573734750cdf66572726bb829199f1bb6d98a4ce4bb569d6438700d17a55ef"
+    },
+    "consumer/identity.py": {
+      "formatter": "ruff",
+      "sha256": "252cc2ed2b4fd8ca880feae7828b27fb4b546d58823f04e574d21c804df21a6b"
+    },
+    "consumer/lifecycle.py": {
+      "formatter": "ruff",
+      "sha256": "aa7fa5494565e73224a5c5d2ca16fe5c4256088ccb5c63384b2395a6b7adb99c"
+    },
+    "consumer/network.py": {
+      "formatter": "ruff",
+      "sha256": "6426f2c35af695616a1a1f6206428c4d771052aab8d7bf449b41a073c9304cd1"
+    },
+    "consumer/permissions.py": {
+      "formatter": "ruff",
+      "sha256": "57485146889561e9d6c33784a144b7640d00f3105b7f9b7ef6b8c1eb54efd4ec"
+    },
+    "consumer/portability.py": {
+      "formatter": "ruff",
+      "sha256": "ed599f934435303bf8806f2f92389f42bc69214c1172d99839569bc70484fb44"
+    },
+    "consumer/providers.py": {
+      "formatter": "ruff",
+      "sha256": "a23ccb34cf73b3efa48bdd53bd170f82f172ce7cd94537fd1e4c36d53688213b"
+    },
+    "consumer/usage.py": {
+      "formatter": "ruff",
+      "sha256": "3baf3d59e60a48ad56651c4b7c3c624565f9d0666ac63a26cec908b8e7ee69b7"
+    },
+    "consumer/vault.py": {
+      "formatter": "ruff",
+      "sha256": "a0d916e4e6b485eea89feb5622187f3555cff62f488bae38bd624caea1daf2f3"
+    },
+    "consumer/webhooks.py": {
+      "formatter": "ruff",
+      "sha256": "1a57154a3d85d1aa5c82b4352a915641597f481eb5e2b856d9618a35b84e7125"
+    },
+    "consumer/work.py": {
+      "formatter": "ruff",
+      "sha256": "f1e3bb8f56688a3d15b1899d4648bc8ed8f4cd5552212ad1f8cfdc9826b73ab6"
+    },
+    "consumer/worker.py": {
+      "formatter": "ruff",
+      "sha256": "af796f37048a32798d3b97947b3977a8b73ae62648cfa56aa9020b3aec360972"
+    },
+    "consumer/workers.py": {
+      "formatter": "ruff",
+      "sha256": "bc2776080bc4b8f10c988f88d839d9f32d434360c99a2b69379d6bdd2ca9013f"
+    },
+    "docs/core.md": {
+      "formatter": "prettier",
+      "sha256": "9954be6c7efdf5246abcbf1603b51dffd9316e22b8ede45d8fe6c1715e6f9d3a"
+    },
+    "docs/qualification.md": {
+      "formatter": "prettier",
+      "sha256": "a81e884aad69bde80fd60980e1c6abf08778f028197428afc42524ceec7f7eca"
+    },
+    "docs/sturgis-02/consumer.md": {
+      "formatter": "prettier",
+      "sha256": "91e6a9c9acd2157dd8073393640d65663cf603b4ce96a6f4064bd7495662abd1"
+    },
+    "docs/sturgis-02/deployment.md": {
+      "formatter": "prettier",
+      "sha256": "44c12f28ea9832faf0522cf3f09d0940a592d04bca54a77a0dd7fa13333d218d"
+    },
+    "docs/sturgis-02/qualification.md": {
+      "formatter": "prettier",
+      "sha256": "60416b2dd55092c932adc7cb71a6e15003e63121f6c5b0fe4278a6b0b415b095"
+    },
+    "docs/sturgis-03/gateway.md": {
+      "formatter": "prettier",
+      "sha256": "89fe486333b247f33cc4edf1d21fdb5a67f279714f20001d5d7d78c9ff92c72c"
+    },
+    "documentation/README.md": {
+      "formatter": "prettier",
+      "sha256": "a771ae52686758650065a8402e3e47d3d84122d7406ba4406429b76cc7d00908"
+    },
+    "documentation/developers/astro.config.mjs": {
+      "formatter": "prettier",
+      "sha256": "1f3716634f2921d98b028ff8f759850bfd8126bee123ad4dc5eae4a9938eec3f"
+    },
+    "documentation/developers/route-middleware.ts": {
+      "formatter": "prettier",
+      "sha256": "c0576099febb2fc38b601ce69926195e1fc095232e553a148c6e6761aa259e80"
+    },
+    "documentation/developers/src/content.config.ts": {
+      "formatter": "prettier",
+      "sha256": "8df6f97febe3353314b1c7b83521a0b06aa0e047c286ade5931bb1aef461d92f"
+    },
+    "documentation/developers/src/content/docs/guides/architecture/authority-evidence.md": {
+      "formatter": "prettier",
+      "sha256": "0b35d548eb487c95c1daa9a9db0687ba9fe3666b61c6492222210dfb8814c1ff"
+    },
+    "documentation/developers/src/content/docs/guides/architecture/causality.md": {
+      "formatter": "prettier",
+      "sha256": "d4206f07f66890feee034cf122a3742a10231b2630fce67d96f2151edf276fef"
+    },
+    "documentation/developers/src/content/docs/guides/architecture/module-ownership.md": {
+      "formatter": "prettier",
+      "sha256": "ebd60d25cdbd9f9436951c706387f2f182a248a1a03554725b6f6921575e4b24"
+    },
+    "documentation/developers/src/content/docs/guides/architecture/overview.md": {
+      "formatter": "prettier",
+      "sha256": "74147624def9c9888886d1aa9e1bc024237c57b275345819cbc2dbc5e6c1366f"
+    },
+    "documentation/developers/src/content/docs/guides/behavior/commitments-plans.md": {
+      "formatter": "prettier",
+      "sha256": "70a35c8726442cdf7f66e491e83ee47b3f945699a5e28784cfdf14740972ba5b"
+    },
+    "documentation/developers/src/content/docs/guides/behavior/evolution-evaluation.md": {
+      "formatter": "prettier",
+      "sha256": "2df15ab8b1d0d28515a166e0c270237798056d3325035563069da366b7bcc5bd"
+    },
+    "documentation/developers/src/content/docs/guides/behavior/goals-budgets.md": {
+      "formatter": "prettier",
+      "sha256": "5d90793e6e2a96c112323d8d4212cdc82b553fc8440671edb09046be5fbfeaac"
+    },
+    "documentation/developers/src/content/docs/guides/behavior/initiative-attention.md": {
+      "formatter": "prettier",
+      "sha256": "76b951ea6de40d9460e473274dc82a682b0e79259b2f14345b481da79f43e882"
+    },
+    "documentation/developers/src/content/docs/guides/behavior/profiles-awareness.md": {
+      "formatter": "prettier",
+      "sha256": "3dffa145dc6f82c20799842c593fa0d3cd66abf00f11c5f41adebd7f1d657c15"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/content-work.md": {
+      "formatter": "prettier",
+      "sha256": "e15ad950de7aa6c5c84d3a0ad5643ad97a62c73607b7355ed91dd3871ce42bc4"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/http-commands.md": {
+      "formatter": "prettier",
+      "sha256": "b8f7995aff264b8db270001350b7edde834b18b5e0234ead7b14e5bc1b6cf2de"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/lifecycle.md": {
+      "formatter": "prettier",
+      "sha256": "39ea62795827c6e8026f73081d659f4d4381320cfa870cfb8d8777e1f2147bc8"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/network-connections.md": {
+      "formatter": "prettier",
+      "sha256": "990a2f8afba1669b41cbc778eaf6b72ce1eb116de76065c4ac14d82c8180aeb3"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/ownership-auth.md": {
+      "formatter": "prettier",
+      "sha256": "0cb28744c51bab3b5ddb19e5c58c82061d8b1c747be077a842baf5169cff16a7"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/vault-provider-settings.md": {
+      "formatter": "prettier",
+      "sha256": "cf1f90c0a546f9c021132048f982af12d60604f1e881a16f166e96e53548f9db"
+    },
+    "documentation/developers/src/content/docs/guides/consumer/workers-ipc.md": {
+      "formatter": "prettier",
+      "sha256": "f82fc71b65ee19046f353a77a6289d7c018a148de4ca0775c9838d6791bad051"
+    },
+    "documentation/developers/src/content/docs/guides/core/artifacts.md": {
+      "formatter": "prettier",
+      "sha256": "c24de11ca4cc81ff0805cd486944a7f3ec9596615bbbe7aa98b6d544ac5552f9"
+    },
+    "documentation/developers/src/content/docs/guides/core/cancellation-recovery.md": {
+      "formatter": "prettier",
+      "sha256": "3855cae3e987a6105f695c8256e3050a34d8044892d22d1ea05095646eca2ac2"
+    },
+    "documentation/developers/src/content/docs/guides/core/context.md": {
+      "formatter": "prettier",
+      "sha256": "264049ad3c6fe08034c273593c8a993f7ed4ef40ed91dca3b8cbf66835cb929b"
+    },
+    "documentation/developers/src/content/docs/guides/core/protocol.md": {
+      "formatter": "prettier",
+      "sha256": "7c1e8d5aa3ad5f7207b821a86c8f183174cbc7b190a3eaca7da02d800712bc32"
+    },
+    "documentation/developers/src/content/docs/guides/core/runtime.md": {
+      "formatter": "prettier",
+      "sha256": "2e4d1df630cddc3291d1bd3e81499cfcdd0290d0f63ae846318112c0a8950331"
+    },
+    "documentation/developers/src/content/docs/guides/core/scheduler.md": {
+      "formatter": "prettier",
+      "sha256": "795275ec025d797cab0958af2e5ba7bb611f63ca70a699b05ea3630ce7b8f525"
+    },
+    "documentation/developers/src/content/docs/guides/core/state.md": {
+      "formatter": "prettier",
+      "sha256": "fa9371a191f62229f382f930499f0ce0895836859f1888751ba263aed0257661"
+    },
+    "documentation/developers/src/content/docs/guides/core/waits-timers.md": {
+      "formatter": "prettier",
+      "sha256": "27405cd817c7d160aa5a6460906c80fdbe277f273d9587230dc8386c51eba407"
+    },
+    "documentation/developers/src/content/docs/guides/frontend/data-events.md": {
+      "formatter": "prettier",
+      "sha256": "64cafeccadc772601420e8c84907d50b4cc20ab95dfdc47bfc5e556a083f64fb"
+    },
+    "documentation/developers/src/content/docs/guides/gateway/architecture.md": {
+      "formatter": "prettier",
+      "sha256": "284d43a54d264c59316ecc5af245293b1a34e5a36c724a7f8bbd5229d88d11cf"
+    },
+    "documentation/developers/src/content/docs/guides/gateway/authentication.md": {
+      "formatter": "prettier",
+      "sha256": "8e6c2204f9c70880ba921498f589e74236edabf98cf4ad2baa1b00af1d13a56a"
+    },
+    "documentation/developers/src/content/docs/guides/gateway/frontend.md": {
+      "formatter": "prettier",
+      "sha256": "874ce8a676418a98745cd3b56bbc9c6fd4290a844a68ab47e7c743780f9734e8"
+    },
+    "documentation/developers/src/content/docs/guides/gateway/http-api.md": {
+      "formatter": "prettier",
+      "sha256": "ec0c357ffa2542dbbe93fc164a90cb7909fa81733920f3d2aa8c3d1949bdec56"
+    },
+    "documentation/developers/src/content/docs/guides/getting-started/contribution.md": {
+      "formatter": "prettier",
+      "sha256": "727085c16d8423c675e4032bebecb18dff5f95814ce9f0229be45ca66e532510"
+    },
+    "documentation/developers/src/content/docs/guides/getting-started/documentation.md": {
+      "formatter": "prettier",
+      "sha256": "824352140218edb1ac2b1f41c698134deb1161204315f6f7f77ec4c7e9dbce37"
+    },
+    "documentation/developers/src/content/docs/guides/getting-started/first-mechanisms.md": {
+      "formatter": "prettier",
+      "sha256": "8c307abc12de7a7b3c2127eb0f130f9355baf41798a14ba428f05403456954da"
+    },
+    "documentation/developers/src/content/docs/guides/getting-started/setup.md": {
+      "formatter": "prettier",
+      "sha256": "b5950a9b34288685fe1222be3497149a692ec6065b113a6203f4be7d587505cf"
+    },
+    "documentation/developers/src/content/docs/guides/index.md": {
+      "formatter": "prettier",
+      "sha256": "ffd49dcdbdd74975da4c6c8413665f3b7b6ac4f2348b2e8a7eb769a17d71bb4a"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/acp.md": {
+      "formatter": "prettier",
+      "sha256": "d5bc3d21eed3b51b107169dd1e062f61888874d542829c991560e28ce7ccdea8"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/channels-delivery.md": {
+      "formatter": "prettier",
+      "sha256": "736e930caea26525eedcb7c4d73644b2818eb1bc8dcd67d1c89b99e0ce8ead23"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/external-devices.md": {
+      "formatter": "prettier",
+      "sha256": "21ccf7e30e3ec4f68d129945361981d397395f4f80947ad3e4da69828c0c13ea"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/files-processes.md": {
+      "formatter": "prettier",
+      "sha256": "2653b6e86fcc9a273ca214de50b099249660447dd4baa2443b8772b6735a7d88"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/media-browser.md": {
+      "formatter": "prettier",
+      "sha256": "bf50cf399c012e8a95efff9fb22b1b407d10508cd874bbcdfff7e7581e174840"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/plugins.md": {
+      "formatter": "prettier",
+      "sha256": "08c0fb1c6885bafd4fca17a99d84370d7bbc36eb677f45e0d53aa3ac739e003c"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/providers.md": {
+      "formatter": "prettier",
+      "sha256": "e77938d85f20b632c2fde9f0c3214b1e0afcf41412dacd889d520dbeebc92f5e"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/skills.md": {
+      "formatter": "prettier",
+      "sha256": "5cd7615f23839611b3db9036f5837f040c9042d8afd7c6bbd232a90c5be43d25"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/subagents.md": {
+      "formatter": "prettier",
+      "sha256": "5a72220c75ade8c33129adb8d880f6fced211d40941136df74444005ac3ee8ee"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/tool-authoring.md": {
+      "formatter": "prettier",
+      "sha256": "6b4283382afb919bae9deb26a3d77eb8d795c16a7197a6e4ca8a0d77f83b6603"
+    },
+    "documentation/developers/src/content/docs/guides/integrations/tool-effects.md": {
+      "formatter": "prettier",
+      "sha256": "4ada77ad28fe64c4a6f4541497ba1272e4bad7a8973b4b63126dea74adae8f0c"
+    },
+    "documentation/developers/src/content/docs/guides/memory/ingestion-sleep.md": {
+      "formatter": "prettier",
+      "sha256": "b1e04fab7430f34b926390bbcb9f598afbece9917e5a5ce59298cee3e8ee1c24"
+    },
+    "documentation/developers/src/content/docs/guides/memory/records-wire.md": {
+      "formatter": "prettier",
+      "sha256": "7622274327a3545ca37e402b658b00f14f22757f404008530bc09a7668ce2268"
+    },
+    "documentation/developers/src/content/docs/guides/memory/retrieval.md": {
+      "formatter": "prettier",
+      "sha256": "3b99a74fa6efd0cd102e5fee8b61adfc2837910ba855cf95b233430d4749e791"
+    },
+    "documentation/developers/src/content/docs/guides/operations/debugging.md": {
+      "formatter": "prettier",
+      "sha256": "ce00e704d33f4d8db84f22340ec7cc0eb1b28f668b2d08c4dd1db14e5c5a6469"
+    },
+    "documentation/developers/src/content/docs/guides/operations/packaging.md": {
+      "formatter": "prettier",
+      "sha256": "2f5d79379b78f234c0978b0f2704b95c73408dea9b315c930c7c4db1e6826a16"
+    },
+    "documentation/developers/src/content/docs/guides/operations/release-migration.md": {
+      "formatter": "prettier",
+      "sha256": "f1c1f1677cf5ff5c2119b6554fa09cda830d377e78ae7de0b80536b3a0108756"
+    },
+    "documentation/developers/tsconfig.json": {
+      "formatter": "prettier",
+      "sha256": "6a71c0401e442598cd9a56398be1cd43199871d22fd4cbe19c8dc1b9073b6e35"
+    },
+    "documentation/examples/first_mechanisms.py": {
+      "formatter": "ruff",
+      "sha256": "bab5d5a70c6d5f2a57a39f42d389ff6a1350203e16f082aebb78dfb3c8b6d44f"
+    },
+    "documentation/shared/config.mjs": {
+      "formatter": "prettier",
+      "sha256": "4ce34876392be0d19ed2bf9cb89ba369345a4c8b7f55556451e8e6ebf81776a0"
+    },
+    "documentation/shared/links.mjs": {
+      "formatter": "prettier",
+      "sha256": "3871076bb1d12ff550e3ceb4b8d4d419e7e07756ff7122e38856fb43c0907034"
+    },
+    "documentation/shared/theme.css": {
+      "formatter": "prettier",
+      "sha256": "c0298c2054d7e4c44e46824c2a0ffd4c760f7d23d426a8846e74f279b9ca1a1d"
+    },
+    "documentation/users/astro.config.mjs": {
+      "formatter": "prettier",
+      "sha256": "72fb30415ce005ac70abdaeb7280d11f6cd9ad562460448bbefdbce597fbcb26"
+    },
+    "documentation/users/src/content.config.ts": {
+      "formatter": "prettier",
+      "sha256": "34b036603793e4eb4bfad87e1fd7f851a84fef6a762257a3b2dc1411983d26df"
+    },
+    "documentation/users/src/content/docs/cli/using-the-cli.md": {
+      "formatter": "prettier",
+      "sha256": "d15a9d0b7493cc320e1a1dab049b4aa9268edcefc1778cb4c8d3938f894e2ab9"
+    },
+    "documentation/users/src/content/docs/connections/devices.md": {
+      "formatter": "prettier",
+      "sha256": "d80f0ae0f98a23dbed62a0151eac83f889ae3b039585899af0def1d0aa3986a4"
+    },
+    "documentation/users/src/content/docs/connections/mcp.md": {
+      "formatter": "prettier",
+      "sha256": "444b81f041450c7925ca881d2a4897eebba6810eddece2551a091ea3c6722b7b"
+    },
+    "documentation/users/src/content/docs/connections/media.md": {
+      "formatter": "prettier",
+      "sha256": "051be9e64ad799abbd47810cc735259797114cd89255a6fa9f90b46d563bf29b"
+    },
+    "documentation/users/src/content/docs/connections/overview.md": {
+      "formatter": "prettier",
+      "sha256": "1762874bd1e359ca7bfe75fc3d30f9327f70995805939da3bb92d4ea408dc32a"
+    },
+    "documentation/users/src/content/docs/connections/web-and-search.md": {
+      "formatter": "prettier",
+      "sha256": "cbf9c165ea3ac6f57179713e4e16630bf69953e93a573fdf23d0a29b5282a274"
+    },
+    "documentation/users/src/content/docs/connections/webhooks.md": {
+      "formatter": "prettier",
+      "sha256": "89f4975057d45d04b0a1b4c25dd7cc9831b641ded4ce8cf92de9b686edb360ea"
+    },
+    "documentation/users/src/content/docs/conversations/continuing-conversations.md": {
+      "formatter": "prettier",
+      "sha256": "fe17b8cfce7356cc47c4cc27c491e8873756454c6ba0ab8f5691034565ca1f70"
+    },
+    "documentation/users/src/content/docs/conversations/sources-history-search.md": {
+      "formatter": "prettier",
+      "sha256": "d56e364b0bfd380ed017dd386971d5d4588f0e928f007dbb4bb306975cb7a4cc"
+    },
+    "documentation/users/src/content/docs/conversations/steering-and-cancellation.md": {
+      "formatter": "prettier",
+      "sha256": "b56a65379c5170ac5494f05e017fe25609b5216099d82c993efd4013f15fa790"
+    },
+    "documentation/users/src/content/docs/files/workspace.md": {
+      "formatter": "prettier",
+      "sha256": "ab1d4ecdc599b6d9544d4554967886e33d00da18bf928a7dfa00ca5ee0e51d52"
+    },
+    "documentation/users/src/content/docs/getting-started/installation-choices.md": {
+      "formatter": "prettier",
+      "sha256": "80230cb0ecb9ac54bc268ef9b9372a66e44bac2872b72d1a8f38393458b1fc4e"
+    },
+    "documentation/users/src/content/docs/getting-started/standalone-gateway.md": {
+      "formatter": "prettier",
+      "sha256": "f4d5424c4272d7caa32dc2faa99f634d4bff770341440f7bf1d67849aa02ed14"
+    },
+    "documentation/users/src/content/docs/guides/gateway-accounts.md": {
+      "formatter": "prettier",
+      "sha256": "838748cfccf35937b1c08c0c41b12682203d15d70d6a856cc92ab283d08bbbc9"
+    },
+    "documentation/users/src/content/docs/guides/model-gateway.md": {
+      "formatter": "prettier",
+      "sha256": "c4a8cbfed27dc2cdb1b3a81687d2bd40753ae97cf6a6ac2f11db25acdfdd6d18"
+    },
+    "documentation/users/src/content/docs/knowledge/memory.md": {
+      "formatter": "prettier",
+      "sha256": "d3d709f011bb15b20d224391528453f2d0fd09e8e9ea706fdb22ea7d8d654830"
+    },
+    "documentation/users/src/content/docs/knowledge/source-library.md": {
+      "formatter": "prettier",
+      "sha256": "568789bb685ff6502dc4016b3a856c6ede8c65883424aee6174bfcb9c9b9668c"
+    },
+    "documentation/users/src/content/docs/models/connect-a-model.md": {
+      "formatter": "prettier",
+      "sha256": "5ae5d932d4f95658e447e586b3ee563d9faca4920985ad5c5e742ce140797394"
+    },
+    "documentation/users/src/content/docs/models/credentials.md": {
+      "formatter": "prettier",
+      "sha256": "ef690289d1eda232de5d769ffc8e382e4ca6d6bbcd838bf3f68ef41f6d7c7beb"
+    },
+    "documentation/users/src/content/docs/reference/command-recipes.md": {
+      "formatter": "prettier",
+      "sha256": "b18d267efd6d12d1fed066a1cc8c2cd1173b910c7f9b8bfc614ea77ff778508f"
+    },
+    "documentation/users/src/content/docs/reference/commands.md": {
+      "formatter": "prettier",
+      "sha256": "2880e6ae7dd6636096565448f6256380fe39a4a5bf8c7b537d84332a8730b8fa"
+    },
+    "documentation/users/src/content/docs/reference/glossary.md": {
+      "formatter": "prettier",
+      "sha256": "2028b5e568d879505f46dd087221bdf86bfc286269563e2e7f4b5560c40ff157"
+    },
+    "documentation/users/src/content/docs/reference/limits.md": {
+      "formatter": "prettier",
+      "sha256": "fb70f349f72a6eba167399d251f7de91cb8c1f860a7b1e057b828334026db756"
+    },
+    "documentation/users/src/content/docs/reference/troubleshooting.md": {
+      "formatter": "prettier",
+      "sha256": "ab526aafef27938a593e233df43ab37f362185ca43c844d570a94cc2d6c57476"
+    },
+    "documentation/users/src/content/docs/settings/permissions.md": {
+      "formatter": "prettier",
+      "sha256": "251be274ff9ae9afde858a25e18bd8b15f9e9e2495311a8683e250d5438a1d24"
+    },
+    "documentation/users/src/content/docs/settings/plugins.md": {
+      "formatter": "prettier",
+      "sha256": "8035631dd9d3da189ec2288c16a2e901480ec82b4a3e7a632fa2ec06e354f073"
+    },
+    "documentation/users/src/content/docs/settings/procedures.md": {
+      "formatter": "prettier",
+      "sha256": "7ef462ebd125099db3179714bc832fc2725bcd4317e97246e86ae0efcc9c5417"
+    },
+    "documentation/users/src/content/docs/settings/usage-diagnostics.md": {
+      "formatter": "prettier",
+      "sha256": "b3968f316552927dd54d3a853f155f2bd19b8925dd68259ffebf7c38285cac9d"
+    },
+    "documentation/users/src/content/docs/work/commitments.md": {
+      "formatter": "prettier",
+      "sha256": "3856de528eb8c054cc0097298e021f72549b6e5b16817fbd96435113d0099ce0"
+    },
+    "documentation/users/src/content/docs/work/delegation.md": {
+      "formatter": "prettier",
+      "sha256": "9566d326107a646d56c7665ea0ebea43438f1e6cdfac81ff0e9ec453eda5b90a"
+    },
+    "documentation/users/src/content/docs/work/evidence.md": {
+      "formatter": "prettier",
+      "sha256": "3b21df6022a11d7b8f3643b47e3f340650a832768a48b0fcc2877099e039c79c"
+    },
+    "documentation/users/src/content/docs/work/goals.md": {
+      "formatter": "prettier",
+      "sha256": "5a9b849de3c1cbaf726da71ade462a05fa58db64c2454c146077d9ee771eb0f3"
+    },
+    "documentation/users/src/content/docs/work/initiative-and-attention.md": {
+      "formatter": "prettier",
+      "sha256": "6027536406981b21e808b88304480b48ef7b68d7797bb7eba99802543f42f09b"
+    },
+    "documentation/users/src/content/docs/work/overview.md": {
+      "formatter": "prettier",
+      "sha256": "792f1afb3507b82dd0b4d213cdc6fc22221e04683952b4a69e4d7ae057a51e1c"
+    },
+    "documentation/users/src/content/docs/work/schedules.md": {
+      "formatter": "prettier",
+      "sha256": "0a1f966ccb612ca2005241e5aa3225d8dff3475b96af033095c2ef980c636076"
+    },
+    "documentation/users/src/content/docs/work/workflows.md": {
+      "formatter": "prettier",
+      "sha256": "0796728d3c4fcbbf1cd17139e6d04bee23a2e8ddd95cdff2819a0e9e8ff990b1"
+    },
+    "documentation/users/tsconfig.json": {
+      "formatter": "prettier",
+      "sha256": "6a71c0401e442598cd9a56398be1cd43199871d22fd4cbe19c8dc1b9073b6e35"
+    },
+    "frontend/index.html": {
+      "formatter": "prettier",
+      "sha256": "ffb60258652f0c2278b3dd3437376f4fc0f915aba1541161011316955d8a536a"
+    },
+    "frontend/src/lib/api.ts": {
+      "formatter": "prettier",
+      "sha256": "0507a3a6d01f32e754aa6f3a11d0774fc6132e27e42aae8619a88d7974402b23"
+    },
+    "frontend/tests/backup_fixture.py": {
+      "formatter": "ruff",
+      "sha256": "efce700fd59f8b4a02ac178a8ee289b8da004ce845059dae356702d5fd2542b8"
+    },
+    "frontend/tests/files.test.tsx": {
+      "formatter": "prettier",
+      "sha256": "6ae79f99dd33225df9bccc58b9c71e221e6470f031a209e90bc720d0b84eba10"
+    },
+    "frontend/tests/knowledge.test.tsx": {
+      "formatter": "prettier",
+      "sha256": "35c5bea1247ea5487b4e036d93d6c87d4224705acb7d827b6ed5a44afe24be39"
+    },
+    "frontend/tsconfig.json": {
+      "formatter": "prettier",
+      "sha256": "893adb8032b44e6928c4c5ddd4e51fd9ed8b765b049bec5bdc78f1d177c4f2e4"
+    },
+    "model_gateway/__main__.py": {
+      "formatter": "ruff",
+      "sha256": "3c8fa7d2e6af0ee5fe686327a7add470e681b5db8af5f4e1af45d320d75c1c41"
+    },
+    "model_gateway/api.py": {
+      "formatter": "ruff",
+      "sha256": "3097707a3cbbdee1d13270f66c755ad715fac5c3eb6d1893d365b66c1b3eefed"
+    },
+    "model_gateway/auth.py": {
+      "formatter": "ruff",
+      "sha256": "f5113aa12b2f1e58ffb3242bd5c90fb69cd58b5e29d1e0ac66bf053a80a33dc5"
+    },
+    "model_gateway/auth_state.py": {
+      "formatter": "ruff",
+      "sha256": "9e2f481f19bfd8a2e0ace0dab991c02934431d3dc10a9106f3e011f4f2a70a4f"
+    },
+    "model_gateway/auth_transports.py": {
+      "formatter": "ruff",
+      "sha256": "1383f88528f7ae8df109db5f5e92a19535711e3fb71d9fe411dcb7414e99994d"
+    },
+    "model_gateway/callbacks.py": {
+      "formatter": "ruff",
+      "sha256": "a5aeaff08dfdc3224a09fe4bf4803b9056c2c4ddb39dcc573cfdc9f92e9cb288"
+    },
+    "model_gateway/catalog.py": {
+      "formatter": "ruff",
+      "sha256": "cd96ce93e2d93cd9ca9f3d6efe2771129419447253fff517442fa1cc8ec7ebe5"
+    },
+    "model_gateway/controls.py": {
+      "formatter": "ruff",
+      "sha256": "1036932b10804af11e40c612734fc4d0669e83c8ec6076a245da66c7246ca225"
+    },
+    "model_gateway/ingress.py": {
+      "formatter": "ruff",
+      "sha256": "db2a86bf73073658e59a7d87dbc8a0c92a986e4b1562f1f201f2f6ae93633b44"
+    },
+    "model_gateway/network.py": {
+      "formatter": "ruff",
+      "sha256": "9c4556c7cdf262ed59473df2b2a5f900c40bbfbeece3c7534454977d770d76b2"
+    },
+    "model_gateway/service.py": {
+      "formatter": "ruff",
+      "sha256": "8b50befa5a88ca583c3922ab0ad17032991a567e12f1db2614623a78aa2cd325"
+    },
+    "model_gateway/store.py": {
+      "formatter": "ruff",
+      "sha256": "c19674514eac795856f80d9fcca501267ab72014d9e323f1eb7a45685db9b363"
+    },
+    "model_gateway/translation.py": {
+      "formatter": "ruff",
+      "sha256": "0ad24676138d0e83fc2c99a282599dde23635e79bc155e31daa94bd28b5696f3"
+    },
+    "model_gateway/transports.py": {
+      "formatter": "ruff",
+      "sha256": "136190f996260ab6b85e3fa3d468e8dd0fd60b8b59bc602e115f9917fbc732aa"
+    },
+    "model_gateway/wire.py": {
+      "formatter": "ruff",
+      "sha256": "2a23f8252593919ab1ea8aec5e3b8004e52966a40e86fe58ef98f7de85ac557b"
+    },
+    "native/memory/PROTOCOL.md": {
+      "formatter": "prettier",
+      "sha256": "02d881a19a9a0c17c1ac8874f4488709736bacfdbb5f60110d7c1d548e62fdaa"
+    },
+    "native/memory/engine.cpp": {
+      "formatter": "clang-format",
+      "sha256": "ad7b0fed47ad98fad165a5be4615f660ddaf32bf82d3371a90255cfbc70642c7"
+    },
+    "native/memory/engine.hpp": {
+      "formatter": "clang-format",
+      "sha256": "d2fb1f4b1719223cd8429c9d64fd4fb4382ffc3caae4162087ec865ba3350ca3"
+    },
+    "native/memory/main.cpp": {
+      "formatter": "clang-format",
+      "sha256": "2ed927ea39871a74d5b7e984c73c53ec7aef7b37a96dd21ed3abc9ebfe55a875"
+    },
+    "scripts/docs_gate.py": {
+      "formatter": "ruff",
+      "sha256": "976ffd66efa1e5d4c1af5351705ce8890c39bb437012ea88b4b8b50dbb906af4"
+    },
+    "scripts/docs_journey.mjs": {
+      "formatter": "prettier",
+      "sha256": "8e621367126c099894c45a044c00242ea9eeacd0862bc183db3741063c56ea8e"
+    },
+    "scripts/docs_reference/__main__.py": {
+      "formatter": "ruff",
+      "sha256": "36d8fcc0ceb7a95e14a455dd517362cefc1659b111d479bdc648a9bf81fe3cfc"
+    },
+    "scripts/docs_reference/babel.mjs": {
+      "formatter": "prettier",
+      "sha256": "fdf90bdae842fdfeff93e0d2e5dc4e007279847701580cfd69510d5bfd2e6519"
+    },
+    "scripts/docs_reference/builder.py": {
+      "formatter": "ruff",
+      "sha256": "5894084644e3638972132af7a991708fde3c7c4cfe8a7f0a5bb5fe496a6995f4"
+    },
+    "scripts/docs_reference/clang_parser.py": {
+      "formatter": "ruff",
+      "sha256": "8a5ebae8e818a714d2677e4ce77c3acd68b3afdd3f41c606777edc78795e253b"
+    },
+    "scripts/docs_reference/cpp_parser.py": {
+      "formatter": "ruff",
+      "sha256": "54d7de92bf43c30c582090aa6bc6006c168ff4de96147584a1ffc9a0fae61817"
+    },
+    "scripts/docs_reference/inventory.py": {
+      "formatter": "ruff",
+      "sha256": "0957713bcec410d523f2aaefd4d56305f3629fc658e6854777ccdbdabb3c7467"
+    },
+    "scripts/docs_reference/javascript.py": {
+      "formatter": "ruff",
+      "sha256": "484f8df4be7fa6c4a8a11b18015eb94e4b02ee24bdcfad80e01392141f52f0f1"
+    },
+    "scripts/docs_reference/python_parser.py": {
+      "formatter": "ruff",
+      "sha256": "4f7b8a928e94f400657cac9b2b2db4ec46e880b94c6682f85cbd3114d2eabaee"
+    },
+    "scripts/docs_reference/render.py": {
+      "formatter": "ruff",
+      "sha256": "424202d545fc83ebc586094145ccdd303a6356a29dfbe7a991bc4e1db32de873"
+    },
+    "scripts/qualify.py": {
+      "formatter": "ruff",
+      "sha256": "087deb7626aa388f308b8860feb1bb36f9ecea578c350501900c41fb3c01feaa"
+    },
+    "scripts/qualify_consumer.py": {
+      "formatter": "ruff",
+      "sha256": "6792e16bf548e55cd3535266a41281d9b7935e18c002dc6b187efffef54ad4f0"
+    },
+    "scripts/qualify_gateway.py": {
+      "formatter": "ruff",
+      "sha256": "a0e1165b51e5e1309f3e4237812351888d80465223fa192df3db623b4dd32b79"
+    },
+    "scripts/verify_native.py": {
+      "formatter": "ruff",
+      "sha256": "75049bca6de0711300ff8e63ea8026541eff5b096784c198aaac739c49c8b947"
+    },
+    "scripts/verify_web.mjs": {
+      "formatter": "prettier",
+      "sha256": "cf4dfd6735305324260f39ee0c7a7cb81e25eb737b2dfdba781fc7fdb95bd260"
+    },
+    "tests/consumer/test_api.py": {
+      "formatter": "ruff",
+      "sha256": "06f808ee87204e6bd1ba3bee3a58235381568d80fbf0de9b7ce77d658b0d2341"
+    },
+    "tests/consumer/test_api_security.py": {
+      "formatter": "ruff",
+      "sha256": "2bb392eee27d02890fa97613d837754792dfa69c66bccfc6a59f69cf14d0b0dc"
+    },
+    "tests/consumer/test_application.py": {
+      "formatter": "ruff",
+      "sha256": "cd8a79002e12aeba2ba9f31c1ee660a9b0f602c7c3043df08f55d82ae9bcd2a2"
+    },
+    "tests/consumer/test_application_domains.py": {
+      "formatter": "ruff",
+      "sha256": "17acbcf2f085b0f9c5d6710b588392abc53464f223f01e53aabbe101f85e14c8"
+    },
+    "tests/consumer/test_cli.py": {
+      "formatter": "ruff",
+      "sha256": "b64690ed7c9153372598bdcba174fedcb5f0ff0812d81c3219c4e93c12ec2c17"
+    },
+    "tests/consumer/test_connections.py": {
+      "formatter": "ruff",
+      "sha256": "587fd9a527424f8fd83d60f6b2fa95154a7750e7e02b2143ae0de6be1e22580f"
+    },
+    "tests/consumer/test_connectors.py": {
+      "formatter": "ruff",
+      "sha256": "9ad993a00a13e412796b469243f880e3308f8ee787facc155409e33a1f62038a"
+    },
+    "tests/consumer/test_consumer_gate.py": {
+      "formatter": "ruff",
+      "sha256": "11e7d587906ffdb039a56186f522c92f66dcc6fea25f0a11b558c6efae24e3bf"
+    },
+    "tests/consumer/test_content.py": {
+      "formatter": "ruff",
+      "sha256": "401994e6cc842261744fe64d160e1ce4a30c7fc0a09c2110a6484920cb84f11e"
+    },
+    "tests/consumer/test_contracts.py": {
+      "formatter": "ruff",
+      "sha256": "ec89063b47269011225136a41bac675369856c0977558f573f85b1da5240e81d"
+    },
+    "tests/consumer/test_conversation_history.py": {
+      "formatter": "ruff",
+      "sha256": "9e171e5ac476c4c81bd6e58980be1c9fb66ede0ddb9346425813bc04d67059fb"
+    },
+    "tests/consumer/test_gateway_probe_authority.py": {
+      "formatter": "ruff",
+      "sha256": "6d692c3b94dd9cb04fadaf66fd48b58d80df1b61ee7230712e7c99f29b1611bc"
+    },
+    "tests/consumer/test_gateway_readiness.py": {
+      "formatter": "ruff",
+      "sha256": "b102fe65ab10ef64b04a2806d5ca5b1eb3e4722485c5f375e0ee24b302a75d1e"
+    },
+    "tests/consumer/test_identity.py": {
+      "formatter": "ruff",
+      "sha256": "f608b51f62c801aa8e4d957eb43bef16cc84ce7701d36715935ae41e78ab601a"
+    },
+    "tests/consumer/test_portability.py": {
+      "formatter": "ruff",
+      "sha256": "c832439f447323273e4bfe5c5b222eb3e1b3a13577f30493809e7f38ddca2124"
+    },
+    "tests/consumer/test_probe_lease.py": {
+      "formatter": "ruff",
+      "sha256": "ece569870470f0a3a609c92e379b0c45bcc799fc6b2cff53b109caa6bc2ed7e7"
+    },
+    "tests/consumer/test_probe_tool_schema.py": {
+      "formatter": "ruff",
+      "sha256": "a76294c20bb1ccbbc074350cba08d7a73703393f2989b1aceb37276a35521702"
+    },
+    "tests/consumer/test_work.py": {
+      "formatter": "ruff",
+      "sha256": "28b1f373c49e7d6f5c87dce5c3ebbbf5ee2573bbbc494e5ea13aab536d67e998"
+    },
+    "tests/consumer/test_workers.py": {
+      "formatter": "ruff",
+      "sha256": "8185c6c5f4aebda8660a7ba1d0b3029eed72d255c663d9b18252745ef8cbff65"
+    },
+    "tests/consumer_integration/test_application.py": {
+      "formatter": "ruff",
+      "sha256": "b0728aa67099eb885085c13a0784753d75b5d216ddcc2700ae3b09afe17ce605"
+    },
+    "tests/consumer_integration/test_http.py": {
+      "formatter": "ruff",
+      "sha256": "acc27b0d78d46f41fd6d34f74ea6c82e06484cd7480088c85c53695ff897370f"
+    },
+    "tests/consumer_integration/test_lifecycle.py": {
+      "formatter": "ruff",
+      "sha256": "88869a369c016953d7b73dfbf15b11b9b97d399ccda16bff7bc6e710fa38181a"
+    },
+    "tests/consumer_integration/test_packaging.py": {
+      "formatter": "ruff",
+      "sha256": "06ec8d8d8f97209297325291db34149cd12e84f4effbf77c648ce9e977f3785c"
+    },
+    "tests/consumer_integration/test_portability_http.py": {
+      "formatter": "ruff",
+      "sha256": "11854f3ee2c3696e7bff236a651f00f2408d8a5cef2844947b9f9b30fea15e60"
+    },
+    "tests/consumer_integration/test_restore_idempotency.py": {
+      "formatter": "ruff",
+      "sha256": "759183d208dba2650ce7ef920820c2e6f05615a1c34136d210f2d15db2232dfe"
+    },
+    "tests/consumer_integration/test_text_only_provider.py": {
+      "formatter": "ruff",
+      "sha256": "ccc735cc9e758b5f1772b6526e61882a38846ad337a15c473a7a27a8121d8064"
+    },
+    "tests/consumer_web/coverage.mjs": {
+      "formatter": "prettier",
+      "sha256": "f5e3c8fe784af515932cf083d8d3b2e2ec956cd8d7b1becd2bfdade1eb72794c"
+    },
+    "tests/consumer_web/coverage.test.mjs": {
+      "formatter": "prettier",
+      "sha256": "a7af17023eafc9560eeddc958d37deabf7ec9b2367553ab50b2228115d7a8041"
+    },
+    "tests/consumer_web/journey.mjs": {
+      "formatter": "prettier",
+      "sha256": "e1497fb3196d7ddfda3af68f5317db2e56e01c3bdd055704ec61ef437306adfb"
+    },
+    "tests/consumer_web/server.py": {
+      "formatter": "ruff",
+      "sha256": "4a1d1a4c05e5d86478c3840247ff36d5fd61e9561a550c2507f7d3859b2c5b91"
+    },
+    "tests/core/test_active_work_queries.py": {
+      "formatter": "ruff",
+      "sha256": "5189c4efe0de57321d319b0d816f2208419accbf58ec970d92f6095baee09be6"
+    },
+    "tests/core/test_agent_identity.py": {
+      "formatter": "ruff",
+      "sha256": "4fb47109ea3c2f8c58b29aae6b8b9ce907358c6fcb1ebb65c18f63ae879f83dd"
+    },
+    "tests/core/test_boundaries.py": {
+      "formatter": "ruff",
+      "sha256": "58872c1f80b338b263463f16ea3586b59c52f4034b86bc72c5cd4ef5dec7733b"
+    },
+    "tests/core/test_capabilities.py": {
+      "formatter": "ruff",
+      "sha256": "bff3223ae50e73ed1dc8e892d27aafbd7bf11afa2d5f8d2b72c37105a39c6060"
+    },
+    "tests/core/test_cognition.py": {
+      "formatter": "ruff",
+      "sha256": "49d6a7912e147b6a22caab227c099424825c257864459c62924a58ed19901ae3"
+    },
+    "tests/core/test_context.py": {
+      "formatter": "ruff",
+      "sha256": "3691c193baf662a05b1f69e01cf4fe9eab62a61d428b127c279bf023f097e67c"
+    },
+    "tests/core/test_evolution.py": {
+      "formatter": "ruff",
+      "sha256": "cbf6631944ba8ca5fb539938433661091e4ac7b855483303f4b14e265801b045"
+    },
+    "tests/core/test_foundation.py": {
+      "formatter": "ruff",
+      "sha256": "dfb7c575520a6e7a3eae17ff0b5d4cd03b9489b1f5e1f82e82bf0ccbbc4fe50c"
+    },
+    "tests/core/test_memory.py": {
+      "formatter": "ruff",
+      "sha256": "b5e96ce2ddee0abd597039471e0561227a2110f7345a7198d102f6eb168c39d9"
+    },
+    "tests/core/test_memory_sleep_cadence.py": {
+      "formatter": "ruff",
+      "sha256": "b10cec41e3710b5bfefa2faddbcc1855926f8df82572cd2249cd275cb9c5d83d"
+    },
+    "tests/core/test_provider_error_details.py": {
+      "formatter": "ruff",
+      "sha256": "ce739c1030765c063b70819cde407e891a84b8a4a10473759aee7a54d2804a1c"
+    },
+    "tests/core/test_qualification_gate.py": {
+      "formatter": "ruff",
+      "sha256": "b795b14eba2acddcaee00bb805ab996d5cef9cf7da4b14bf2e9a393bdecd0a18"
+    },
+    "tests/core/test_runtime.py": {
+      "formatter": "ruff",
+      "sha256": "cef1becde037f5b0085db3f8e0f016821c1cf5d13d5740821a430004ff974486"
+    },
+    "tests/core/test_scheduling.py": {
+      "formatter": "ruff",
+      "sha256": "47fae6ca5689836c285e989037e033a414accf8af5d2947148f6051345f44123"
+    },
+    "tests/docs_site_gate.py": {
+      "formatter": "ruff",
+      "sha256": "ff169eed9a527e21468fe86025c2943a7e5c73f2ef18608e8a63fedd7021dae6"
+    },
+    "tests/documentation/navigation.test.mjs": {
+      "formatter": "prettier",
+      "sha256": "0fe2477ea634a3e10d9b3f58362c32dd0d74a7168828cd6e4a0595bd426fcde9"
+    },
+    "tests/documentation/test_docs_gate_more.py": {
+      "formatter": "ruff",
+      "sha256": "5264a77c885087e69c7259edbdb1e9303da0dc14ae5e042cc3e1f4718d18d70d"
+    },
+    "tests/documentation/test_reference.py": {
+      "formatter": "ruff",
+      "sha256": "47589d50f5da787ac69562ad92158ffc58fae38ef7af1db69e6ebbc30b7f2ec7"
+    },
+    "tests/gateway/browser_journey.mjs": {
+      "formatter": "prettier",
+      "sha256": "577174707dde25811a77143923a7e780ccf38d73368526098e3760e8f965603c"
+    },
+    "tests/gateway/browser_server.py": {
+      "formatter": "ruff",
+      "sha256": "ee0d3b184928bb360d613e5fdc1ab0e4f35f72519a81142bc82c2667e21205dd"
+    },
+    "tests/gateway/native_browser.mjs": {
+      "formatter": "prettier",
+      "sha256": "0dc7868322f6c7c2409b24eece229ab2e91c6ecfb90533ba542c37751425a93c"
+    },
+    "tests/gateway/test_api.py": {
+      "formatter": "ruff",
+      "sha256": "b38b9a64765b8520882e3117dccfbfca944940854a64e49d66ae5ae525ddbf19"
+    },
+    "tests/gateway/test_auth.py": {
+      "formatter": "ruff",
+      "sha256": "e58162a8f77702aebbe1ecf94a5ea388e0cb07e557372dde816376b88d5fa50b"
+    },
+    "tests/gateway/test_auth_integration.py": {
+      "formatter": "ruff",
+      "sha256": "6dc9f8afeeb1b1fa0d78d7c9e23c41d12fdfe0c57e11d81b56c6a9b253583732"
+    },
+    "tests/gateway/test_auth_transports.py": {
+      "formatter": "ruff",
+      "sha256": "4c358236fe0a625512789d5a04854de5d8beca9678d5a7f4de43e75afefcb311"
+    },
+    "tests/gateway/test_callbacks.py": {
+      "formatter": "ruff",
+      "sha256": "93388bd910287290e04879089304a220e6ef59428f3c9093582a136be8981dd6"
+    },
+    "tests/gateway/test_catalog.py": {
+      "formatter": "ruff",
+      "sha256": "2022a4075e27c798e8a2107c8fb62e0e89ce9ded508dac8010d9a2e4c131b7c3"
+    },
+    "tests/gateway/test_cli.py": {
+      "formatter": "ruff",
+      "sha256": "4905f82fa18e76d9797f1886f07e4618cb03aa0a8bf4093953ca5d997640d17e"
+    },
+    "tests/gateway/test_controls.py": {
+      "formatter": "ruff",
+      "sha256": "060478f2b6a20bc6ce5b03c9b3797815097d345d74c676348844aece4f19a8f6"
+    },
+    "tests/gateway/test_gateway_agent_identity.py": {
+      "formatter": "ruff",
+      "sha256": "b65e9fcda772be63980a9d0103612ccfe261016c4a04d64c743431039a2f6e83"
+    },
+    "tests/gateway/test_gateway_boundaries.py": {
+      "formatter": "ruff",
+      "sha256": "d38b9b0fb65993a6975feba4c4437eb78c90e9880e438a9d7f3f529d7d662726"
+    },
+    "tests/gateway/test_ingress.py": {
+      "formatter": "ruff",
+      "sha256": "902731f5428c4c18a070b9750c61b3268cde3574ebfbb533307bfce9be3fbddb"
+    },
+    "tests/gateway/test_integration.py": {
+      "formatter": "ruff",
+      "sha256": "4d261dd5c9032b33cdfff88f63b98be91d035b452139978af1ac9173d81c1c8c"
+    },
+    "tests/gateway/test_model_limit_compat.py": {
+      "formatter": "ruff",
+      "sha256": "e95428673107cd84e80c71661c1596db33f8c2a52ded91d13c5d127c2c46de8f"
+    },
+    "tests/gateway/test_openrouter_compat.py": {
+      "formatter": "ruff",
+      "sha256": "6b09637437eaff43c8e88306357cef7b25dd2cb60eef5095eacc8501e25031d2"
+    },
+    "tests/gateway/test_qualification_receipt.py": {
+      "formatter": "ruff",
+      "sha256": "80a9f1d6e58ae6bfe9968f93d3b473966df64bb865b730bcebe31a85d28e3063"
+    },
+    "tests/gateway/test_service.py": {
+      "formatter": "ruff",
+      "sha256": "42257237d6c35273fe29aefb0b3271537c487dfbff0c4fa4d564affce05aeace"
+    },
+    "tests/gateway/test_store.py": {
+      "formatter": "ruff",
+      "sha256": "af4d6826fa4e671cfb792287e77f084f61f726800a5f218d3d993b5e2e7fcbca"
+    },
+    "tests/gateway/test_transports.py": {
+      "formatter": "ruff",
+      "sha256": "a37b396b27ea44cac7f4df6d1cc2b15a77a0e17b5a155a3f2c57a36e3fff293e"
+    },
+    "tests/integration/test_continuity.py": {
+      "formatter": "ruff",
+      "sha256": "fe8b6fdacb578d2c39be99c22c207bc5a9b35d2647505e2df477fecb6cd7c68d"
+    },
+    "tests/integration/test_evidence_admission.py": {
+      "formatter": "ruff",
+      "sha256": "a92f0f29f63d77b7457df0542664cd1209a1809a697afcb52bd6598e7dfcb8ae"
+    },
+    "tests/integration/test_provider_outcomes.py": {
+      "formatter": "ruff",
+      "sha256": "e322573ad7ccf22ff2b92106b55970a663152a39b950243a59c359676a978f44"
+    },
+    "tests/integration/test_runtime_faults.py": {
+      "formatter": "ruff",
+      "sha256": "8eb70647d6b25fb2149057e4e8deee4bff513eb6b0a2bba8829e6b31c15d79a0"
+    },
+    "tests/native/test_memory_worker.py": {
+      "formatter": "ruff",
+      "sha256": "68da5d53edf72ffed82fe8a86cb9cd54a41a94b4150d8a9ad348c234dac4e2d4"
+    }
+  }
+}

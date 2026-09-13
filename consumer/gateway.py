@@ -17,7 +17,7 @@ class ConsumerGateway:
     def __init__(self, control):
         self.control = control
         self.service = ModelGateway(control.settings.root / "gateway",
-            network_policy=NetworkPolicy(private_origins=control.settings.private_network_origins),
+            network_policy=NetworkPolicy(private_origins=control.settings.private_network_origins, timeout=120),
             allow_local_servers=control.settings.mode == "self_hosted")
         self.http = GatewayHTTP(self.service, endpoint=control.origin + "/model-gateway/v1")
         self._bindings = {}
@@ -46,6 +46,9 @@ class ConsumerGateway:
         selected = next((m for m in available if m["id"] == model), None)
         if selected is None:
             raise GatewayError("model_unavailable", "Choose a model from your gateway’s imported models.")
+        capabilities = {field: selected[field] for field in ("context_limit", "output_limit", "tools")}
+        if selected.get("tools_source") == "preset_default":
+            capabilities["tools"] = True
         try:
             prior = await asyncio.to_thread(store.get, tenant, "client_binding", agent_id)
         except GatewayError as error:
@@ -61,30 +64,36 @@ class ConsumerGateway:
                 await asyncio.to_thread(store.authenticate, secret)
             except GatewayError:
                 reusable = False
-        if reusable and prior["state"] == "failed":
+        # An explicit retry after a completed selection must reach the worker;
+        # replaying its old receipt would preserve a text-only probe fallback.
+        # Pending requests retain their identity to reconcile uncertain IPC.
+        if reusable and prior["state"] in {"failed", "active"}:
             binding = await asyncio.to_thread(store.put, tenant, "client_binding", agent_id,
-                {**prior, "state": "pending", "request_id": new_id("gateway_bind")}, prior["revision"])
+                {**prior, "state": "pending", "request_id": new_id("gateway_bind"), "capabilities": capabilities}, prior["revision"])
         elif reusable:
             binding = prior
         else:
             key = await asyncio.to_thread(service.create_key, tenant, name="Sturgis agent " + agent_id, models=[model])
             binding = await asyncio.to_thread(store.put, tenant, "client_binding", agent_id,
                 {"model": model, "key_id": key["id"], "previous_key_id": prior["key_id"] if prior else None,
-                 "state": "pending", "request_id": new_id("gateway_bind")}, prior["revision"] if prior else 0, secret=key["key"])
+                 "previous_key_ids": list(dict.fromkeys([prior["key_id"], *prior.get("previous_key_ids", []),
+                     *([prior["previous_key_id"]] if prior.get("previous_key_id") else [])])) if prior else [],
+                 "state": "pending", "request_id": new_id("gateway_bind"), "capabilities": capabilities}, prior["revision"] if prior else 0, secret=key["key"])
             secret = key["key"]
         # The worker sees only a gateway-restricted client key. Upstream secrets
         # never cross this boundary. A retained ID reconciles uncertain IPC results.
         try:
             result = await self.control.lifecycle.command(agent_id, "gateway.bind", {
                 "endpoint": self.http.endpoint + "/chat/completions", "api_key": secret, "model": model,
-                "context_limit": selected["context_limit"], "output_limit": selected["output_limit"], "tools": selected["tools"]},
-                request_id=binding["request_id"])
+                **binding.get("capabilities", capabilities)},
+                request_id=binding["request_id"], timeout= min(300, self.service.network.timeout * 2 + 10))
         except CoreError as error:
             if error.details.get("worker_response") and error.code != "worker_indeterminate":
                 await asyncio.to_thread(store.put, tenant, "client_binding", agent_id, {**binding, "state": "failed"}, binding["revision"])
             raise
         if binding["state"] != "active":
-            if binding.get("previous_key_id"):
-                await asyncio.to_thread(store.revoke_key, tenant, binding["previous_key_id"])
+            previous = binding.get("previous_key_ids") or ([binding["previous_key_id"]] if binding.get("previous_key_id") else [])
+            for key_id in previous:
+                await asyncio.to_thread(store.revoke_key, tenant, key_id)
             await asyncio.to_thread(store.put, tenant, "client_binding", agent_id, {**binding, "state": "active"}, binding["revision"])
         return result

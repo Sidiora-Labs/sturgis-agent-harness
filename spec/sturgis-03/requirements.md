@@ -52,3 +52,29 @@ Replace agent-owned provider setup with an independent, standalone model gateway
 1. Both documentation sites include gateway setup, free-tier limits, local/custom providers, model discovery, keys, routes, troubleshooting, standalone operation, architecture, all source references and boundaries.
 2. Preserve full Python/C++/client 90 percent executable-line floors; include model_gateway in production and documentation inventories, run full documentation gate, and report live vendor qualification separately from controlled wire proof.
 
+## Requirement 6: Complete native account lifecycle and client protocols
+
+**User Story:** As a gateway user, I sign in to supported provider accounts and use native model clients without configuring an agent.
+
+### Acceptance Criteria
+
+1. Implement native GitHub Copilot and Kiro device flows plus Codex and Gemini CLI PKCE, tenant-bound expiring sessions, cancellation, encrypted token bundles, account discovery, provider-specific inference and durable refresh fencing. No third-party gateway installation substitutes for these paths.
+2. Standalone administration includes its own authenticated UI, management sessions, settings, export/import recovery and client-key lifecycle; provider entitlements and actual remote sign-in qualification remain explicit.
+3. Expose OpenAI Chat, Responses and Anthropic Messages client APIs. Preserve native signed/opaque state for matching protocols and reject unsupported lossy cross-format transformations explicitly. Exercise streams, nonstream collection, failure after output, request cancellation and account restart paths.
+
+## Requirement 7: Real OpenRouter activation and truthful readiness
+
+**User Story:** As a user, an imported OpenRouter model can be activated and produce an actual agent response, and failures identify the affected model without exposing secrets.
+
+### Acceptance Criteria
+
+1. Accept an unchanged empty terminal choice accompanying final OpenRouter usage without duplicating output or terminal events; reject changed finishes, new output, tool calls and backwards usage.
+2. Distinguish catalog import from verified inference in gateway labels. Preserve safe categorized HTTP and stream failures through provider probes to contextual model selection feedback and retry.
+3. Exercise the actual failing stream shape through consumer binding and real HTTP fixtures, then activate the user's configured model and verify a real agent response. Preserve existing data and independent 90 percent coverage floors and refresh both documentation sites.
+4. Models with an advertised output limit above 262144 can complete ordinary agent chat after activation. Align generic request validation with the existing 2000000-token capability domain while retaining imported-model limits and strict integer bounds.
+5. Tool capability probes use the same canonical invocation schema as agent execution. Any text-only fallback is visible and can be retried with a new completed-request identity while pending uncertain requests retain reconciliation identity. Verify a real read-only tool action and its final model response.
+6. An existing installation remains responsive after thousands of historical jobs: completed daily memory sleep does not enqueue redundant work, scoped state queries exclude terminal history from admission and status paths, and old records remain intact across restart.
+7. Readiness checks renew their scheduler lease while bounded model I/O runs, stop renewal and close the stream on cancellation or authority loss, and retain factual usage. Slow successful tool checks can activate without extending global budgets or ignoring lease expiry.
+8. Every agent model invocation receives mandatory harness-owned identity: Sturgis, developed by Sidiora Labs, distinct from its underlying model. Preserve identity with custom instructions, tool continuations, provider changes, and restored transcripts; retain prior incorrect self-descriptions as attributed history rather than authority. Verify the user-selected live model corrects its prior identity claim.
+9. Opening an existing listed conversation promptly displays its saved messages without scanning unrelated maintenance history. Public event pagination filters by authorized scope and binding before limiting, preserves cursor continuity and terminal events, and the UI distinguishes loading, reconnecting and genuinely empty history. Verify switching and reloading existing chats with original data preserved.
+

@@ -1,4 +1,5 @@
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -43,6 +44,7 @@ function mount({
   const sent: Record<string, unknown>[] = [];
   let polled = false,
     failed = false;
+  let selectConversation: (id: string) => void = () => {};
   const fetcher = vi.fn(async (url: string, options: RequestInit) => {
     if (url.endsWith("/agents/agent"))
       return envelope({
@@ -67,6 +69,13 @@ function mount({
       });
     }
     if (url.includes("/events?")) {
+      if (handlers.events) {
+        const params = Object.fromEntries(
+          new URL(url, "http://consumer.test").searchParams,
+        );
+        const result = await handlers.events(params, {});
+        return result instanceof Response ? result : envelope(result);
+      }
       if (!polled) {
         polled = true;
         return envelope({
@@ -128,6 +137,7 @@ function mount({
   });
   function Page() {
     const [selected, setSelected] = useState<string | null>(null);
+    selectConversation = setSelected;
     return (
       <ConversationPage
         selectedConversation={selected}
@@ -156,9 +166,177 @@ function mount({
     onSelect,
     sent,
     fetcher,
+    client,
+    selectConversation: (id: string) => selectConversation(id),
     ...rendered,
   };
 }
+it("opening a listed saved chat stays loading through empty replay pages, renders saved messages and reloads them after remount", async () => {
+  const rooms = [
+    { id: "room", title: "Current chat", revision: 1, archived: false },
+    { id: "older", title: "Previous chat", revision: 1, archived: false },
+  ];
+  const saved = [
+    {
+      id: "old-user",
+      kind: "user.prompt",
+      cursor: 501,
+      payload: { text: "My previous question" },
+    },
+    {
+      id: "old-answer",
+      kind: "output.persisted",
+      cursor: 502,
+      payload: {
+        stream_id: "old-stream",
+        content: { type: "text", text: "The saved answer" },
+      },
+    },
+  ];
+  let firstPage: (value: unknown) => void = () => {};
+  let lastPage: (value: unknown) => void = () => {};
+  let nextPageReads = 0,
+    olderStarts = 0;
+  const handlers = {
+    "conversations.list": () => ({ items: rooms }),
+    events: (params: Record<string, unknown>) => {
+      if (params.conversation_id === "room" && params.after === "0")
+        return {
+          items: [
+            {
+              id: "current",
+              kind: "user.prompt",
+              cursor: 1,
+              payload: { text: "Current room message" },
+            },
+          ],
+          cursor: 1,
+          has_more: false,
+        };
+      if (params.conversation_id === "older" && params.after === "0") {
+        olderStarts += 1;
+        if (olderStarts > 1)
+          return { items: saved, cursor: 502, has_more: false };
+        return new Promise((resolve) => {
+          firstPage = resolve;
+        });
+      }
+      if (params.conversation_id === "older" && params.after === "500") {
+        nextPageReads += 1;
+        return new Promise((resolve) => {
+          lastPage = resolve;
+        });
+      }
+      return new Promise(() => {});
+    },
+  };
+  const page = mount({ handlers });
+  await screen.findByText("Current room message");
+  await act(async () => page.selectConversation("older"));
+  expect(screen.getByText("Previous chat")).toBeTruthy();
+  expect(
+    screen.getByRole("status", { name: "Opening conversation" }),
+  ).toBeTruthy();
+  expect(screen.queryByText("Current room message")).toBeNull();
+  expect(screen.queryByText("A little space to think")).toBeNull();
+  await act(async () => firstPage({ items: [], cursor: 500, has_more: true }));
+  await waitFor(() => expect(nextPageReads).toBe(1));
+  expect(
+    screen.getByRole("status", { name: "Opening conversation" }),
+  ).toBeTruthy();
+  expect(screen.queryByText("A little space to think")).toBeNull();
+  await act(async () =>
+    lastPage({ items: saved, cursor: 502, has_more: false }),
+  );
+  await screen.findByText("The saved answer");
+  expect(screen.getByText("My previous question")).toBeTruthy();
+  expect(
+    screen.queryByRole("status", { name: "Opening conversation" }),
+  ).toBeNull();
+  page.unmount();
+  const reopened = mount({ handlers });
+  await screen.findByText("Current room message");
+  await act(async () => reopened.selectConversation("older"));
+  await screen.findByText("The saved answer");
+  expect(screen.getByText("My previous question")).toBeTruthy();
+  expect(olderStarts).toBe(2);
+  expect(
+    reopened.fetcher.mock.calls.some(([url]) =>
+      url.includes("conversation_id=older&after=0"),
+    ),
+  ).toBe(true);
+});
+
+it("reconnect errors retain loaded history and temporary runtime fences pause updates without clearing the chat", async () => {
+  let updates = 0;
+  const saved = {
+    id: "saved",
+    kind: "user.prompt",
+    cursor: 10,
+    payload: { text: "Keep my saved message visible" },
+  };
+  const page = mount({
+    handlers: {
+      events: (params) => {
+        if (params.after === "0")
+          return { items: [saved], cursor: 10, has_more: false };
+        updates += 1;
+        if (updates === 1)
+          return envelope(
+            null,
+            {
+              code: "worker_unavailable",
+              message: "Conversation service is temporarily unavailable.",
+            },
+            503,
+          );
+        if (updates === 2)
+          return { items: [saved], cursor: 10, has_more: false };
+        return new Promise(() => {});
+      },
+    },
+  });
+  await screen.findByText("Keep my saved message visible");
+  const error = await screen.findByRole("alert");
+  expect(error.textContent).toContain(
+    "Conversation service is temporarily unavailable.",
+  );
+  expect(error.textContent).toContain(
+    "Showing loaded messages while reconnecting.",
+  );
+  expect(screen.getByText("Keep my saved message visible")).toBeTruthy();
+  await waitFor(() => expect(screen.queryByRole("alert")).toBeNull(), {
+    timeout: 2500,
+  });
+  expect(screen.getAllByText("Keep my saved message visible")).toHaveLength(1);
+  fireEvent.change(screen.getByLabelText("Message"), {
+    target: { value: "Preserve this draft while paused" },
+  });
+  expect(screen.getByRole("button", { name: "Send message" })).toHaveProperty(
+    "disabled",
+    false,
+  );
+  await act(async () => {
+    page.client.setQueryData(["runtime", "owner", "agent"], {
+      agent_id: "agent",
+      desired: "running",
+      observed: "running",
+      private_queries_paused: true,
+    });
+  });
+  expect(screen.getByText("Keep my saved message visible")).toBeTruthy();
+  expect(
+    await screen.findByText(
+      "Conversation updates are paused. Your loaded messages and draft stay here.",
+    ),
+  ).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Send message" })).toHaveProperty(
+    "disabled",
+    true,
+  );
+  expect(screen.queryByText("A little space to think")).toBeNull();
+});
+
 it("ambiguous send failures retain the message identity across retries and prevent accidental changed-message reuse", async () => {
   const page = mount({ failSend: true });
   await screen.findByText("Research thread");

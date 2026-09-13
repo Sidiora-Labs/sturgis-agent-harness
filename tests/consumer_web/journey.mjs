@@ -1,11 +1,15 @@
 /** The production Material 3 client drives actual Python, private workers and native memory. */
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import path from "node:path";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { createInterface } from "node:readline";
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
+const rawCoverage = path.resolve(process.argv[2] || "evidence/sturgis-02/browser-v8.json");
+const out = path.dirname(rawCoverage);
+await fs.mkdir(out, { recursive: true });
 const proc = spawn(".venv/bin/python", ["tests/consumer_web/server.py"], {
   stdio: ["ignore", "pipe", "inherit"],
 });
@@ -124,7 +128,7 @@ try {
   await page.getByLabel("Email", { exact: true }).waitFor();
   evidence.accessibility.push(await axe("bootstrap"));
   await page.screenshot({
-    path: "evidence/sturgis-02/auth-material3.png",
+    path: path.join(out, "auth-material3.png"),
     fullPage: true,
   });
   await fill("Email", "browser@example.com");
@@ -161,7 +165,7 @@ try {
   await dismiss();
   evidence.accessibility.push(await axe("empty conversation"));
   await page.screenshot({
-    path: "evidence/sturgis-02/conversation-material3-empty.png",
+    path: path.join(out, "conversation-material3-empty.png"),
     fullPage: true,
   });
   await page.getByRole("button", { name: /Shape an idea/ }).click();
@@ -171,6 +175,7 @@ try {
   );
   await fill("Message", "Draft survives navigation");
   await nav("Settings");
+  await page.getByText("Advanced: legacy model connections, credentials & usage", { exact: true }).click();
   await click("Connect your first model");
   await fill("Endpoint", info.model);
   await fill("Model", "wire-browser");
@@ -275,7 +280,7 @@ try {
   await dismiss();
   evidence.accessibility.push(await axe("conversation"));
   await page.screenshot({
-    path: "evidence/sturgis-02/conversation-material3-desktop.png",
+    path: path.join(out, "conversation-material3-desktop.png"),
     fullPage: true,
   });
   const input = page.getByLabel("Message", { exact: true });
@@ -391,7 +396,7 @@ try {
   await dismiss();
   evidence.accessibility.push(await axe("work"));
   await page.screenshot({
-    path: "evidence/sturgis-02/work-material3-desktop.png",
+    path: path.join(out, "work-material3-desktop.png"),
     fullPage: true,
   });
   await nav("Settings");
@@ -433,7 +438,7 @@ try {
     "narrow overflow",
   );
   await page.screenshot({
-    path: "evidence/sturgis-02/conversation-material3-mobile.png",
+    path: path.join(out, "conversation-material3-mobile.png"),
     fullPage: true,
   });
   evidence.accessibility.push(await axe("mobile conversation"));
@@ -475,7 +480,7 @@ try {
   assert.deepEqual(errors, []);
   await noErrors();
   await fs.writeFile(
-    "evidence/sturgis-02/browser-quality.json",
+    path.join(out, "browser-quality.json"),
     JSON.stringify(evidence, null, 2),
   );
   console.log(
@@ -483,7 +488,7 @@ try {
   );
 } catch (error) {
   await page.screenshot({
-    path: "evidence/sturgis-02/browser-failure.png",
+    path: path.join(out, "browser-failure.png"),
     fullPage: true,
   });
   console.error(
@@ -497,7 +502,7 @@ try {
   throw error;
 } finally {
   if (collecting) v8Batches.push(...(await page.coverage.stopJSCoverage()));
-  await fs.writeFile(process.argv[2], JSON.stringify(v8Batches));
+  await fs.writeFile(rawCoverage, JSON.stringify(v8Batches));
   await browser.close();
   proc.kill("SIGTERM");
   await Promise.race([

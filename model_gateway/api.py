@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import asynccontextmanager
 import hashlib
 import hmac
 import os
@@ -40,11 +41,40 @@ async def body(request, allowed=None, required=()):
     return value
 
 
-def bearer(request):
+def bearer(request, *, native=False):
     values = request.headers.getlist("authorization")
+    native_keys = request.headers.getlist("x-api-key") if native else []
+    if native_keys:
+        if len(native_keys) != 1 or values:
+            raise GatewayError("unauthenticated", "Send exactly one gateway API key.", 401)
+        return native_keys[0]
     if len(values) != 1 or not values[0].startswith("Bearer "):
         raise GatewayError("unauthenticated", "Use a gateway API key in the Authorization header.", 401)
     return values[0][7:]
+
+
+async def while_connected(request, operation):
+    """Own work until its result or disconnect, after the full body is consumed.
+
+    StreamingResponse takes over disconnect monitoring after the first event.
+    Cancelling and joining here releases upstream sockets before returning.
+    """
+    async def disconnected():
+        while True:
+            if (await request.receive())["type"] == "http.disconnect":
+                return
+    work = asyncio.ensure_future(operation)
+    watcher = asyncio.create_task(disconnected())
+    try:
+        done, _ = await asyncio.wait({work, watcher}, return_when=asyncio.FIRST_COMPLETED)
+        if watcher in done:
+            raise GatewayError("client_disconnected", "The client disconnected.", 499)
+        return await work
+    finally:
+        for task in (work, watcher):
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(work, watcher, return_exceptions=True)
 
 
 class GatewayHTTP:
@@ -67,11 +97,41 @@ class GatewayHTTP:
                      "keys": lambda: store.keys(tenant), "usage": lambda: store.usage(tenant),
                      "status": lambda: {"endpoint": self.endpoint, "connections": len(gateway.connections(tenant)),
                                         "models": len(gateway.models(tenant)), "version": VERSION}}
+            reads["auth/providers"] = gateway.auth.providers
+            reads["auth/accounts"] = lambda: gateway.auth.accounts(tenant)
+            reads["settings"] = lambda: gateway.controls.settings(tenant)
+            reads["export"] = lambda: gateway.controls.export(tenant)
             if resource in reads:
                 return await asyncio.to_thread(reads[resource])
+        if resource == "settings" and method == "POST":
+            return await asyncio.to_thread(gateway.controls.save_settings, tenant, **await body(request,
+                {"expected_revision", "request_timeout", "max_concurrency", "requests_per_minute"},
+                {"expected_revision", "request_timeout", "max_concurrency", "requests_per_minute"}))
+        if resource == "import" and method == "POST":
+            return await asyncio.to_thread(gateway.controls.import_configuration, tenant, (await body(request, {"archive"}, {"archive"}))["archive"])
         if resource == "discover" and method == "POST":
-            return await gateway.discover(tenant, **await body(request, {"preset_id", "endpoint", "api_key", "connection_id"}, {"preset_id"}))
-        fields = {"preset_id", "name", "models", "endpoint", "api_key", "selected_model", "expected_revision"}
+            return await gateway.discover(tenant, **await body(request, {"preset_id", "endpoint", "api_key", "connection_id", "auth_account_id"}, {"preset_id"}))
+        fields = {"preset_id", "name", "models", "endpoint", "api_key", "selected_model", "expected_revision", "auth_account_id", "catalog_mode"}
+        if resource == "auth/start" and method == "POST":
+            session = await gateway.auth.start(tenant, **await body(request, {"provider_id", "redirect_uri", "name", "options"}, {"provider_id"}))
+            return await gateway.callbacks.watch(tenant, session)
+        if resource.startswith("auth/"):
+            parts = resource.split("/")
+            if len(parts) == 3 and parts[1] == "accounts" and method == "DELETE":
+                values = await body(request, {"expected_revision"}, {"expected_revision"})
+                return await asyncio.to_thread(gateway.auth.disconnect, tenant, parts[2], values["expected_revision"])
+            if len(parts) == 3 and parts[2] == "poll" and method == "POST":
+                await body(request, set())
+                session = await gateway.auth.poll(tenant, parts[1])
+                return await gateway.callbacks.watch(tenant, session)
+            if len(parts) == 3 and parts[2] == "complete" and method == "POST":
+                result = await gateway.auth.complete(tenant, parts[1], **await body(request, {"state", "code"}, {"state", "code"}))
+                await gateway.callbacks.forget(parts[1])
+                return result
+            if len(parts) == 2 and method == "DELETE":
+                result = await asyncio.to_thread(gateway.auth.cancel, tenant, parts[1])
+                await gateway.callbacks.forget(parts[1])
+                return result
         if resource == "connections" and method == "POST":
             return await gateway.connect(tenant, **await body(request, fields, {"preset_id", "name", "models"}))
         if resource.startswith("connections/"):
@@ -86,6 +146,9 @@ class GatewayHTTP:
                 return await asyncio.to_thread(store.delete_connection, tenant, parts[1], value["expected_revision"])
         if resource == "routes" and method == "POST":
             return await asyncio.to_thread(gateway.save_route, tenant, **await body(request, {"id", "name", "models", "strategy", "expected_revision"}, {"id", "name", "models"}))
+        if resource.startswith("routes/") and len(resource.split("/")) == 2 and method == "DELETE":
+            values = await body(request, {"expected_revision"}, {"expected_revision"})
+            return await asyncio.to_thread(store.delete_route, tenant, resource.split("/")[1], values["expected_revision"])
         if resource == "keys" and method == "POST":
             return await asyncio.to_thread(gateway.create_key, tenant, **await body(request, {"name", "models"}, {"name"}))
         if resource.startswith("keys/") and len(resource.split("/")) == 2 and method == "DELETE":
@@ -102,13 +165,16 @@ class GatewayHTTP:
     async def chat(self, request):
         key, payload = bearer(request), await body(request)
         if not payload.get("stream", False):
-            return JSONResponse(await self.gateway.complete(key, payload))
+            return JSONResponse(await while_connected(request, self.gateway.complete(key, payload)))
         iterator = self.gateway.stream(key, payload).__aiter__()
         # Fail initial authorization/routing/upstream errors as real HTTP errors.
         try:
-            first = await anext(iterator)
+            first = await while_connected(request, anext(iterator))
         except StopAsyncIteration:
             raise GatewayError("provider_incomplete", "The provider returned no completion.", 502) from None
+        except BaseException:
+            await iterator.aclose()
+            raise
 
         async def events():
             try:
@@ -134,7 +200,41 @@ class GatewayHTTP:
             return await wrap(request, self.models)
         async def chat(request):
             return await wrap(request, self.chat)
-        return [Route(prefix + "/models", models, methods=["GET"]), Route(prefix + "/chat/completions", chat, methods=["POST"])]
+        async def native(request):
+            return await wrap(request, self.native)
+        return [Route(prefix + "/models", models, methods=["GET"]), Route(prefix + "/chat/completions", chat, methods=["POST"]),
+                Route(prefix + "/messages", native, methods=["POST"]), Route(prefix + "/responses", native, methods=["POST"])]
+
+    async def native(self, request):
+        """Native client formats preserve provider signatures on matching routes."""
+        from model_gateway.ingress import collect_native
+        protocol = "anthropic" if request.url.path.endswith("/messages") else "openai-responses"
+        payload = await body(request)
+        iterator = self.gateway.stream_native(bearer(request, native=protocol == "anthropic"), payload, protocol, extra_headers=dict(request.headers)).__aiter__()
+        if not payload.get("stream", False):
+            try:
+                return JSONResponse(await while_connected(request, collect_native(protocol, iterator)))
+            finally:
+                await iterator.aclose()
+        try:
+            first = await while_connected(request, anext(iterator))
+        except StopAsyncIteration:
+            raise GatewayError("provider_incomplete", "The provider returned no completion.", 502) from None
+        except BaseException:
+            await iterator.aclose()
+            raise
+        def frame(record):
+            return ("event: " + record["event"] + "\n" if record.get("event") else "") + "data: " + json_dumps(record["data"]) + "\n\n"
+        async def events():
+            try:
+                yield frame(first)
+                async for record in iterator:
+                    yield frame(record)
+            except GatewayError as error:
+                yield frame({"event": "error", "data": {"type": "error", "error": error.as_dict()}})
+            finally:
+                await iterator.aclose()
+        return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
 
 
 class StandaloneAuth:
@@ -182,7 +282,7 @@ class StandaloneAuth:
             self.sessions.pop(hashlib.sha256(request.cookies.get("sturgis_gateway", "").encode()).hexdigest(), None)
             response = envelope({"authenticated": False})
             response.delete_cookie("sturgis_gateway")
-            response.delete_cookie("sturgis_csrf")
+            response.delete_cookie("sturgis_gateway_csrf")
             return response
         if request.headers.get("origin") != self.origin:
             raise GatewayError("origin_denied", "Sign in from the gateway page.", 403)
@@ -204,7 +304,7 @@ class StandaloneAuth:
         self.sessions[hashlib.sha256(token.encode()).hexdigest()] = {"csrf": csrf, "expires_at": time.time() + 28800}
         response = envelope({"authenticated": True})
         response.set_cookie("sturgis_gateway", token, max_age=28800, httponly=True, secure=self.origin.startswith("https:"), samesite="strict")
-        response.set_cookie("sturgis_csrf", csrf, max_age=28800, secure=self.origin.startswith("https:"), samesite="strict")
+        response.set_cookie("sturgis_gateway_csrf", csrf, max_age=28800, secure=self.origin.startswith("https:"), samesite="strict")
         return response
 
 
@@ -213,9 +313,9 @@ def envelope(data=None, error=None):
                         status_code=error.status if error else 200, headers={"Cache-Control": "no-store"})
 
 
-def create_app(root, *, public_origin="http://127.0.0.1:8790", network_policy=None, allow_local_servers=True, web_root=None):
+def create_app(root, *, public_origin="http://127.0.0.1:8790", network_policy=None, allow_local_servers=True, web_root=None, auth_configs=None):
     """Compose a runnable independent gateway with zero agent imports or workers."""
-    gateway = ModelGateway(root, network_policy=network_policy, allow_local_servers=allow_local_servers)
+    gateway = ModelGateway(root, network_policy=network_policy, allow_local_servers=allow_local_servers, auth_configs=auth_configs)
     auth = StandaloneAuth(gateway.store, public_origin)
     http = GatewayHTTP(gateway, endpoint=public_origin + "/v1", authorize=auth.authorize)
     async def management(request):
@@ -237,6 +337,13 @@ def create_app(root, *, public_origin="http://127.0.0.1:8790", network_policy=No
             auth.security(request)
             return FileResponse(web_root / "gateway.html")
         routes += [Route("/", index), Mount("/assets", StaticFiles(directory=web_root / "assets"))]
-    app = Starlette(routes=routes)
+    @asynccontextmanager
+    async def lifespan(app):
+        await gateway.start()
+        try:
+            yield
+        finally:
+            await gateway.close()
+    app = Starlette(routes=routes, lifespan=lifespan)
     app.state.gateway, app.state.auth = gateway, auth
     return app

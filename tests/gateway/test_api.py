@@ -67,10 +67,27 @@ async def test_admin_browser_session_csrf_and_logout(tmp_path):
         assert "HttpOnly" in logged.headers.get_list("set-cookie")[0]
         assert (await client.get("/api/v1/gateway/connections")).status_code == 200
         assert (await client.post("/api/v1/gateway/keys", json={"name": "Client"})).status_code == 401
-        client.headers["X-CSRF-Token"] = client.cookies["sturgis_csrf"]
+        client.headers["X-CSRF-Token"] = client.cookies["sturgis_gateway_csrf"]
         assert (await client.post("/api/v1/gateway/keys", json={"name": "Client"})).status_code == 200
         assert (await client.delete("/api/v1/gateway/session")).status_code == 200
         assert (await client.get("/api/v1/gateway/connections")).status_code == 401
+
+
+async def test_route_delete_revision_tenant_and_existing_connections(tmp_path):
+    async with installation(tmp_path) as (client, app, url, requests):
+        connection, key = await setup(client, app, url)
+        alias = connection["id"] + "/model-a"
+        saved = await client.post("/api/v1/gateway/routes", json={"id": "daily", "name": "Daily", "models": [alias]})
+        assert saved.status_code == 200
+        with pytest.raises(GatewayError) as wrong_tenant:
+            app.state.gateway.store.delete_route("other", "daily", 1)
+        assert wrong_tenant.value.status == 404
+        for revision, status in [(True, 400), (0, 409), (1, 200), (1, 404)]:
+            response = await client.request("DELETE", "/api/v1/gateway/routes/daily", json={"expected_revision": revision})
+            assert response.status_code == status, response.text
+        assert not (await client.get("/api/v1/gateway/routes")).json()["data"]
+        assert len((await client.get("/api/v1/gateway/connections")).json()["data"]) == 1
+        assert [m["id"] for m in (await client.get("/api/v1/gateway/models")).json()["data"]] == [alias]
 
 
 async def test_management_crud_and_key_revocation(tmp_path):
@@ -86,8 +103,7 @@ async def test_management_crud_and_key_revocation(tmp_path):
         edited = await client.patch(f"/api/v1/gateway/connections/{connection['id']}", json={"preset_id": "custom-openai", "name": "Updated",
             "models": ["model-a"], "endpoint": url+"/v1", "expected_revision": 2})
         assert edited.json()["data"]["name"] == "Updated"
-        assert (await client.delete(f"/api/v1/gateway/connections/{connection['id']}", json={"expected_revision": 2}) if False else
-                await client.request("DELETE", f"/api/v1/gateway/connections/{connection['id']}", json={"expected_revision": 2})).status_code == 409
+        assert (await client.request("DELETE", f"/api/v1/gateway/connections/{connection['id']}", json={"expected_revision": 2})).status_code == 409
         assert (await client.request("DELETE", f"/api/v1/gateway/connections/{connection['id']}", json={"expected_revision": 3})).status_code == 200
         assert (await client.delete("/api/v1/gateway/keys/"+key["id"])).status_code == 200
         client.headers["Authorization"] = "Bearer " + key["key"]

@@ -180,6 +180,38 @@ def recipes():
     return report
 
 
+def gateway_surface():
+    """Compare independently parsed gateway resources and CLI flags to manuals."""
+    source = ROOT / 'model_gateway/api.py'
+    if not source.parent.exists():
+        return {'status': 'absent', 'resources': []}
+    tree = ast.parse(source.read_text())
+    resources = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            if any(isinstance(t, ast.Name) and t.id == 'reads' for t in node.targets) and isinstance(node.value, ast.Dict):
+                resources.update(ast.literal_eval(k) for k in node.value.keys)
+            for target in node.targets:
+                if isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name) and target.value.id == 'reads':
+                    resources.add(ast.literal_eval(target.slice))
+        if isinstance(node, ast.Compare) and isinstance(node.left, ast.Name) and node.left.id == 'resource':
+            resources.update(n.value for n in node.comparators if isinstance(n, ast.Constant) and isinstance(n.value, str))
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == 'Route' and node.args:
+            path = node.args[0]
+            if isinstance(path, ast.BinOp) and isinstance(path.right, ast.Constant):
+                resources.add(path.right.value.lstrip('/'))
+    cli = ast.parse((ROOT / 'model_gateway/__main__.py').read_text())
+    flags = {n.args[0].value for n in ast.walk(cli) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+             and n.func.attr == 'add_argument' and n.args and isinstance(n.args[0], ast.Constant) and n.args[0].value.startswith('--')}
+    manuals = '\n'.join(p.read_text() for audience in ('users', 'developers') for p in prose_pages(audience).values())
+    missing = sorted({'/' + name for name in resources if '/' + name not in manuals} | {flag for flag in flags if flag not in manuals})
+    report = {'status': 'failed' if missing else 'passed', 'resources': sorted(resources), 'cli_flags': sorted(flags), 'missing': missing}
+    write_report('gateway-surface.json', report)
+    if missing:
+        raise ValueError('Gateway surface lacks manuals: ' + ', '.join(missing))
+    return report
+
+
 def content(audience):
     """Require real explanatory pages and mapped examples for the complete live surface."""
     manifest_path = DOCS / 'coverage' / f'{audience}.json'
@@ -249,6 +281,9 @@ def content(audience):
         consumers = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'consumer').glob('*.py') if p.name not in {'__init__.py', '__main__.py'}}
         if consumers - sources:
             errors.append('Consumer implementation missing authored explanations: ' + ', '.join(sorted(consumers - sources)))
+        gateway = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'model_gateway').glob('*.py')}
+        if gateway - sources:
+            errors.append('Gateway implementation missing authored explanations: ' + ', '.join(sorted(gateway - sources)))
         frontend = {p.relative_to(ROOT).as_posix() for p in (ROOT/'frontend/src').rglob('*') if p.is_file() and p.suffix in {'.ts','.tsx','.css'}}
         if frontend - sources:
             errors.append('Frontend implementation missing authored explanations: '+', '.join(sorted(frontend-sources)))
@@ -419,7 +454,7 @@ def examples():
 
 def source_manifest():
     paths = []
-    for directory in ('agent', 'consumer', 'native/memory', 'frontend', 'scripts', 'tests', 'packaging', 'documentation'):
+    for directory in ('agent', 'consumer', 'model_gateway', 'native/memory', 'frontend', 'scripts', 'tests', 'packaging', 'documentation'):
         for p in (ROOT / directory).rglob('*'):
             rel = p.relative_to(ROOT)
             if not p.is_file() or p.is_symlink():
@@ -527,6 +562,7 @@ def full():
     run(['node', '--experimental-strip-types', '--test', 'tests/documentation/navigation.test.mjs'])
     contracts()
     recipes()
+    gateway_surface()
     manuals = [content(audience) for audience in ('users', 'developers')]
     run([PYTHON, '-m', 'scripts.docs_reference', 'build', '--root', ROOT, '--output', DOCS/'developers/src/content/docs/reference/files', '--manifest', DOCS/'coverage/reference.json'])
     run([PYTHON, '-m', 'scripts.docs_reference', 'audit', '--root', ROOT, '--output', DOCS/'developers/src/content/docs/reference/files', '--manifest', DOCS/'coverage/reference.json'])

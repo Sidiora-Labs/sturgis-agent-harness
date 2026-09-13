@@ -3,9 +3,11 @@ title: "Architecture and process boundaries"
 description: "Understand the Python control layer, persistent core and C++ memory worker."
 ---
 
-The product has a shared consumer control service, private agent workers, and a native memory subprocess per agent runtime. The browser and CLI use one HTTP contract. They do not create a separate agent loop.
+The product has a shared consumer control service, private agent workers, a native memory subprocess per agent runtime, and an independent model gateway. The consumer browser and CLI use one HTTP contract. They do not create a separate agent loop.
 
 The control service authenticates people, resolves owned agents, records lifecycle intent and routes bounded commands to a fixed private worker. `AgentApplication` composes product services over a `CoreRuntime`. The core supervises admission, model work, delivery, heartbeats and memory. The C++ worker stores scoped memory records and retrieval projections; it does not execute tools or decide whether a goal was achieved.
+
+The gateway owns provider connections, encrypted account credentials, model catalogs, routes, app keys and provider-attempt usage. It can run independently without importing agent or consumer modules, or be composed into the consumer service. External clients use its Chat Completions, Responses or Messages boundaries. `ConsumerGateway` maps the authenticated consumer to a gateway tenant and gives an agent a restricted gateway client credential. Upstream secrets stay in the gateway. See [the gateway architecture](../gateway/architecture.md) for native protocol preservation, cancellation and admission behavior.
 
 ## Three kinds of durable truth
 
@@ -27,6 +29,8 @@ Read [module ownership](module-ownership.md) before adding another controller, a
 
 ## Implementation sources
 
+- [model_gateway/service.py](/reference/files/model_gateway/service.py/)
+- [consumer/gateway.py](/reference/files/consumer/gateway.py/)
 - [agent/runtime/__init__.py](/reference/files/agent/runtime/__init__.py/)
 - [consumer/api.py](/reference/files/consumer/api.py/)
 - [consumer/application.py](/reference/files/consumer/application.py/)
@@ -34,4 +38,3 @@ Read [module ownership](module-ownership.md) before adding another controller, a
 - [native/memory/main.cpp](/reference/files/native/memory/main.cpp/)
 
 [Developer manual](../index.md)
-

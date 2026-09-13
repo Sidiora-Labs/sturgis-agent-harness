@@ -64,7 +64,15 @@ class Scheduler:
         return updated
 
     def _all(self):
-        return [self.get(row.value["scope"], row.id) for row in self.journal.list("work_index", CONTROL)]
+        # The control index is the authority for membership, including scopes
+        # sharing this scheduler's running capacity. Read active bodies once per
+        # scope instead of loading every indexed historical work record.
+        scopes = {}
+        for row in self.journal.list("work_index", CONTROL):
+            scopes.setdefault(row.value["scope"], set()).add(row.id)
+        return [row for scope, identities in scopes.items()
+                for row in self.journal.list_states("work", scope, ("running", "queued"))
+                if row.id in identities]
 
     def _lineage(self, scope, row, now, *, executing=True, check_goal=True):
         result, seen, child = [], set(), None

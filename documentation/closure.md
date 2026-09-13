@@ -19,6 +19,13 @@ individual worked recipe, prerequisites, expected observations and recovery for
 every public domain command. The [user coverage map](coverage/users.json) binds
 these manuals to their reviewed implementation sources.
 
+The [Model Gateway manual](users/src/content/docs/guides/model-gateway.md) covers preset and custom
+connections, live discovery, manual import, free and local options, native account sign-in,
+agent model selection, app keys, route management, limits and configuration transfer.
+Its [standalone guide](users/src/content/docs/getting-started/standalone-gateway.md) runs the same
+subsystem without agents. [Gateway developer guides](developers/src/content/docs/guides/gateway/architecture.md)
+explain the independent state, protocol, account, network, HTTP and frontend boundaries.
+
 ## Developer manuals and implementation reference
 
 Start with [Build with Sturgis](developers/src/content/docs/index.md) and the

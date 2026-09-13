@@ -7,6 +7,78 @@ import httpx
 from agent.protocol import CoreError, ToolCall, canonical_json, strict_loads
 
 
+# These public categories are safe to persist; arbitrary vendor strings are not.
+_PUBLIC_ERROR_CODES = frozenset("""
+authentication_error invalid_api_key unauthorized unauthenticated permission_denied permission_error forbidden
+insufficient_quota quota_exceeded billing_hard_limit_reached rate_limit_exceeded rate_limit_error rate_limited
+overloaded_error server_error internal_error timeout busy cooldown
+model_not_found invalid_model model_required model_unavailable model_denied provider_unavailable
+context_length_exceeded output_limit invalid_request invalid_request_error unsupported_parameter
+unsupported_capability unsupported_request unsupported_content invalid_tools content_filter
+provider_error provider_http provider_protocol provider_incomplete provider_bounds
+provider_auth provider_rate_limit provider_not_found provider_request
+account_disconnected account_reauth_required account_unavailable auth_rejected auth_unavailable
+credential_unavailable invalid_key key_required sign_in_required reconnect_required
+network_transport network_origin_denied network_address_denied dns_failed
+""".split())
+_HTTP_ERROR_CODES = {401: "authentication_error", 402: "insufficient_quota", 403: "permission_denied",
+                     404: "model_not_found", 408: "timeout", 413: "context_length_exceeded",
+                     429: "rate_limited", 500: "internal_error", 502: "provider_error",
+                     503: "overloaded_error", 504: "timeout"}
+
+
+def _provider_error_details(payload):
+    """Admit only fixed public categories, never free-form remote diagnostics."""
+    error = payload.get("error") if isinstance(payload, dict) else None
+    if isinstance(error, dict):
+        for value in (error.get("code"), error.get("type")):
+            if type(value) is int:
+                value = _HTTP_ERROR_CODES.get(value)
+            if isinstance(value, str) and value in _PUBLIC_ERROR_CODES:
+                return {"provider_code": value}
+    return {}
+
+
+async def _next_chunk(iterator, cancel):
+    """Join each pending read when cancellation interrupts provider I/O."""
+    read = asyncio.create_task(anext(iterator))
+    stop = asyncio.create_task(cancel.wait()) if cancel is not None else None
+    try:
+        if stop:
+            done, _ = await asyncio.wait({read, stop}, return_when=asyncio.FIRST_COMPLETED)
+            if stop in done and stop.result():
+                raise CoreError("cancelled", "Provider stream cancelled")
+        return await read
+    finally:
+        for task in (read, stop):
+            if task is not None and not task.done():
+                task.cancel()
+        await asyncio.gather(*[task for task in (read, stop) if task is not None], return_exceptions=True)
+
+
+async def _http_error_details(response, limit, timeout, cancel):
+    """Keep a bounded optional error body; an HTTP failure stays authoritative."""
+    body = bytearray()
+    try:
+        async with asyncio.timeout(timeout):
+            iterator = response.aiter_bytes().__aiter__()
+            while True:
+                try:
+                    chunk = await _next_chunk(iterator, cancel)
+                except StopAsyncIteration:
+                    break
+                if len(chunk) > limit - len(body):
+                    return {}
+                body.extend(chunk)
+            return _provider_error_details(strict_loads(bytes(body)))
+    except CoreError as error:
+        if error.code == "cancelled":
+            raise
+    except (httpx.HTTPError, TimeoutError, UnicodeError, TypeError, ValueError, RecursionError):
+        pass
+    return {}
+
+
 @dataclass(frozen=True)
 class ProviderEvent:
     kind: str
@@ -77,27 +149,16 @@ class HTTPProvider:
             async with self.client_factory(timeout=self.timeout, follow_redirects=False, trust_env=False) as client:
                 async with client.stream("POST", descriptor["endpoint"], json=payload, headers=headers) as response:
                     if response.status_code != 200:
+                        details = await _http_error_details(response, self.max_event_bytes, self.timeout, cancel)
                         raise CoreError("provider_http", "Provider rejected request", status=response.status_code,
-                                        retryable=response.status_code in {429, 500, 502, 503, 504})
+                                        retryable=response.status_code in {429, 500, 502, 503, 504}, **details)
                     iterator = response.aiter_bytes().__aiter__()
                     buffer = b""
                     while True:
-                        read = asyncio.create_task(anext(iterator))
-                        stop = asyncio.create_task(cancel.wait()) if cancel is not None else None
                         try:
-                            if stop:
-                                done, _ = await asyncio.wait({read, stop}, return_when=asyncio.FIRST_COMPLETED)
-                                if stop in done and stop.result():
-                                    raise CoreError("cancelled", "Provider stream cancelled")
-                            try:
-                                chunk = await read
-                            except StopAsyncIteration:
-                                break
-                        finally:
-                            for task in (read, stop):
-                                if task is not None and not task.done():
-                                    task.cancel()
-                            await asyncio.gather(*[task for task in (read, stop) if task is not None], return_exceptions=True)
+                            chunk = await _next_chunk(iterator, cancel)
+                        except StopAsyncIteration:
+                            break
                         buffer += chunk
                         while b"\n" in buffer:
                             line, buffer = buffer.split(b"\n", 1)
@@ -114,7 +175,8 @@ class HTTPProvider:
                             if not isinstance(parsed, dict):
                                 raise CoreError("provider_protocol", "Provider event must be an object")
                             if "error" in parsed:
-                                raise CoreError("provider_error", "Provider returned an error event")
+                                raise CoreError("provider_error", "Provider returned an error event",
+                                                **_provider_error_details(parsed))
                             choices = parsed.get("choices")
                             if not isinstance(choices, list) or len(choices) > 1:
                                 raise CoreError("provider_protocol", "Provider must stream at most one choice")

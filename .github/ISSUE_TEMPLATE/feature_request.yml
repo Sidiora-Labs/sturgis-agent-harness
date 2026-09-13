@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose an improvement with a concrete use case.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User or developer need
+      description: Describe the task you cannot complete today.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+      description: Explain the desired experience and an example of success.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and scope
+      description: Existing workarounds, affected components and constraints.

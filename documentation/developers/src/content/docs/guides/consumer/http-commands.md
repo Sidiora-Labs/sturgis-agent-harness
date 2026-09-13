@@ -43,6 +43,8 @@ The following tables are derived from the application's explicit registrations a
 
 Revisions and stable IDs solve different problems. `expected_revision` prevents stale updates; `request_id` identifies transport execution; operation IDs identify content/memory mutations; message IDs identify conversation input. See [state](../core/state.md), [workflow services](content-work.md) and [retry recovery](../frontend/mutation-recovery.md).
 
+For `/agents/{id}/events` and `messages.events`, the replay payload remains `{items, cursor, has_more}`. Public event kinds and the authorized conversation binding are filtered before the limit, rather than exposing empty pages of unrelated maintenance work. The cursor can move beyond the last returned item when the snapshot is exhausted; reuse that exact cursor even when `items` is empty. `has_more` means more matching events remain in that snapshot, not merely that the journal contains newer hidden rows. Subsequent polling can discover events appended after that snapshot. Conversation lists use descending creation time with a stable ID tie-breaker. See [conversation projections](content-work.md#conversation-history-projection) for routing and terminal-event details.
+
 ### artifacts
 
 | Command | Access | Required fields | Optional fields |
@@ -275,4 +277,3 @@ Revisions and stable IDs solve different problems. `expected_revision` prevents 
 - [consumer/device.py](/reference/files/consumer/device.py/)
 
 [Developer manual](../index.md)
-

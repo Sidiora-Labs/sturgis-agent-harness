@@ -26,7 +26,8 @@
       "modules": [
         "agent/runtime"
       ],
-      "role": "index"
+      "role": "index",
+      "words": 392
     },
     {
       "path": "getting-started/setup.md",
@@ -37,7 +38,10 @@
         "CMakeLists.txt",
         "consumer/config.py",
         "consumer/cli.py",
-        "packaging/build-wheel.sh"
+        "packaging/build-wheel.sh",
+        "consumer/gateway.py",
+        "model_gateway/service.py",
+        "model_gateway/__main__.py"
       ],
       "functions": [
         "Settings",
@@ -50,7 +54,8 @@
           "description": "Create an environment, build assets and start the existing CLI service."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 460
     },
     {
       "path": "getting-started/contribution.md",
@@ -59,22 +64,40 @@
         "spec/sturgis-02/spec.kvx",
         "spec/sturgis-02/execution.md",
         "agent/state/__init__.py",
-        "consumer/application.py"
+        "consumer/application.py",
+        "Makefile",
+        "scripts/check_format.py",
+        "pyproject.toml",
+        ".format-debt.json",
+        "package.json",
+        "packaging/build-wheel.sh"
       ],
       "functions": [
         "Journal.transaction",
-        "AgentApplication.bind_command"
+        "AgentApplication.bind_command",
+        "scripts.check_format.inventory",
+        "scripts.check_format.digest",
+        "scripts.check_format.policy",
+        "scripts.check_format.violations",
+        "scripts.check_format.run",
+        "scripts.check_format.main"
       ],
       "examples": [
         {
           "id": "getting-started-contribution-1",
           "heading": "Make a change without splitting authority",
           "description": "Add one consumer command through its existing domain owner."
+        },
+        {
+          "id": "developer-format-debt",
+          "heading": "Developer checks and formatting policy",
+          "description": "Inspect exact legacy formatting debt, format the intended changed paths, and reject new or modified deviations."
         }
       ],
       "modules": [
         "agent/state"
-      ]
+      ],
+      "words": 910
     },
     {
       "path": "getting-started/qualification.md",
@@ -85,22 +108,35 @@
         "scripts/verify_web.mjs",
         "tests/consumer_web/coverage.mjs",
         "spec/sturgis-02/coverage.md",
-        "scripts/qualify.py"
+        "scripts/qualify.py",
+        "scripts/qualify_gateway.py",
+        "tests/gateway/browser_journey.mjs",
+        "frontend/vitest.config.ts"
       ],
       "functions": [
         "main",
         "validate_python",
         "validate_native",
-        "validate_web"
+        "validate_web",
+        "arguments",
+        "python_command",
+        "gateway_report",
+        "verify_receipt"
       ],
       "examples": [
         {
           "id": "getting-started-qualification-1",
           "heading": "Qualify the current complete system",
           "description": "Run the current aggregate gate and interpret each independent result."
+        },
+        {
+          "id": "getting-started-qualification-receipt",
+          "heading": "Verify an existing qualification receipt",
+          "description": "Verify exact current source, browser inputs, artifact hashes and coverage floors without repeating a completed full qualification."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 887
     },
     {
       "path": "architecture/overview.md",
@@ -110,7 +146,9 @@
         "consumer/api.py",
         "consumer/application.py",
         "consumer/workers.py",
-        "native/memory/main.cpp"
+        "native/memory/main.cpp",
+        "model_gateway/service.py",
+        "consumer/gateway.py"
       ],
       "functions": [
         "CoreRuntime",
@@ -127,7 +165,8 @@
       ],
       "modules": [
         "agent/runtime"
-      ]
+      ],
+      "words": 485
     },
     {
       "path": "architecture/module-ownership.md",
@@ -150,7 +189,8 @@
       ],
       "modules": [
         "agent/runtime"
-      ]
+      ],
+      "words": 403
     },
     {
       "path": "architecture/causality.md",
@@ -181,7 +221,8 @@
         "agent/runtime",
         "agent/tool_runner",
         "agent/delivery"
-      ]
+      ],
+      "words": 434
     },
     {
       "path": "architecture/authority-evidence.md",
@@ -210,7 +251,8 @@
         "agent/awareness",
         "agent/tool_runner",
         "agent/goals"
-      ]
+      ],
+      "words": 335
     },
     {
       "path": "core/protocol.md",
@@ -239,7 +281,8 @@
       "modules": [
         "agent/protocol",
         "agent/framing"
-      ]
+      ],
+      "words": 331
     },
     {
       "path": "core/context.md",
@@ -248,7 +291,8 @@
         "agent/context/__init__.py",
         "agent/attention/__init__.py",
         "agent/runtime/__init__.py",
-        "consumer/content.py"
+        "consumer/content.py",
+        "agent/runtime/identity.py"
       ],
       "functions": [
         "ContextBlock",
@@ -267,7 +311,8 @@
         "agent/context",
         "agent/attention",
         "agent/runtime"
-      ]
+      ],
+      "words": 596
     },
     {
       "path": "core/state.md",
@@ -282,7 +327,9 @@
         "Journal.append",
         "Journal.events",
         "Journal.advance_cursor",
-        "Record"
+        "Record",
+        "Journal.list_states",
+        "Journal.routed_events"
       ],
       "examples": [
         {
@@ -294,7 +341,8 @@
       "modules": [
         "agent/state",
         "agent/protocol"
-      ]
+      ],
+      "words": 861
     },
     {
       "path": "core/artifacts.md",
@@ -321,7 +369,8 @@
       "modules": [
         "agent/artifacts",
         "agent/runtime"
-      ]
+      ],
+      "words": 312
     },
     {
       "path": "core/runtime.md",
@@ -330,14 +379,18 @@
         "agent/runtime/__init__.py",
         "agent/channel_adapters/__init__.py",
         "agent/provider_catalog/__init__.py",
-        "consumer/application.py"
+        "consumer/application.py",
+        "agent/runtime/identity.py"
       ],
       "functions": [
         "CoreRuntime",
         "CoreRuntime.start",
         "CoreRuntime.accept",
         "CoreRuntime.submit_event",
-        "CoreRuntime.pause_admission"
+        "CoreRuntime.pause_admission",
+        "CoreRuntime._tick",
+        "CoreRuntime._memory_loop",
+        "CoreRuntime._packet"
       ],
       "examples": [
         {
@@ -350,7 +403,8 @@
         "agent/runtime",
         "agent/channel_adapters",
         "agent/provider_catalog"
-      ]
+      ],
+      "words": 559
     },
     {
       "path": "core/scheduler.md",
@@ -358,7 +412,8 @@
       "sources": [
         "agent/scheduler/__init__.py",
         "agent/goals/__init__.py",
-        "agent/tool_runner/__init__.py"
+        "agent/tool_runner/__init__.py",
+        "agent/state/__init__.py"
       ],
       "functions": [
         "Scheduler.submit",
@@ -366,7 +421,8 @@
         "Scheduler.authorize",
         "Scheduler.record_usage",
         "Scheduler.reconcile_usage",
-        "Scheduler.finish"
+        "Scheduler.finish",
+        "Scheduler._all"
       ],
       "examples": [
         {
@@ -379,7 +435,8 @@
         "agent/scheduler",
         "agent/goals",
         "agent/tool_runner"
-      ]
+      ],
+      "words": 439
     },
     {
       "path": "core/waits-timers.md",
@@ -408,7 +465,8 @@
         "agent/scheduler",
         "agent/commitments",
         "agent/runtime"
-      ]
+      ],
+      "words": 358
     },
     {
       "path": "core/cancellation-recovery.md",
@@ -437,7 +495,8 @@
       "modules": [
         "agent/runtime",
         "agent/tool_runner"
-      ]
+      ],
+      "words": 415
     },
     {
       "path": "memory/records-wire.md",
@@ -462,7 +521,8 @@
       ],
       "modules": [
         "agent/memory"
-      ]
+      ],
+      "words": 374
     },
     {
       "path": "memory/retrieval.md",
@@ -487,7 +547,8 @@
       "modules": [
         "agent/memory",
         "agent/context"
-      ]
+      ],
+      "words": 382
     },
     {
       "path": "memory/generations-leases.md",
@@ -511,7 +572,8 @@
       ],
       "modules": [
         "agent/memory"
-      ]
+      ],
+      "words": 376
     },
     {
       "path": "memory/ingestion-sleep.md",
@@ -525,7 +587,9 @@
         "MemoryIngestor.process_event",
         "MemoryIngestor.replay",
         "MemorySleep.run_cycle",
-        "consolidate_duplicates"
+        "consolidate_duplicates",
+        "MemorySleep.due",
+        "MemorySleep._cycle_identity"
       ],
       "examples": [
         {
@@ -537,7 +601,8 @@
       "modules": [
         "agent/memory",
         "agent/runtime"
-      ]
+      ],
+      "words": 642
     },
     {
       "path": "behavior/profiles-awareness.md",
@@ -545,7 +610,8 @@
       "sources": [
         "agent/profile/__init__.py",
         "agent/awareness/__init__.py",
-        "agent/runtime/__init__.py"
+        "agent/runtime/__init__.py",
+        "agent/runtime/identity.py"
       ],
       "functions": [
         "ProfileRegistry.register",
@@ -566,7 +632,8 @@
         "agent/profile",
         "agent/awareness",
         "agent/runtime"
-      ]
+      ],
+      "words": 417
     },
     {
       "path": "behavior/goals-budgets.md",
@@ -595,7 +662,8 @@
       "modules": [
         "agent/goals",
         "agent/scheduler"
-      ]
+      ],
+      "words": 325
     },
     {
       "path": "behavior/commitments-plans.md",
@@ -624,7 +692,8 @@
       "modules": [
         "agent/commitments",
         "agent/planner"
-      ]
+      ],
+      "words": 328
     },
     {
       "path": "behavior/initiative-attention.md",
@@ -653,7 +722,8 @@
         "agent/initiative",
         "agent/attention",
         "agent/context"
-      ]
+      ],
+      "words": 305
     },
     {
       "path": "behavior/evolution-evaluation.md",
@@ -685,7 +755,8 @@
         "agent/self_evolution",
         "agent/meta_harness",
         "agent/runtime"
-      ]
+      ],
+      "words": 390
     },
     {
       "path": "integrations/tool-authoring.md",
@@ -715,7 +786,8 @@
         "agent/plugin_sdk",
         "agent/protocol",
         "agent/scheduler"
-      ]
+      ],
+      "words": 304
     },
     {
       "path": "integrations/tool-effects.md",
@@ -743,7 +815,8 @@
         "agent/tool_runner",
         "agent/protocol",
         "agent/scheduler"
-      ]
+      ],
+      "words": 335
     },
     {
       "path": "integrations/files-processes.md",
@@ -770,7 +843,8 @@
       ],
       "modules": [
         "agent/tool_runner"
-      ]
+      ],
+      "words": 335
     },
     {
       "path": "integrations/plugins.md",
@@ -799,7 +873,8 @@
       "modules": [
         "agent/plugin_sdk",
         "agent/plugin_host"
-      ]
+      ],
+      "words": 342
     },
     {
       "path": "integrations/skills.md",
@@ -826,7 +901,8 @@
       ],
       "modules": [
         "agent/skills"
-      ]
+      ],
+      "words": 303
     },
     {
       "path": "integrations/subagents.md",
@@ -855,7 +931,8 @@
         "agent/subagents",
         "agent/scheduler",
         "agent/runtime"
-      ]
+      ],
+      "words": 364
     },
     {
       "path": "integrations/providers.md",
@@ -871,7 +948,10 @@
         "ProviderCatalog.observe",
         "ProviderCatalog.resolve",
         "HTTPProvider.stream",
-        "ProviderEvent"
+        "ProviderEvent",
+        "_provider_error_details",
+        "_http_error_details",
+        "_next_chunk"
       ],
       "examples": [
         {
@@ -884,7 +964,8 @@
         "agent/provider_catalog",
         "agent/provider_adapters",
         "agent/runtime"
-      ]
+      ],
+      "words": 639
     },
     {
       "path": "integrations/channels-delivery.md",
@@ -915,7 +996,8 @@
         "agent/channel_core",
         "agent/channel_adapters",
         "agent/delivery"
-      ]
+      ],
+      "words": 359
     },
     {
       "path": "integrations/acp.md",
@@ -942,7 +1024,8 @@
         "agent/acp",
         "agent/runtime",
         "agent/channel_core"
-      ]
+      ],
+      "words": 405
     },
     {
       "path": "consumer/ownership-auth.md",
@@ -969,7 +1052,8 @@
           "description": "Follow owner authorization and a one-use approval through a tool attempt."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 410
     },
     {
       "path": "consumer/vault-provider-settings.md",
@@ -978,7 +1062,9 @@
         "consumer/vault.py",
         "consumer/providers.py",
         "consumer/application.py",
-        "consumer/network.py"
+        "consumer/network.py",
+        "consumer/gateway.py",
+        "agent/runtime/__init__.py"
       ],
       "functions": [
         "CredentialVault.put",
@@ -987,7 +1073,13 @@
         "ProviderSettings.configure",
         "ProviderSettings.probe",
         "ProviderSettings.activate",
-        "ProviderSettings.ensure_selected_ready"
+        "ProviderSettings.ensure_selected_ready",
+        "probe_failure",
+        "AgentApplication.bind_gateway",
+        "ProviderSettings._probe_begin",
+        "ProviderSettings._probe_renew",
+        "ProviderSettings._probe_lease",
+        "ProviderSettings._probe_finish"
       ],
       "examples": [
         {
@@ -996,7 +1088,8 @@
           "description": "Rotate a key and deliberately reprobe the changed provider configuration."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 1149
     },
     {
       "path": "consumer/network-connections.md",
@@ -1023,7 +1116,8 @@
           "description": "Configure a search connection without granting arbitrary origins or trusting readiness labels."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 444
     },
     {
       "path": "consumer/http-commands.md",
@@ -1148,7 +1242,8 @@
         "workflows.run",
         "workflows.state",
         "workflows.step"
-      ]
+      ],
+      "words": 1256
     },
     {
       "path": "consumer/workers-ipc.md",
@@ -1176,7 +1271,8 @@
       ],
       "modules": [
         "agent/framing"
-      ]
+      ],
+      "words": 397
     },
     {
       "path": "consumer/lifecycle.md",
@@ -1195,7 +1291,8 @@
         "Lifecycle.recover",
         "Lifecycle._wake",
         "WorkViews.pause",
-        "AgentApplication.prepare_suspend"
+        "AgentApplication.prepare_suspend",
+        "AgentApplication.lifecycle_snapshot"
       ],
       "examples": [
         {
@@ -1206,7 +1303,8 @@
       ],
       "modules": [
         "agent/runtime"
-      ]
+      ],
+      "words": 472
     },
     {
       "path": "consumer/backup-restore.md",
@@ -1231,7 +1329,8 @@
           "description": "Validate a raw ZIP and retry an uncertain restore with the same identity."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 423
     },
     {
       "path": "consumer/content-work.md",
@@ -1241,7 +1340,8 @@
         "consumer/application.py",
         "consumer/work.py",
         "consumer/usage.py",
-        "agent/planner/__init__.py"
+        "agent/planner/__init__.py",
+        "agent/state/__init__.py"
       ],
       "functions": [
         "ConsumerData",
@@ -1249,7 +1349,9 @@
         "AgentApplication._source_blocks",
         "WorkViews.run_workflow",
         "WorkViews.advance",
-        "UsageView.summary"
+        "UsageView.summary",
+        "AgentApplication.events",
+        "AgentApplication.conversation_list"
       ],
       "examples": [
         {
@@ -1260,7 +1362,8 @@
       ],
       "modules": [
         "agent/planner"
-      ]
+      ],
+      "words": 794
     },
     {
       "path": "integrations/external-devices.md",
@@ -1287,7 +1390,8 @@
           "description": "Implement the one-time pairing and signed poll/respond handshake."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 380
     },
     {
       "path": "integrations/media-browser.md",
@@ -1312,7 +1416,8 @@
           "description": "Trace an audio artifact to transcription and distinguish catalog readiness from an executed operation."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 396
     },
     {
       "path": "frontend/structure.md",
@@ -1345,7 +1450,8 @@
           "description": "Add a domain screen using shared context, primitives and existing commands."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 696
     },
     {
       "path": "frontend/data-events.md",
@@ -1356,7 +1462,9 @@
         "frontend/src/lib/api.ts",
         "frontend/src/App.tsx",
         "frontend/src/pages/ConversationPage.tsx",
-        "consumer/api.py"
+        "consumer/api.py",
+        "consumer/application.py",
+        "agent/state/__init__.py"
       ],
       "functions": [
         "useRuntimeState",
@@ -1365,7 +1473,8 @@
         "useAgentQuery",
         "useEvents",
         "api",
-        "command"
+        "command",
+        "emptyReplay"
       ],
       "examples": [
         {
@@ -1374,7 +1483,8 @@
           "description": "Suspend an agent and prove background refetch cannot silently wake it."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 765
     },
     {
       "path": "frontend/mutation-recovery.md",
@@ -1402,7 +1512,8 @@
           "description": "Retry the same accepted action after a network failure without repeating its effect."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 487
     },
     {
       "path": "frontend/accessibility.md",
@@ -1417,7 +1528,8 @@
         "frontend/src/pages/FilesPage.tsx",
         "frontend/src/pages/KnowledgePage.tsx",
         "frontend/src/pages/SettingsPage.tsx",
-        "tests/consumer_web/journey.mjs"
+        "tests/consumer_web/journey.mjs",
+        "frontend/src/App.tsx"
       ],
       "functions": [
         "Modal",
@@ -1433,7 +1545,8 @@
           "description": "Review a connection dialog with keyboard input and an actual failed probe."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 553
     },
     {
       "path": "operations/packaging.md",
@@ -1459,7 +1572,8 @@
           "description": "Build a wheel and start it from an environment outside the source checkout."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 385
     },
     {
       "path": "operations/debugging.md",
@@ -1492,7 +1606,8 @@
         "agent/runtime",
         "agent/tool_runner",
         "agent/memory"
-      ]
+      ],
+      "words": 420
     },
     {
       "path": "operations/release-migration.md",
@@ -1521,7 +1636,8 @@
       ],
       "modules": [
         "agent/self_evolution"
-      ]
+      ],
+      "words": 414
     },
     {
       "path": "getting-started/documentation.md",
@@ -1544,7 +1660,8 @@
           "description": "Change a guide, rebuild both sites, and close only a fresh verified docs receipt."
         }
       ],
-      "modules": []
+      "modules": [],
+      "words": 365
     },
     {
       "path": "getting-started/first-mechanisms.md",
@@ -1577,10 +1694,133 @@
         "agent/goals",
         "agent/framing",
         "agent/protocol"
+      ],
+      "words": 382
+    },
+    {
+      "path": "gateway/http-api.md",
+      "title": "Gateway HTTP API contracts",
+      "sources": [
+        "consumer/gateway.py",
+        "model_gateway/api.py",
+        "model_gateway/errors.py",
+        "model_gateway/ingress.py",
+        "model_gateway/service.py"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.http-api"
+      ],
+      "examples": [
+        {
+          "id": "http-api-2",
+          "heading": "Connection examples",
+          "description": "Connection examples"
+        }
+      ],
+      "words": 2362,
+      "modules": [
+        "model_gateway"
+      ]
+    },
+    {
+      "path": "gateway/authentication.md",
+      "title": "Gateway authentication and native accounts",
+      "sources": [
+        "model_gateway/api.py",
+        "model_gateway/auth.py",
+        "model_gateway/auth_state.py",
+        "model_gateway/auth_transports.py",
+        "model_gateway/callbacks.py",
+        "model_gateway/store.py"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.authentication"
+      ],
+      "examples": [
+        {
+          "id": "authentication-operation",
+          "heading": "Standalone administrator sessions",
+          "description": "Follow the concrete operation and recovery steps in this manual."
+        }
+      ],
+      "words": 1615,
+      "modules": [
+        "model_gateway"
+      ]
+    },
+    {
+      "path": "gateway/frontend.md",
+      "title": "Gateway frontend implementation",
+      "sources": [
+        "frontend/gateway.html",
+        "frontend/src/App.tsx",
+        "frontend/src/components/Shell.tsx",
+        "frontend/src/gateway-main.tsx",
+        "frontend/src/lib/api.ts",
+        "frontend/src/lib/types.ts",
+        "frontend/src/pages/SettingsPage.tsx",
+        "frontend/src/pages/gateway/AgentGatewayModel.tsx",
+        "frontend/src/pages/gateway/GatewayControlsPanel.tsx",
+        "frontend/src/pages/gateway/GatewayPage.tsx",
+        "frontend/src/pages/gateway/NativeAuthDialog.tsx",
+        "frontend/src/pages/gateway/ProviderDrawer.tsx",
+        "frontend/src/pages/gateway/StandaloneGateway.tsx",
+        "frontend/src/pages/gateway/gateway.css",
+        "frontend/src/pages/gateway/useGateway.ts"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.frontend"
+      ],
+      "examples": [
+        {
+          "id": "frontend-operation",
+          "heading": "Entrypoints and ownership",
+          "description": "Follow the concrete operation and recovery steps in this manual."
+        }
+      ],
+      "words": 1962,
+      "modules": [
+        "frontend/src/pages/gateway"
+      ]
+    },
+    {
+      "path": "gateway/architecture.md",
+      "title": "Independent model gateway architecture",
+      "sources": [
+        "consumer/gateway.py",
+        "model_gateway/__init__.py",
+        "model_gateway/__main__.py",
+        "model_gateway/catalog.py",
+        "model_gateway/controls.py",
+        "model_gateway/network.py",
+        "model_gateway/service.py",
+        "model_gateway/store.py",
+        "model_gateway/translation.py",
+        "model_gateway/transports.py",
+        "model_gateway/wire.py"
+      ],
+      "commands": [],
+      "features": [
+        "gateway.architecture"
+      ],
+      "examples": [
+        {
+          "id": "architecture-operation",
+          "heading": "Composition boundaries",
+          "description": "Follow the concrete operation and recovery steps in this manual."
+        }
+      ],
+      "words": 2295,
+      "modules": [
+        "model_gateway"
       ]
     }
   ],
   "source_sha256": {
+    "CMakeLists.txt": "35ab64aa9a3e844625e2b4ce56b7d82e92d4d5079bf7c1ed4bae5e2d43907f58",
     "agent/acp/__init__.py": "6e0c980f80c539aeed2f79f1395597bf5c17bcaa2b20ca21b46e35158e4f19cf",
     "agent/artifacts/__init__.py": "0ad96cd2aaf7761ec94140edf4ba672d14e0914db15d5aaa902ab0eb35e3ba56",
     "agent/attention/__init__.py": "0eb8e257e66b28b532124485bc2bafdf7bafa9f9318493b3340f3bd0837cb0ea",
@@ -1596,28 +1836,29 @@
     "agent/initiative/__init__.py": "d9770e540589c04ba98750b26e21a8f3acb250a6a6d881b9cb8c157f77508f65",
     "agent/memory/client.py": "a6e9a1d94b1c59e86788f4a77c9e8df613d7caea4833a6921edc1dd36bee29ae",
     "agent/memory/ingestion.py": "0fe64dd2c3e0e47a44ebdc3f62114914bf7d9bc80294bcd39d1c06198f8bfcd4",
-    "agent/memory/sleep.py": "37b4d5e9e4e6b2007a5fdba16dd66a6ed995bb05c607e0416c7019b5e403380f",
+    "agent/memory/sleep.py": "3a1d34a87cb35ae8143a2bb54963f174ba02102ebfd318dcc8abc0215fa76144",
     "agent/meta_harness/__init__.py": "18a2a6b8f6177577f52e2bb1f9570a72f9e79f428476bb86f03d8fe7de4c8012",
     "agent/planner/__init__.py": "b80a1b09472f10f8f785affc920e66aeb8c08278f60fb7a222432c1b21fb60d6",
     "agent/plugin_host/__init__.py": "107ff64d6ba162e1197aee63be1087c16d62b16b689660c4b76e6137571c2a7b",
     "agent/plugin_sdk/__init__.py": "0e093fda474ef7e4ada71d7e32e8d7c6853af9ae8db60e206a3750cdcf3a6876",
     "agent/profile/__init__.py": "e9eb0c353aeef1edb13093750237a069cab7a141745131e1684daebae63886b3",
     "agent/protocol/__init__.py": "4b58df65bc5dff0835a9ab4756be7a0e757660deb4cc51d9cc8df321bfb5ed64",
-    "agent/provider_adapters/__init__.py": "b1dcb9d4b9bf59d1bc5cae9425cab8baf820ffdd5da16919b9fea5ec0b5c9a74",
+    "agent/provider_adapters/__init__.py": "9d7401d0f4a68dfda3a4f108e34dc13bce5334d4c94532547d4ed2367064fe36",
     "agent/provider_catalog/__init__.py": "bf1e6f1f8e1b568666b2c4da1044477575fdc741bae91be45a6f2281217ec95d",
-    "agent/runtime/__init__.py": "60436d64c3c6b77c3f8700ca3295901135bf28e634475639c8a0090d880a03f6",
-    "agent/scheduler/__init__.py": "125bc581cc73893b7e1de9a2d2fab3b305092a15660d38c8d951fc2a6145f0ab",
+    "agent/runtime/__init__.py": "73cbd4a57c92c1c111c353767b786353362d341fc1ede123f9d6986dfcc44c84",
+    "agent/runtime/identity.py": "851a61ff38aee678edd24c5119a06d4eb6ee36f30aebfc0eecd1beb17e4aa114",
+    "agent/scheduler/__init__.py": "7555dfac397fae0976b41756b1e582d41ab2378d139ecf116cb6e4f5bd8900b0",
     "agent/self_evolution/__init__.py": "3f2392390da7986d49f8b4d8329407e30d33079c0fdbdcd8773678ef2ded58eb",
     "agent/skills/__init__.py": "1742bb29dc6ecdb3431023150c0025845081e6fd84bfbfc47a79221bb620a23b",
-    "agent/state/__init__.py": "b3bf9b23e4e2ab7e785f94aa03ef3db9c16043da57ffaf8c40fdc182033ad9c4",
+    "agent/state/__init__.py": "23ce2056f53ae2d3b3986ed2810144a9a04967e19e150cbb0caedb2d1138af11",
     "agent/subagents/__init__.py": "0235e9a15d1e1c7ca120f46662d95e5865eeb61927db131aefc791af2fa40fae",
     "agent/tool_runner/__init__.py": "4eb618bd5d1055698d5ccfa2fe9bcbad34dc3e7c06205b2d7b59e19fd5aceac1",
     "agent/tool_runner/files.py": "3391795a3474968b68aef7182e4d1ae8fcb0081b8d3ef0af7358ac183cb2bfbf",
     "agent/tool_runner/process.py": "fcc67caad28bb81b7e9df51444f013ab159298a999bf4223eb96445215c9d100",
     "consumer/__init__.py": "fe98b09a89de61fa41868bbb942f8537367e419c04166dd99d2bc611d578cb4d",
     "consumer/__main__.py": "5e970434a56697b9278f386f54e768459bfe2fc9b0a2364d77be33f5e0a1e864",
-    "consumer/api.py": "f1fff24f870c787f67f2146ea8da7dcfe0a177c283209a6528be2cdb5760e2a0",
-    "consumer/application.py": "b18491fc2c6109e7401ec67072db3753d62438b63a1261eb69ec144442949ddd",
+    "consumer/api.py": "634045b885519eae126d8c8c96ab9cd0926e7ce89c257009061908293b6235a0",
+    "consumer/application.py": "6197194030d9438f5c39c93140475f037cab19eb622a88b304fcd93f1f8799f8",
     "consumer/browser.py": "037c89c3fd9114267c4018291049bc10a283f5957362f471cd118e5d92393408",
     "consumer/cli.py": "6f8a626d1f2eb37ada21cd022620208635a34396ede34190c9d1bd29f18871fa",
     "consumer/config.py": "d7946aa462bab7f2dbaf1ee406bba8646d760e7696e37dd5b6a2d00a82b79d9c",
@@ -1626,49 +1867,97 @@
     "consumer/content.py": "1b25d9e03131aa005e1714e64e21b0425b2697a3ddb2f31ae9a42fc6c3a48d58",
     "consumer/contracts.py": "83042c61aa73a3dfa2f30ee01bed2e04eb2770943b5032cfafdb9a228b7cea17",
     "consumer/device.py": "894ef53052cfc98b09393a5da964da804e9c5627606537eb37886327a5b288bf",
+    "consumer/gateway.py": "a6573734750cdf66572726bb829199f1bb6d98a4ce4bb569d6438700d17a55ef",
     "consumer/identity.py": "252cc2ed2b4fd8ca880feae7828b27fb4b546d58823f04e574d21c804df21a6b",
     "consumer/lifecycle.py": "aa7fa5494565e73224a5c5d2ca16fe5c4256088ccb5c63384b2395a6b7adb99c",
     "consumer/network.py": "6426f2c35af695616a1a1f6206428c4d771052aab8d7bf449b41a073c9304cd1",
     "consumer/permissions.py": "57485146889561e9d6c33784a144b7640d00f3105b7f9b7ef6b8c1eb54efd4ec",
     "consumer/portability.py": "ed599f934435303bf8806f2f92389f42bc69214c1172d99839569bc70484fb44",
-    "consumer/providers.py": "3cb36ee15cec5f912c168e1791dd95113af25b56a04437e981aaee2a74386e9f",
+    "consumer/providers.py": "a23ccb34cf73b3efa48bdd53bd170f82f172ce7cd94537fd1e4c36d53688213b",
     "consumer/usage.py": "3baf3d59e60a48ad56651c4b7c3c624565f9d0666ac63a26cec908b8e7ee69b7",
     "consumer/vault.py": "a0d916e4e6b485eea89feb5622187f3555cff62f488bae38bd624caea1daf2f3",
     "consumer/webhooks.py": "1a57154a3d85d1aa5c82b4352a915641597f481eb5e2b856d9618a35b84e7125",
     "consumer/work.py": "f1e3bb8f56688a3d15b1899d4648bc8ed8f4cd5552212ad1f8cfdc9826b73ab6",
     "consumer/worker.py": "af796f37048a32798d3b97947b3977a8b73ae62648cfa56aa9020b3aec360972",
-    "consumer/workers.py": "bf376ed5bddb203fa71a5170728d541a0b04229b29c18202ae4f25e129121d72",
+    "consumer/workers.py": "bc2776080bc4b8f10c988f88d839d9f32d434360c99a2b69379d6bdd2ca9013f",
+    "docs/qualification.md": "a81e884aad69bde80fd60980e1c6abf08778f028197428afc42524ceec7f7eca",
+    "docs/sturgis-02/qualification.md": "60416b2dd55092c932adc7cb71a6e15003e63121f6c5b0fe4278a6b0b415b095",
     "documentation/examples/first_mechanisms.py": "bab5d5a70c6d5f2a57a39f42d389ff6a1350203e16f082aebb78dfb3c8b6d44f",
-    "frontend/src/App.tsx": "cd9fc7bd286dc609bc87bb1af0fc5c36f18f1725fdad4b20a236be3f6f1e49cb",
-    "frontend/src/components/Shell.tsx": "522550ec6e800b765e1482269a454680709fc30d737ecc4e7d351daef76915e4",
+    "documentation/package.json": "51b2e9554cf46c3ac26e53fe68465c371a352e7890da208d589bf64b71686c9c",
+    "documentation/requirements.txt": "2add5f510759e62077d4a96825613dd5110eaebdbe26c5cca73fb389ac6e86a6",
+    "frontend/gateway.html": "7c9a9613e2a4e6d094688aa5587b2fb5c8c14b16c511982dd1dc83420e476509",
+    "frontend/src/App.tsx": "be2af8fd36dfbcbac8f5de5e599c5b5ff8d80879c5c39b0e3220a6dfbab03bed",
+    "frontend/src/components/Shell.tsx": "01463b8f665a4a761691aac5c642ce58bf61b0307de8d94b589fb2526e78e5b0",
     "frontend/src/components/components.css": "85b53447dab88fb37eda2acc4116d18714e37308df7d7c874f4dba0e5ee011ae",
     "frontend/src/components/ui.tsx": "819ec862d6dc88352619414e15ae15b926c86636decbd501dc430ce082438c62",
+    "frontend/src/gateway-main.tsx": "78644d4830e47b2a7d643c43158f7ff131961d36291d0f829128f1d806410744",
     "frontend/src/global.css": "07290efada017c31bac932595d3cebb99c31071bc310d248bac7a654f5728253",
     "frontend/src/hooks/useAgent.tsx": "46449adbecc4c44e376997b6dc79eeb10b5bcf0db863a1c83a3aaf7e8348d422",
-    "frontend/src/hooks/useEvents.ts": "470ee0071b91ade5a761ee68bed9bdae430b5b17e27a7f8d7f3a84e74cc11c10",
-    "frontend/src/lib/api.ts": "5c1a91d7318c72e8bde82cd71963004fc73e2ce6e8365b5fb77d7b99aa0c9413",
-    "frontend/src/lib/types.ts": "993373820fe16d524821d3ca570df1e352273b9cbcbb68a90be972fbcd94f4a3",
+    "frontend/src/hooks/useEvents.ts": "3d232c1acee3a153412a0dae5be752621563c02fcdd616b212a3ace5e62733ab",
+    "frontend/src/lib/api.ts": "0507a3a6d01f32e754aa6f3a11d0774fc6132e27e42aae8619a88d7974402b23",
+    "frontend/src/lib/types.ts": "62411c5005edbf9d5770ea2dc4a0248ca030cdc5844761370cb5b54356585d89",
     "frontend/src/main.tsx": "f37d06ad10cd09251789afc494daeb32e8ea42d40c3707d58daf0725271548fa",
     "frontend/src/material.css": "92996f152619640657114d4c65c972deb91409407a5f5d91bb3fd6f11505f296",
     "frontend/src/pages/ConnectionsPage.tsx": "48c2e9ab9a14666dbda2bb2688f6b54c916d4054c9eed99020e04f9d978253f0",
-    "frontend/src/pages/ConversationPage.tsx": "1046d42e4a11be89c09f261ded385632b546808171b1d1609eb8286afebac09f",
+    "frontend/src/pages/ConversationPage.tsx": "e8b659afccfdc771b2e1c1bda07f235bed2b47aae1ea1c58a81f5f0c0c2fa2d7",
     "frontend/src/pages/FilesPage.tsx": "e4686b6aa3868045d74e65901b12b47db6d362bd6d04aa7bf62518adeefdd62c",
     "frontend/src/pages/KnowledgePage.tsx": "70c39dbfe0919a721df823eabb1ba41b2303e3cc520ebd93f8806c6e3685ca73",
-    "frontend/src/pages/SettingsPage.tsx": "df335eab3d1d6481b0db85d30fda1f4df5cec5c6814929c5afaca0723ac4943a",
+    "frontend/src/pages/SettingsPage.tsx": "3820204ec3637b7e903af0edb1c8dd8eed007da82a3db27c55d92a44d2cfb7ed",
     "frontend/src/pages/WorkPage.tsx": "112be58d7f24a82e2a3931a6d423ac05e72760139404571e21f9849b67a18e4a",
     "frontend/src/pages/conversation.css": "80bc423f0f5c2b0207024994d0edb3d3cd95f5bb1f5e695df92b237443376757",
+    "frontend/src/pages/gateway/AgentGatewayModel.tsx": "f8f0b807d3fbe7c882d032057a77f91fa4353877309ddbed27721e5802ad58e8",
+    "frontend/src/pages/gateway/GatewayControlsPanel.tsx": "182e144c4522889f95b04f5f3f49d4cb2f809175b60b151f98dca15f680140e6",
+    "frontend/src/pages/gateway/GatewayPage.tsx": "22fcc091a48778948e25dd8391d196420c27e4bc0119ee920900f5b6e2ef7463",
+    "frontend/src/pages/gateway/NativeAuthDialog.tsx": "dd0aba47cb0ad0399cc1769b7af113e8b82021a820f67aa0b1023bfff78e269d",
+    "frontend/src/pages/gateway/ProviderDrawer.tsx": "f3abf76a7be12c936f88ee08b3c78b986fd5d5ee23a8fee112ed77499b1e4758",
+    "frontend/src/pages/gateway/StandaloneGateway.tsx": "70b2fd641998d4869a2daa49da24a0245639ed0aa384be0d286da794973a2e40",
+    "frontend/src/pages/gateway/gateway.css": "d87ccc7e53c56b9fdcf87a18b5b2a6d68ba58698633be3f82414f69559178205",
+    "frontend/src/pages/gateway/useGateway.ts": "5f62922de32ed23dc1e1eab2042f81cbf1c61508f159696245b7151ccf9c2396",
     "frontend/src/pages/shared.tsx": "831e601416d63becfcd7a109bde07ceea4c582680f630b2c0f46bbfdbde62315",
     "frontend/src/pages/work-connections.css": "5d2325f50c83d86d84c33af1485d8f837806cd597413eeea0ab607057023c455",
-    "frontend/vite.config.ts": "d642b1e8f5757bd77b3f30659ee071dc39f9461ff62c3c08b61ae03e298adfd4",
+    "frontend/vite.config.ts": "8dc1adf1c6b1eecf4dbe1c7b1c949d5ad26aeccf324c2410965a435c142640c2",
+    "frontend/vitest.config.ts": "6a2523168ab67e59bf3b650d3fd865558d492963449fea154ead5980614e8304",
+    "model_gateway/__init__.py": "2753ee6f6861c42c174a44be308322562a68cef80de8509e3cc2cc4415e13b14",
+    "model_gateway/__main__.py": "3c8fa7d2e6af0ee5fe686327a7add470e681b5db8af5f4e1af45d320d75c1c41",
+    "model_gateway/api.py": "3097707a3cbbdee1d13270f66c755ad715fac5c3eb6d1893d365b66c1b3eefed",
+    "model_gateway/auth.py": "f5113aa12b2f1e58ffb3242bd5c90fb69cd58b5e29d1e0ac66bf053a80a33dc5",
+    "model_gateway/auth_state.py": "9e2f481f19bfd8a2e0ace0dab991c02934431d3dc10a9106f3e011f4f2a70a4f",
+    "model_gateway/auth_transports.py": "1383f88528f7ae8df109db5f5e92a19535711e3fb71d9fe411dcb7414e99994d",
+    "model_gateway/callbacks.py": "a5aeaff08dfdc3224a09fe4bf4803b9056c2c4ddb39dcc573cfdc9f92e9cb288",
+    "model_gateway/catalog.py": "cd96ce93e2d93cd9ca9f3d6efe2771129419447253fff517442fa1cc8ec7ebe5",
+    "model_gateway/controls.py": "1036932b10804af11e40c612734fc4d0669e83c8ec6076a245da66c7246ca225",
+    "model_gateway/errors.py": "de4cdc71b191c6006002214a430f5836dd787b048486d8c04893177a03450a71",
+    "model_gateway/ingress.py": "db2a86bf73073658e59a7d87dbc8a0c92a986e4b1562f1f201f2f6ae93633b44",
+    "model_gateway/network.py": "9c4556c7cdf262ed59473df2b2a5f900c40bbfbeece3c7534454977d770d76b2",
+    "model_gateway/service.py": "8b50befa5a88ca583c3922ab0ad17032991a567e12f1db2614623a78aa2cd325",
+    "model_gateway/store.py": "c19674514eac795856f80d9fcca501267ab72014d9e323f1eb7a45685db9b363",
+    "model_gateway/translation.py": "0ad24676138d0e83fc2c99a282599dde23635e79bc155e31daa94bd28b5696f3",
+    "model_gateway/transports.py": "136190f996260ab6b85e3fa3d468e8dd0fd60b8b59bc602e115f9917fbc732aa",
+    "model_gateway/wire.py": "2a23f8252593919ab1ea8aec5e3b8004e52966a40e86fe58ef98f7de85ac557b",
+    "native/memory/PROTOCOL.md": "02d881a19a9a0c17c1ac8874f4488709736bacfdbb5f60110d7c1d548e62fdaa",
     "native/memory/engine.cpp": "ad7b0fed47ad98fad165a5be4615f660ddaf32bf82d3371a90255cfbc70642c7",
     "native/memory/main.cpp": "2ed927ea39871a74d5b7e984c73c53ec7aef7b37a96dd21ed3abc9ebfe55a875",
-    "scripts/docs_gate.py": "4a52e248d314d3108f8e6978017bca2fdb853d53d6e57c13a77de6b934fed4d1",
+    "package.json": "6fe3ec4cad3d439b95acef524fa541ee1ccf34901472febffad63897272c9cab",
+    "packaging/Dockerfile": "1f772c2e9e357dbabcb6eeed0e406ea4559f8cf81529f3f3e66d77dbc18e3d3f",
+    "packaging/build-wheel.sh": "f78b9d650d0864140e91df177b110e5b1588cfc0c3dbb5b0b44adec57c73ac9a",
+    "packaging/sturgis.service": "218fa62142bba6383a5af92ebdca82fc4e2ccb1f2bad0f46959e75ab5539555c",
+    "pyproject.toml": "2b590cfbe7a6374a1bcee94b35a945337c2db5795bdef959a2b9af69595cae6d",
+    "scripts/check_format.py": "1f23953298a662db33794b66a9171aab224754d4e1e7dd31149f5cdb803c768b",
+    "scripts/docs_gate.py": "976ffd66efa1e5d4c1af5351705ce8890c39bb437012ea88b4b8b50dbb906af4",
     "scripts/qualify.py": "087deb7626aa388f308b8860feb1bb36f9ecea578c350501900c41fb3c01feaa",
-    "scripts/qualify_consumer.py": "3a1d7b04724ba32e2c4e974d85ae2d144e0e062697839e7541db75006d62d43f",
+    "scripts/qualify_consumer.py": "6792e16bf548e55cd3535266a41281d9b7935e18c002dc6b187efffef54ad4f0",
+    "scripts/qualify_gateway.py": "a0e1165b51e5e1309f3e4237812351888d80465223fa192df3db623b4dd32b79",
     "scripts/verify_native.py": "75049bca6de0711300ff8e63ea8026541eff5b096784c198aaac739c49c8b947",
-    "scripts/verify_web.mjs": "b5e84b31c5f11c8f507310ec757169ab95d8fc435c8be81ea97812fcd9bede61",
-    "tests/consumer_web/coverage.mjs": "9bf9850bfc90d69752eff7768d54dd5cd69f3ae1e8d0ac681af30f1736072041",
-    "tests/consumer_web/journey.mjs": "8fae091607bf2ded1cee8a40f5c4f3143e00a84727305571e4adf252d790199c",
+    "scripts/verify_web.mjs": "cf4dfd6735305324260f39ee0c7a7cb81e25eb737b2dfdba781fc7fdb95bd260",
+    "spec/sturgis-01/contracts.md": "9ed98aebe7ae539a9ae4b96580cb8bbc52bab7d4b77a7f12d904d0c8240a37da",
+    "spec/sturgis-02/contracts.md": "39c53f1ca19ab24daa3d76883a3691d7e6426a40d3eb53652f79ac191c3c16d2",
+    "spec/sturgis-02/coverage.md": "81ded105ac3b7853daa07de4b263175b9987a5053d08621b54bb9b123bffd3de",
+    "spec/sturgis-02/execution.md": "710ce041d54980d3598e40a5166a8ea039c589b33ade99420fce15ffc42c791c",
+    "spec/sturgis-02/http-contract.md": "48ea12cc7ced817552a7c5b9db69aac59219f92d3f1bf7a13de79322e7817bb7",
+    "spec/sturgis-02/spec.kvx": "22fdbb153a9f37de4e57ecc05c4f1b2c14653390945d56b18022c284e028c166",
+    "tests/consumer_web/coverage.mjs": "f5e3c8fe784af515932cf083d8d3b2e2ec956cd8d7b1becd2bfdade1eb72794c",
+    "tests/consumer_web/journey.mjs": "e1497fb3196d7ddfda3af68f5317db2e56e01c3bdd055704ec61ef437306adfb",
+    "tests/gateway/browser_journey.mjs": "577174707dde25811a77143923a7e780ccf38d73368526098e3760e8f965603c",
     "tests/integration/test_evidence_admission.py": "a92f0f29f63d77b7457df0542664cd1209a1809a697afcb52bd6598e7dfcb8ae"
   }
 }
