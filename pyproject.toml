@@ -31,7 +31,7 @@ sturgis = "consumer.cli:main"
 sturgis-gateway = "model_gateway.__main__:main"
 
 [project.optional-dependencies]
-test = ["pytest==8.3.5", "pytest-asyncio==0.25.3", "coverage==7.10.7", "pytest-cov==6.0.0", "gcovr==8.3"]
+test = ["pytest==8.3.5", "pytest-asyncio==0.25.3", "coverage==7.16.0", "pytest-cov==6.0.0", "gcovr==8.3"]
 dev = ["ruff==0.16.7", "pre-commit==4.6.2", "clang-format==18.1.8", "build==1.6.1", "setuptools==84.0.0", "wheel==0.48.0"]
 
 [tool.ruff]
