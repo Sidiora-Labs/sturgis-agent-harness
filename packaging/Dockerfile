@@ -1,5 +1,5 @@
 # Package a wheel built on matching Ubuntu 24.04 / Linux / CPython 3.12.
-FROM ubuntu:24.04
+FROM ubuntu:25.10
 RUN apt-get update && apt-get install -y --no-install-recommends python3.12-venv libsqlite3-0 libstdc++6 bubblewrap util-linux ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && useradd --create-home --uid 10001 sturgis \
