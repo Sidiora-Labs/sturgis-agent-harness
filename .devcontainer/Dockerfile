@@ -1,5 +1,5 @@
 FROM node:22.22.2-bookworm-slim AS node
-FROM python:3.12-slim-bookworm
+FROM python:3.15-slim-bookworm
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
